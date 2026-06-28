@@ -354,19 +354,19 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent" />
           
           {/* Content */}
-          <div className="relative z-10 text-left px-6 sm:px-12 md:max-w-xl flex flex-col items-start gap-4 mr-auto py-8">
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-brand-gold bg-brand-purple/85 px-4 py-1.5 rounded-full backdrop-blur-sm shadow-sm border border-brand-purple/20">
+          <div className="relative z-10 text-left px-4 sm:px-12 md:max-w-xl flex flex-col items-start gap-2 sm:gap-4 mr-auto py-0">
+            <span className="text-[9px] sm:text-xs font-bold uppercase tracking-wider text-brand-gold bg-brand-purple/85 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full backdrop-blur-sm shadow-sm border border-brand-purple/20 whitespace-nowrap">
               Stationery Point Kochi
             </span>
-            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight uppercase">
+            <h1 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight uppercase">
               Stationery <br />
               on Sale
             </h1>
-            <p className="text-xs sm:text-sm md:text-base text-white/85 max-w-sm text-balance">
+            <p className="text-[11px] sm:text-sm md:text-base text-white/85 max-w-sm text-balance leading-snug">
               Find quality writing, drafting, school, and art supplies below MRP.
             </p>
-            <div className="mt-2">
-              <Link to="/catalog" className="rounded-full bg-[#FF2D73] text-white font-bold px-8 py-3.5 hover:bg-[#e02060] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-block">
+            <div>
+              <Link to="/catalog" className="rounded-full bg-[#FF2D73] text-white font-bold px-5 py-2.5 sm:px-8 sm:py-3.5 hover:bg-[#e02060] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-block text-xs sm:text-sm">
                 Shop Now
               </Link>
             </div>
@@ -402,8 +402,9 @@ export default function Home() {
             </div>
             {/* Background Kinetic Typography */}
             <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
-              <div className="absolute top-1/2 left-0 w-[200%] -translate-y-1/2 -rotate-[8deg] origin-left">
+              <div className="absolute top-1/2 left-0 w-[300%] -translate-y-1/2 -rotate-[8deg] origin-left">
                 <div className="flex animate-scroll-left w-max text-white" style={{ opacity: 0.1 }}>
+                  <span className="pr-[500px]">MRP</span>
                   <span className="pr-[500px]">MRP</span>
                   <span className="pr-[500px]">MRP</span>
                 </div>
@@ -429,8 +430,9 @@ export default function Home() {
             </div>
             {/* Background Kinetic Typography */}
             <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
-              <div className="absolute top-1/2 left-0 w-[200%] -translate-y-1/2 -rotate-[8deg] origin-left">
+              <div className="absolute top-1/2 left-0 w-[300%] -translate-y-1/2 -rotate-[8deg] origin-left">
                 <div className="flex animate-scroll-left w-max text-brand-purple" style={{ opacity: 0.05 }}>
+                  <span className="pr-[500px]">BULK</span>
                   <span className="pr-[500px]">BULK</span>
                   <span className="pr-[500px]">BULK</span>
                 </div>
@@ -456,8 +458,9 @@ export default function Home() {
             </div>
             {/* Background Kinetic Typography */}
             <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
-              <div className="absolute top-1/2 left-0 w-[200%] -translate-y-1/2 -rotate-[8deg] origin-left">
+              <div className="absolute top-1/2 left-0 w-[300%] -translate-y-1/2 -rotate-[8deg] origin-left">
                 <div className="flex animate-scroll-left w-max text-white" style={{ opacity: 0.1 }}>
+                  <span className="pr-[500px]">CHAT</span>
                   <span className="pr-[500px]">CHAT</span>
                   <span className="pr-[500px]">CHAT</span>
                 </div>

@@ -114,7 +114,7 @@ html.lenis body {
 /* Kinetic Editorial Background Text Animation */
 @keyframes scrollMarquee {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(-33.333%); }
 }
 
 .animate-scroll-left {
@@ -123,6 +123,6 @@ html.lenis body {
   line-height: 0.8;
   white-space: nowrap;
   pointer-events: none;
-  animation: scrollMarquee 12s linear infinite;
+  animation: scrollMarquee 9s linear infinite;
 }
 

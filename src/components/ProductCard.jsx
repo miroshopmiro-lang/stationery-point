@@ -206,9 +206,9 @@ export default function ProductCard({ product }) {
             target="_blank"
             rel="noreferrer"
             aria-label={`Enquire about ${product.name} on WhatsApp`}
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-brand-purple/35 text-brand-purple font-bold py-2.5 hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-all duration-300 text-xs sm:text-sm shadow-sm"
+            className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-brand-purple/35 text-brand-purple font-bold px-3 py-2.5 hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-all duration-300 text-xs sm:text-sm shadow-sm w-full"
           >
-            <WhatsAppIcon className="w-4 h-4" /> Enquire on WhatsApp
+            <WhatsAppIcon className="w-4 h-4 shrink-0" /> <span className="truncate">Enquire on WhatsApp</span>
           </a>
         </div>
       </div>
