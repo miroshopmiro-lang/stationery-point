@@ -70,7 +70,7 @@ export default function Contact() {
   };
 
   const fieldClass = (k) =>
-    `rounded-xl border px-4 py-3 transition-colors focus:border-brand-purple ${errors[k] ? 'border-red-400' : 'border-gray-200'}`;
+    `rounded-xl border px-4 py-3 transition-colors focus:border-brand-primary ${errors[k] ? 'border-red-400' : 'border-gray-200'}`;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
@@ -86,13 +86,13 @@ export default function Contact() {
           <div className="p-8">
             <h2 className="text-2xl font-bold">Visit Us</h2>
             <p className="mt-3 text-gray-600">{STORE.address}</p>
-            <p className="text-brand-purple font-semibold mt-1">{STORE.landmark}</p>
+            <p className="text-brand-primary font-semibold mt-1">{STORE.landmark}</p>
             <p className="mt-4 text-gray-500 text-sm">{STORE.hours}</p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href={`tel:${STORE.phoneTel}`} className="inline-flex items-center gap-2 rounded-full border border-brand-purple text-brand-purple font-semibold px-5 py-2.5 hover:bg-brand-purple hover:text-white transition-colors duration-300">
+              <a href={`tel:${STORE.phoneTel}`} className="inline-flex items-center gap-2 rounded-full border border-brand-primary text-brand-primary font-semibold px-5 py-2.5 hover:bg-brand-primary hover:text-white transition-colors duration-300">
                 <PhoneIcon className="w-4 h-4" /> {STORE.phoneDisplay}
               </a>
-              <a href={STORE.instagram} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-gray-200 font-semibold px-5 py-2.5 hover:border-brand-purple transition-colors">
+              <a href={STORE.instagram} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-gray-200 font-semibold px-5 py-2.5 hover:border-brand-primary transition-colors">
                 <InstagramIcon className="w-4 h-4" /> Instagram
               </a>
             </div>
@@ -133,7 +133,7 @@ export default function Contact() {
             <button type="submit" className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] text-white font-semibold py-3 hover:bg-[#1da851] transition-colors">
               <WhatsAppIcon className="w-5 h-5" /> Send on WhatsApp
             </button>
-            <button type="button" onClick={sendEmail} className="flex-1 rounded-xl border border-brand-purple text-brand-purple font-semibold py-3 hover:bg-brand-purple hover:text-white transition-colors duration-300">
+            <button type="button" onClick={sendEmail} className="flex-1 rounded-xl border border-brand-primary text-brand-primary font-semibold py-3 hover:bg-brand-primary hover:text-white transition-colors duration-300">
               Send via Email
             </button>
           </div>

@@ -1,20 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { STORE, waLink } from '../lib/utils';
+import { categories } from '../data/productData';
 import { PhoneIcon, WhatsAppIcon, InstagramIcon } from './icons';
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-purple text-white mt-10">
+    <footer className="bg-brand-primary text-white mt-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14">
         <div className="grid md:grid-cols-3 gap-10">
           <div>
             <h2 className="font-bold text-lg mb-4 border-b border-white/15 pb-2">Catalog</h2>
             <ul className="space-y-2 text-white/75 text-sm">
-              <li><Link to="/catalog?category=stationery" className="hover:text-brand-gold transition-colors">Stationery</Link></li>
-              <li><Link to="/catalog?category=office-supplies" className="hover:text-brand-gold transition-colors">Office Supplies</Link></li>
-              <li><Link to="/catalog?category=art-supplies" className="hover:text-brand-gold transition-colors">Art Supplies</Link></li>
-              <li><Link to="/catalog?category=craft-material" className="hover:text-brand-gold transition-colors">Craft Material</Link></li>
+              {categories.map((c) => (
+                <li key={c.id}><Link to={`/catalog?category=${c.id}`} className="hover:text-brand-gold transition-colors">{c.title}</Link></li>
+              ))}
             </ul>
           </div>
           <div>

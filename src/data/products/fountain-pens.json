@@ -1,0 +1,20 @@
+{
+  "id": 18,
+  "name": "Fountain Pens",
+  "category": "stationery",
+  "categoryLabel": "Stationery",
+  "price": "Below MRP",
+  "description": "",
+  "tags": [
+    "fountain pen",
+    "ink",
+    "luxury",
+    "pen"
+  ],
+  "image": "/shop-catalogue-images/fountain_pens.webp",
+  "brand": "",
+  "mrp": null,
+  "ourPrice": null,
+  "inStock": true,
+  "newArrival": false
+}

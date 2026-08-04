@@ -1,0 +1,20 @@
+{
+  "id": 2,
+  "name": "Plain Notebooks",
+  "category": "stationery",
+  "categoryLabel": "Stationery",
+  "price": "Below MRP",
+  "description": "",
+  "tags": [
+    "notebook",
+    "plain",
+    "paper",
+    "drawing"
+  ],
+  "image": "/shop-catalogue-images/plain_notebook.webp",
+  "brand": "",
+  "mrp": null,
+  "ourPrice": null,
+  "inStock": true,
+  "newArrival": false
+}

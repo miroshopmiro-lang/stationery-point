@@ -1,0 +1,19 @@
+{
+  "id": 91,
+  "name": "Foam Sheets",
+  "category": "craft-material",
+  "categoryLabel": "Craft Material",
+  "price": "Below MRP",
+  "description": "",
+  "tags": [
+    "foam sheets",
+    "craft",
+    "decoration"
+  ],
+  "image": "",
+  "brand": "",
+  "mrp": null,
+  "ourPrice": null,
+  "inStock": true,
+  "newArrival": false
+}

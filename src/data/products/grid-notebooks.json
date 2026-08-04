@@ -1,0 +1,20 @@
+{
+  "id": 4,
+  "name": "Grid Notebooks",
+  "category": "stationery",
+  "categoryLabel": "Stationery",
+  "price": "Below MRP",
+  "description": "",
+  "tags": [
+    "notebook",
+    "grid",
+    "graph",
+    "math"
+  ],
+  "image": "/shop-catalogue-images/grid_notebook.webp",
+  "brand": "",
+  "mrp": null,
+  "ourPrice": null,
+  "inStock": true,
+  "newArrival": false
+}

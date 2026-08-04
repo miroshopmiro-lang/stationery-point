@@ -1,0 +1,19 @@
+{
+  "id": 60,
+  "name": "Charcoal Pencils",
+  "category": "art-supplies",
+  "categoryLabel": "Art Supplies",
+  "price": "Below MRP",
+  "description": "",
+  "tags": [
+    "charcoal",
+    "pencil",
+    "sketch"
+  ],
+  "image": "/shop-catalogue-images/charcoal_pencils.webp",
+  "brand": "",
+  "mrp": null,
+  "ourPrice": null,
+  "inStock": true,
+  "newArrival": false
+}

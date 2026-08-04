@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { waLink } from '../lib/utils';
-import { WhatsAppIcon } from './icons';
+import { useEnquiryList, productKey } from '../context/EnquiryListContext';
+import { WhatsAppIcon, PlusIcon, MinusIcon } from './icons';
 
 const squareColors = ['bg-[#FFF3B3]', 'bg-[#D2ECF9]', 'bg-[#E1EFE1]'];
 
@@ -23,7 +24,7 @@ function renderProductIcon(name) {
   if (lowercase.includes('notebook') || lowercase.includes('diary') || lowercase.includes('register') || lowercase.includes('ledger') || lowercase.includes('book') || lowercase.includes('pad')) {
     return (
       <div className="w-10 h-13 bg-white rounded-md shadow-md border border-gray-200 flex flex-col overflow-hidden">
-        <div className="w-full h-3.5 bg-[#5D2D8F] flex items-center justify-center text-[5px] text-white font-bold leading-none">
+        <div className="w-full h-3.5 bg-brand-primary flex items-center justify-center text-[5px] text-white font-bold leading-none">
           NOTEBOOK
         </div>
         <div className="flex-grow flex flex-col gap-1 p-1">
@@ -171,6 +172,9 @@ function renderProductIcon(name) {
 
 export default function ProductCard({ product }) {
   const reduce = useReducedMotion();
+  const { add, setQty, getQty } = useEnquiryList();
+  const key = productKey(product);
+  const qty = getQty(key);
   return (
     <motion.div
       layout
@@ -178,7 +182,17 @@ export default function ProductCard({ product }) {
       animate={{ opacity: 1, y: 0 }}
       className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-soft transition-[transform,box-shadow] duration-300 hover:scale-102 hover:-translate-y-1 flex flex-col justify-between"
     >
-      <div className="aspect-[4/3] flex items-center justify-center relative overflow-hidden group-hover:bg-brand-lavender/5 transition-colors p-4">
+      <div className="aspect-[4/3] flex items-center justify-center relative overflow-hidden group-hover:bg-brand-soft/5 transition-colors p-4">
+        {product.newArrival && (
+          <span className="absolute top-2.5 left-2.5 z-10 rounded-full bg-brand-gold text-gray-900 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 shadow-sm">
+            New
+          </span>
+        )}
+        {product.inStock === false && (
+          <span className="absolute top-2.5 right-2.5 z-10 rounded-full bg-gray-800/80 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1">
+            Out of Stock
+          </span>
+        )}
         {product.image ? (
           <img
             src={product.image}
@@ -186,30 +200,76 @@ export default function ProductCard({ product }) {
             className="w-full h-full object-cover rounded-xl shadow-inner"
           />
         ) : (
-          <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center relative shadow-sm overflow-hidden ${squareColors[product.id % 3]}`}>
+          <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center relative shadow-sm overflow-hidden ${squareColors[(product.id ?? product.name.length) % 3]}`}>
             {renderProductIcon(product.name)}
           </div>
         )}
       </div>
       <div className="p-4 sm:p-5 flex flex-col gap-2.5 min-w-0 flex-grow justify-between border-t border-gray-50/50">
         <div className="flex flex-col gap-1.5">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-brand-purple/75">{product.categoryLabel}</span>
-          <h3 className="font-bold text-gray-800 text-sm sm:text-base leading-snug line-clamp-1 group-hover:text-brand-purple transition-colors">{product.name}</h3>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-brand-primary/75">{product.categoryLabel}</span>
+          <h3 className="font-bold text-gray-800 text-sm sm:text-base leading-snug line-clamp-1 group-hover:text-brand-primary transition-colors">{product.name}</h3>
+          {product.brand && (
+            <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">{product.brand}</p>
+          )}
           {product.description && (
             <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed min-h-[32px]">{product.description}</p>
           )}
         </div>
         <div className="flex flex-col gap-3 mt-1">
-          <span className="inline-block w-fit text-xs font-extrabold text-brand-purple bg-brand-lavender/50 rounded-full px-3 py-1">{product.price}</span>
-          <a
-            href={waLink(product.name)}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`Enquire about ${product.name} on WhatsApp`}
-            className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-brand-purple/35 text-brand-purple font-bold px-3 py-2.5 hover:bg-[#25D366] hover:border-[#25D366] hover:text-white transition-all duration-300 text-xs sm:text-sm shadow-sm w-full"
-          >
-            <WhatsAppIcon className="w-4 h-4 shrink-0" /> <span className="truncate">Enquire on WhatsApp</span>
-          </a>
+          {product.mrp && product.ourPrice ? (
+            <span className="inline-flex items-baseline gap-2">
+              <span className="text-xs text-gray-400 line-through">₹{Number(product.mrp).toLocaleString('en-IN')}</span>
+              <span className="text-base font-extrabold text-brand-primary">₹{Number(product.ourPrice).toLocaleString('en-IN')}</span>
+            </span>
+          ) : (
+            <span className="inline-block w-fit text-xs font-extrabold text-brand-primary bg-brand-soft/50 rounded-full px-3 py-1">{product.price}</span>
+          )}
+          <div className="flex items-stretch gap-2">
+            {qty === 0 ? (
+              <button
+                type="button"
+                onClick={() => add(product)}
+                className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl bg-brand-primary text-white font-bold px-3 py-2.5 hover:bg-brand-dark transition-colors duration-300 text-xs sm:text-sm shadow-sm"
+                aria-label={`Add ${product.name} to enquiry list`}
+              >
+                <PlusIcon className="w-3.5 h-3.5 shrink-0" /> <span className="truncate">Add to List</span>
+              </button>
+            ) : (
+              <div
+                className="flex-1 flex items-center justify-between rounded-xl border-2 border-brand-primary px-1.5 py-1"
+                role="group"
+                aria-label={`${product.name} quantity in enquiry list`}
+              >
+                <button
+                  type="button"
+                  onClick={() => setQty(key, qty - 1)}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center text-brand-primary hover:bg-brand-soft transition-colors"
+                  aria-label={`Decrease quantity of ${product.name}`}
+                >
+                  <MinusIcon className="w-3.5 h-3.5" />
+                </button>
+                <span className="text-sm font-extrabold tabular-nums text-brand-primary" aria-live="polite">{qty}</span>
+                <button
+                  type="button"
+                  onClick={() => setQty(key, qty + 1)}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center text-brand-primary hover:bg-brand-soft transition-colors"
+                  aria-label={`Increase quantity of ${product.name}`}
+                >
+                  <PlusIcon className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
+            <a
+              href={waLink(product.name)}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Enquire about ${product.name} on WhatsApp`}
+              className="shrink-0 inline-flex items-center justify-center rounded-xl bg-[#25D366] text-white w-11 hover:bg-[#1da851] transition-colors duration-300 shadow-sm"
+            >
+              <WhatsAppIcon className="w-4 h-4" />
+            </a>
+          </div>
         </div>
       </div>
     </motion.div>

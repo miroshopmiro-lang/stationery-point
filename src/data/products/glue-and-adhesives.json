@@ -1,0 +1,20 @@
+{
+  "id": 36,
+  "name": "Glue & Adhesives",
+  "category": "craft-material",
+  "categoryLabel": "Craft Material",
+  "price": "Below MRP",
+  "description": "",
+  "tags": [
+    "glue",
+    "adhesive",
+    "craft",
+    "office"
+  ],
+  "image": "/shop-catalogue-images/glue_adhesives.webp",
+  "brand": "",
+  "mrp": null,
+  "ourPrice": null,
+  "inStock": true,
+  "newArrival": false
+}

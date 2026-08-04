@@ -1,0 +1,19 @@
+{
+  "id": 74,
+  "name": "Backpacks",
+  "category": "stationery",
+  "categoryLabel": "Stationery",
+  "price": "Below MRP",
+  "description": "",
+  "tags": [
+    "backpacks",
+    "bags",
+    "school"
+  ],
+  "image": "/shop-catalogue-images/backpacks.webp",
+  "brand": "",
+  "mrp": null,
+  "ourPrice": null,
+  "inStock": true,
+  "newArrival": false
+}

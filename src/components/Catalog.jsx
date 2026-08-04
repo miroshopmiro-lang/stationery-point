@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { products, categories } from '../data/productData';
 import { SearchIcon } from './icons';
 import ProductCard from './ProductCard';
+import CategoryCard from './CategoryCard';
 
 const filters = [{ id: 'all', label: 'All Products' }, ...categories.map((c) => ({ id: c.id, label: c.title }))];
 
@@ -41,6 +42,11 @@ export default function Catalog() {
     });
   }, [active, query]);
 
+  // Jags-style browsing: the catalog landing shows category cards; a chosen
+  // category (or a search) shows the product grid.
+  const showLanding = active === 'all' && !query.trim();
+  const activeCategory = categories.find((c) => c.id === active);
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div className="mb-8">
@@ -62,10 +68,27 @@ export default function Catalog() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search products, e.g. watercolor, pencils, files…"
-          className="w-full rounded-full border border-gray-200 bg-white pl-12 pr-4 py-3 transition-colors focus:border-brand-purple"
+          className="w-full rounded-full border border-gray-200 bg-white pl-12 pr-4 py-3 transition-colors focus:border-brand-primary"
         />
       </div>
 
+      {showLanding ? (
+        <div>
+          <h2 className="text-sm font-bold uppercase tracking-wide text-gray-400 mb-4">Find by Category</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {categories.map((c) => (
+              <CategoryCard
+                key={c.id}
+                name={c.title}
+                image={c.image}
+                categoryId={c.id}
+                color={c.color}
+                count={products.filter((p) => p.category === c.id).length}
+              />
+            ))}
+          </div>
+        </div>
+      ) : (
       <div className="grid lg:grid-cols-[220px_1fr] gap-8">
         <aside className="lg:sticky lg:top-32 h-fit min-w-0">
           <h2 className="text-sm font-bold uppercase tracking-wide text-gray-400 mb-3 hidden lg:block">Categories</h2>
@@ -75,7 +98,7 @@ export default function Catalog() {
             <select
               value={active}
               onChange={(e) => setActive(e.target.value)}
-              className="w-full rounded-xl border border-gray-200 bg-white pl-4 pr-10 py-3.5 text-sm font-bold text-gray-700 focus:border-brand-purple focus:outline-none appearance-none shadow-sm cursor-pointer"
+              className="w-full rounded-xl border border-gray-200 bg-white pl-4 pr-10 py-3.5 text-sm font-bold text-gray-700 focus:border-brand-primary focus:outline-none appearance-none shadow-sm cursor-pointer"
             >
               {filters.map((f) => (
                 <option key={f.id} value={f.id}>
@@ -99,7 +122,7 @@ export default function Catalog() {
                 onClick={() => setActive(f.id)}
                 aria-pressed={active === f.id}
                 className={`whitespace-nowrap text-left rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors duration-300 ${
-                  active === f.id ? 'bg-brand-purple text-white' : 'bg-white border border-gray-100 text-gray-700 hover:bg-brand-lavender'
+                  active === f.id ? 'bg-brand-primary text-white' : 'bg-white border border-gray-100 text-gray-700 hover:bg-brand-soft'
                 }`}
               >
                 {f.label}
@@ -109,10 +132,22 @@ export default function Catalog() {
         </aside>
 
         <div className="min-w-0">
-          <p className="text-sm text-gray-400 mb-4" aria-live="polite">{filtered.length} product{filtered.length !== 1 ? 's' : ''} found</p>
+          <div className="mb-4 flex items-end justify-between gap-3">
+            <div>
+              {activeCategory && <h2 className="text-xl font-extrabold text-gray-800">{activeCategory.title}</h2>}
+              <p className="text-sm text-gray-400" aria-live="polite">{filtered.length} product{filtered.length !== 1 ? 's' : ''} found</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setSearchParams({})}
+              className="text-xs font-bold text-brand-primary hover:text-brand-dark underline underline-offset-4 whitespace-nowrap pb-0.5"
+            >
+              &larr; All Categories
+            </button>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {filtered.map((p) => (
-              <ProductCard key={p.id} product={p} />
+              <ProductCard key={p.id ?? p.name} product={p} />
             ))}
           </div>
           {filtered.length === 0 && (
@@ -121,7 +156,7 @@ export default function Catalog() {
               <button
                 type="button"
                 onClick={() => setSearchParams({})}
-                className="mt-4 px-6 py-2.5 bg-brand-purple text-white font-semibold rounded-full hover:bg-brand-purple/90 transition-all duration-300 shadow-md hover:shadow-lg text-xs"
+                className="mt-4 px-6 py-2.5 bg-brand-primary text-white font-semibold rounded-full hover:bg-brand-primary/90 transition-all duration-300 shadow-md hover:shadow-lg text-xs"
               >
                 Clear All Filters
               </button>
@@ -129,6 +164,7 @@ export default function Catalog() {
           )}
         </div>
       </div>
+      )}
     </div>
   );
 }

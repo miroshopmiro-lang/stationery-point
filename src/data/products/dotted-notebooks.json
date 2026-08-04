@@ -1,0 +1,20 @@
+{
+  "id": 3,
+  "name": "Dotted Notebooks",
+  "category": "stationery",
+  "categoryLabel": "Stationery",
+  "price": "Below MRP",
+  "description": "",
+  "tags": [
+    "notebook",
+    "dotted",
+    "bullet journal",
+    "journal"
+  ],
+  "image": "/shop-catalogue-images/dotted_notebook.webp",
+  "brand": "",
+  "mrp": null,
+  "ourPrice": null,
+  "inStock": true,
+  "newArrival": false
+}

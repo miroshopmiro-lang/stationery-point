@@ -1,0 +1,20 @@
+{
+  "id": 104,
+  "name": "Candles & Cake Toppers",
+  "category": "party-gifts",
+  "categoryLabel": "Party & Gifts",
+  "price": "Below MRP",
+  "description": "",
+  "tags": [
+    "candles",
+    "cake topper",
+    "birthday",
+    "party"
+  ],
+  "image": "",
+  "brand": "",
+  "mrp": null,
+  "ourPrice": null,
+  "inStock": true,
+  "newArrival": false
+}

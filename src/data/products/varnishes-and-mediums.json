@@ -1,0 +1,20 @@
+{
+  "id": 79,
+  "name": "Varnishes & Mediums",
+  "category": "art-supplies",
+  "categoryLabel": "Art Supplies",
+  "price": "Below MRP",
+  "description": "",
+  "tags": [
+    "varnish",
+    "mediums",
+    "acrylic",
+    "oil"
+  ],
+  "image": "/shop-catalogue-images/varnishes_mediums.webp",
+  "brand": "",
+  "mrp": null,
+  "ourPrice": null,
+  "inStock": true,
+  "newArrival": false
+}

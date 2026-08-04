@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { STORE, waLink, prefersReducedMotion } from '../lib/utils';
+import { categories, products } from '../data/productData';
+import CategoryCard from './CategoryCard';
+import AdvantageCards from './AdvantageCards';
 import Testimonials from './Testimonials';
+import NewArrivals from './NewArrivals';
 import { WhatsAppIcon } from './icons';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -63,7 +67,7 @@ function renderIcon(name) {
     case 'Registers & Ledgers':
       return (
         <div className="w-10 h-13 bg-white rounded-md shadow-md border border-gray-200 flex flex-col overflow-hidden">
-          <div className="w-full h-3.5 bg-brand-purple flex items-center justify-center text-[5px] text-white font-bold leading-none">
+          <div className="w-full h-3.5 bg-brand-primary flex items-center justify-center text-[5px] text-white font-bold leading-none">
             NOTEBOOK
           </div>
           <div className="flex-grow flex flex-col gap-1 p-1">
@@ -176,7 +180,7 @@ function renderIcon(name) {
       );
     case 'Staplers & Punches':
       return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="text-gray-800">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-800">
           <path d="M5 22h14"/>
           <path d="M5 2v8l-2 2v2h18v-2l-2-2V2H5z"/>
           <path d="M9 14h6"/>
@@ -206,7 +210,7 @@ function renderIcon(name) {
       );
     case 'Fine Art Brushes':
       return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="text-gray-800">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-800">
           <path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/>
           <path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-1.17 2.01-2 2.01.93 1.23 2.5 2.03 4.02 2.03 2.23 0 4.05-1.8 4.05-4.04 0-1.66-1.35-3-3.02-3.02Z"/>
         </svg>
@@ -271,7 +275,7 @@ function GridSection({ title, subtitle, items }) {
           <Link
             key={item.name}
             to={item.to}
-            className="group flex flex-col items-center justify-between p-4 border-r border-b border-gray-200 hover:bg-brand-lavender/10 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:z-10 hover:-translate-y-0.5 transform transition-all duration-300"
+            className="group flex flex-col items-center justify-between p-4 border-r border-b border-gray-200 hover:bg-brand-soft/10 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:z-10 hover:-translate-y-0.5 transform transition-all duration-300"
           >
             <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center relative shadow-sm overflow-hidden ${squareColors[idx % 3]}`}>
               {renderIcon(item.name)}
@@ -284,7 +288,7 @@ function GridSection({ title, subtitle, items }) {
         ))}
       </div>
       <div className="mt-8 flex justify-center">
-        <Link to="/catalog" className="rounded-full border-2 border-brand-purple text-brand-purple font-bold px-8 py-2.5 text-xs sm:text-sm hover:bg-brand-purple hover:text-white transition-all duration-300 shadow-sm hover:shadow">
+        <Link to="/catalog" className="rounded-full border-2 border-brand-primary text-brand-primary font-bold px-8 py-2.5 text-xs sm:text-sm hover:bg-brand-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow">
           View More Products &rarr;
         </Link>
       </div>
@@ -319,11 +323,12 @@ export default function Home() {
       {/* CATEGORY TABS & TRUST BADGES (Scooboo-style) */}
       <div className="w-full bg-white border-b border-gray-200/60 shadow-sm">
         {/* Color Strip Tabs */}
-        <div className="flex overflow-x-auto sm:grid sm:grid-cols-4 text-white text-xs font-bold text-center select-none scrollbar-none">
-          <Link to="/catalog?category=stationery" className="bg-[#EF4444] py-3.5 px-4 whitespace-nowrap hover:opacity-90 transition-opacity flex-1 text-center">Stationery</Link>
-          <Link to="/catalog?category=office-supplies" className="bg-[#10B981] py-3.5 px-4 whitespace-nowrap hover:opacity-90 transition-opacity flex-1 text-center">Office Supplies</Link>
-          <Link to="/catalog?category=art-supplies" className="bg-[#3B82F6] py-3.5 px-4 whitespace-nowrap hover:opacity-90 transition-opacity flex-1 text-center">Art Supplies</Link>
-          <Link to="/catalog?category=craft-material" className="bg-[#6366F1] py-3.5 px-4 whitespace-nowrap hover:opacity-90 transition-opacity flex-1 text-center">Craft Material</Link>
+        <div className="flex overflow-x-auto text-white text-xs font-bold text-center select-none scrollbar-none">
+          {categories.map((c) => (
+            <Link key={c.id} to={`/catalog?category=${c.id}`} style={{ backgroundColor: c.color }} className="py-3.5 px-4 whitespace-nowrap hover:opacity-90 transition-opacity flex-1 text-center">
+              {c.title}
+            </Link>
+          ))}
         </div>
 
         {/* Trust Badges Bar */}
@@ -355,7 +360,7 @@ export default function Home() {
           
           {/* Content */}
           <div className="relative z-10 text-left px-4 sm:px-12 md:max-w-xl flex flex-col items-start gap-2 sm:gap-4 mr-auto py-0">
-            <span className="text-[9px] sm:text-xs font-bold uppercase tracking-wider text-brand-gold bg-brand-purple/85 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full backdrop-blur-sm shadow-sm border border-brand-purple/20 whitespace-nowrap">
+            <span className="text-[9px] sm:text-xs font-bold uppercase tracking-wider text-brand-gold bg-brand-primary/85 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full backdrop-blur-sm shadow-sm border border-brand-primary/20 whitespace-nowrap">
               Stationery Point Kochi
             </span>
             <h1 className="text-xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight uppercase">
@@ -366,7 +371,7 @@ export default function Home() {
               Find quality writing, drafting, school, and art supplies below MRP.
             </p>
             <div>
-              <Link to="/catalog" className="rounded-full bg-[#FF2D73] text-white font-bold px-5 py-2.5 sm:px-8 sm:py-3.5 hover:bg-[#e02060] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-block text-xs sm:text-sm">
+              <Link to="/catalog" className="rounded-full bg-brand-gold text-gray-900 font-bold px-5 py-2.5 sm:px-8 sm:py-3.5 hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-block text-xs sm:text-sm">
                 Shop Now
               </Link>
             </div>
@@ -374,101 +379,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* NEW ARRIVALS CAROUSEL */}
+      <NewArrivals />
+
+      {/* FIND BY CATEGORIES (Jags-style browse) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+        <div className="mb-6">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-800 tracking-tight">Find by Categories</h2>
+          <p className="text-xs sm:text-sm text-gray-500 mt-1.5 font-medium">Browse the aisles — every category holds many products to compare and choose.</p>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          {categories.map((c) => (
+            <CategoryCard key={c.id} name={c.title} image={c.image} categoryId={c.id} color={c.color} count={products.filter((p) => p.category === c.id).length} />
+          ))}
+        </div>
+      </section>
+
       {/* SECTION 1 */}
-      <GridSection 
+      <GridSection
         title="Academic &amp; School Supplies" 
         subtitle="Complete bundles, notebooks, writing tools, and geometry gear for school kids and students."
         items={section1} 
       />
 
-      {/* BREAKER 1: STATIONERY POINT ADVANTAGE CARDS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Card 1: Retail below MRP */}
-          <div className="bg-[#5D2D8F] text-white p-8 rounded-3xl flex flex-col justify-between aspect-square relative overflow-hidden shadow-soft group hover:shadow-md transition-shadow">
-            <div className="relative z-10 h-full flex flex-col justify-between">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-[#FFB000]">Our Guarantee</span>
-                <h3 className="text-3xl font-black uppercase tracking-tight mt-2 leading-none">
-                  Retail<br />Below MRP
-                </h3>
-                <p className="text-sm text-white/80 mt-4 leading-relaxed max-w-[220px]">
-                  Single items at wholesale prices. No minimum order quantity required.
-                </p>
-              </div>
-              <Link to="/catalog" className="w-fit rounded-full bg-[#FFB000] text-gray-900 font-bold px-6 py-2.5 text-xs hover:bg-white transition-colors shadow-sm">
-                Explore Catalog &rarr;
-              </Link>
-            </div>
-            {/* Background Kinetic Typography */}
-            <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
-              <div className="absolute top-1/2 left-0 w-[300%] -translate-y-1/2 -rotate-[8deg] origin-left">
-                <div className="flex animate-scroll-left w-max text-white" style={{ opacity: 0.1 }}>
-                  <span className="pr-[500px]">MRP</span>
-                  <span className="pr-[500px]">MRP</span>
-                  <span className="pr-[500px]">MRP</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2: Bulk Wholesale */}
-          <div className="bg-white border border-gray-200 text-gray-800 p-8 rounded-3xl flex flex-col justify-between aspect-square relative overflow-hidden shadow-soft group hover:shadow-md transition-shadow">
-            <div className="relative z-10 h-full flex flex-col justify-between">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-brand-purple/70">Institutional</span>
-                <h3 className="text-3xl font-black uppercase tracking-tight text-brand-purple mt-2 leading-none">
-                  Wholesale<br />Supply
-                </h3>
-                <p className="text-sm text-gray-500 mt-4 leading-relaxed max-w-[220px]">
-                  Custom pricing for schools, tuition centers, offices, and bulk buyers in Kochi.
-                </p>
-              </div>
-              <a href={waLink('Bulk Inquiry')} target="_blank" rel="noreferrer" className="w-fit rounded-full bg-brand-purple text-white font-bold px-6 py-2.5 text-xs hover:bg-opacity-90 transition-colors shadow-sm">
-                Request Quote &rarr;
-              </a>
-            </div>
-            {/* Background Kinetic Typography */}
-            <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
-              <div className="absolute top-1/2 left-0 w-[300%] -translate-y-1/2 -rotate-[8deg] origin-left">
-                <div className="flex animate-scroll-left w-max text-brand-purple" style={{ opacity: 0.05 }}>
-                  <span className="pr-[500px]">BULK</span>
-                  <span className="pr-[500px]">BULK</span>
-                  <span className="pr-[500px]">BULK</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3: WhatsApp Enquiry */}
-          <div className="bg-[#25D366] text-white p-8 rounded-3xl flex flex-col justify-between aspect-square relative overflow-hidden shadow-soft group hover:shadow-md transition-shadow">
-            <div className="relative z-10 h-full flex flex-col justify-between">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-green-100">Quick Contact</span>
-                <h3 className="text-3xl font-black uppercase tracking-tight mt-2 leading-none">
-                  WhatsApp<br />Enquiry
-                </h3>
-                <p className="text-sm text-white/90 mt-4 leading-relaxed max-w-[220px]">
-                  Send us a list or picture of the items you need. We'll reply with a below-MRP quote!
-                </p>
-              </div>
-              <a href={waLink('Send Stationery List')} target="_blank" rel="noreferrer" className="w-fit rounded-full bg-white text-green-600 font-bold px-6 py-2.5 text-xs hover:bg-green-50 transition-colors shadow-sm">
-                Send List Now &rarr;
-              </a>
-            </div>
-            {/* Background Kinetic Typography */}
-            <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
-              <div className="absolute top-1/2 left-0 w-[300%] -translate-y-1/2 -rotate-[8deg] origin-left">
-                <div className="flex animate-scroll-left w-max text-white" style={{ opacity: 0.1 }}>
-                  <span className="pr-[500px]">CHAT</span>
-                  <span className="pr-[500px]">CHAT</span>
-                  <span className="pr-[500px]">CHAT</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ADVANTAGE CARDS (custom animated graphics) */}
+      <AdvantageCards />
 
       {/* SECTION 2 */}
       <GridSection 
@@ -479,7 +414,7 @@ export default function Home() {
 
       {/* BREAKER 2: KOCHI LOCAL DELIVERY BANNER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        <div className="bg-gradient-to-r from-gray-900 via-brand-purple/90 to-brand-purple text-white rounded-3xl p-8 md:p-12 relative overflow-hidden border border-brand-purple/10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="bg-gradient-to-r from-gray-900 via-brand-primary/90 to-brand-primary text-white rounded-3xl p-8 md:p-12 relative overflow-hidden border border-brand-primary/10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="relative z-10 max-w-lg">
             <span className="text-[10px] font-bold uppercase tracking-widest text-brand-gold">Kochi Fulfillment</span>
             <h3 className="text-3xl font-extrabold mt-2 leading-tight">Serving Kochi's Schools &amp; Offices</h3>
@@ -500,7 +435,7 @@ export default function Home() {
                 <div className="w-3/4 h-[1px] bg-gray-400" />
               </div>
               {/* SP Branding tape */}
-              <div className="absolute top-8 left-0 right-0 h-3 bg-brand-purple/20 border-y border-brand-purple/10" />
+              <div className="absolute top-8 left-0 right-0 h-3 bg-brand-primary/20 border-y border-brand-primary/10" />
             </div>
             <div className="w-14 h-14 bg-amber-700 rounded-lg shadow-sm border-b-4 border-amber-900 flex items-center justify-center text-[10px] text-white/30 font-bold">
               BOX
@@ -520,7 +455,7 @@ export default function Home() {
 
       {/* WHOLESALE CTA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-        <div className="rounded-3xl bg-brand-purple text-white px-6 sm:px-12 py-12 md:py-16 relative overflow-hidden">
+        <div className="rounded-3xl bg-brand-primary text-white px-6 sm:px-12 py-12 md:py-16 relative overflow-hidden">
           <div className="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-brand-gold/20 blur-2xl" aria-hidden="true" />
           <div className="relative max-w-2xl">
             <h2 className="text-3xl md:text-4xl font-extrabold">Wholesale &amp; Bulk Enquiries</h2>

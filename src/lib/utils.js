@@ -23,10 +23,19 @@ export const STORE = {
   hours: 'Monday – Saturday: 9:30 AM – 8:00 PM | Sunday: Closed',
   rating: '4.8',
   reviewCount: '147+',
+  // Query the business by name so the embed shows the Stationery Point
+  // listing (name, rating, photos) instead of pinning the Katti Tower building.
   mapsEmbed:
-    'https://www.google.com/maps?q=Katti+Tower+Janatha+Junction+Vyttila+Kochi&output=embed',
-  mapsLink: 'https://maps.google.com/?q=Katti+Tower+Janatha+Junction+Vyttila+Kochi',
+    'https://www.google.com/maps?q=Stationery+Point+Katti+Tower+Vyttila+Kochi&output=embed',
+  mapsLink: 'https://maps.google.com/?q=Stationery+Point+Katti+Tower+Vyttila+Kochi',
 };
+
+// One WhatsApp message for a whole enquiry list: [{ name, qty }, ...]
+export function waListLink(items) {
+  const lines = items.map((i, idx) => `${idx + 1}. ${i.name} — Qty: ${i.qty}`);
+  const msg = `Hi Stationery Point, I would like to enquire about these items:\n\n${lines.join('\n')}\n\nPlease share prices and availability.`;
+  return `https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(msg)}`;
+}
 
 export function waLink(productName) {
   const base = `https://wa.me/${STORE.whatsapp}?text=`;

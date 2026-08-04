@@ -1,0 +1,19 @@
+{
+  "id": 49,
+  "name": "Stamps & Pads",
+  "category": "office-supplies",
+  "categoryLabel": "Office Supplies",
+  "price": "Below MRP",
+  "description": "",
+  "tags": [
+    "stamps",
+    "ink pad",
+    "office"
+  ],
+  "image": "/shop-catalogue-images/stamps_pads.webp",
+  "brand": "",
+  "mrp": null,
+  "ourPrice": null,
+  "inStock": true,
+  "newArrival": false
+}

@@ -1,0 +1,19 @@
+{
+  "id": 68,
+  "name": "Sketch & Drawing Pads",
+  "category": "art-supplies",
+  "categoryLabel": "Art Supplies",
+  "price": "Below MRP",
+  "description": "",
+  "tags": [
+    "sketchbook",
+    "drawing pad",
+    "paper"
+  ],
+  "image": "/shop-catalogue-images/sketch_drawing_pads.webp",
+  "brand": "",
+  "mrp": null,
+  "ourPrice": null,
+  "inStock": true,
+  "newArrival": false
+}

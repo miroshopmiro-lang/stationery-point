@@ -1,0 +1,19 @@
+{
+  "id": 70,
+  "name": "Oil Painting Pads & Sheets",
+  "category": "art-supplies",
+  "categoryLabel": "Art Supplies",
+  "price": "Below MRP",
+  "description": "",
+  "tags": [
+    "oil pad",
+    "canvas sheets",
+    "oil painting"
+  ],
+  "image": "/shop-catalogue-images/oil_painting_pads.webp",
+  "brand": "",
+  "mrp": null,
+  "ourPrice": null,
+  "inStock": true,
+  "newArrival": false
+}

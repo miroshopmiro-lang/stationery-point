@@ -1,0 +1,3 @@
+# SPA fallback: deep links (/catalog, /new-arrivals, refreshes) serve the app.
+# Real files (including /admin/*) are served before redirects are evaluated.
+/* /index.html 200

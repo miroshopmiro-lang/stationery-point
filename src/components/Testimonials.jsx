@@ -23,9 +23,9 @@ export default function Testimonials() {
   }, [i, reduce]);
 
   return (
-    <section className="bg-brand-lavender py-16" aria-roledescription="carousel" aria-label="Customer reviews">
+    <section className="bg-brand-soft py-16" aria-roledescription="carousel" aria-label="Customer reviews">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <p className="text-sm font-medium text-brand-purple/60 mb-2">Verified Google Reviews</p>
+        <p className="text-sm font-medium text-brand-primary/60 mb-2">Verified Google Reviews</p>
         <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Loved by {STORE.reviewCount} customers</h2>
         <div className="mt-2 flex items-center gap-1 text-brand-gold">
           {Array.from({ length: 5 }).map((_, k) => (<StarIcon key={k} className="w-5 h-5" />))}
@@ -45,7 +45,7 @@ export default function Testimonials() {
                 {Array.from({ length: r.stars }).map((_, k) => (<StarIcon key={k} className="w-4 h-4" />))}
               </div>
               <p className="text-lg text-gray-700 leading-relaxed">“{r.text}”</p>
-              <p className="mt-4 font-bold text-brand-purple">— {r.name}</p>
+              <p className="mt-4 font-bold text-brand-primary">— {r.name}</p>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -58,7 +58,7 @@ export default function Testimonials() {
               role="tab"
               aria-selected={k === i}
               onClick={() => setI(k)}
-              className={`h-2.5 rounded-full transition-[width,background-color] ${k === i ? 'w-8 bg-brand-purple' : 'w-2.5 bg-brand-purple/30'}`}
+              className={`h-2.5 rounded-full transition-[width,background-color] ${k === i ? 'w-8 bg-brand-primary' : 'w-2.5 bg-brand-primary/30'}`}
               aria-label={`Show review ${k + 1} of ${reviews.length} by ${rev.name}`}
             />
           ))}
