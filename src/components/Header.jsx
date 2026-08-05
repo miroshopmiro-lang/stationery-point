@@ -18,7 +18,6 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50">
       <div className="relative overflow-hidden bg-gradient-to-r from-brand-dark via-brand-primary to-brand-dark text-white text-center text-xs sm:text-sm py-2 px-4 tracking-wide font-semibold">
-        <div className="absolute inset-0 halftone-light opacity-25 pointer-events-none" aria-hidden="true" />
         <span className="relative">✏️ Quality Products Below MRP &nbsp;·&nbsp; Special Store Discounts Available</span>
       </div>
 
