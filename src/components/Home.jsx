@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { STORE, waLink } from '../lib/utils';
+import { STORE } from '../lib/utils';
 import { categories, products } from '../data/productData';
 import CategoryCard from './CategoryCard';
 import AdvantageCards from './AdvantageCards';
 import Testimonials from './Testimonials';
 import NewArrivals from './NewArrivals';
+import SendListModal from './SendListModal';
 import { WhatsAppIcon, StarIcon } from './icons';
 
 // One merged "popular" grid. Previously three near-identical 9-item grids
@@ -177,8 +178,11 @@ function GridSection({ title, subtitle, items }) {
 }
 
 export default function Home() {
+  const [listModalOpen, setListModalOpen] = useState(false);
+
   return (
     <div>
+      <SendListModal open={listModalOpen} onClose={() => setListModalOpen(false)} />
       {/* TRUST STRIP — one line of verified facts. Replaces the seven-colour
           category tab strip (6 of 7 failed WCAG AA on white text) and the
           emoji badge row that stacked to three lines on mobile. */}
@@ -219,10 +223,6 @@ export default function Home() {
               <br />
               and art.
             </h1>
-            <p className="text-sm sm:text-base text-white/85 max-w-md text-balance leading-relaxed">
-              {products.length} products across {categories.length} aisles — all below MRP. Send us your
-              list on WhatsApp and we&rsquo;ll quote it.
-            </p>
             <div className="flex flex-wrap gap-3 pt-1">
               <Link
                 to="/catalog"
@@ -230,14 +230,15 @@ export default function Home() {
               >
                 Browse the catalog
               </Link>
-              <a
-                href={waLink()}
-                target="_blank"
-                rel="noreferrer"
+              {/* Opens the "make your list first" prompt rather than firing a
+                  bare WhatsApp intent — see SendListModal. */}
+              <button
+                type="button"
+                onClick={() => setListModalOpen(true)}
                 className="inline-flex items-center gap-2 rounded-full border border-white/40 text-white font-bold px-6 py-3 text-sm hover:bg-white/10 transition-colors"
               >
                 <WhatsAppIcon className="w-4 h-4" /> Send a list
-              </a>
+              </button>
             </div>
           </div>
         </div>

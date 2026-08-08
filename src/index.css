@@ -105,18 +105,31 @@ html.lenis body {
   }
 }
 
-/* Brand Marquee Animation */
-@keyframes marqueeScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-33.333%); }
+/* New Arrivals strip.
+   The drift is a rAF loop in NewArrivals.jsx writing scrollLeft, not a CSS
+   animation — that makes the strip a real scroll container, so a finger flick
+   or a mouse drag can take it over mid-motion and it stays where it was left.
+   Pausing is decided in JS too: a CSS :hover pause stopped the strip the
+   instant the cursor was over it, including while the page was merely
+   scrolling past underneath, which read as stuttering. */
+.marquee-viewport {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-behavior: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
 }
-.animate-marquee {
+.marquee-viewport::-webkit-scrollbar {
+  display: none;
+}
+.marquee-viewport.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+.marquee-track {
   display: flex;
   width: max-content;
-  animation: marqueeScroll 25s linear infinite;
-}
-.animate-marquee:hover {
-  animation-play-state: paused;
 }
 
 /* Kinetic Editorial Background Text Animation */
