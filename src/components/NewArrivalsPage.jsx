@@ -20,7 +20,6 @@ export default function NewArrivalsPage() {
 
       {items.length > 0 ? (
         <>
-          <p className="text-sm text-gray-400 mb-4">{items.length} product{items.length !== 1 ? 's' : ''}</p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {items.map((p) => (
               <ProductCard key={p.id ?? p.name} product={p} />

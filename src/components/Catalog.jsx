@@ -82,8 +82,6 @@ export default function Catalog() {
                 name={c.title}
                 image={c.image}
                 categoryId={c.id}
-                color={c.color}
-                count={products.filter((p) => p.category === c.id).length}
               />
             ))}
           </div>
@@ -135,7 +133,11 @@ export default function Catalog() {
           <div className="mb-4 flex items-end justify-between gap-3">
             <div>
               {activeCategory && <h2 className="text-xl font-extrabold text-gray-800">{activeCategory.title}</h2>}
-              <p className="text-sm text-gray-400" aria-live="polite">{filtered.length} product{filtered.length !== 1 ? 's' : ''} found</p>
+              {/* Result counts deliberately not shown — a category reading
+                  "7 products" reads as a small shop, not a curated one. */}
+              <p className="sr-only" aria-live="polite">
+                {filtered.length} product{filtered.length !== 1 ? 's' : ''} found
+              </p>
             </div>
             <button
               type="button"

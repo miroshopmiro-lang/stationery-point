@@ -170,7 +170,7 @@ function GridSection({ title, subtitle, items }) {
           to="/catalog"
           className="rounded-full border-2 border-brand-primary text-brand-primary font-bold px-8 py-2.5 text-sm hover:bg-brand-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow"
         >
-          Browse All {products.length} Products &rarr;
+          Browse the full catalog &rarr;
         </Link>
       </div>
     </section>
@@ -260,7 +260,6 @@ export default function Home() {
               name={c.title}
               image={c.image}
               categoryId={c.id}
-              count={products.filter((p) => p.category === c.id).length}
             />
           ))}
         </div>

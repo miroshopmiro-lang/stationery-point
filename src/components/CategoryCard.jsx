@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 // so nothing can overlap or steal the tap target. The per-category `color`
 // prop is accepted for backwards compatibility but no longer rendered: the
 // stock-palette chips it drove failed WCAG AA contrast and fought the brand.
-export default function CategoryCard({ name, image, categoryId, count }) {
+export default function CategoryCard({ name, image, categoryId }) {
   const to = categoryId ? `/catalog?category=${categoryId}` : '/catalog';
   return (
     <Link
       to={to}
-      aria-label={`Browse ${name} (${count ?? 0} items)`}
+      aria-label={`Browse ${name}`}
       className="group relative block aspect-[4/5] rounded-2xl overflow-hidden border border-gray-200/50 bg-gray-50 shadow-soft transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lg focus-visible:ring-4 focus-visible:ring-brand-gold"
     >
       {/* Artwork */}
@@ -33,11 +33,6 @@ export default function CategoryCard({ name, image, categoryId, count }) {
           {name}
         </span>
         <span className="flex items-center gap-2">
-          {count != null && (
-            <span className="text-[11px] font-bold uppercase tracking-wide text-white/75">
-              {count} item{count !== 1 ? 's' : ''}
-            </span>
-          )}
           <span className="text-brand-gold text-xs font-extrabold opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
             Browse &rarr;
           </span>
