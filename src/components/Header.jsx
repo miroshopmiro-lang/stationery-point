@@ -18,7 +18,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50">
       <div className="relative overflow-hidden bg-gradient-to-r from-brand-dark via-brand-primary to-brand-dark text-white text-center text-xs sm:text-sm py-2 px-4 tracking-wide font-semibold">
-        <span className="relative">✏️ Quality Products Below MRP &nbsp;·&nbsp; Special Store Discounts Available</span>
+        <span className="relative">Below MRP every day &nbsp;·&nbsp; Mon–Sat 9:30 AM – 8 PM &nbsp;·&nbsp; Opposite Metro Pillar 837, Vyttila</span>
       </div>
 
       <div className="glass border-b border-white/40">
@@ -56,17 +56,13 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Link to="/catalog" className="hidden sm:flex items-center gap-2 bg-white/70 border border-gray-200 rounded-full px-3 py-2 text-sm text-gray-500 hover:border-brand-primary transition-colors">
+            <Link to="/catalog" className="hidden sm:flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-gray-700 hover:text-brand-primary transition-colors">
               <SearchIcon className="w-4 h-4" /> Search
             </Link>
             <a href={`tel:${STORE.phoneTel}`} className="hidden md:flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold border border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white transition-colors duration-300">
               <PhoneIcon className="w-4 h-4" /> Call
             </a>
             <a href={waLink()} target="_blank" rel="noreferrer" className="relative flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-semibold bg-[#25D366] text-white hover:bg-[#1da851] hover:shadow-lg hover:-translate-y-px transition-all duration-200" aria-label="Enquire on WhatsApp">
-              <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5" aria-hidden="true">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-200 border border-white" />
-              </span>
               <WhatsAppIcon className="w-4 h-4" /> <span className="hidden sm:inline">WhatsApp</span>
             </a>
             <button

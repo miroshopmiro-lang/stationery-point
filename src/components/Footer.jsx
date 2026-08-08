@@ -43,7 +43,7 @@ export default function Footer() {
         <p className="mt-12 text-center text-xs text-white/50">© {new Date().getFullYear()} Stationery Point, Kochi. All rights reserved.</p>
       </div>
       <div className="overflow-hidden" aria-hidden="true">
-        <span className="block text-center font-serif uppercase font-extrabold leading-none text-white/10 text-[14vw] tracking-tight select-none -mb-[2vw]" translate="no">
+        <span className="block text-center uppercase font-extrabold leading-none text-white/10 text-[14vw] tracking-tight select-none -mb-[2vw]" translate="no">
           Stationery Point
         </span>
       </div>

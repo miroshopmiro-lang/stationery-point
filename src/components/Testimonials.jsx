@@ -5,7 +5,7 @@ import { StarIcon } from './icons';
 
 const reviews = [
   { name: 'Anisha P.', stars: 5, text: 'This place is a hidden treasure in the city. One shop for all the stationery and craft items… customer service is appreciable. They gave much discount to the things I bought… step from Sahodaran Ayyappan road…' },
-  { name: 'Vivek D.', stars: 5, text: 'Quality and variety made available at very affordable prices &amp; friendly staff.' },
+  { name: 'Vivek D.', stars: 5, text: 'Quality and variety made available at very affordable prices & friendly staff.' },
   { name: 'Jelitta Johny', stars: 5, text: 'Wonderful experience and quality products at reasonable price 💗' },
 ];
 
