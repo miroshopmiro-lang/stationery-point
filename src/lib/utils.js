@@ -22,7 +22,7 @@ export const STORE = {
   landmark: 'Opposite Metro Pillar No. 837',
   hours: 'Monday – Saturday: 9:30 AM – 8:00 PM | Sunday: Closed',
   rating: '4.8',
-  reviewCount: '147+',
+  reviewCount: '150+',
   // Query the business by name so the embed shows the Stationery Point
   // listing (name, rating, photos) instead of pinning the Katti Tower building.
   mapsEmbed:
