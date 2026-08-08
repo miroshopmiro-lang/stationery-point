@@ -78,7 +78,8 @@ export default function AdvantageCards() {
                 WhatsApp<br />Enquiry
               </h3>
               <p className="text-sm text-white/90 mt-4 leading-relaxed max-w-[220px]">
-                Send us a list or picture of the items you need. We'll reply with a below-MRP quote!
+                Send a list or photo. Can't find it in the catalog? We can usually source it in
+                1–2 days.
               </p>
             </div>
             <a href={waLink('Send Stationery List')} target="_blank" rel="noreferrer" className="w-fit rounded-full bg-white text-green-600 font-bold px-6 py-2.5 text-xs hover:bg-green-50 transition-colors shadow-sm">

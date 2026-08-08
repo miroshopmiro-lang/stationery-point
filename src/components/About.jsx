@@ -25,7 +25,7 @@ export default function About() {
           <p className="text-sm font-medium text-gray-400 mb-2">About Stationery Point</p>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">Your one-stop stationery shop in <span className="text-gradient">Vyttila, Kochi</span></h1>
           <p className="mt-6 text-gray-600 leading-relaxed">
-            Welcome to Stationery Point, your ultimate one-stop shop in Kochi for all your writing supplies, craft items, school and office stationery, party products, and corporate gifts. We are proud to offer a massive variety of high-quality products at prices below MRP! Whether you are a student, an artist, or sourcing supplies for your office, our friendly staff is here to help you find exactly what you need.
+            Welcome to Stationery Point, your ultimate one-stop shop in Kochi for all your writing supplies, craft items, school and office stationery, party products, and corporate gifts. We are proud to offer a massive variety of high-quality products at prices below MRP! Whether you are a student, an artist, or sourcing supplies for your office, Sam and the team are here to help you find exactly what you need — and if we don't have it on the shelf, we can usually source it within a day or two.
           </p>
           <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-soft text-brand-primary font-semibold px-4 py-2">
             <StarIcon className="w-4 h-4 text-brand-gold" /> {STORE.rating} / 5 · {STORE.reviewCount} verified reviews
@@ -49,6 +49,19 @@ export default function About() {
                 <span className={h.open ? 'text-green-600 font-semibold tabular-nums' : 'text-red-500 font-semibold'}>{h.time}</span>
               </li>
             ))}
+          </ul>
+          {/* Both confirmed by repeat customers in Google reviews — parking
+              by name six times over, the rewards scheme by the owner's own
+              reply thanking a customer for redeeming points. Kept deliberately
+              generic: no points-per-rupee ratio or redemption threshold is
+              confirmed, so none is claimed here. */}
+          <ul className="mt-5 space-y-2 text-sm text-gray-600">
+            <li className="flex items-center gap-2">
+              <span className="text-brand-primary" aria-hidden="true">✓</span> Parking available outside the store
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-brand-primary" aria-hidden="true">✓</span> Ask in-store about our rewards points
+            </li>
           </ul>
         </div>
         <div className="rounded-2xl bg-brand-primary text-white shadow-soft p-8">

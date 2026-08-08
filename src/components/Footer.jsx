@@ -24,6 +24,7 @@ export default function Footer() {
               <li>{STORE.hours}</li>
               <li>Enquiry-only · No online checkout</li>
               <li>Quality products below MRP</li>
+              <li>Free parking available</li>
             </ul>
           </div>
           <div>

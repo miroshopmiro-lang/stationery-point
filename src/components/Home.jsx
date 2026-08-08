@@ -197,7 +197,7 @@ export default function Home() {
           <span className="text-gray-300" aria-hidden="true">·</span>
           <span>Below MRP</span>
           <span className="text-gray-300 hidden sm:inline" aria-hidden="true">·</span>
-          <span className="hidden sm:inline">Vyttila, Kochi</span>
+          <span className="hidden sm:inline">Free parking</span>
         </div>
       </div>
 
