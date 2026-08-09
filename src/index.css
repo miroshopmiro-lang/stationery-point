@@ -132,6 +132,76 @@ html.lenis body {
   width: max-content;
 }
 
+/* ── Advantage cards ──────────────────────────────────────────────────────
+   Three poster cards. Every animation here is transform-only, so it runs on
+   the compositor and cannot be stalled by React re-rendering the catalogue
+   on the main thread.
+
+   Reduced motion is handled entirely by the global rule above — there is no
+   JS flag for it, deliberately. None of these use animation-fill-mode, so
+   when that rule collapses the duration they revert to their BASE state,
+   and every base state here is the fully-readable one: marquee text at
+   translate 0, chat thread at the top, strike-through fully drawn. Motion is
+   only ever decoration on top of something already correct. */
+
+/* Poster type is sized in cqw so it scales against the CARD, not the viewport.
+   Without this the giant "MRP" would reflow at every breakpoint and the amount
+   it bleeds past the edge would change with the window rather than staying a
+   deliberate crop. */
+.adv-card { container-type: inline-size; }
+
+/* Track holds its content twice; -50% lands exactly on the seam. */
+@keyframes advMarqueeLeft {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes advMarqueeRight {
+  from { transform: translate3d(-50%, 0, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+
+.adv-marquee {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  animation: advMarqueeLeft 20s linear infinite;
+}
+.adv-marquee--reverse { animation-name: advMarqueeRight; }
+.adv-marquee--fast    { animation-duration: 14s; }
+.adv-marquee--slow    { animation-duration: 27s; }
+
+@keyframes advChatScroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(0, -50%, 0); }
+}
+.adv-chat-track { animation: advChatScroll 24s linear infinite; }
+
+@keyframes advTypingDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%           { transform: translateY(-3px); opacity: 1; }
+}
+.adv-dot { animation: advTypingDot 1.4s ease-in-out infinite; }
+.adv-dot:nth-child(2) { animation-delay: 0.18s; }
+.adv-dot:nth-child(3) { animation-delay: 0.36s; }
+
+/* Strike-through draws once. Base state is fully drawn, so a reduced-motion
+   visitor sees the struck-out price, which is the whole point of the card. */
+@keyframes advStrike {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.adv-strike {
+  transform-origin: left center;
+  animation: advStrike 800ms cubic-bezier(0.2, 0.8, 0.2, 1) 1;
+}
+
+/* Off-screen cards stop animating — no battery burn on a phone parked
+   halfway down the page. Default is running, so if the observer never
+   fires (or JS fails) the cards animate rather than freeze. */
+.adv-offscreen .adv-marquee,
+.adv-offscreen .adv-chat-track,
+.adv-offscreen .adv-dot { animation-play-state: paused; }
+
 /* Kinetic Editorial Background Text Animation */
 @keyframes scrollMarquee {
   0% { transform: translateX(0); }
