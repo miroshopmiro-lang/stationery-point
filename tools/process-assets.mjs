@@ -64,20 +64,26 @@ const LEGACY = [
   // storefront stays JPEG on purpose: it is the og:image, and WebP link previews
   // are unreliable across WhatsApp and the other scrapers this shop shares into.
   { in: 'storefront.jpg', out: 'storefront.jpg', w: 1024, h: 576, budget: 130 * KB, jpeg: true },
-  // Phone-sized variants of the tiles currently in public/. Marked transitional:
-  // these sources are busy photographs and four of them cannot reach 35KB at any
-  // quality worth shipping. The replacement artwork is flat illustration and will,
-  // so the budget stays honest for SPECS and this block only warns. Delete the
-  // whole block once the generated tiles land in the inbox.
-  ...TILES.map((id) => ({
+];
+
+// stationery, office-supplies and party-gifts are staying as the original stock
+// photos — no replacement art was generated for them, so they still need a
+// legacy -600 companion. The other four now come through SPECS from their own
+// generated PNG, and must NOT also be regenerated here: this block's source is
+// asset-originals/category-tiles/, which still holds the OLD stock photo for
+// every id, so re-running it against the full TILES list would silently
+// overwrite the new artwork's -600 with the discarded photo it replaced.
+const KEPT_STOCK_TILES = ['stationery', 'office-supplies', 'party-gifts'];
+LEGACY.push(
+  ...KEPT_STOCK_TILES.map((id) => ({
     in: `category-tiles/${id}.webp`,
     out: `category-tiles/${id}-600.webp`,
     w: 600,
     h: 750,
     budget: 35 * KB,
     transitional: true,
-  })),
-];
+  }))
+);
 
 /**
  * Encode down the quality ladder until the file fits its budget. Returns the
