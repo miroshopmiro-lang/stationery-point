@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { STORE } from '../lib/utils';
-import { StarIcon } from './icons';
+import { StarIcon, ChevronLeftIcon, ChevronRightIcon } from './icons';
 
 // Verbatim Google reviews. Text is quoted exactly as written — including the
 // authors' own spelling — because an edited review is no longer a review.
@@ -103,42 +103,114 @@ function initials(name) {
     .join('');
 }
 
+const slideVariants = {
+  enter: (direction) => ({
+    opacity: 0,
+    x: direction > 0 ? 30 : -30,
+  }),
+  center: {
+    opacity: 1,
+    x: 0,
+  },
+  exit: (direction) => ({
+    opacity: 0,
+    x: direction > 0 ? -30 : 30,
+  }),
+};
+
 export default function Testimonials() {
   const [i, setI] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const [pauseDuration, setPauseDuration] = useState(5000);
+  const [isHovered, setIsHovered] = useState(false);
   const reduce = useReducedMotion();
   const r = reviews[i];
 
+  const handlePrev = () => {
+    setDirection(-1);
+    setI((prev) => (prev - 1 + reviews.length) % reviews.length);
+    setPauseDuration(10000); // 10s extended reading delay after manual click
+  };
+
+  const handleNext = () => {
+    setDirection(1);
+    setI((prev) => (prev + 1) % reviews.length);
+    setPauseDuration(10000); // 10s extended reading delay after manual click
+  };
+
+  const handleDotClick = (k) => {
+    if (k === i) return;
+    setDirection(k > i ? 1 : -1);
+    setI(k);
+    setPauseDuration(10000); // 10s extended reading delay after manual click
+  };
+
   useEffect(() => {
-    if (reduce) return; // Respect reduced motion settings
-    const timer = setInterval(() => {
+    if (reduce || isHovered) return; // Respect reduced motion and pause on hover
+
+    const timer = setTimeout(() => {
+      setDirection(1);
       setI((prev) => (prev + 1) % reviews.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [i, reduce]);
+      setPauseDuration(5000); // Reset back to default 5s interval for subsequent auto ticks
+    }, pauseDuration);
+
+    return () => clearTimeout(timer);
+  }, [i, pauseDuration, reduce, isHovered]);
 
   return (
     <section className="bg-brand-soft py-16" aria-roledescription="carousel" aria-label="Customer reviews">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <p className="text-sm font-medium text-brand-primary/60 mb-2">Verified Google Reviews</p>
-        <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Loved by Kochi</h2>
-        <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1">
-          <span className="flex items-center gap-1 text-brand-gold" aria-hidden="true">
-            {Array.from({ length: 5 }).map((_, k) => (<StarIcon key={k} className="w-5 h-5" />))}
-          </span>
-          <span className="text-gray-700 font-bold tabular-nums">{STORE.rating} / 5</span>
-          <span className="text-gray-500 text-sm">from {STORE.reviewCount} Google reviews</span>
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-sm font-medium text-brand-primary/60 mb-2">Verified Google Reviews</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Loved by Kochi</h2>
+            <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1">
+              <span className="flex items-center gap-1 text-brand-gold" aria-hidden="true">
+                {Array.from({ length: 5 }).map((_, k) => (<StarIcon key={k} className="w-5 h-5" />))}
+              </span>
+              <span className="text-gray-700 font-bold tabular-nums">{STORE.rating} / 5</span>
+              <span className="text-gray-500 text-sm">from {STORE.reviewCount} Google reviews</span>
+            </div>
+          </div>
+
+          {/* Direct Arrow Navigation for Header on larger screens */}
+          <div className="hidden sm:flex items-center gap-2" aria-label="Review navigation">
+            <button
+              type="button"
+              onClick={handlePrev}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand-primary shadow-soft border border-brand-primary/10 transition-all hover:bg-brand-primary hover:text-white hover:border-brand-primary active:scale-95 focus:outline-none focus:ring-2 focus:ring-brand-primary/50"
+              aria-label="Previous review"
+            >
+              <ChevronLeftIcon className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand-primary shadow-soft border border-brand-primary/10 transition-all hover:bg-brand-primary hover:text-white hover:border-brand-primary active:scale-95 focus:outline-none focus:ring-2 focus:ring-brand-primary/50"
+              aria-label="Next review"
+            >
+              <ChevronRightIcon className="h-5 w-5" />
+            </button>
+          </div>
         </div>
 
         {/* min-h is sized to the longest review so the card doesn't resize
             under the reader as it rotates. */}
-        <div className="mt-8 bg-white rounded-2xl shadow-soft p-8 min-h-[430px] sm:min-h-[300px] md:min-h-[260px] flex flex-col" aria-live="polite">
-          <AnimatePresence mode="wait">
+        <div
+          className="mt-8 bg-white rounded-2xl shadow-soft p-8 min-h-[430px] sm:min-h-[300px] md:min-h-[260px] flex flex-col relative overflow-hidden"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          aria-live="polite"
+        >
+          <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={i}
-              initial={reduce ? false : { opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={reduce ? { opacity: 0 } : { opacity: 0, x: -20 }}
-              transition={{ duration: 0.4 }}
+              custom={direction}
+              variants={slideVariants}
+              initial={reduce ? false : 'enter'}
+              animate="center"
+              exit={reduce ? { opacity: 0 } : 'exit'}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
               className="flex flex-col h-full"
             >
               <div className="flex gap-1 text-brand-gold mb-3" aria-label={`${r.stars} out of 5 stars`}>
@@ -174,23 +246,52 @@ export default function Testimonials() {
           </AnimatePresence>
         </div>
 
-        <div className="mt-6 flex flex-wrap items-center gap-2" role="tablist" aria-label="Select a review">
-          {reviews.map((rev, k) => (
-            <button
-              key={rev.name}
-              type="button"
-              role="tab"
-              aria-selected={k === i}
-              onClick={() => setI(k)}
-              className={`h-2.5 rounded-full transition-[width,background-color] ${k === i ? 'w-8 bg-brand-primary' : 'w-2.5 bg-brand-primary/30'}`}
-              aria-label={`Show review ${k + 1} of ${reviews.length} by ${rev.name}`}
-            />
-          ))}
+        {/* Controls bar below review card */}
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            {/* Navigation Arrows for Mobile / General */}
+            <div className="flex items-center gap-1.5 sm:hidden" aria-label="Review navigation controls">
+              <button
+                type="button"
+                onClick={handlePrev}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-brand-primary shadow-soft border border-brand-primary/10 transition-all hover:bg-brand-primary hover:text-white active:scale-95 focus:outline-none focus:ring-2 focus:ring-brand-primary/50"
+                aria-label="Previous review"
+              >
+                <ChevronLeftIcon className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={handleNext}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-brand-primary shadow-soft border border-brand-primary/10 transition-all hover:bg-brand-primary hover:text-white active:scale-95 focus:outline-none focus:ring-2 focus:ring-brand-primary/50"
+                aria-label="Next review"
+              >
+                <ChevronRightIcon className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* Indicator Dots */}
+            <div role="tablist" aria-label="Select a review" className="flex items-center gap-1.5 flex-wrap">
+              {reviews.map((rev, k) => (
+                <button
+                  key={rev.name}
+                  type="button"
+                  role="tab"
+                  aria-selected={k === i}
+                  onClick={() => handleDotClick(k)}
+                  className={`h-2.5 rounded-full transition-[width,background-color] duration-300 ${
+                    k === i ? 'w-8 bg-brand-primary' : 'w-2.5 bg-brand-primary/30 hover:bg-brand-primary/60'
+                  }`}
+                  aria-label={`Show review ${k + 1} of ${reviews.length} by ${rev.name}`}
+                />
+              ))}
+            </div>
+          </div>
+
           <a
             href={STORE.mapsLink}
             target="_blank"
             rel="noreferrer"
-            className="ml-auto text-sm font-bold text-brand-primary hover:text-brand-dark underline underline-offset-4 whitespace-nowrap transition-colors"
+            className="text-sm font-bold text-brand-primary hover:text-brand-dark underline underline-offset-4 whitespace-nowrap transition-colors"
           >
             Read them all on Google &rarr;
           </a>
@@ -199,3 +300,4 @@ export default function Testimonials() {
     </section>
   );
 }
+

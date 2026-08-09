@@ -83,3 +83,16 @@ export const MenuIcon = ({ className = 'w-6 h-6' }) => (
     <line x1="4" y1="17" x2="20" y2="17" />
   </svg>
 );
+
+export const ChevronLeftIcon = ({ className = 'w-5 h-5' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" {...base}>
+    <path d="M15 18l-6-6 6-6" />
+  </svg>
+);
+
+export const ChevronRightIcon = ({ className = 'w-5 h-5' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" {...base}>
+    <path d="M9 18l6-6-6-6" />
+  </svg>
+);
+
