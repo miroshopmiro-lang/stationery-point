@@ -204,12 +204,22 @@ export default function Home() {
       {/* HERO */}
       <section className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="relative rounded-3xl overflow-hidden min-h-[420px] sm:min-h-[380px] md:min-h-[440px] flex items-center bg-gray-900 shadow-soft">
-          <img
-            src="/hero_banner.png"
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover opacity-55"
-            fetchpriority="high"
-          />
+          {/* Two crops: the mobile one is composed so the objects sit along
+              the bottom edge and the top half stays clear for the H1 below;
+              the desktop one clears its left third instead. No masking
+              opacity needed here — unlike the old photo, this art has no
+              competing text or logos baked in. */}
+          <picture>
+            <source media="(min-width: 640px)" srcSet="/hero-desktop.webp" />
+            <img
+              src="/hero-mobile.webp"
+              alt=""
+              width={1200}
+              height={900}
+              className="absolute inset-0 w-full h-full object-cover"
+              fetchpriority="high"
+            />
+          </picture>
           <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/25" />
 
           <div className="relative z-10 text-left px-6 sm:px-12 md:max-w-2xl flex flex-col items-start gap-4 mr-auto py-10">
