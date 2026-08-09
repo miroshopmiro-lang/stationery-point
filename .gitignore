@@ -6,3 +6,9 @@ dist-ssr
 .DS_Store
 
 public/*.skill.md
+
+# Raw generated PNGs waiting to be processed by tools/process-assets.mjs.
+# Multi-MB each and reproducible from the prompts; only the optimised WebP in
+# public/ ships. asset-originals/ is NOT ignored — the pipeline reads from it
+# so that re-running never re-compresses its own output.
+asset-inbox/

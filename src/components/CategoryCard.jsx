@@ -2,11 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // Category tile. The whole card is one link — no nested interactive elements,
-// so nothing can overlap or steal the tap target. The per-category `color`
-// prop is accepted for backwards compatibility but no longer rendered: the
-// stock-palette chips it drove failed WCAG AA contrast and fought the brand.
+// so nothing can overlap or steal the tap target. The per-category `color` that
+// drove the old chips is now gone from categories.json and from the CMS too:
+// they were stock Tailwind 500s, failed WCAG AA on white text, and fought the
+// brand palette.
 export default function CategoryCard({ name, image, categoryId }) {
   const to = categoryId ? `/catalog?category=${categoryId}` : '/catalog';
+  // The grid renders a tile at roughly 165px on a phone and 280px on desktop,
+  // so the 1200px master is only ever needed on a large high-density screen.
+  // tools/process-assets.mjs emits the -600 alongside every tile it writes.
+  const small = image?.endsWith('.webp') ? image.replace(/\.webp$/, '-600.webp') : null;
   return (
     <Link
       to={to}
@@ -17,6 +22,10 @@ export default function CategoryCard({ name, image, categoryId }) {
       <div className="absolute inset-0" aria-hidden="true">
         <img
           src={image}
+          {...(small && {
+            srcSet: `${small} 600w, ${image} 1200w`,
+            sizes: '(max-width: 767px) 45vw, (max-width: 1023px) 30vw, 23vw',
+          })}
           alt=""
           width={1200}
           height={1500}

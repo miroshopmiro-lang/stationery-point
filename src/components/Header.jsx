@@ -24,7 +24,7 @@ export default function Header() {
       <div className="glass border-b border-white/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
           <Link to="/" className="group flex items-center gap-2.5 shrink-0">
-            <img src="/logo.png" alt="Stationery Point Logo" className="w-9 h-9 rounded-xl object-cover ring-2 ring-brand-primary/15 group-hover:ring-brand-primary/40 group-hover:-rotate-3 transition-all duration-300" />
+            <img src="/logo.webp" alt="Stationery Point Logo" width={128} height={128} className="w-9 h-9 rounded-xl object-cover ring-2 ring-brand-primary/15 group-hover:ring-brand-primary/40 group-hover:-rotate-3 transition-all duration-300" />
             <span className="font-extrabold tracking-tight text-lg leading-none group-hover:text-brand-primary transition-colors duration-300" translate="no">STATIONERY<br className="hidden sm:block" /> POINT</span>
           </Link>
 

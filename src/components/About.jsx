@@ -3,13 +3,16 @@ import { motion } from 'framer-motion';
 import { STORE } from '../lib/utils';
 import { StarIcon } from './icons';
 
+// Alt text describes what is actually in each photograph — four of these
+// previously described a different image entirely (gallery_5 is the Parker
+// counter, not "school supplies and geometry gear").
 const gallery = [
-  { src: '/storefront.jpg', alt: 'Stationery Point Storefront in Vyttila, Kochi' },
-  { src: '/gallery_1.jpg', alt: 'Stationery products inside the store' },
-  { src: '/gallery_2.jpg', alt: 'Premium writing pens and supplies display' },
-  { src: '/gallery_3.jpg', alt: 'A wide range of school and office registers' },
-  { src: '/gallery_4.jpg', alt: 'Art paints and paint brushes collection' },
-  { src: '/gallery_5.jpg', alt: 'School supplies and geometry gear' },
+  { src: '/storefront.jpg', alt: 'The Stationery Point shopfront on Junior Janatha Road, Vyttila' },
+  { src: '/gallery_1.webp', alt: 'The Stationery Point signboard above the open shopfront' },
+  { src: '/gallery_2.webp', alt: 'Shelves of files, binder clips, staplers and paper inside the shop' },
+  { src: '/gallery_3.webp', alt: 'A wall display of batteries, scissors, craft thread and embroidery hoops' },
+  { src: '/gallery_4.webp', alt: 'Pens, calculators, geometry sets and childrens art kits on a display board' },
+  { src: '/gallery_5.webp', alt: 'The premium pen counter, with fountain pens and rollerballs laid out' },
 ];
 
 const hours = [
@@ -34,7 +37,7 @@ export default function About() {
 
         <div className="grid grid-cols-3 gap-3">
           {gallery.map((g, i) => (
-            <motion.img key={g.src} src={g.src} alt={g.alt} width={500} height={500} loading="lazy" decoding="async" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.07 }} className="rounded-2xl aspect-square object-cover shadow-soft" />
+            <motion.img key={g.src} src={g.src} alt={g.alt} width={800} height={800} loading="lazy" decoding="async" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.07 }} className="rounded-2xl aspect-square object-cover shadow-soft" />
           ))}
         </div>
       </div>

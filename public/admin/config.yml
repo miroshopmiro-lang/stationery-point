@@ -14,7 +14,7 @@ backend:
 local_backend: true
 
 site_url: https://stationery-point.pages.dev
-logo_url: /logo.png
+logo_url: /logo.webp
 media_folder: public/shop-catalogue-images
 public_folder: /shop-catalogue-images
 
@@ -71,5 +71,4 @@ collections:
             fields:
               - { name: id, label: 'ID (lowercase-with-dashes, used in links)', widget: string }
               - { name: title, label: Title, widget: string }
-              - { name: color, label: Homepage strip colour, widget: color }
               - { name: image, label: 'Category photo (browse cards)', widget: image, required: false, default: '' }

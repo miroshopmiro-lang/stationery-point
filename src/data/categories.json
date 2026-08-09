@@ -1,46 +1,39 @@
 {
-    "items":  [
-                  {
-                      "id":  "stationery",
-                      "title":  "Stationery",
-                      "color":  "#EF4444",
-                      "image":  "/category-tiles/stationery.webp"
-                  },
-                  {
-                      "id":  "office-supplies",
-                      "title":  "Office Supplies",
-                      "color":  "#10B981",
-                      "image":  "/category-tiles/office-supplies.webp"
-                  },
-                  {
-                      "id":  "art-supplies",
-                      "title":  "Art Supplies",
-                      "color":  "#3B82F6",
-                      "image":  "/category-tiles/art-supplies.webp"
-                  },
-                  {
-                      "id":  "craft-material",
-                      "title":  "Craft Material",
-                      "color":  "#6366F1",
-                      "image":  "/category-tiles/craft-material.webp"
-                  },
-                  {
-                      "id":  "party-gifts",
-                      "title":  "Party \u0026 Gifts",
-                      "color":  "#F59E0B",
-                      "image":  "/category-tiles/party-gifts.webp"
-                  },
-                  {
-                      "id":  "return-gifts",
-                      "title":  "Return Gifts",
-                      "color":  "#EC4899",
-                      "image":  "/category-tiles/return-gifts.webp"
-                  },
-                  {
-                      "id":  "special-edition",
-                      "title":  "Special Edition",
-                      "color":  "#111827",
-                      "image":  "/category-tiles/special-edition.webp"
-                  }
-              ]
+  "items": [
+    {
+      "id": "stationery",
+      "title": "Stationery",
+      "image": "/category-tiles/stationery.webp"
+    },
+    {
+      "id": "office-supplies",
+      "title": "Office Supplies",
+      "image": "/category-tiles/office-supplies.webp"
+    },
+    {
+      "id": "art-supplies",
+      "title": "Art Supplies",
+      "image": "/category-tiles/art-supplies.webp"
+    },
+    {
+      "id": "craft-material",
+      "title": "Craft Material",
+      "image": "/category-tiles/craft-material.webp"
+    },
+    {
+      "id": "party-gifts",
+      "title": "Party & Gifts",
+      "image": "/category-tiles/party-gifts.webp"
+    },
+    {
+      "id": "return-gifts",
+      "title": "Return Gifts",
+      "image": "/category-tiles/return-gifts.webp"
+    },
+    {
+      "id": "special-edition",
+      "title": "Special Edition",
+      "image": "/category-tiles/special-edition.webp"
+    }
+  ]
 }
