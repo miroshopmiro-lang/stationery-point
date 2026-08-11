@@ -87,12 +87,18 @@ function GoArrow({ children, className = '' }) {
 export default function AdvantageCards() {
   const sectionRef = useRef(null);
   const [offscreen, setOffscreen] = useState(false);
+  // Strike stays drawn until we know the card is on screen, then it replays the
+  // draw once. Never the other way round — see the .adv-strike note in index.css.
+  const [drawStrike, setDrawStrike] = useState(false);
 
   useEffect(() => {
     const el = sectionRef.current;
     if (!el || typeof IntersectionObserver === 'undefined') return;
     const io = new IntersectionObserver(
-      ([entry]) => setOffscreen(!entry.isIntersecting),
+      ([entry]) => {
+        setOffscreen(!entry.isIntersecting);
+        if (entry.isIntersecting) setDrawStrike(true);
+      },
       { rootMargin: '200px' }
     );
     io.observe(el);
@@ -119,7 +125,9 @@ export default function AdvantageCards() {
               MRP
               <span
                 aria-hidden="true"
-                className="adv-strike absolute left-[-6%] right-[-6%] top-1/2 block h-[0.09em] -translate-y-1/2 rounded-full bg-[#FFB000]"
+                className={`adv-strike absolute left-[-6%] right-[-6%] top-1/2 block h-[0.09em] -translate-y-1/2 rounded-full bg-[#FFB000] ${
+                  drawStrike ? 'is-drawing' : ''
+                }`}
               />
             </span>
           </div>
@@ -142,13 +150,21 @@ export default function AdvantageCards() {
           aria-label="Request a wholesale quote on WhatsApp"
           className="bg-[#241F6B]"
         >
-          <div className="relative z-10 flex items-start justify-between gap-3">
+          <div className="relative z-10 flex shrink-0 items-start justify-between gap-3">
             <Eyebrow className="text-[#CDD661]">Institutional</Eyebrow>
           </div>
 
+          {/* flex-1 + min-h-0: this band gets exactly whatever vertical space
+              is left between the eyebrow and the heading below, at any card
+              size — not a guessed rem offset. overflow-hidden clips whichever
+              rows don't fit, which reads as the band continuing past the
+              frame rather than as a bug. See the AdvantageCards.jsx header
+              comment: an earlier top-1/2 + -translate-y-1/2 version centered
+              on the card ignoring the heading's footprint, and collided with
+              it once the card dropped below ~230px on tablet widths. */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none border-y-[6px] border-[#CDD661] py-3"
+            className="pointer-events-none relative z-0 min-h-0 flex-1 select-none overflow-hidden border-y-[6px] border-[#CDD661] py-3"
           >
             {[
               { cls: 'adv-marquee--fast', text: 'BULK' },
@@ -168,8 +184,7 @@ export default function AdvantageCards() {
             ))}
           </div>
 
-          {/* Sits above the marquee so the label never collides with it. */}
-          <div className="relative z-10 flex flex-col gap-2">
+          <div className="relative z-10 flex shrink-0 flex-col gap-2">
             <h3 className="text-xl font-black uppercase leading-none tracking-tight text-white sm:text-2xl">
               Wholesale supply
             </h3>
@@ -187,17 +202,19 @@ export default function AdvantageCards() {
           aria-label="Send your list on WhatsApp"
           className="bg-[#14113D]"
         >
-          <div className="relative z-10 flex items-center justify-between gap-3">
+          <div className="relative z-10 flex shrink-0 items-center justify-between gap-3">
             <Eyebrow className="text-white/50">Send a list</Eyebrow>
             <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#25D366]">
               <WhatsAppIcon className="h-4 w-4 text-white" />
             </span>
           </div>
 
-          {/* Masked at both ends so bubbles dissolve instead of being sliced. */}
+          {/* flex-1 + min-h-0, same reasoning as card 2's band — fills exactly
+              the gap between the icon row and the heading, at any card size.
+              Masked at both ends so bubbles dissolve instead of being sliced. */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-6 top-[4.25rem] bottom-[4.75rem] select-none overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,#000_16%,#000_84%,transparent)]"
+            className="pointer-events-none relative z-0 min-h-0 flex-1 select-none overflow-hidden px-1 [mask-image:linear-gradient(to_bottom,transparent,#000_16%,#000_84%,transparent)]"
           >
             <div className="adv-chat-track flex flex-col gap-2">
               {[...CHAT_LINES, ...CHAT_LINES].map((line, i) => (
@@ -206,7 +223,7 @@ export default function AdvantageCards() {
             </div>
           </div>
 
-          <div className="relative z-10 flex flex-col gap-2">
+          <div className="relative z-10 flex shrink-0 flex-col gap-2">
             <h3 className="text-xl font-black uppercase leading-none tracking-tight text-white sm:text-2xl">
               WhatsApp enquiry
             </h3>
