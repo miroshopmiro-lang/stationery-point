@@ -69,12 +69,13 @@ export default function SendListModal({ open, onClose }) {
           >
             <div className="flex items-start justify-between gap-4 px-6 pt-6 pb-1">
               <div>
-                <h2 id="send-list-title" className="text-xl sm:text-2xl font-extrabold text-gray-800 tracking-tight">
-                  Make your list first
+                <h2 id="send-list-title" className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">
+                  {count > 0 ? 'Your Enquiry List' : 'Create Your Supply List First'}
                 </h2>
-                <p className="text-sm text-gray-500 mt-1.5 leading-relaxed">
-                  Add what you need, then it reaches us as one WhatsApp message with every item on
-                  it — and we quote the whole thing back.
+                <p className="text-xs sm:text-sm text-gray-500 mt-1.5 leading-relaxed">
+                  {count > 0
+                    ? 'Review your items and send them to us on WhatsApp for an instant price quote.'
+                    : 'Your enquiry list is currently empty! Add items from our catalog or message us directly on WhatsApp.'}
                 </p>
               </div>
               <button
@@ -95,13 +96,13 @@ export default function SendListModal({ open, onClose }) {
                   target="_blank"
                   rel="noreferrer"
                   onClick={onClose}
-                  className="flex items-center gap-3 rounded-2xl bg-[#25D366] text-white px-4 py-4 font-bold hover:bg-[#1da851] transition-colors"
+                  className="flex items-center gap-3 rounded-xl bg-[#25D366] text-white px-4 py-3.5 font-bold hover:bg-[#1da851] transition-colors shadow-xs"
                 >
                   <WhatsAppIcon className="w-5 h-5 shrink-0" />
                   <span className="text-sm text-left">
-                    Send my list now
-                    <span className="block text-xs font-semibold text-white/80 mt-0.5">
-                      {count} item{count !== 1 ? 's' : ''} ready
+                    Send My List on WhatsApp Now
+                    <span className="block text-xs font-semibold text-white/85 mt-0.5">
+                      {count} item{count !== 1 ? 's' : ''} ready for quote
                     </span>
                   </span>
                 </a>
@@ -110,17 +111,17 @@ export default function SendListModal({ open, onClose }) {
               <Link
                 to="/catalog"
                 onClick={onClose}
-                className="flex items-center gap-4 rounded-2xl border-2 border-brand-primary bg-brand-soft/40 px-4 py-4 text-left hover:bg-brand-soft transition-colors group"
+                className="flex items-center gap-4 rounded-xl border-2 border-brand-primary bg-brand-soft/40 px-4 py-3.5 text-left hover:bg-brand-soft transition-colors group"
               >
-                <span className="w-11 h-11 rounded-xl bg-brand-primary text-white flex items-center justify-center shrink-0">
+                <span className="w-10 h-10 rounded-lg bg-brand-primary text-white flex items-center justify-center shrink-0">
                   <ListIcon className="w-5 h-5" />
                 </span>
                 <span className="min-w-0">
-                  <span className="block font-extrabold text-gray-800 text-sm">
-                    {count > 0 ? 'Add more from the catalogue' : 'Build it from the catalogue'}
+                  <span className="block font-bold text-gray-900 text-xs sm:text-sm">
+                    {count > 0 ? 'Add more from the Shop Catalog' : 'Browse Catalog & Select Products'}
                   </span>
-                  <span className="block text-xs text-gray-500 font-medium mt-0.5 leading-relaxed">
-                    Tap “Add to list” on anything you need. Set quantities as you go.
+                  <span className="block text-xs text-gray-500 font-normal mt-0.5 leading-relaxed">
+                    Select products &amp; quantities directly from our catalog to build your list.
                   </span>
                 </span>
               </Link>
@@ -128,23 +129,22 @@ export default function SendListModal({ open, onClose }) {
               <button
                 type="button"
                 disabled={!AI_ASSISTANT_READY}
-                className="flex items-center gap-4 rounded-2xl border-2 border-gray-200 px-4 py-4 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-70 enabled:hover:border-brand-primary enabled:hover:bg-brand-soft/40"
+                className="flex items-center gap-4 rounded-xl border border-gray-200 px-4 py-3.5 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-70 enabled:hover:border-brand-primary enabled:hover:bg-brand-soft/40"
               >
-                <span className="w-11 h-11 rounded-xl bg-brand-gold text-gray-900 flex items-center justify-center shrink-0">
+                <span className="w-10 h-10 rounded-lg bg-brand-gold text-gray-900 flex items-center justify-center shrink-0">
                   <SparkleIcon className="w-5 h-5" />
                 </span>
                 <span className="min-w-0">
-                  <span className="flex items-center gap-2 font-extrabold text-gray-800 text-sm">
-                    Let the assistant build it
+                  <span className="flex items-center gap-2 font-bold text-gray-900 text-xs sm:text-sm">
+                    AI Assistant List Builder
                     {!AI_ASSISTANT_READY && (
-                      <span className="text-[10px] font-bold uppercase tracking-wide bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] font-semibold uppercase tracking-wider bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md">
                         Coming soon
                       </span>
                     )}
                   </span>
-                  <span className="block text-xs text-gray-500 font-medium mt-0.5 leading-relaxed">
-                    Describe what you need — a school list, an office refill — and it finds the
-                    items for you.
+                  <span className="block text-xs text-gray-500 font-normal mt-0.5 leading-relaxed">
+                    Chat with our AI assistant to instantly assemble your list (school supplies, office refills, art kits).
                   </span>
                 </span>
               </button>

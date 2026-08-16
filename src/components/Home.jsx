@@ -7,21 +7,21 @@ import AdvantageCards from './AdvantageCards';
 import Testimonials from './Testimonials';
 import NewArrivals from './NewArrivals';
 import SendListModal from './SendListModal';
-import { WhatsAppIcon, StarIcon } from './icons';
+import { WhatsAppIcon } from './icons';
 
 // One merged "popular" grid. Previously three near-identical 9-item grids
 // (Academic / Office / Art) ran back to back — 2,084px of the page repeating
 // the same idea and ending in three identical "View More Products" buttons.
 const popular = [
-  { name: 'School Kits', to: '/catalog?q=kit' },
-  { name: 'Notebooks', to: '/catalog?category=stationery' },
-  { name: 'Gel & Ball Pens', to: '/catalog?category=stationery' },
-  { name: 'Geometry Boxes', to: '/catalog?q=geometry' },
-  { name: 'Color Pencils', to: '/catalog?category=art-supplies' },
-  { name: 'Calculators', to: '/catalog?category=office-supplies' },
-  { name: 'Lever Arch Files', to: '/catalog?q=file' },
-  { name: 'Artist Canvases', to: '/catalog?category=art-supplies' },
-  { name: 'Sticky Notes', to: '/catalog?category=stationery' },
+  { name: 'School Kits', to: '/catalog?q=kit', image: '/icons/item-school-kits.webp' },
+  { name: 'Notebooks', to: '/catalog?category=stationery', image: '/icons/item-notebooks.webp' },
+  { name: 'Gel & Ball Pens', to: '/catalog?category=stationery', image: '/icons/item-pens.webp' },
+  { name: 'Geometry Boxes', to: '/catalog?q=geometry', image: '/icons/item-geometry-boxes.webp' },
+  { name: 'Color Pencils', to: '/catalog?category=art-supplies', image: '/icons/item-colour-pencils.webp' },
+  { name: 'Calculators', to: '/catalog?category=office-supplies', image: '/icons/item-calculators.webp' },
+  { name: 'Lever Arch Files', to: '/catalog?q=file', image: '/icons/item-lever-arch-files.webp' },
+  { name: 'Artist Canvases', to: '/catalog?category=art-supplies', image: '/icons/item-artist-canvases.webp' },
+  { name: 'Sticky Notes', to: '/catalog?category=stationery', image: '/icons/item-sticky-notes.webp' },
 ];
 
 const squareColors = ['bg-[#FFF3B3]', 'bg-[#D2ECF9]', 'bg-[#E1EFE1]'];
@@ -142,10 +142,13 @@ function renderIcon(name) {
 
 function GridSection({ title, subtitle, items }) {
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div className="mb-6">
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-800 tracking-tight">{title}</h2>
-        <p className="text-sm text-gray-500 mt-1.5 font-medium">{subtitle}</p>
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      <div className="mb-5 sm:mb-6">
+        <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-primary/80 block mb-1">
+          Top Picks
+        </span>
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">{title}</h2>
+        <p className="text-xs sm:text-sm text-gray-500 mt-1 font-normal">{subtitle}</p>
       </div>
       <div className="border-t border-l border-gray-200 rounded-2xl overflow-hidden grid grid-cols-3 lg:grid-cols-9 bg-white shadow-soft">
         {items.map((item, idx) => (
@@ -157,7 +160,19 @@ function GridSection({ title, subtitle, items }) {
             <div
               className={`w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center relative shadow-sm overflow-hidden ${squareColors[idx % 3]}`}
             >
-              {renderIcon(item.name)}
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt=""
+                  width={160}
+                  height={160}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              ) : (
+                renderIcon(item.name)
+              )}
             </div>
             <span className="mt-3 text-xs sm:text-sm font-semibold text-gray-700 leading-tight text-center flex items-center justify-center min-h-[32px] w-full px-2">
               <span className="line-clamp-2 break-words">{item.name}</span>
@@ -165,10 +180,10 @@ function GridSection({ title, subtitle, items }) {
           </Link>
         ))}
       </div>
-      <div className="mt-8 flex justify-center">
+      <div className="mt-6 flex justify-center">
         <Link
           to="/catalog"
-          className="rounded-full border-2 border-brand-primary text-brand-primary font-bold px-8 py-2.5 text-sm hover:bg-brand-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow"
+          className="rounded-full border-2 border-brand-primary text-brand-primary font-bold px-7 py-2 text-xs sm:text-sm hover:bg-brand-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow"
         >
           Browse the full catalog &rarr;
         </Link>
@@ -183,87 +198,76 @@ export default function Home() {
   return (
     <div>
       <SendListModal open={listModalOpen} onClose={() => setListModalOpen(false)} />
-      {/* TRUST STRIP — one line of verified facts. Replaces the seven-colour
-          category tab strip (6 of 7 failed WCAG AA on white text) and the
-          emoji badge row that stacked to three lines on mobile. */}
-      <div className="w-full bg-white border-b border-gray-200/60">
-        <div className="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs sm:text-sm font-semibold text-gray-600">
-          <span className="inline-flex items-center gap-1 text-brand-primary">
-            <StarIcon className="w-4 h-4 text-brand-gold" />
-            {STORE.rating} / 5
-          </span>
-          <span className="text-gray-300" aria-hidden="true">·</span>
-          <span>{STORE.reviewCount} Google reviews</span>
-          <span className="text-gray-300" aria-hidden="true">·</span>
-          <span>Below MRP</span>
-          <span className="text-gray-300 hidden sm:inline" aria-hidden="true">·</span>
-          <span className="hidden sm:inline">Free parking</span>
-        </div>
-      </div>
+      {/* HERO — NOOE.co Layout (Mobile: Full-bleed edge-to-edge thinner/wider banner top, dark text block bottom; Desktop: dark bg flows top & bottom of 16:9 right image, text left) */}
+      <section className="w-full bg-gradient-to-r from-[#040911] via-[#0A1730] to-[#040911] text-white overflow-hidden py-0 md:py-10 lg:py-14">
+        <div className="w-full flex flex-col md:flex-row items-center">
+          
+          {/* MOBILE: Full-Bleed Thinner Banner Top / DESKTOP: Right Side Image (16:9, flush right with dark bg flowing top & bottom) */}
+          <div className="order-first md:order-last w-full md:w-[56%] lg:w-[62%] shrink-0 flex items-center justify-end md:pl-4">
+            <div className="relative w-full aspect-[21/9] sm:aspect-[16/9] md:aspect-video max-h-[200px] sm:max-h-[280px] md:max-h-[420px] shadow-2xl overflow-hidden bg-[#EFE7DB]">
+              {/* One 16:9 file for every breakpoint, cropped by object-cover — the same
+                  approach nooe.co uses. The container is 21:9 on mobile and 16:9 above 640px. */}
+              <video
+                className="w-full h-full object-cover"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                poster="/hero-poster.webp"
+                aria-label="Stationery Point — where ideas begin"
+              >
+                <source src="/hero-video.mp4" type="video/mp4" />
+                <img
+                  src="/hero-poster.webp"
+                  alt="Stationery Point Store & Products"
+                  className="w-full h-full object-cover"
+                />
+              </video>
+            </div>
+          </div>
 
-      {/* HERO */}
-      <section className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        <div className="relative rounded-3xl overflow-hidden min-h-[420px] sm:min-h-[380px] md:min-h-[440px] flex items-center bg-gray-900 shadow-soft">
-          {/* Two crops: the mobile one is composed so the objects sit along
-              the bottom edge and the top half stays clear for the H1 below;
-              the desktop one clears its left third instead. No masking
-              opacity needed here — unlike the old photo, this art has no
-              competing text or logos baked in. */}
-          <picture>
-            <source media="(min-width: 640px)" srcSet="/hero-desktop.webp" />
-            <img
-              src="/hero-mobile.webp"
-              alt=""
-              width={1200}
-              height={900}
-              className="absolute inset-0 w-full h-full object-cover"
-              fetchpriority="high"
-            />
-          </picture>
-          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/25" />
-
-          <div className="relative z-10 text-left px-6 sm:px-12 md:max-w-2xl flex flex-col items-start gap-4 mr-auto py-10">
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-brand-gold bg-brand-primary/85 px-4 py-1.5 rounded-full backdrop-blur-sm shadow-sm border border-brand-primary/20 whitespace-nowrap">
+          {/* TEXT CONTENT — Below banner on mobile (full-bleed dark background), Left side on desktop */}
+          <div className="order-last md:order-first w-full md:w-[44%] lg:w-[38%] shrink-0 flex flex-col justify-center items-center text-center md:items-start md:text-left px-6 sm:px-10 lg:pl-16 lg:pr-6 py-8 md:py-6 lg:py-8">
+            <span className="text-[11px] font-bold uppercase tracking-widest text-[#FFB000] bg-white/10 px-3.5 py-1 rounded-full border border-white/20 self-center md:self-start mb-3.5">
               Stationery Point Kochi
             </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-[1.05] tracking-tight">
-              Everything for
-              <br />
-              school, office
-              <br />
-              and art.
+            <h1 className="text-balance text-3xl sm:text-4xl lg:text-[42px] xl:text-5xl font-bold tracking-tight text-white leading-[1.2] md:leading-[1.15]">
+              Everything for <span className="text-[#FFB000]">school, office</span> <br className="hidden md:inline" />and art.
             </h1>
-            <div className="flex flex-wrap gap-3 pt-1">
+
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-5 w-full sm:w-auto">
               <Link
                 to="/catalog"
-                className="rounded-full bg-brand-gold text-gray-900 font-bold px-7 py-3 hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-block text-sm"
+                className="rounded-full bg-[#FFB000] text-gray-900 font-bold px-7 py-3 hover:bg-white transition-all duration-300 shadow-md hover:shadow-lg text-xs sm:text-sm text-center flex-1 sm:flex-none"
               >
-                Browse the catalog
+                Browse Catalog
               </Link>
-              {/* Opens the "make your list first" prompt rather than firing a
-                  bare WhatsApp intent — see SendListModal. */}
               <button
                 type="button"
                 onClick={() => setListModalOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full border border-white/40 text-white font-bold px-6 py-3 text-sm hover:bg-white/10 transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/35 text-white font-bold px-6 py-3 text-xs sm:text-sm hover:bg-white/10 transition-colors flex-1 sm:flex-none"
               >
-                <WhatsAppIcon className="w-4 h-4" /> Send a list
+                <WhatsAppIcon className="w-4 h-4 text-[#25D366]" /> Send a list
               </button>
             </div>
           </div>
+
         </div>
       </section>
 
-      {/* FIND BY CATEGORIES — promoted directly under the hero. This is the
-          primary navigation of the site; it used to sit below the fold. */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-        <div className="mb-6">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-800 tracking-tight">Find by Category</h2>
-          <p className="text-sm text-gray-500 mt-1.5 font-medium">
+      {/* FIND BY CATEGORIES — promoted directly under the hero. NOOE 4-column grid + kicker tag */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+        <div className="mb-5 sm:mb-6">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-primary/80 block mb-1">
+            Explore Collections
+          </span>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">Find by Category</h2>
+          <p className="text-xs sm:text-sm text-gray-500 mt-1 font-normal">
             Browse the aisles — tap any category to see what&rsquo;s in stock.
           </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {categories.map((c) => (
             <CategoryCard
               key={c.id}

@@ -74,8 +74,8 @@ export default function Catalog() {
 
       {showLanding ? (
         <div>
-          <h2 className="text-sm font-bold uppercase tracking-wide text-gray-400 mb-4">Find by Category</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900 mb-5">Find by Category</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {categories.map((c) => (
               <CategoryCard
                 key={c.id}

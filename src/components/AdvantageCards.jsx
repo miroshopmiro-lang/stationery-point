@@ -1,235 +1,154 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { waLink } from '../lib/utils';
+import { waLink, waListLink } from '../lib/utils';
+import { useEnquiryList } from '../context/EnquiryListContext';
+import SendListModal from './SendListModal';
 import { WhatsAppIcon } from './icons';
 
-// The three advantage cards, rebuilt as posters.
-//
-// The previous version was the same template three times over — eyebrow label,
-// heading, paragraph, pill button — with the category word ghosted behind the
-// copy at 5-10% opacity. At that opacity, rotated and hard-clipped by the card
-// edge, it didn't read as texture; it read as a z-index bug. Benchmarked
-// against scooboo.in, where each card is a single idea at full commitment:
-// one is poster type, one is a marquee, one is a physical prop that moves.
-//
-// Palette is deliberately loud here. Chartreuse is straight off the shop's
-// signboard logo and appears nowhere else on the site, so this row reads as a
-// distinct band rather than more of the same indigo. The WhatsApp green that
-// used to fill the third card is gone — it was another company's brand colour
-// carrying a whole panel; it survives only as the glyph, where it belongs.
-//
-// Motion lives in index.css (.adv-*) and is transform-only.
-
-const CHAT_LINES = [
-  { from: 'them', text: '50 ruled notebooks' },
-  { from: 'them', text: '20 geometry boxes' },
-  { from: 'us', typing: true },
-  { from: 'them', text: 'Chart paper, 2 packs' },
-  { from: 'them', text: 'A4 sheets, 1 box' },
-  { from: 'us', typing: true },
-];
-
-function ChatBubble({ line }) {
-  const mine = line.from === 'us';
+function TagIcon({ className = 'w-6 h-6' }) {
   return (
-    <div className={`flex ${mine ? 'justify-start' : 'justify-end'}`}>
-      <div
-        className={`max-w-[80%] rounded-2xl px-3 py-2 text-[11px] font-semibold leading-snug shadow-sm ${
-          mine
-            ? 'rounded-bl-sm bg-white/10 text-white/70'
-            : 'rounded-br-sm bg-[#CDD661] text-[#241F6B]'
-        }`}
-      >
-        {line.typing ? (
-          <span className="flex items-center gap-1 py-0.5" aria-label="Typing">
-            <span className="adv-dot block h-1.5 w-1.5 rounded-full bg-white/80" />
-            <span className="adv-dot block h-1.5 w-1.5 rounded-full bg-white/80" />
-            <span className="adv-dot block h-1.5 w-1.5 rounded-full bg-white/80" />
-          </span>
-        ) : (
-          line.text
-        )}
-      </div>
-    </div>
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" />
+      <line x1="7" y1="7" x2="7.01" y2="7" />
+    </svg>
   );
 }
 
-// Shared chrome so the three cards stay a set: same radius, same ratio, same
-// lift. The card itself is the link — no pill button competing inside it.
-function Card({ as: As = 'div', className = '', children, ...rest }) {
+function BoxesIcon({ className = 'w-6 h-6' }) {
   return (
-    <As
-      className={`adv-card group relative flex aspect-square flex-col justify-between overflow-hidden rounded-3xl p-7 shadow-soft transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-gold sm:p-8 ${className}`}
-      {...rest}
-    >
-      {children}
-    </As>
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+      <line x1="12" y1="22.08" x2="12" y2="12" />
+    </svg>
   );
 }
 
-function Eyebrow({ children, className = '' }) {
+function SparkAccent({ className = 'w-5 h-5' }) {
   return (
-    <span className={`text-[11px] font-extrabold uppercase tracking-[0.2em] ${className}`}>
-      {children}
-    </span>
-  );
-}
-
-function GoArrow({ children, className = '' }) {
-  return (
-    <span className={`inline-flex items-center gap-2 text-xs font-extrabold ${className}`}>
-      {children}
-      <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-    </span>
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+      <path d="M12 3v3M6 6l2.5 2.5M18 6l-2.5 2.5" />
+    </svg>
   );
 }
 
 export default function AdvantageCards() {
-  const sectionRef = useRef(null);
-  const [offscreen, setOffscreen] = useState(false);
-  // Strike stays drawn until we know the card is on screen, then it replays the
-  // draw once. Never the other way round — see the .adv-strike note in index.css.
-  const [drawStrike, setDrawStrike] = useState(false);
+  const { items, count } = useEnquiryList();
+  const [listModalOpen, setListModalOpen] = useState(false);
 
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el || typeof IntersectionObserver === 'undefined') return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        setOffscreen(!entry.isIntersecting);
-        if (entry.isIntersecting) setDrawStrike(true);
-      },
-      { rootMargin: '200px' }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+  const handleSendListClick = (e) => {
+    if (count === 0) {
+      e.preventDefault();
+      setListModalOpen(true);
+    }
+  };
 
   return (
-    <section
-      ref={sectionRef}
-      className={`max-w-7xl mx-auto px-4 sm:px-6 py-8 ${offscreen ? 'adv-offscreen' : ''}`}
-    >
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-3 sm:gap-6">
-        {/* 1 — Below MRP. Poster type: the strike-through IS the proposition. */}
-        <Card as={Link} to="/catalog" aria-label="Browse the catalog" className="bg-[#CDD661]">
-          <Eyebrow className="relative z-10 text-[#241F6B]/70">Retail</Eyebrow>
+    <section className="w-full bg-[#F4F2FC] py-10 sm:py-18 md:py-24">
+      <SendListModal open={listModalOpen} onClose={() => setListModalOpen(false)} />
 
-          <div className="relative z-10 -mt-2">
-            <span className="block text-2xl font-black uppercase leading-none tracking-tight text-[#241F6B] sm:text-3xl">
-              Below
-            </span>
-            {/* Sized off the card, not the viewport, so it stays clipped by the
-                same amount at every width instead of reflowing. */}
-            <span className="relative mt-1 block w-fit text-[24cqw] font-black uppercase leading-[0.78] tracking-tighter text-[#241F6B]">
-              MRP
-              <span
-                aria-hidden="true"
-                className={`adv-strike absolute left-[-6%] right-[-6%] top-1/2 block h-[0.09em] -translate-y-1/2 rounded-full bg-[#FFB000] ${
-                  drawStrike ? 'is-drawing' : ''
-                }`}
-              />
-            </span>
+      <div className="max-w-7xl mx-auto px-5 sm:px-6">
+        {/* Section Header — Centered on Mobile, Left-aligned on Desktop */}
+        <div className="mb-8 sm:mb-12 max-w-2xl text-center md:text-left mx-auto md:mx-0">
+          <span className="text-[13px] font-bold uppercase tracking-[0.15em] text-[#332E92] block mb-2 sm:mb-3">
+            WHY SHOP WITH US
+          </span>
+          <div className="relative inline-block text-center md:text-left">
+            <h2 className="text-3xl sm:text-4xl md:text-[44px] font-bold text-[#1C1230] leading-[1.15] tracking-tight">
+              More value. Less hassle.
+            </h2>
+            <SparkAccent className="absolute left-full ml-1 sm:ml-1.5 top-0 sm:top-1 w-5 h-5 sm:w-6 sm:h-6 text-[#FFB000] shrink-0" />
           </div>
+          <p className="text-base sm:text-lg text-gray-600 font-normal leading-[1.45] sm:leading-relaxed mt-2.5 sm:mt-3">
+            Whether you&apos;re grabbing a pen or stocking up for a classroom, we make it easy.
+          </p>
+        </div>
 
-          <div className="relative z-10 flex flex-col gap-2">
-            <p className="text-[11px] font-bold leading-snug text-[#241F6B]/70">
-              Single items at wholesale prices. No minimum order.
-            </p>
-            <GoArrow className="text-[#241F6B]">Explore catalog</GoArrow>
-          </div>
-        </Card>
-
-        {/* 2 — Wholesale. Three marquee rows, middle one running back the
-            other way so the card never reads as one sliding block. */}
-        <Card
-          as="a"
-          href={waLink('Bulk Inquiry')}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Request a wholesale quote on WhatsApp"
-          className="bg-[#241F6B]"
-        >
-          <div className="relative z-10 flex shrink-0 items-start justify-between gap-3">
-            <Eyebrow className="text-[#CDD661]">Institutional</Eyebrow>
-          </div>
-
-          {/* flex-1 + min-h-0: this band gets exactly whatever vertical space
-              is left between the eyebrow and the heading below, at any card
-              size — not a guessed rem offset. overflow-hidden clips whichever
-              rows don't fit, which reads as the band continuing past the
-              frame rather than as a bug. See the AdvantageCards.jsx header
-              comment: an earlier top-1/2 + -translate-y-1/2 version centered
-              on the card ignoring the heading's footprint, and collided with
-              it once the card dropped below ~230px on tablet widths. */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none relative z-0 min-h-0 flex-1 select-none overflow-hidden border-y-[6px] border-[#CDD661] py-3"
-          >
-            {[
-              { cls: 'adv-marquee--fast', text: 'BULK' },
-              { cls: 'adv-marquee--reverse', text: 'BULK' },
-              { cls: 'adv-marquee--slow', text: 'BULK' },
-            ].map((row, i) => (
-              <div key={i} className={`adv-marquee ${row.cls}`}>
-                {Array.from({ length: 12 }).map((_, j) => (
-                  <span
-                    key={j}
-                    className="px-3 text-[15cqw] font-black uppercase leading-[0.95] tracking-tighter text-[#FFB000]"
-                  >
-                    {row.text}
-                  </span>
-                ))}
+        {/* 3 Benefit Columns — Centered Flow on Mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 md:gap-12 md:divide-x md:divide-[#E2DCF7] md:-mx-6">
+          {/* Column 1: Save more */}
+          <div className="flex flex-col justify-between items-center md:items-start text-center md:text-left md:h-full md:px-6 border-b border-[#E2DCF7]/70 pb-8 md:pb-0 md:border-b-0">
+            <div className="flex flex-col items-center md:items-start">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E5E0FA] text-[#332E92] flex items-center justify-center mb-3 sm:mb-4 shrink-0 mx-auto md:mx-0">
+                <TagIcon className="w-5 h-5 sm:w-6 sm:h-6 text-[#332E92]" />
               </div>
-            ))}
-          </div>
 
-          <div className="relative z-10 flex shrink-0 flex-col gap-2">
-            <h3 className="text-xl font-black uppercase leading-none tracking-tight text-white sm:text-2xl">
-              Wholesale supply
-            </h3>
-            <GoArrow className="text-[#CDD661]">Request a quote</GoArrow>
-          </div>
-        </Card>
-
-        {/* 3 — WhatsApp. The prop card: a thread that keeps moving, which is
-            the actual product experience rather than a picture of it. */}
-        <Card
-          as="a"
-          href={waLink('Send Stationery List')}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Send your list on WhatsApp"
-          className="bg-[#14113D]"
-        >
-          <div className="relative z-10 flex shrink-0 items-center justify-between gap-3">
-            <Eyebrow className="text-white/50">Send a list</Eyebrow>
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#25D366]">
-              <WhatsAppIcon className="h-4 w-4 text-white" />
-            </span>
-          </div>
-
-          {/* flex-1 + min-h-0, same reasoning as card 2's band — fills exactly
-              the gap between the icon row and the heading, at any card size.
-              Masked at both ends so bubbles dissolve instead of being sliced. */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none relative z-0 min-h-0 flex-1 select-none overflow-hidden px-1 [mask-image:linear-gradient(to_bottom,transparent,#000_16%,#000_84%,transparent)]"
-          >
-            <div className="adv-chat-track flex flex-col gap-2">
-              {[...CHAT_LINES, ...CHAT_LINES].map((line, i) => (
-                <ChatBubble key={i} line={line} />
-              ))}
+              <h3 className="text-[23px] sm:text-2xl font-bold text-[#332E92] tracking-tight mb-1.5 sm:mb-2.5">
+                Save more
+              </h3>
+              <p className="text-[16.5px] sm:text-lg font-bold text-[#1C1230] leading-[1.35] mb-1 sm:mb-2 max-w-[320px] mx-auto md:mx-0">
+                Wholesale prices, even for single items.
+              </p>
+              <p className="text-[15px] sm:text-base text-gray-600 leading-[1.45] mb-4 sm:mb-7 max-w-[320px] mx-auto md:mx-0">
+                Top brands at prices below MRP. No minimum order.
+              </p>
             </div>
+
+            <Link
+              to="/catalog"
+              className="inline-flex items-center gap-1.5 text-[15px] sm:text-base font-bold text-[#332E92] hover:text-[#241F6B] underline underline-offset-4 decoration-2 decoration-[#332E92]/30 transition-colors group"
+            >
+              Browse the catalog <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </Link>
           </div>
 
-          <div className="relative z-10 flex shrink-0 flex-col gap-2">
-            <h3 className="text-xl font-black uppercase leading-none tracking-tight text-white sm:text-2xl">
-              WhatsApp enquiry
-            </h3>
-            <GoArrow className="text-[#CDD661]">Send your list</GoArrow>
+          {/* Column 2: Buy in bulk */}
+          <div className="flex flex-col justify-between items-center md:items-start text-center md:text-left md:h-full md:px-6 border-b border-[#E2DCF7]/70 pb-8 md:pb-0 md:border-b-0">
+            <div className="flex flex-col items-center md:items-start">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E5E0FA] text-[#332E92] flex items-center justify-center mb-3 sm:mb-4 shrink-0 mx-auto md:mx-0">
+                <BoxesIcon className="w-5 h-5 sm:w-6 sm:h-6 text-[#332E92]" />
+              </div>
+
+              <h3 className="text-[23px] sm:text-2xl font-bold text-[#332E92] tracking-tight mb-1.5 sm:mb-2.5">
+                Buy in bulk
+              </h3>
+              <p className="text-[16.5px] sm:text-lg font-bold text-[#1C1230] leading-[1.35] mb-1 sm:mb-2 max-w-[320px] mx-auto md:mx-0">
+                Easy institutional &amp; wholesale orders.
+              </p>
+              <p className="text-[15px] sm:text-base text-gray-600 leading-[1.45] mb-4 sm:mb-7 max-w-[320px] mx-auto md:mx-0">
+                Volume discounts, GST invoices and supplies for schools, offices and events.
+              </p>
+            </div>
+
+            <a
+              href={waLink('Bulk Inquiry')}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 text-[15px] sm:text-base font-bold text-[#332E92] hover:text-[#241F6B] underline underline-offset-4 decoration-2 decoration-[#332E92]/30 transition-colors group"
+            >
+              Get a bulk quote <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </a>
           </div>
-        </Card>
+
+          {/* Column 3: Order on WhatsApp */}
+          <div className="flex flex-col justify-between items-center md:items-start text-center md:text-left md:h-full md:px-6">
+            <div className="flex flex-col items-center md:items-start">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#DCF8C6] text-[#25D366] flex items-center justify-center mb-3 sm:mb-4 shrink-0 mx-auto md:mx-0">
+                <WhatsAppIcon className="w-6 h-6 sm:w-7 sm:h-7 text-[#25D366]" />
+              </div>
+
+              <h3 className="text-[23px] sm:text-2xl font-bold text-[#332E92] tracking-tight mb-1.5 sm:mb-2.5">
+                Order on WhatsApp
+              </h3>
+              <p className="text-[16.5px] sm:text-lg font-bold text-[#1C1230] leading-[1.35] mb-1 sm:mb-2 max-w-[320px] mx-auto md:mx-0">
+                Send us your list. We’ll handle the rest.
+              </p>
+              <p className="text-[15px] sm:text-base text-gray-600 leading-[1.45] mb-4 sm:mb-7 max-w-[320px] mx-auto md:mx-0">
+                Select items from our catalog or message us directly. Fast price quotes &amp; store pickup.
+              </p>
+            </div>
+
+            <a
+              href={count > 0 ? waListLink(items) : '#'}
+              onClick={handleSendListClick}
+              target={count > 0 ? '_blank' : '_self'}
+              rel={count > 0 ? 'noreferrer' : undefined}
+              className="inline-flex items-center gap-1.5 text-[15px] sm:text-base font-bold text-[#332E92] hover:text-[#25D366] underline underline-offset-4 decoration-2 decoration-[#332E92]/30 transition-colors group"
+            >
+              Send your list <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

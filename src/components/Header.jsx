@@ -2,14 +2,24 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { STORE, waLink } from '../lib/utils';
-import { WhatsAppIcon, PhoneIcon, SearchIcon, MenuIcon } from './icons';
+import { WhatsAppIcon, PhoneIcon, SearchIcon, MenuIcon, StarIcon } from './icons';
 
 const nav = [
   { to: '/', label: 'Home' },
-  { to: '/new-arrivals', label: 'New Arrivals' },
   { to: '/catalog', label: 'Shop Catalog' },
   { to: '/about', label: 'About Us' },
   { to: '/contact', label: 'Contact Store' },
+];
+
+const marqueeItems = [
+  <span key="rating" className="inline-flex items-center gap-1">
+    <StarIcon className="w-3 h-3 text-brand-gold" />
+    {STORE.rating}/5 · {STORE.reviewCount} Google reviews
+  </span>,
+  <span key="mrp">Below MRP every day</span>,
+  <span key="parking">Free parking</span>,
+  <span key="hours">Mon–Sat 9:30 AM – 8 PM</span>,
+  <span key="location">Opposite Metro Pillar 837, Vyttila</span>,
 ];
 
 export default function Header() {
@@ -17,8 +27,21 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="relative overflow-hidden bg-gradient-to-r from-brand-dark via-brand-primary to-brand-dark text-white text-center text-xs sm:text-sm py-2 px-4 tracking-wide font-semibold">
-        <span className="relative">Below MRP every day &nbsp;·&nbsp; Mon–Sat 9:30 AM – 8 PM &nbsp;·&nbsp; Opposite Metro Pillar 837, Vyttila</span>
+      <div className="flex justify-center bg-brand-dark py-1.5">
+        <div className="w-[375px] overflow-hidden text-white/80 text-[11px] leading-none">
+          <div className="adv-marquee adv-marquee--slow">
+            {[0, 1].map((rep) => (
+              <div key={rep} className="flex items-center shrink-0" aria-hidden={rep === 1}>
+                {marqueeItems.map((item, i) => (
+                  <React.Fragment key={i}>
+                    <span className="px-3">{item}</span>
+                    <span className="text-white/25" aria-hidden="true">·</span>
+                  </React.Fragment>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="glass border-b border-white/40">

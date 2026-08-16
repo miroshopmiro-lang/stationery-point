@@ -158,18 +158,20 @@ export default function Testimonials() {
   }, [i, pauseDuration, reduce, isHovered]);
 
   return (
-    <section className="bg-brand-soft py-16" aria-roledescription="carousel" aria-label="Customer reviews">
+    <section className="bg-brand-soft py-12 sm:py-16" aria-roledescription="carousel" aria-label="Customer reviews">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-sm font-medium text-brand-primary/60 mb-2">Verified Google Reviews</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Loved by Kochi</h2>
-            <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-primary/80 block mb-1">
+              Verified Google Reviews
+            </span>
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-gray-900">Loved by Kochi</h2>
+            <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
               <span className="flex items-center gap-1 text-brand-gold" aria-hidden="true">
-                {Array.from({ length: 5 }).map((_, k) => (<StarIcon key={k} className="w-5 h-5" />))}
+                {Array.from({ length: 5 }).map((_, k) => (<StarIcon key={k} className="w-4 h-4" />))}
               </span>
-              <span className="text-gray-700 font-bold tabular-nums">{STORE.rating} / 5</span>
-              <span className="text-gray-500 text-sm">from {STORE.reviewCount} Google reviews</span>
+              <span className="text-gray-700 font-bold text-xs sm:text-sm tabular-nums">{STORE.rating} / 5</span>
+              <span className="text-gray-500 text-xs sm:text-sm">from {STORE.reviewCount} Google reviews</span>
             </div>
           </div>
 

@@ -3,21 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --brand-primary: #332E92;
+  --brand-primary: #0F2042;
   --brand-gold: #FFB000;
-  --bg-color: #FAFAFC;
+  --bg-color: #F2F0EF;
   color-scheme: light;
 }
 
 html,
 body {
   background-color: var(--bg-color);
-  font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+  font-family: 'DM Sans', 'Plus Jakarta Sans', sans-serif;
   overflow-x: hidden;
   color: #1c1230;
   -webkit-font-smoothing: antialiased;
   touch-action: manipulation;
-  -webkit-tap-highlight-color: rgba(51, 46, 146, 0.15);
+  -webkit-tap-highlight-color: rgba(15, 32, 66, 0.15);
 }
 
 /* Visible focus ring for keyboard users across all interactive elements */
@@ -57,7 +57,7 @@ h1, h2, h3, h4 {
 }
 
 .text-gradient {
-  background: linear-gradient(to right, #332E92, #FFB000);
+  background: linear-gradient(to right, #0F2042, #FFB000);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -87,7 +87,7 @@ html.lenis body {
 }
 
 ::selection {
-  background: #332E92;
+  background: #0F2042;
   color: #fff;
 }
 
@@ -105,32 +105,6 @@ html.lenis body {
   }
 }
 
-/* New Arrivals strip.
-   The drift is a rAF loop in NewArrivals.jsx writing scrollLeft, not a CSS
-   animation — that makes the strip a real scroll container, so a finger flick
-   or a mouse drag can take it over mid-motion and it stays where it was left.
-   Pausing is decided in JS too: a CSS :hover pause stopped the strip the
-   instant the cursor was over it, including while the page was merely
-   scrolling past underneath, which read as stuttering. */
-.marquee-viewport {
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-behavior: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  cursor: grab;
-}
-.marquee-viewport::-webkit-scrollbar {
-  display: none;
-}
-.marquee-viewport.is-dragging {
-  cursor: grabbing;
-  user-select: none;
-}
-.marquee-track {
-  display: flex;
-  width: max-content;
-}
 
 /* ── Advantage cards ──────────────────────────────────────────────────────
    Three poster cards. Every animation here is transform-only, so it runs on

@@ -16,7 +16,7 @@ export default function CategoryCard({ name, image, categoryId }) {
     <Link
       to={to}
       aria-label={`Browse ${name}`}
-      className="group relative block aspect-[4/5] rounded-2xl overflow-hidden border border-gray-200/50 bg-gray-50 shadow-soft transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lg focus-visible:ring-4 focus-visible:ring-brand-gold"
+      className="group relative block aspect-[4/3] rounded-2xl overflow-hidden border border-gray-200/60 bg-gray-50 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lg focus-visible:ring-4 focus-visible:ring-brand-gold"
     >
       {/* Artwork */}
       <div className="absolute inset-0" aria-hidden="true">
@@ -28,23 +28,21 @@ export default function CategoryCard({ name, image, categoryId }) {
           })}
           alt=""
           width={1200}
-          height={1500}
+          height={900}
           loading="lazy"
           decoding="async"
-          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.07]"
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-colors duration-300 group-hover:from-black/95" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 group-hover:opacity-90" />
       </div>
 
-      {/* Label block, bottom-left, nothing overlapping it */}
-      <span className="absolute inset-x-0 bottom-0 z-10 flex flex-col gap-1.5 p-4">
-        <span className="block font-extrabold text-xl sm:text-2xl leading-tight text-white tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)]">
+      {/* Label block */}
+      <span className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between p-4 sm:p-5">
+        <span className="block font-bold text-base sm:text-lg leading-snug text-white tracking-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)]">
           {name}
         </span>
-        <span className="flex items-center gap-2">
-          <span className="text-brand-gold text-xs font-extrabold opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-            Browse &rarr;
-          </span>
+        <span className="flex items-center text-brand-gold text-xs font-bold opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 shrink-0 ml-2">
+          Browse &rarr;
         </span>
       </span>
     </Link>

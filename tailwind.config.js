@@ -1,17 +1,26 @@
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    path.join(__dirname, 'index.html'),
+    path.join(__dirname, 'src/**/*.{js,ts,jsx,tsx}'),
+  ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', '"Outfit"', 'sans-serif'],
+        sans: ['"DM Sans"', '"Plus Jakarta Sans"', 'sans-serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
       },
       colors: {
         // Deep indigo-blue sampled from the shop's real signboard
         // (public/gallery_1.jpg, sun-corrected). Confirm with client on call.
-        'brand-primary': '#332E92',
-        'brand-dark': '#241F6B',
-        'brand-soft': '#EEF0FB',
+        'brand-primary': '#0F2042',
+        'brand-dark': '#071228',
+        'brand-soft': '#EDF2F9',
         'brand-gold': '#FFB000',
       },
       boxShadow: {
