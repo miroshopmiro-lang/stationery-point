@@ -46,7 +46,7 @@ export default function EnquiryBasket() {
       >
         <span className="relative">
           <ListIcon className="w-5 h-5" />
-          <span className="absolute -top-2.5 -right-2.5 min-w-[20px] h-5 px-1 rounded-full bg-brand-gold text-gray-900 text-[11px] font-extrabold flex items-center justify-center tabular-nums" aria-hidden="true">
+          <span className="absolute -top-2.5 -right-2.5 min-w-[20px] h-5 px-1 rounded-full bg-brand-accent text-gray-900 text-[11px] font-extrabold flex items-center justify-center tabular-nums" aria-hidden="true">
             {count}
           </span>
         </span>

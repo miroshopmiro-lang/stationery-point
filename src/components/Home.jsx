@@ -6,7 +6,8 @@ import CategoryCard from './CategoryCard';
 import AdvantageCards from './AdvantageCards';
 import Testimonials from './Testimonials';
 import SendListModal from './SendListModal';
-import { WhatsAppIcon } from './icons';
+import AskBox from './AskBox';
+import { StarIcon } from './icons';
 
 // One merged "popular" grid. Previously three near-identical 9-item grids
 // (Academic / Office / Art) ran back to back — 2,084px of the page repeating
@@ -197,61 +198,59 @@ export default function Home() {
   return (
     <div>
       <SendListModal open={listModalOpen} onClose={() => setListModalOpen(false)} />
-      {/* HERO — NOOE.co Layout (Mobile: Full-bleed edge-to-edge thinner/wider banner top, dark text block bottom; Desktop: dark bg flows top & bottom of 16:9 right image, text left) */}
-      <section className="w-full bg-gradient-to-r from-[#040911] via-[#0A1730] to-[#040911] text-white overflow-hidden py-0 md:py-10 lg:py-14">
-        <div className="w-full flex flex-col md:flex-row items-center">
-          
-          {/* MOBILE: Full-Bleed Thinner Banner Top / DESKTOP: Right Side Image (16:9, flush right with dark bg flowing top & bottom) */}
-          <div className="order-first md:order-last w-full md:w-[56%] lg:w-[62%] shrink-0 flex items-center justify-end md:pl-4">
-            <div className="relative w-full aspect-[21/9] sm:aspect-[16/9] md:aspect-video max-h-[200px] sm:max-h-[280px] md:max-h-[420px] shadow-2xl overflow-hidden bg-[#EFE7DB]">
-              {/* One 16:9 file for every breakpoint, cropped by object-cover — the same
-                  approach nooe.co uses. The container is 21:9 on mobile and 16:9 above 640px. */}
-              <video
-                className="w-full h-full object-cover"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                poster="/hero-poster.webp"
-                aria-label="Stationery Point — where ideas begin"
-              >
-                <source src="/hero-video.mp4" type="video/mp4" />
-                <img
-                  src="/hero-poster.webp"
-                  alt="Stationery Point Store & Products"
-                  className="w-full h-full object-cover"
-                />
-              </video>
-            </div>
-          </div>
-
-          {/* TEXT CONTENT — Below banner on mobile (full-bleed dark background), Left side on desktop */}
-          <div className="order-last md:order-first w-full md:w-[44%] lg:w-[38%] shrink-0 flex flex-col justify-center items-center text-center md:items-start md:text-left px-6 sm:px-10 lg:pl-16 lg:pr-6 py-8 md:py-6 lg:py-8">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-[#FFB000] bg-white/10 px-3.5 py-1 rounded-full border border-white/20 self-center md:self-start mb-3.5">
-              Stationery Point Kochi
+      {/* HERO — real storefront + the ask-box as the primary interaction, not
+          decoration. On brand indigo/dark (#332E92/#241F6B), not the borrowed
+          nooe.co navy. The ask-box answers "do you have it / how much" right
+          here, because that's the job this page actually has to do. */}
+      <section className="w-full bg-gradient-to-br from-brand-dark via-brand-primary to-brand-dark text-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-14 lg:py-20 flex flex-col lg:flex-row items-center gap-8 lg:gap-14">
+          <div className="w-full lg:w-1/2 flex flex-col items-center text-center lg:items-start lg:text-left">
+            <span className="text-[11px] font-bold uppercase tracking-widest text-brand-accent bg-white/10 px-3.5 py-1 rounded-full border border-white/20 mb-3.5">
+              Katti Tower, Vyttila · Kochi
             </span>
-            <h1 className="text-balance text-3xl sm:text-4xl lg:text-[42px] xl:text-5xl font-bold tracking-tight text-white leading-[1.2] md:leading-[1.15]">
-              Everything for <span className="text-[#FFB000]">school, office</span> <br className="hidden md:inline" />and art.
+            <h1 className="text-balance text-3xl sm:text-4xl lg:text-[42px] xl:text-5xl font-bold tracking-tight text-white leading-[1.15]">
+              Everything for <span className="text-brand-accent">school, office</span> and art.
             </h1>
+            <p className="mt-4 text-sm sm:text-base text-white/70 max-w-md">
+              Ask us for anything on the shelf, or paste your whole list — we'll confirm price and stock over WhatsApp.
+            </p>
 
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-5 w-full sm:w-auto">
-              <Link
-                to="/catalog"
-                className="rounded-full bg-[#FFB000] text-gray-900 font-bold px-7 py-3 hover:bg-white transition-all duration-300 shadow-md hover:shadow-lg text-xs sm:text-sm text-center flex-1 sm:flex-none"
-              >
-                Browse Catalog
-              </Link>
+            <div className="mt-6 w-full flex flex-col items-center lg:items-start gap-2">
+              <AskBox variant="hero" />
               <button
                 type="button"
                 onClick={() => setListModalOpen(true)}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/35 text-white font-bold px-6 py-3 text-xs sm:text-sm hover:bg-white/10 transition-colors flex-1 sm:flex-none"
+                className="text-xs font-semibold text-white/60 hover:text-white underline underline-offset-4 transition-colors"
               >
-                <WhatsAppIcon className="w-4 h-4 text-[#25D366]" /> Send a list
+                Already have a saved list or items in your basket? Send it from here →
               </button>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-1.5 mt-6 text-[11px] text-white/60">
+              <span className="inline-flex items-center gap-1">
+                <StarIcon className="w-3 h-3 text-brand-accent" /> {STORE.rating}/5 · {STORE.reviewCount} reviews
+              </span>
+              <span>Opposite Metro Pillar 837</span>
+              <span>Mon–Sat 9:30 AM – 8 PM</span>
             </div>
           </div>
 
+          <div className="w-full lg:w-1/2">
+            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+              <img
+                src="/storefront.jpg"
+                alt="Stationery Point storefront, Katti Tower, Vyttila"
+                width={1600}
+                height={1200}
+                loading="eager"
+                fetchpriority="high"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                <p className="text-white text-xs sm:text-sm font-semibold">Real shop, real stock — not a stock photo.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

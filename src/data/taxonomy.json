@@ -1,0 +1,56 @@
+{
+  "_source": "Placeholder search vocabulary — generic stationery-shop terms plus items visibly confirmed in shelf photos (gallery_2/3/5). This is NOT Sam's real item master. It exists so the ask-box works and degrades gracefully before the real export lands. Every match routes to a WhatsApp confirmation, never a bare stock claim — see waLink usage in search.js. Replace subcategories.terms with real data once tools/import-catalog.mjs processes Sam's export; keep the category shell (id/title/image) which categories.json already owns.",
+  "categories": [
+    {
+      "id": "stationery",
+      "terms": ["pen", "gel pen", "ball pen", "fountain pen", "pencil", "hb pencil", "mechanical pencil",
+        "eraser", "sharpener", "notebook", "spiral notebook", "ruled notebook", "diary", "journal",
+        "sticky notes", "highlighter", "marker", "permanent marker", "sketch pen", "ruler", "scale",
+        "geometry box", "geometry set", "correction pen", "whitener", "ink", "refill"]
+    },
+    {
+      "id": "office-supplies",
+      "terms": ["file", "lever arch file", "folder", "binder clip", "paper clip", "stapler", "staple pin",
+        "punch", "punching machine", "tape", "cellotape", "masking tape", "calculator", "chart paper",
+        "envelope", "rubber band", "gum", "glue", "adhesive", "scissors", "cutter", "office kit",
+        "table stand", "desk organiser", "pen stand", "printer paper", "a4 paper", "xerox paper"]
+    },
+    {
+      "id": "art-supplies",
+      "terms": ["watercolor", "watercolour", "poster color", "acrylic color", "oil pastel", "crayon",
+        "sketch book", "drawing book", "canvas", "paint brush", "palette", "colour pencil",
+        "charcoal pencil", "calligraphy pen", "brush pen", "fineliner", "gouache", "easel",
+        "sketch pencil", "art kit", "modelling clay", "mandala", "stencil"]
+    },
+    {
+      "id": "craft-material",
+      "terms": ["glitter", "sequins", "foam sheet", "origami paper", "googly eyes", "beads",
+        "ribbon", "satin ribbon", "ice cream sticks", "pipe cleaners", "craft kit", "diy kit",
+        "chalk paint", "fabric paint", "glass paint"]
+    },
+    {
+      "id": "party-gifts",
+      "terms": ["balloon", "birthday banner", "party popper", "candle", "cake topper",
+        "gift wrapping paper", "gift bag", "greeting card", "decoration"]
+    },
+    {
+      "id": "return-gifts",
+      "terms": ["return gift", "return gift combo", "corporate gift", "gift hamper",
+        "school return gift", "birthday return gift"]
+    },
+    {
+      "id": "special-edition",
+      "terms": ["parker", "premium pen", "pen gift set", "luxury journal", "executive desk set",
+        "calligraphy gift set", "fountain pen set"]
+    }
+  ],
+  "faq": [
+    { "q": "school supply list", "a": "supply-list" },
+    { "q": "bulk order", "a": "bulk" },
+    { "q": "wholesale", "a": "bulk" },
+    { "q": "delivery", "a": "delivery" },
+    { "q": "opening hours", "a": "hours" },
+    { "q": "location", "a": "location" },
+    { "q": "gst invoice", "a": "bulk" }
+  ]
+}

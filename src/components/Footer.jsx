@@ -13,14 +13,14 @@ export default function Footer() {
             <h2 className="font-bold text-lg mb-4 border-b border-white/15 pb-2">Catalog</h2>
             <ul className="space-y-2 text-white/75 text-sm">
               {categories.map((c) => (
-                <li key={c.id}><Link to={`/catalog?category=${c.id}`} className="hover:text-brand-gold transition-colors">{c.title}</Link></li>
+                <li key={c.id}><Link to={`/catalog?category=${c.id}`} className="hover:text-brand-accent transition-colors">{c.title}</Link></li>
               ))}
             </ul>
           </div>
           <div>
             <h2 className="font-bold text-lg mb-4 border-b border-white/15 pb-2">Store Details</h2>
             <ul className="space-y-2 text-white/75 text-sm">
-              <li><Link to="/about" className="hover:text-brand-gold transition-colors">About Us</Link></li>
+              <li><Link to="/about" className="hover:text-brand-accent transition-colors">About Us</Link></li>
               <li>{STORE.hours}</li>
               <li>Enquiry-only · No online checkout</li>
               <li>Quality products below MRP</li>
@@ -31,12 +31,12 @@ export default function Footer() {
             <h2 className="font-bold text-lg mb-4 border-b border-white/15 pb-2">Get in Touch</h2>
             <ul className="space-y-3 text-white/75 text-sm">
               <li>{STORE.address}</li>
-              <li className="text-brand-gold">{STORE.landmark}</li>
-              <li><a href={`tel:${STORE.phoneTel}`} className="inline-flex items-center gap-2 hover:text-brand-gold transition-colors"><PhoneIcon className="w-4 h-4" /> {STORE.phoneDisplay}</a></li>
+              <li className="text-brand-accent">{STORE.landmark}</li>
+              <li><a href={`tel:${STORE.phoneTel}`} className="inline-flex items-center gap-2 hover:text-brand-accent transition-colors"><PhoneIcon className="w-4 h-4" /> {STORE.phoneDisplay}</a></li>
               <li className="flex items-center gap-4 pt-1">
-                <a href={waLink()} target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-colors" aria-label="Enquire on WhatsApp"><WhatsAppIcon className="w-5 h-5" /></a>
-                <a href={STORE.instagram} target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-colors" aria-label="Visit our Instagram"><InstagramIcon className="w-5 h-5" /></a>
-                <a href={STORE.mapsLink} target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-colors text-sm underline underline-offset-4">View Map</a>
+                <a href={waLink()} target="_blank" rel="noreferrer" className="hover:text-brand-accent transition-colors" aria-label="Enquire on WhatsApp"><WhatsAppIcon className="w-5 h-5" /></a>
+                <a href={STORE.instagram} target="_blank" rel="noreferrer" className="hover:text-brand-accent transition-colors" aria-label="Visit our Instagram"><InstagramIcon className="w-5 h-5" /></a>
+                <a href={STORE.mapsLink} target="_blank" rel="noreferrer" className="hover:text-brand-accent transition-colors text-sm underline underline-offset-4">View Map</a>
               </li>
             </ul>
           </div>

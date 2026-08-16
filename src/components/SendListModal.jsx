@@ -1,21 +1,20 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useEnquiryList } from '../context/EnquiryListContext';
 import { waLink, waListLink } from '../lib/utils';
 import { CloseIcon, ListIcon, WhatsAppIcon } from './icons';
+import AskBox from './AskBox';
 
 // The hero's "Send a list" used to fire a bare WhatsApp intent, which put the
 // work back on the customer: they had to type the whole list themselves into a
 // chat. This intercepts that tap and asks them to BUILD the list first, so the
 // message that eventually goes out is itemised.
 //
-// Two routes in: browse the catalogue and tap "Add to list", or let the AI
-// assistant assemble it. The assistant does not exist yet — its card is shown
-// disabled so the path is visible and we can measure intent to tap it. Wire it
-// up by replacing the button with the real launcher; nothing else changes.
-
-const AI_ASSISTANT_READY = false;
+// Three routes in: browse the catalogue and tap "Add to list", paste/type a
+// list directly (AskBox in list mode — matches each line against known
+// categories and always produces a working WhatsApp message, matched or
+// not), or attach a photo/PDF straight in WhatsApp.
 
 function SparkleIcon({ className = 'w-5 h-5' }) {
   return (
@@ -30,10 +29,12 @@ export default function SendListModal({ open, onClose }) {
   const { items, count } = useEnquiryList();
   const reduce = useReducedMotion();
   const panelRef = useRef(null);
+  const [listBuilderOpen, setListBuilderOpen] = useState(false);
 
   // Escape closes; focus moves into the panel so the keyboard lands somewhere.
   useEffect(() => {
     if (!open) return;
+    setListBuilderOpen(false);
     const onKey = (e) => {
       if (e.key === 'Escape') onClose();
     };
@@ -126,28 +127,29 @@ export default function SendListModal({ open, onClose }) {
                 </span>
               </Link>
 
-              <button
-                type="button"
-                disabled={!AI_ASSISTANT_READY}
-                className="flex items-center gap-4 rounded-xl border border-gray-200 px-4 py-3.5 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-70 enabled:hover:border-brand-primary enabled:hover:bg-brand-soft/40"
-              >
-                <span className="w-10 h-10 rounded-lg bg-brand-gold text-gray-900 flex items-center justify-center shrink-0">
-                  <SparkleIcon className="w-5 h-5" />
-                </span>
-                <span className="min-w-0">
-                  <span className="flex items-center gap-2 font-bold text-gray-900 text-xs sm:text-sm">
-                    AI Assistant List Builder
-                    {!AI_ASSISTANT_READY && (
-                      <span className="text-[10px] font-semibold uppercase tracking-wider bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md">
-                        Coming soon
-                      </span>
-                    )}
+              {!listBuilderOpen ? (
+                <button
+                  type="button"
+                  onClick={() => setListBuilderOpen(true)}
+                  className="flex items-center gap-4 rounded-xl border border-gray-200 px-4 py-3.5 text-left transition-colors hover:border-brand-primary hover:bg-brand-soft/40"
+                >
+                  <span className="w-10 h-10 rounded-lg bg-brand-accent text-gray-900 flex items-center justify-center shrink-0">
+                    <SparkleIcon className="w-5 h-5" />
                   </span>
-                  <span className="block text-xs text-gray-500 font-normal mt-0.5 leading-relaxed">
-                    Chat with our AI assistant to instantly assemble your list (school supplies, office refills, art kits).
+                  <span className="min-w-0">
+                    <span className="flex items-center gap-2 font-bold text-gray-900 text-xs sm:text-sm">
+                      Paste or type your list
+                    </span>
+                    <span className="block text-xs text-gray-500 font-normal mt-0.5 leading-relaxed">
+                      School supply list, office refills, art kit — paste it in and we'll match it against what we stock.
+                    </span>
                   </span>
-                </span>
-              </button>
+                </button>
+              ) : (
+                <div className="rounded-xl border border-brand-primary/30 bg-brand-dark px-4 py-4">
+                  <AskBox variant="header" defaultMode="list" />
+                </div>
+              )}
             </div>
 
             <div className="px-6 pb-6 -mt-1">

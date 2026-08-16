@@ -167,7 +167,7 @@ export default function Testimonials() {
             </span>
             <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-gray-900">Loved by Kochi</h2>
             <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span className="flex items-center gap-1 text-brand-gold" aria-hidden="true">
+              <span className="flex items-center gap-1 text-brand-accent" aria-hidden="true">
                 {Array.from({ length: 5 }).map((_, k) => (<StarIcon key={k} className="w-4 h-4" />))}
               </span>
               <span className="text-gray-700 font-bold text-xs sm:text-sm tabular-nums">{STORE.rating} / 5</span>
@@ -215,7 +215,7 @@ export default function Testimonials() {
               transition={{ duration: 0.35, ease: 'easeOut' }}
               className="flex flex-col h-full"
             >
-              <div className="flex gap-1 text-brand-gold mb-3" aria-label={`${r.stars} out of 5 stars`}>
+              <div className="flex gap-1 text-brand-accent mb-3" aria-label={`${r.stars} out of 5 stars`}>
                 {Array.from({ length: r.stars }).map((_, k) => (<StarIcon key={k} className="w-4 h-4" />))}
               </div>
               <p className="text-lg text-gray-700 leading-relaxed flex-grow">“{r.text}”</p>

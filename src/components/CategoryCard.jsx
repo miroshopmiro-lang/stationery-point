@@ -16,7 +16,7 @@ export default function CategoryCard({ name, image, categoryId }) {
     <Link
       to={to}
       aria-label={`Browse ${name}`}
-      className="group relative block aspect-[4/3] rounded-2xl overflow-hidden border border-gray-200/60 bg-gray-50 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lg focus-visible:ring-4 focus-visible:ring-brand-gold"
+      className="group relative block aspect-[4/3] rounded-2xl overflow-hidden border border-gray-200/60 bg-gray-50 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lg focus-visible:ring-4 focus-visible:ring-brand-accent"
     >
       {/* Artwork */}
       <div className="absolute inset-0" aria-hidden="true">
@@ -41,7 +41,7 @@ export default function CategoryCard({ name, image, categoryId }) {
         <span className="block font-bold text-base sm:text-lg leading-snug text-white tracking-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)]">
           {name}
         </span>
-        <span className="flex items-center text-brand-gold text-xs font-bold opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 shrink-0 ml-2">
+        <span className="flex items-center text-brand-accent text-xs font-bold opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 shrink-0 ml-2">
           Browse &rarr;
         </span>
       </span>

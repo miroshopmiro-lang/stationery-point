@@ -57,7 +57,7 @@ export default function AdvantageCards() {
             <h2 className="text-3xl sm:text-4xl md:text-[44px] font-bold text-[#1C1230] leading-[1.15] tracking-tight">
               More value. Less hassle.
             </h2>
-            <SparkAccent className="absolute left-full ml-1 sm:ml-1.5 top-0 sm:top-1 w-5 h-5 sm:w-6 sm:h-6 text-[#FFB000] shrink-0" />
+            <SparkAccent className="absolute left-full ml-1 sm:ml-1.5 top-0 sm:top-1 w-5 h-5 sm:w-6 sm:h-6 text-[#CDD661] shrink-0" />
           </div>
           <p className="text-base sm:text-lg text-gray-600 font-normal leading-[1.45] sm:leading-relaxed mt-2.5 sm:mt-3">
             Whether you&apos;re grabbing a pen or stocking up for a classroom, we make it easy.

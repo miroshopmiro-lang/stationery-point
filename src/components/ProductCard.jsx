@@ -16,7 +16,7 @@ function ProductPlaceholder() {
     >
       <svg viewBox="0 0 32 32" className="w-10 h-10 opacity-20">
         <rect width="32" height="32" rx="8" fill="#332E92" />
-        <path d="M9 22L20 6l4 3-11 16-5 1z" fill="#FFB000" />
+        <path d="M9 22L20 6l4 3-11 16-5 1z" fill="#CDD661" />
       </svg>
     </div>
   );
@@ -36,7 +36,7 @@ export default function ProductCard({ product }) {
     >
       <div className="aspect-[4/3] flex items-center justify-center relative overflow-hidden group-hover:bg-brand-soft/5 transition-colors p-4">
         {product.newArrival && (
-          <span className="absolute top-2.5 left-2.5 z-10 rounded-full bg-brand-gold text-gray-900 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 shadow-sm">
+          <span className="absolute top-2.5 left-2.5 z-10 rounded-full bg-brand-accent text-gray-900 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 shadow-sm">
             New
           </span>
         )}

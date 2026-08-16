@@ -1,0 +1,30 @@
+{
+  "_source": "Confirmed by direct visual inspection of asset-originals/gallery_2.jpg, gallery_3.jpg and gallery_5.jpg (real shelf photographs from the shop). NOT from Sam — needs his sign-off before this list goes live on a brand-index page. Safe to use for search matching now since matches route to a WhatsApp confirmation, never a bare claim of stock.",
+  "confirmed": [
+    { "name": "Camlin", "seenIn": "gallery_2, gallery_3" },
+    { "name": "Kangaro", "seenIn": "gallery_2, gallery_3" },
+    { "name": "Parker", "seenIn": "gallery_5" },
+    { "name": "Luxor", "seenIn": "gallery_5" },
+    { "name": "Artline", "seenIn": "gallery_3" },
+    { "name": "Nippo", "seenIn": "gallery_3" },
+    { "name": "Duracell", "seenIn": "gallery_3" },
+    { "name": "Panasonic", "seenIn": "gallery_3" },
+    { "name": "Faber-Castell", "seenIn": "gallery_3" },
+    { "name": "Doms", "seenIn": "gallery_2" },
+    { "name": "Apsara", "seenIn": "gallery_2" },
+    { "name": "Kay", "seenIn": "gallery_2" },
+    { "name": "Systemark", "seenIn": "gallery_5" },
+    { "name": "Foli", "seenIn": "gallery_5" },
+    { "name": "Jags", "seenIn": "gallery_3" }
+  ],
+  "unconfirmed": [
+    { "name": "Casio", "note": "recorded in earlier session notes, not directly re-verified this pass" },
+    { "name": "Maped", "note": "recorded in earlier session notes, not directly re-verified this pass" },
+    { "name": "Flair", "note": "recorded in earlier session notes, not directly re-verified this pass" },
+    { "name": "Uni-ball", "note": "recorded in earlier session notes, not directly re-verified this pass" },
+    { "name": "Classmate", "note": "recorded in earlier session notes, not directly re-verified this pass" },
+    { "name": "Ajanta", "note": "recorded in earlier session notes, not directly re-verified this pass" },
+    { "name": "Winsor & Newton", "note": "ask Sam — research shows Kerala buyers specifically search for this before travelling" },
+    { "name": "Brustro", "note": "ask Sam — same as above" }
+  ]
+}

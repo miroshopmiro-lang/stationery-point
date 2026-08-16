@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { STORE, waLink } from '../lib/utils';
-import { WhatsAppIcon, PhoneIcon, SearchIcon, MenuIcon, StarIcon } from './icons';
+import { WhatsAppIcon, PhoneIcon, SearchIcon, MenuIcon, StarIcon, CloseIcon } from './icons';
+import AskBox from './AskBox';
 
 const nav = [
   { to: '/', label: 'Home' },
@@ -13,7 +14,7 @@ const nav = [
 
 const marqueeItems = [
   <span key="rating" className="inline-flex items-center gap-1">
-    <StarIcon className="w-3 h-3 text-brand-gold" />
+    <StarIcon className="w-3 h-3 text-brand-accent" />
     {STORE.rating}/5 · {STORE.reviewCount} Google reviews
   </span>,
   <span key="mrp">Below MRP every day</span>,
@@ -24,6 +25,23 @@ const marqueeItems = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [askOpen, setAskOpen] = useState(false);
+  const askRef = useRef(null);
+
+  // Close the ask popover on outside click or Escape.
+  useEffect(() => {
+    if (!askOpen) return;
+    const onKey = (e) => e.key === 'Escape' && setAskOpen(false);
+    const onClick = (e) => {
+      if (askRef.current && !askRef.current.contains(e.target)) setAskOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('mousedown', onClick);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('mousedown', onClick);
+    };
+  }, [askOpen]);
 
   return (
     <header className="sticky top-0 z-50">
@@ -79,9 +97,35 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Link to="/catalog" className="hidden sm:flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-gray-700 hover:text-brand-primary transition-colors">
-              <SearchIcon className="w-4 h-4" /> Search
-            </Link>
+            <div className="relative" ref={askRef}>
+              <button
+                type="button"
+                onClick={() => setAskOpen((v) => !v)}
+                aria-expanded={askOpen}
+                aria-label="Ask about a product or paste a list"
+                className="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-gray-700 hover:text-brand-primary transition-colors"
+              >
+                <SearchIcon className="w-4 h-4" /> <span className="hidden sm:inline">Ask / Find</span>
+              </button>
+              <AnimatePresence>
+                {askOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    className="fixed sm:absolute inset-x-4 sm:inset-x-auto top-20 sm:top-full right-0 sm:mt-2 sm:w-96 max-w-[92vw] mx-auto sm:mx-0 rounded-2xl bg-brand-dark p-4 shadow-2xl z-50"
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-white/70 text-xs font-bold uppercase tracking-wide">Quick ask</span>
+                      <button type="button" onClick={() => setAskOpen(false)} aria-label="Close" className="text-white/50 hover:text-white p-1">
+                        <CloseIcon className="w-4 h-4" />
+                      </button>
+                    </div>
+                    <AskBox variant="header" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
             <a href={`tel:${STORE.phoneTel}`} className="hidden md:flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold border border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white transition-colors duration-300">
               <PhoneIcon className="w-4 h-4" /> Call
             </a>

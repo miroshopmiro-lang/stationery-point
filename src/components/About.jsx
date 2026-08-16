@@ -31,7 +31,7 @@ export default function About() {
             Welcome to Stationery Point, your ultimate one-stop shop in Kochi for all your writing supplies, craft items, school and office stationery, party products, and corporate gifts. We are proud to offer a massive variety of high-quality products at prices below MRP! Whether you are a student, an artist, or sourcing supplies for your office, Sam and the team are here to help you find exactly what you need — and if we don't have it on the shelf, we can usually source it within a day or two.
           </p>
           <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-soft text-brand-primary font-semibold px-4 py-2">
-            <StarIcon className="w-4 h-4 text-brand-gold" /> {STORE.rating} / 5 · {STORE.reviewCount} verified reviews
+            <StarIcon className="w-4 h-4 text-brand-accent" /> {STORE.rating} / 5 · {STORE.reviewCount} verified reviews
           </div>
         </motion.div>
 
@@ -73,7 +73,7 @@ export default function About() {
             From bulk school kits to office and studio supplies, we offer quality products at the best wholesale rates in Kochi. Visit us at Katti Tower, Vyttila, or message us for a custom quote.
           </p>
           <p className="mt-5 text-white/90 text-sm">{STORE.address}</p>
-          <p className="text-brand-gold text-sm font-semibold mt-1">{STORE.landmark}</p>
+          <p className="text-brand-accent text-sm font-semibold mt-1">{STORE.landmark}</p>
         </div>
       </div>
     </div>
