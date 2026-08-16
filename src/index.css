@@ -3,9 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --brand-primary: #0F2042;
-  --brand-gold: #FFB000;
-  --bg-color: #F2F0EF;
+  --brand-primary: #332E92;
+  --brand-dark: #241F6B;
+  --brand-soft: #EEF0FB;
+  --brand-accent: #CDD661;
+  --bg-color: #FBF8F2;
   color-scheme: light;
 }
 
@@ -17,7 +19,7 @@ body {
   color: #1c1230;
   -webkit-font-smoothing: antialiased;
   touch-action: manipulation;
-  -webkit-tap-highlight-color: rgba(15, 32, 66, 0.15);
+  -webkit-tap-highlight-color: rgba(51, 46, 146, 0.15);
 }
 
 /* Visible focus ring for keyboard users across all interactive elements */
@@ -57,7 +59,7 @@ h1, h2, h3, h4 {
 }
 
 .text-gradient {
-  background: linear-gradient(to right, #0F2042, #FFB000);
+  background: linear-gradient(to right, #332E92, #CDD661);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -77,17 +79,8 @@ h1, h2, h3, h4 {
   -webkit-backdrop-filter: blur(12px);
 }
 
-/* Lenis */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
 ::selection {
-  background: #0F2042;
+  background: #332E92;
   color: #fff;
 }
 
@@ -98,9 +91,6 @@ html.lenis body {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-  .lenis {
     scroll-behavior: auto !important;
   }
 }

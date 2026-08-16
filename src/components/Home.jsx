@@ -5,7 +5,6 @@ import { categories, products } from '../data/productData';
 import CategoryCard from './CategoryCard';
 import AdvantageCards from './AdvantageCards';
 import Testimonials from './Testimonials';
-import NewArrivals from './NewArrivals';
 import SendListModal from './SendListModal';
 import { WhatsAppIcon } from './icons';
 
@@ -278,9 +277,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      {/* NEW ARRIVALS — auto-scrolling marquee */}
-      <NewArrivals />
 
       {/* SOCIAL PROOF — moved up from ~5,900px (screen 8) to screen 3 */}
       <Testimonials />

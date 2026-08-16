@@ -16,12 +16,12 @@ export default {
         serif: ['"Playfair Display"', 'Georgia', 'serif'],
       },
       colors: {
-        // Deep indigo-blue sampled from the shop's real signboard
-        // (public/gallery_1.jpg, sun-corrected). Confirm with client on call.
-        'brand-primary': '#0F2042',
-        'brand-dark': '#071228',
-        'brand-soft': '#EDF2F9',
-        'brand-gold': '#FFB000',
+        // Sampled directly from the real signboard (asset-originals/gallery_1.jpg) —
+        // deep indigo board, chartreuse wordmark/icon. Do not adjust without re-sampling.
+        'brand-primary': '#332E92',
+        'brand-dark': '#241F6B',
+        'brand-soft': '#EEF0FB',
+        'brand-accent': '#CDD661',
       },
       boxShadow: {
         soft: '0 10px 40px -12px rgba(51, 46, 146, 0.18)',
