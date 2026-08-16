@@ -1,0 +1,42 @@
+{
+  "_note": "Collections are merchandising groupings, not catalogue data — each maps to a catalog filter that already works. Art is generated lifestyle scenes (no legible branding, per the art-direction lock). Until the real assets land, `image` points at a placeholder and the card falls back to a tinted panel.",
+  "hero": [
+    {
+      "id": "school",
+      "eyebrow": "Back to school",
+      "title": "Everything on the list.",
+      "subtitle": "Notebooks, geometry boxes, pens and the rest — sorted in one trip.",
+      "cta": { "label": "Shop school supplies", "to": "/catalog?category=stationery" },
+      "image": "/hero/hero-school.webp",
+      "imageMobile": "/hero/hero-school-mobile.webp"
+    },
+    {
+      "id": "art",
+      "eyebrow": "Art & craft",
+      "title": "Colour, paper, everything in between.",
+      "subtitle": "Watercolours, canvases, brushes and craft material for every project.",
+      "cta": { "label": "Shop art supplies", "to": "/catalog?category=art-supplies" },
+      "image": "/hero/hero-art.webp",
+      "imageMobile": "/hero/hero-art-mobile.webp"
+    },
+    {
+      "id": "office",
+      "eyebrow": "For offices & schools",
+      "title": "Bulk orders, handled.",
+      "subtitle": "Volume pricing, GST invoices and delivery across Kochi.",
+      "cta": { "label": "Get a bulk quote", "to": "/contact" },
+      "image": "/hero/hero-office.webp",
+      "imageMobile": "/hero/hero-office-mobile.webp"
+    }
+  ],
+  "collections": [
+    { "id": "school-kits", "title": "School Kits", "blurb": "Class-wise essentials, ready to go", "to": "/catalog?q=kit", "image": "/collections/school-kits.webp", "tint": "#EEF0FB" },
+    { "id": "pens-writing", "title": "Pens & Writing", "blurb": "Gel, ball, fountain and refills", "to": "/catalog?category=stationery", "image": "/collections/pens-writing.webp", "tint": "#F3F1FA" },
+    { "id": "notebooks", "title": "Notebooks & Paper", "blurb": "Ruled, plain, spiral and chart", "to": "/catalog?category=stationery", "image": "/collections/notebooks.webp", "tint": "#FAF6EC" },
+    { "id": "art-colour", "title": "Art & Colour", "blurb": "Watercolour, acrylic, pastels", "to": "/catalog?category=art-supplies", "image": "/collections/art-colour.webp", "tint": "#F0F4EC" },
+    { "id": "office-essentials", "title": "Office Essentials", "blurb": "Files, staplers, tape, A4 paper", "to": "/catalog?category=office-supplies", "image": "/collections/office-essentials.webp", "tint": "#EEF0FB" },
+    { "id": "craft", "title": "Craft Material", "blurb": "Foam, glitter, ribbon, origami", "to": "/catalog?category=craft-material", "image": "/collections/craft.webp", "tint": "#FAF0F2" },
+    { "id": "return-gifts", "title": "Return Gifts", "blurb": "Birthday and event favourites", "to": "/catalog?category=return-gifts", "image": "/collections/return-gifts.webp", "tint": "#FAF6EC" },
+    { "id": "premium-pens", "title": "Premium Pens", "blurb": "Gifting-grade writing instruments", "to": "/catalog?category=special-edition", "image": "/collections/premium-pens.webp", "tint": "#F3F1FA" }
+  ]
+}
