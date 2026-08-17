@@ -1,0 +1,38 @@
+{
+  "_note": "SCHOOL KIT TILE BLOCK — structure copied 1:1 from smiggle.co.uk's 'READY. SET. BACK TO SCHOOL.' block, verified from a rendered 375px screenshot on 17 Aug 2026. Six tiles, two per row, price-band tile first and carrying the only badge.",
+  "_smiggle_reference": {
+    "heading": "READY. SET. BACK TO SCHOOL.",
+    "tiles_in_order": ["£30-£50 Bundles", "School Bags", "School Lunch Boxes", "School Bottles", "£2 Stationery", "30% Off Gift Packs"],
+    "observed": "Tile 1 is the price band and is the only tile with a roundel badge ('HOT OFFER', blue circle, top-right). Tile 1's image shows a COMPLETE KIT (bag + lunchbox + pencil case + bottle) while every other tile shows a SINGLE item — that contrast is how the bundle reads as more value at a glance. Labels sit inside the tile below the image, centred and underlined. Tile panel is a light warm grey, product photo centred on it.",
+    "note": "Smiggle rotates tiles 5 and 6 by campaign — on 16 Aug they were 'School Stationery' and 'School Pencil Cases'. Ours must therefore be data-driven, never hardcoded."
+  },
+
+  "_UNCONFIRMED_PRICING": "The four ₹ bands below are INFERRED from bottom-up MRP arithmetic in research/market/price-bands.md, NOT confirmed by Sam. Every component price needs a live re-check before launch — one spot-check already found a Faber-Castell geometry box listed at ₹100 that is actually ₹95, i.e. rounded UP, which inflates the saving. DO NOT show a savings figure to a customer until Sam signs off the kit contents and the MRP totals.",
+
+  "heading": "School kits, sorted.",
+  "subheading": "Pick a kit, send it on WhatsApp. We pack it before you reach the shop.",
+
+  "tiles": [
+    {
+      "id": "kits",
+      "label": "₹499–₹2,999 Kits",
+      "badge": "Best value",
+      "isPriceBand": true,
+      "image": "/kit-tiles/kits-all-bands.webp",
+      "to": "/catalog?collection=school-kits",
+      "_imageBrief": "Must show a COMPLETE KIT — multiple items together (notebook stack, pouch, geometry box, pencils, bottle, lunch box) — deliberately more objects than any other tile, copying smiggle's lead-tile contrast."
+    },
+    { "id": "notebooks", "label": "Notebooks", "image": "/kit-tiles/notebooks.webp", "to": "/catalog?category=notebooks" },
+    { "id": "art", "label": "Art & Colouring", "image": "/kit-tiles/art.webp", "to": "/catalog?category=art-supplies" },
+    { "id": "geometry", "label": "Geometry Boxes", "image": "/kit-tiles/geometry.webp", "to": "/catalog?category=geometry" },
+    { "id": "pouches", "label": "Pencil Pouches", "image": "/kit-tiles/pouches.webp", "to": "/catalog?category=pouches" },
+    { "id": "bottles", "label": "Bottles & Lunch Boxes", "image": "/kit-tiles/bottles.webp", "to": "/catalog?category=bottles" }
+  ],
+
+  "bands": [
+    { "id": "b1", "price": 499, "name": "Primary Essentials", "grades": "LKG–Grade 4", "mrp": 650, "confirmed": false },
+    { "id": "b2", "price": 999, "name": "Middle School Scholar", "grades": "Grade 5–8", "mrp": 1399, "confirmed": false },
+    { "id": "b3", "price": 1999, "name": "Complete School-Ready", "grades": "All grades", "mrp": 3199, "confirmed": false },
+    { "id": "b4", "price": 2999, "name": "Ultimate Studio", "grades": "Senior & art students", "mrp": 4999, "confirmed": false }
+  ]
+}

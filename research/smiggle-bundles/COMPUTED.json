@@ -1,0 +1,118 @@
+{
+  "_meta": {
+    "captured": "2026-08-17",
+    "viewport": "502px (environment minimum; 375px target was not achievable — resize returned 502px)",
+    "url_bundle_listing": "https://www.smiggle.co.uk/shop/en/smiggleuk/gift-bundles/ready-made-bundles",
+    "url_pdp_measured": "https://www.smiggle.co.uk/shop/en/smiggleuk/gift-bundles/ready-made-bundles/unreal-silicone-bottle-bundle-unreal-pink",
+    "notes": "All computed values read via window.getComputedStyle() at runtime. Values marked null were not read."
+  },
+
+  "homepage_tiles_under_hero": {
+    "_note": "Tile block under hero on homepage. Tile labels extracted via JS from .image-box elements inside the row containing 'READY. SET. BACK TO SCHOOL.' header.",
+    "viewport_at_measurement": "502px",
+    "tiles_per_row": 2,
+    "tile_labels_in_order": [
+      "£30-£50 Bundles",
+      "School Bags",
+      "School Lunch Boxes",
+      "School Bottles",
+      "£2 Stationery",
+      "30% Off Gift Packs"
+    ],
+    "first_tile_is_price_band": true,
+    "first_tile_label": "£30-£50 Bundles",
+    "tile_dimensions_px": {
+      "tile_1": { "width": 246.2, "height": 253.84 },
+      "tile_2": { "width": 246.2, "height": 256.84 },
+      "tile_3": { "width": 246.2, "height": 253.84 },
+      "tile_4": { "width": 246.2, "height": 256.84 },
+      "tile_5": { "width": 246.2, "height": 261.84 },
+      "tile_6": { "width": 246.2, "height": 261.84 }
+    },
+    "computed_border_radius": {
+      "tile_element": "0px",
+      "link_element": "0px",
+      "img_element": "0px",
+      "_note": "Rounded corners are baked into the image assets, not applied via CSS border-radius."
+    },
+    "computed_styles_price_band_tile": "COULD NOT READ — JS targeted label text only; full computed style extraction of tile not completed before quota exhaustion"
+  },
+
+  "bundle_grid_card": {
+    "_note": "First product card in the ready-made bundles listing grid.",
+    "_product": "Unreal Silicone Bottle Bundle (first in grid)",
+    "card_container": {
+      "font_size": "COULD NOT READ",
+      "font_weight": "COULD NOT READ",
+      "color_rgb": "COULD NOT READ",
+      "color_hex": "COULD NOT READ",
+      "text_decoration": "COULD NOT READ",
+      "background_color_rgb": "COULD NOT READ",
+      "background_color_hex": "COULD NOT READ",
+      "border_radius": "COULD NOT READ",
+      "padding": "COULD NOT READ",
+      "width": "COULD NOT READ",
+      "height": "COULD NOT READ",
+      "_reason": "Second browser subagent (styles extraction) hit quota exhaustion before completing this section."
+    },
+    "list_price_element": {
+      "_label": "Struck was-price",
+      "font_size": "COULD NOT READ",
+      "font_weight": "COULD NOT READ",
+      "color_rgb": "COULD NOT READ",
+      "color_hex": "COULD NOT READ",
+      "text_decoration": "COULD NOT READ",
+      "background_color_rgb": "COULD NOT READ",
+      "background_color_hex": "COULD NOT READ",
+      "border_radius": "COULD NOT READ",
+      "padding": "COULD NOT READ",
+      "width": "COULD NOT READ",
+      "height": "COULD NOT READ"
+    },
+    "sale_price_element": {
+      "_label": "Live now-price",
+      "font_size": "COULD NOT READ",
+      "font_weight": "COULD NOT READ",
+      "color_rgb": "COULD NOT READ",
+      "color_hex": "COULD NOT READ",
+      "text_decoration": "COULD NOT READ",
+      "background_color_rgb": "COULD NOT READ",
+      "background_color_hex": "COULD NOT READ",
+      "border_radius": "COULD NOT READ",
+      "padding": "COULD NOT READ",
+      "width": "COULD NOT READ",
+      "height": "COULD NOT READ"
+    },
+    "savings_badge": {
+      "_label": "Promo tag (e.g. 'Hot Offer', '25% Off. Online Only')",
+      "font_size": "COULD NOT READ",
+      "font_weight": "COULD NOT READ",
+      "color_rgb": "COULD NOT READ",
+      "color_hex": "COULD NOT READ",
+      "text_decoration": "COULD NOT READ",
+      "background_color_rgb": "COULD NOT READ",
+      "background_color_hex": "COULD NOT READ",
+      "border_radius": "COULD NOT READ",
+      "padding": "COULD NOT READ",
+      "width": "COULD NOT READ",
+      "height": "COULD NOT READ"
+    }
+  },
+
+  "pdp_cta_button": {
+    "_page": "Unreal Silicone Bottle Bundle (Unreal Pink) PDP",
+    "_url": "https://www.smiggle.co.uk/shop/en/smiggleuk/gift-bundles/ready-made-bundles/unreal-silicone-bottle-bundle-unreal-pink",
+    "button_text": "COULD NOT READ — ADD TO BAG button query ran but quota exhausted before result was captured",
+    "font_size": "COULD NOT READ",
+    "font_weight": "COULD NOT READ",
+    "color_rgb": "COULD NOT READ",
+    "color_hex": "COULD NOT READ",
+    "text_decoration": "COULD NOT READ",
+    "background_color_rgb": "COULD NOT READ",
+    "background_color_hex": "COULD NOT READ",
+    "border_radius": "COULD NOT READ",
+    "padding": "COULD NOT READ",
+    "width": "COULD NOT READ",
+    "height": "COULD NOT READ"
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SendListModal from './SendListModal';
 import HeroCarousel from './HeroCarousel';
+import SchoolKitTiles from './SchoolKitTiles';
 import OfferStrip from './OfferStrip';
 import CategoryBento from './CategoryBento';
 import CollectionCards from './CollectionCards';
@@ -28,6 +29,10 @@ export default function Home() {
       <SendListModal open={listModalOpen} onClose={() => setListModalOpen(false)} />
 
       <HeroCarousel />
+      {/* Kit tiles sit DIRECTLY under the hero — smiggle.co.uk's placement, above every
+          product, collection and category. In school-buying season the parent's first
+          question is "how much for the whole list", not "show me bags". */}
+      <SchoolKitTiles />
       <OfferStrip offer={OFFER} />
       <CategoryBento />
       <CollectionCards />
