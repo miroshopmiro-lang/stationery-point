@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import SendListModal from './SendListModal';
 import HeroCarousel from './HeroCarousel';
 import SchoolKitTiles from './SchoolKitTiles';
+import CategoryCircles from './CategoryCircles';
+import PromoTiles from './PromoTiles';
 import OfferStrip from './OfferStrip';
-import CategoryBento from './CategoryBento';
 import CollectionCards from './CollectionCards';
 import SendListSection from './SendListSection';
 import BrandWall from './BrandWall';
@@ -34,7 +35,12 @@ export default function Home() {
           question is "how much for the whole list", not "show me bags". */}
       <SchoolKitTiles />
       <OfferStrip offer={OFFER} />
-      <CategoryBento />
+      {/* Circular category rail — flyingtiger + blick both use circles for this block.
+          Replaces CategoryBento; no reference uses a bento/asymmetric grid anywhere. */}
+      <CategoryCircles />
+      {/* Half-photo / half-flat-panel tiles with alternating photo side — flyingtiger's
+          promo block. Type lives on the panel so artwork carries no text at all. */}
+      <PromoTiles />
       <CollectionCards />
       <SendListSection />
       <BrandWall />

@@ -15,7 +15,8 @@
   "tiles": [
     {
       "id": "kits",
-      "label": "₹499–₹2,999 Kits",
+      "label": "Ready-Made Kits",
+      "_labelPending": "smiggle's lead tile is '£30-£50 Bundles' — the PRICE BAND is the label, and that is the pattern we want. Ours stays non-numeric until Sam confirms real kit contents and prices from his item export. Then this becomes e.g. '₹499–₹2,999 Kits'.",
       "badge": "Best value",
       "isPriceBand": true,
       "image": "/kit-tiles/kits-all-bands.webp",
