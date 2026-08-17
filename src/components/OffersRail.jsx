@@ -67,7 +67,7 @@ export default function OffersRail() {
             {offers.map((p) => (
               <li
                 key={p.id ?? p.name}
-                className="shrink-0 snap-start w-[158px] sm:w-[190px] lg:w-[232px]"
+                className="shrink-0 snap-start flex w-[158px] sm:w-[190px] lg:w-[232px]"
               >
                 <ProductCard product={p} />
               </li>

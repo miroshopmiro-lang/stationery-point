@@ -87,8 +87,13 @@ export default function ProductCard({ product }) {
   const savingPct = hasBothPrices ? Math.round((saving / Number(product.mrp)) * 100) : 0;
 
   return (
+    {/* h-full so every card in a rail or grid is the same height. Without it the cards size to
+        their own content, their bottoms land at different points, and the bottom-pinned CTAs
+        stop aligning — the audit measured a one-line title lifting a card's CTA ~22px above its
+        neighbours. hobbycraft's row aligns because the cards are equal height AND the CTA is
+        pinned; both halves are needed. */}
     <article
-      className="relative flex flex-col bg-white rounded border border-hairline shadow-card overflow-hidden
+      className="relative flex flex-col h-full bg-white rounded border border-hairline shadow-card overflow-hidden
                  transition-colors duration-surface ease-ref hover:border-brand-primary/40"
       style={{ paddingBottom: 44 }}
     >
@@ -113,7 +118,11 @@ export default function ProductCard({ product }) {
       <div className="flex flex-col gap-1 px-3 pt-2.5">
         {/* Title 15px/400, line-height 1.5 — hobbycraft exactly. Two lines then clamp;
             Indian SKU names run long and a 1.0 line-height would collide. */}
-        <h3 className="text-[15px] font-normal leading-[1.5] text-ink line-clamp-2">{product.name}</h3>
+        {/* Two lines reserved always (15px x 1.5 x 2 = 45px) so a one-line name does not pull
+            the price and stars up and ragged the row. */}
+        <h3 className="text-[15px] font-normal leading-[1.5] text-ink line-clamp-2 min-h-[45px]">
+          {product.name}
+        </h3>
 
         {product.brand && (
           <p className="text-[12px] font-medium text-muted">{product.brand}</p>

@@ -45,20 +45,28 @@ function KitTile({ tile }) {
 
         {/* Roundel badge — smiggle puts one on the lead tile only, top-right.
             Chartreuse with deep indigo text measures 7.9:1, a comfortable AA pass. */}
+        {/* Roundel sized to ~26% of tile width, matching smiggle's proportion. Was 52px on a
+            166px tile (35%), which the audit flagged as oversized against their badge. */}
         {tile.badge && (
           <span
-            className="absolute top-2 right-2 w-[52px] h-[52px] rounded-full bg-brand-accent
-                       text-brand-dark text-[10px] font-bold uppercase leading-[1.15]
-                       flex items-center justify-center text-center px-1"
+            className="absolute top-1.5 right-1.5 w-[43px] h-[43px] rounded-full bg-brand-accent
+                       text-brand-dark text-[9px] font-bold uppercase leading-[1.1]
+                       flex items-center justify-center text-center px-0.5"
           >
             {tile.badge}
           </span>
         )}
       </div>
 
-      {/* Label inside the tile, below the image, centred, underlined. */}
-      <span className="px-2 pb-3 pt-2 text-center">
-        <span className="text-[14px] font-semibold text-ink underline decoration-1 underline-offset-4
+      {/* Label inside the tile, below the image, centred, underlined.
+          Tightened to smiggle's spacing: the audit measured our label sitting ~21px off the
+          tile bottom against their ~13px, and our row gap at 14px against their ~6-7px, which
+          made the whole block read roughly twice as loose as theirs.
+          min-h reserves two lines so a wrapping label ("Bottles & Lunch Boxes") does not break
+          the row baseline against its neighbours. */}
+      <span className="px-1.5 pb-2 pt-1.5 text-center">
+        <span className="block min-h-[34px] text-[14px] font-semibold leading-[1.2] text-ink underline
+                         decoration-1 underline-offset-2
                          transition-colors duration-text ease-ref group-hover:text-brand-primary">
           {tile.label}
         </span>
@@ -88,7 +96,8 @@ export default function SchoolKitTiles() {
         )}
 
         {/* Two per row at phone width — smiggle's grid. Three across from tablet up. */}
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 lg:gap-6">
+        {/* Row gap tightened to smiggle's ~6-7px. Ours was 14px. */}
+        <div className="mt-5 grid grid-cols-2 gap-x-3 gap-y-2 sm:gap-4 lg:grid-cols-3 lg:gap-6">
           {tiles.map((tile) => (
             <KitTile key={tile.id} tile={tile} />
           ))}

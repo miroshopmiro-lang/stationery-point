@@ -22,8 +22,27 @@ export default function SmartImage({
 }) {
   const [failed, setFailed] = useState(false);
 
+  /*
+   * POSITION COLLISION FIX (17 Aug 2026).
+   *
+   * This used to hardcode `relative` into its own class string. Callers that need the wrapper
+   * to fill a sized parent pass `className="absolute inset-0"` — and Tailwind's `.relative`
+   * and `.absolute` have EQUAL specificity, so the winner is decided by order in the generated
+   * stylesheet, not by order in the class attribute. `relative` won.
+   *
+   * Consequence, found by the visual audit and then confirmed by measurement: the wrapper
+   * ignored `inset-0` and sized itself to the image's intrinsic ratio instead of its parent.
+   * A category circle measured 104x78 inside a 104x104 disc — the leftover 26px read as a
+   * white crescent on every circle at every breakpoint. The hero and promo tiles had the same
+   * hole. It looked like a missing-image problem; it was a CSS cascade problem.
+   *
+   * So: only apply `relative` when the caller has not positioned this element itself.
+   */
+  const positioned = /\b(absolute|fixed|sticky|relative)\b/.test(className);
+  const base = positioned ? 'overflow-hidden' : 'relative overflow-hidden';
+
   return (
-    <div className={`relative overflow-hidden ${className}`} style={failed ? { backgroundColor: tint } : undefined}>
+    <div className={`${base} ${className}`} style={failed ? { backgroundColor: tint } : undefined}>
       {!failed && (
         <picture>
           {srcMobile && <source media="(max-width: 639px)" srcSet={srcMobile} />}

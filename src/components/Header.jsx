@@ -28,6 +28,19 @@ const nav = [
   { to: '/contact', label: 'Contact Store' },
 ];
 
+/* Desktop category nav, mirroring flyingtiger.com's horizontal bar. Sourced from the real
+   category list so we are not padding the count to look bigger than the shop is. */
+const categoryNav = [
+  { label: 'School kits', to: '/catalog?collection=school-kits' },
+  { label: 'Stationery', to: '/catalog?category=stationery' },
+  { label: 'Art supplies', to: '/catalog?category=art-supplies' },
+  { label: 'Craft', to: '/catalog?category=craft-material' },
+  { label: 'Office', to: '/catalog?category=office-supplies' },
+  { label: 'Party & gifts', to: '/catalog?category=party-gifts' },
+  { label: 'Return gifts', to: '/catalog?category=return-gifts' },
+  { label: 'Bulk orders', to: '/contact' },
+];
+
 // flyingtiger.com rotates three claims in its announcement bar. Same count, our claims.
 const announcements = [
   'Below MRP every day',
@@ -146,11 +159,15 @@ export default function Header() {
               height={128}
               className="w-8 h-8 rounded-lg object-cover"
             />
+            {/* Wraps to two lines at phone width where horizontal room is scarce, but stays on
+                ONE line from sm up. The audit found it wrapping at every breakpoint including
+                1440px, which made the wordmark read as cramped on a header with 900px spare. */}
             <span
               className="font-bold tracking-tight text-brand-primary text-[15px] sm:text-lg leading-[1.05]"
               translate="no"
             >
-              STATIONERY<br />POINT
+              STATIONERY<br className="sm:hidden" />
+              <span className="hidden sm:inline"> </span>POINT
             </span>
           </Link>
 
@@ -174,6 +191,35 @@ export default function Header() {
           <AskBox variant="header" />
         </div>
       </div>
+
+      {/* 3b — DESKTOP CATEGORY NAV. Added 17 Aug 2026 after the visual audit found the 1440px
+             header was ~900px of dead white carrying three icons and nothing else.
+             This is the finding I got wrong first time round: a DOM query returned only "Menu"
+             and I concluded flyingtiger.com was hamburger-only even at desktop. The screenshot
+             showed a full horizontal nav of FOURTEEN items — New in, Back To School,
+             Bestsellers, School & office, Home, Gifts, Food, Toys & games, Arts & crafts,
+             Party & occasions, Accessories, Last Chance, Shop all, Inspiration.
+             So: horizontal category nav at desktop, hamburger at phone width. Ours lists the
+             real categories rather than padding the count to match theirs. */}
+      <nav aria-label="Categories" className="hidden lg:block border-b border-hairline bg-white">
+        <ul className="max-w-[1280px] mx-auto px-8 flex items-center justify-center gap-1 xl:gap-2">
+          {categoryNav.map((c) => (
+            <li key={c.to}>
+              <NavLink
+                to={c.to}
+                className={({ isActive }) =>
+                  'inline-flex items-center h-11 px-3 text-[14px] font-medium whitespace-nowrap ' +
+                  'transition-colors duration-text ease-ref ' +
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded ' +
+                  (isActive ? 'text-brand-primary' : 'text-ink hover:text-brand-primary')
+                }
+              >
+                {c.label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       {/* 4 — Trust strip. hobbycraft: light band, centred, two claims split by a divider, ~38px. */}
       <div className="bg-brand-soft">
