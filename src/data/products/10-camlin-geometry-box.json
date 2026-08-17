@@ -1,0 +1,16 @@
+{
+  "_PLACEHOLDER": "DEMO DATA — not Sam's catalogue. Product names are real, commonly-stocked Indian SKUs so the card design can be judged. Prices: 'verified' was read off a live Indian retail page; 'indicative' is typical retail for the item and is NOT confirmed. Rating and reviewCount are INVENTED to exercise the star component. Purge this whole folder when the real item export lands.",
+  "placeholder": true,
+  "priceConfidence": "indicative",
+  "id": 10,
+  "name": "Camlin Geometry Box",
+  "brand": "Camlin",
+  "category": "stationery",
+  "mrp": 210,
+  "ourPrice": 175,
+  "rating": 4.2,
+  "reviewCount": 98,
+  "description": "Full geometry set in a hinged tin with a pencil and eraser.",
+  "newArrival": false,
+  "image": ""
+}

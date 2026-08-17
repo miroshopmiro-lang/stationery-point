@@ -3,6 +3,7 @@ import SendListModal from './SendListModal';
 import HeroCarousel from './HeroCarousel';
 import SchoolKitTiles from './SchoolKitTiles';
 import CategoryCircles from './CategoryCircles';
+import OffersRail from './OffersRail';
 import PromoTiles from './PromoTiles';
 import OfferStrip from './OfferStrip';
 import CollectionCards from './CollectionCards';
@@ -38,6 +39,9 @@ export default function Home() {
       {/* Circular category rail — flyingtiger + blick both use circles for this block.
           Replaces CategoryBento; no reference uses a bento/asymmetric grid anywhere. */}
       <CategoryCircles />
+      {/* Offers rail on a tinted band — hobbycraft's "Our best offers". Renders nothing
+          when no product is genuinely below MRP. */}
+      <OffersRail />
       {/* Half-photo / half-flat-panel tiles with alternating photo side — flyingtiger's
           promo block. Type lives on the panel so artwork carries no text at all. */}
       <PromoTiles />

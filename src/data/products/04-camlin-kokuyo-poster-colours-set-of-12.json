@@ -1,0 +1,16 @@
+{
+  "_PLACEHOLDER": "DEMO DATA — not Sam's catalogue. Product names are real, commonly-stocked Indian SKUs so the card design can be judged. Prices: 'verified' was read off a live Indian retail page; 'indicative' is typical retail for the item and is NOT confirmed. Rating and reviewCount are INVENTED to exercise the star component. Purge this whole folder when the real item export lands.",
+  "placeholder": true,
+  "priceConfidence": "indicative",
+  "id": 4,
+  "name": "Camlin Kokuyo Poster Colours — Set of 12",
+  "brand": "Camlin",
+  "category": "art-supplies",
+  "mrp": 280,
+  "ourPrice": 235,
+  "rating": 4.4,
+  "reviewCount": 127,
+  "description": "12 x 10ml jars. Opaque, water-based, mixes cleanly.",
+  "newArrival": false,
+  "image": ""
+}

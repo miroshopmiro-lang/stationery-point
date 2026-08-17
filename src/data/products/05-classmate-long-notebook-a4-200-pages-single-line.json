@@ -1,0 +1,16 @@
+{
+  "_PLACEHOLDER": "DEMO DATA — not Sam's catalogue. Product names are real, commonly-stocked Indian SKUs so the card design can be judged. Prices: 'verified' was read off a live Indian retail page; 'indicative' is typical retail for the item and is NOT confirmed. Rating and reviewCount are INVENTED to exercise the star component. Purge this whole folder when the real item export lands.",
+  "placeholder": true,
+  "priceConfidence": "indicative",
+  "id": 5,
+  "name": "Classmate Long Notebook A4 — 200 Pages, Single Line",
+  "brand": "Classmate",
+  "category": "stationery",
+  "mrp": 95,
+  "ourPrice": 82,
+  "rating": 4.3,
+  "reviewCount": 340,
+  "description": "Standard school long notebook. Single ruled, 200 pages.",
+  "newArrival": false,
+  "image": ""
+}

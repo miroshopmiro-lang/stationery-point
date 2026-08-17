@@ -10,8 +10,41 @@ const categoryTitle = new Map(categories.map((c) => [c.id, c.title]));
 
 const productModules = import.meta.glob('./products/*.json', { eager: true });
 
-export const products = Object.values(productModules)
-  .map((m) => m.default)
+/*
+ * PLACEHOLDER GUARD.
+ *
+ * src/data/products/ currently holds DEMO products (placeholder: true) so the card and grid
+ * design can be judged before Sam's real item export arrives. Their names are real,
+ * commonly-stocked Indian SKUs, but their ratings and review counts are invented and most
+ * prices are indicative rather than confirmed.
+ *
+ * They must never reach a production build, because the site would then be showing a real
+ * shop's customers prices and review counts that nobody has verified.
+ *
+ * Dev  -> placeholders render, so the design is reviewable.
+ * Prod -> placeholders are stripped. If that empties the catalogue, that is the correct and
+ *         honest outcome: the catalogue genuinely is empty until the export lands.
+ *
+ * To preview placeholders in a production build deliberately, run:
+ *   VITE_ALLOW_PLACEHOLDER_PRODUCTS=1 npm run build
+ */
+const allowPlaceholders =
+  !import.meta.env.PROD || import.meta.env.VITE_ALLOW_PLACEHOLDER_PRODUCTS === '1';
+
+const allProducts = Object.values(productModules).map((m) => m.default);
+
+export const placeholderCount = allProducts.filter((p) => p.placeholder).length;
+
+if (placeholderCount > 0 && allowPlaceholders && typeof console !== 'undefined') {
+  console.warn(
+    `[Stationery Point] ${placeholderCount} PLACEHOLDER products are live. ` +
+      'Names are real SKUs; ratings and review counts are invented and prices are mostly ' +
+      'indicative. Purge src/data/products/ when the real item export lands.'
+  );
+}
+
+export const products = allProducts
+  .filter((p) => allowPlaceholders || !p.placeholder)
   // categoryLabel is derived so the CMS only has to set the category.
   .map((p) => ({ ...p, categoryLabel: categoryTitle.get(p.category) ?? p.categoryLabel ?? '' }))
   .sort(

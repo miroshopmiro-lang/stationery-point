@@ -1,0 +1,16 @@
+{
+  "_PLACEHOLDER": "DEMO DATA — not Sam's catalogue. Product names are real, commonly-stocked Indian SKUs so the card design can be judged. Prices: 'verified' was read off a live Indian retail page; 'indicative' is typical retail for the item and is NOT confirmed. Rating and reviewCount are INVENTED to exercise the star component. Purge this whole folder when the real item export lands.",
+  "placeholder": true,
+  "priceConfidence": "indicative",
+  "id": 15,
+  "name": "Coloured Craft Paper A4 — 100 Sheets, Assorted",
+  "brand": "Generic",
+  "category": "craft-material",
+  "mrp": 180,
+  "ourPrice": 149,
+  "rating": 4.1,
+  "reviewCount": 38,
+  "description": "Ten shades, 100 sheets. For craft, collage and school projects.",
+  "newArrival": false,
+  "image": ""
+}

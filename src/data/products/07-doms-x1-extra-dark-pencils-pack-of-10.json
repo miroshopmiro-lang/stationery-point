@@ -1,0 +1,16 @@
+{
+  "_PLACEHOLDER": "DEMO DATA — not Sam's catalogue. Product names are real, commonly-stocked Indian SKUs so the card design can be judged. Prices: 'verified' was read off a live Indian retail page; 'indicative' is typical retail for the item and is NOT confirmed. Rating and reviewCount are INVENTED to exercise the star component. Purge this whole folder when the real item export lands.",
+  "placeholder": true,
+  "priceConfidence": "indicative",
+  "id": 7,
+  "name": "Doms X1 Extra Dark Pencils — Pack of 10",
+  "brand": "Doms",
+  "category": "stationery",
+  "mrp": 55,
+  "ourPrice": 48,
+  "rating": 4.5,
+  "reviewCount": 158,
+  "description": "Extra dark, break-resistant lead with a free eraser and sharpener.",
+  "newArrival": false,
+  "image": ""
+}
