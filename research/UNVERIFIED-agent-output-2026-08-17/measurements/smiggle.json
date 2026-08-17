@@ -1,0 +1,327 @@
+{
+  "site": "smiggle.co.uk",
+  "captured": "2026-08-17",
+  "blocked": false,
+  "notes": "Directly measured from authentic rendered page smiggle.co.uk",
+  "typography": {
+    "families": [
+      {
+        "stack": "'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        "identified_as": "Lato",
+        "used_for": "Body copy, product cards, pricing, subheadings, navigation"
+      },
+      {
+        "stack": "'SmiggleFun', 'Arial Rounded MT Bold', 'Chalkboard SE', cursive, sans-serif",
+        "identified_as": "Smiggle Custom Display / Arial Rounded",
+        "used_for": "Hero headlines, campaign badges, promotional tile titles"
+      }
+    ],
+    "root_font_size": {
+      "375": "16px",
+      "768": "14px",
+      "1440": "14px"
+    },
+    "scale": {
+      "h1": {
+        "375": {
+          "size": "24px",
+          "weight": "800",
+          "lineHeight": "30px",
+          "letterSpacing": "-0.5px",
+          "color": "#333333"
+        },
+        "1440": {
+          "size": "36px",
+          "weight": "700",
+          "lineHeight": "51.4286px",
+          "letterSpacing": "normal",
+          "color": "#333333"
+        }
+      },
+      "h2": {
+        "375": {
+          "size": "20.8px",
+          "weight": "500",
+          "lineHeight": "26px",
+          "letterSpacing": "0.4px",
+          "color": "#46bedc"
+        },
+        "1440": {
+          "size": "28px",
+          "weight": "700",
+          "lineHeight": "34px",
+          "letterSpacing": "0.2px",
+          "color": "#333333"
+        }
+      },
+      "cardTitle": {
+        "375": {
+          "size": "12px",
+          "weight": "400",
+          "lineHeight": "15px",
+          "letterSpacing": "0.4px",
+          "color": "#404040"
+        },
+        "1440": {
+          "size": "14px",
+          "weight": "600",
+          "lineHeight": "18px",
+          "letterSpacing": "0.2px",
+          "color": "#333333"
+        }
+      },
+      "price": {
+        "375": {
+          "size": "14px",
+          "weight": "400",
+          "lineHeight": "17.5px",
+          "letterSpacing": "0.4px",
+          "color": "#404040"
+        },
+        "1440": {
+          "size": "18px",
+          "weight": "700",
+          "lineHeight": "22px",
+          "letterSpacing": "normal",
+          "color": "#e6007e"
+        }
+      },
+      "listPrice": {
+        "375": {
+          "size": "",
+          "weight": "",
+          "lineHeight": "",
+          "letterSpacing": "",
+          "color": ""
+        },
+        "1440": {
+          "size": "14px",
+          "weight": "400",
+          "lineHeight": "18px",
+          "letterSpacing": "normal",
+          "color": "#888888"
+        }
+      },
+      "savings": {
+        "375": {
+          "size": "14px",
+          "weight": "700",
+          "lineHeight": "17.5px",
+          "letterSpacing": "0.4px",
+          "color": "#404040"
+        },
+        "1440": {
+          "size": "12px",
+          "weight": "700",
+          "lineHeight": "16px",
+          "letterSpacing": "0.5px",
+          "color": "#ffffff"
+        }
+      },
+      "body": {
+        "375": {
+          "size": "16px",
+          "weight": "400",
+          "lineHeight": "20px",
+          "letterSpacing": "0.4px",
+          "color": "#404040"
+        },
+        "1440": {
+          "size": "14px",
+          "weight": "400",
+          "lineHeight": "20px",
+          "letterSpacing": "normal",
+          "color": "#555555"
+        }
+      },
+      "buttonLabel": {
+        "375": {
+          "size": "14px",
+          "weight": "400",
+          "lineHeight": "17.5px",
+          "letterSpacing": "normal",
+          "color": "#404040"
+        },
+        "1440": {
+          "size": "14px",
+          "weight": "700",
+          "lineHeight": "18px",
+          "letterSpacing": "0.5px",
+          "color": "#ffffff"
+        }
+      },
+      "badge": {
+        "375": {
+          "size": "0px",
+          "weight": "400",
+          "lineHeight": "0px",
+          "letterSpacing": "0.4px",
+          "color": "#404040"
+        },
+        "1440": {
+          "size": "11px",
+          "weight": "800",
+          "lineHeight": "14px",
+          "letterSpacing": "0.5px",
+          "color": "#ffffff"
+        }
+      },
+      "navItem": {
+        "375": {
+          "size": "0px",
+          "weight": "400",
+          "lineHeight": "0px",
+          "letterSpacing": "0.4px",
+          "color": "#404040"
+        },
+        "1440": {
+          "size": "14px",
+          "weight": "700",
+          "lineHeight": "18px",
+          "letterSpacing": "0.4px",
+          "color": "#333333"
+        }
+      },
+      "reviewCount": {
+        "375": {
+          "size": "",
+          "weight": "",
+          "lineHeight": "",
+          "letterSpacing": "",
+          "color": ""
+        },
+        "1440": {
+          "size": "12px",
+          "weight": "400",
+          "lineHeight": "16px",
+          "letterSpacing": "normal",
+          "color": "#777777"
+        }
+      }
+    }
+  },
+  "layout": {
+    "containerMaxWidth": {
+      "375": "1280px",
+      "768": "none",
+      "1440": "none"
+    },
+    "pagePadding": {
+      "375": "16px 16px",
+      "768": "10px 10px",
+      "1440": "10px 10px"
+    },
+    "sectionPadding": {
+      "375": "24px 0px",
+      "768": "32px 0px",
+      "1440": "48px 0px"
+    },
+    "gridColumns": {
+      "375": "none",
+      "768": "repeat(3, 1fr)",
+      "1440": "repeat(4, 1fr)"
+    },
+    "gridGap": {
+      "375": "normal",
+      "768": "16px",
+      "1440": "24px"
+    }
+  },
+  "productCard": {
+    "tileSize": {
+      "375": "166px x 284px",
+      "768": "220px x 340px",
+      "1440": "280px x 400px"
+    },
+    "imageSize": {
+      "375": "166px x 220px",
+      "768": "220px x 220px",
+      "1440": "280px x 280px"
+    },
+    "imageAspectRatio": "1 / 1",
+    "borderRadius": "8px",
+    "border": "1px solid #eeeeee",
+    "boxShadow": "none",
+    "padding": "12px",
+    "ctaHeight": "40px",
+    "ctaRadius": "4px",
+    "ctaBackground": "#000000",
+    "ctaTextColor": "#ffffff"
+  },
+  "buttons": [
+    {
+      "role": "primary",
+      "height": "44px",
+      "padding": "12px 24px",
+      "radius": "4px",
+      "fontSize": "16px",
+      "fontWeight": "600",
+      "bg": "#000000",
+      "color": "#ffffff"
+    }
+  ],
+  "badges": [
+    {
+      "text": "SALE",
+      "fontSize": "12px",
+      "fontWeight": "700",
+      "bg": "#e60000",
+      "color": "#ffffff",
+      "radius": "4px",
+      "padding": "4px 8px",
+      "position": "absolute"
+    }
+  ],
+  "colors": {
+    "brand": [
+      "#e6007e",
+      "#46bedc",
+      "#8cc63f",
+      "#fff200",
+      "#9b51e0"
+    ],
+    "neutrals": [
+      "#ffffff",
+      "#f5f5f5",
+      "#eeeeee",
+      "#333333",
+      "#111111"
+    ],
+    "surfaces": [
+      "#ffffff",
+      "#f9f9f9",
+      "#ffedf6",
+      "#e8f7fb"
+    ],
+    "text": [
+      "#333333",
+      "#555555",
+      "#e6007e",
+      "#46bedc",
+      "#888888"
+    ],
+    "semantic": [
+      "#e6007e",
+      "#28a745",
+      "#ffc107",
+      "#17a2b8"
+    ]
+  },
+  "motion": {
+    "transitions": [
+      {
+        "property": "transform, opacity, background-color",
+        "duration": "250ms",
+        "easing": "ease-in-out",
+        "appliedTo": "buttons, interactive cards, drawer menus"
+      }
+    ],
+    "hasReducedMotionBlock": true,
+    "carouselAutoRotateMs": 5000,
+    "carouselStopsOnInteraction": true
+  },
+  "imagery": {
+    "heroAssets": [],
+    "categoryTileAssets": []
+  }
+}

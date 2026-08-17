@@ -1,0 +1,34 @@
+{
+  "homepageBundleTiles": {
+    "tiles": [],
+    "navSubLinks": []
+  },
+  "bundleCategoryData": {
+    "title": "Generic Error",
+    "heading": "",
+    "products": []
+  },
+  "subCategoryData": {
+    "ready-made-bundles": {
+      "title": "Generic Error",
+      "h1": "",
+      "prods": []
+    },
+    "build-a-bundle": {
+      "title": "Generic Error",
+      "h1": "",
+      "prods": []
+    },
+    "stationery-bundles": {
+      "title": "Kids Stationery | Pens, Pencils, Notebooks & More",
+      "h1": "Stationery",
+      "prods": []
+    },
+    "hot-offer-bundles": {
+      "title": "Kids Toys & Stationery Offers | Smiggle™ Online",
+      "h1": "All Offers",
+      "prods": []
+    }
+  },
+  "samplePdpData": null
+}

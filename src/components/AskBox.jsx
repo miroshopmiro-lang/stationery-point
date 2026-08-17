@@ -84,6 +84,42 @@ export default function AskBox({ variant = 'hero', defaultMode = 'single' }) {
   const [mode, setMode] = useState(defaultMode); // 'single' | 'list'
   const [value, setValue] = useState('');
   const isHero = variant === 'hero';
+  const isHeader = variant === 'header';
+
+  /*
+   * HEADER VARIANT — full-width rounded search pill on its own row.
+   * Copied from the one pattern all three renderable references agree on:
+   *   flyingtiger.com  — full-width row, own line, black submit button
+   *   hobbycraft.co.uk — full-width pill, magnifier LEFT, "What are you looking for today?"
+   *   dickblick.com    — full-width pill, and the ITEM COUNT is in the placeholder:
+   *                      "Search 110,000+ art supplies" — a free range/trust signal.
+   * We copy hobbycraft's shape and blick's count-in-placeholder idea.
+   * No mode-toggle chips here; those belong to the hero/section variant.
+   */
+  if (isHeader) {
+    return (
+      <form
+        role="search"
+        onSubmit={(e) => e.preventDefault()}
+        className="relative w-full"
+      >
+        <SearchIcon className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
+        <input
+          type="search"
+          inputMode="search"
+          autoComplete="off"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          aria-label="Search items or paste your supply list"
+          placeholder="Search items — or paste your list"
+          className="w-full h-11 rounded-full border border-hairline bg-white pl-11 pr-4 text-[14px] text-ink
+                     placeholder:text-muted outline-none
+                     transition-colors duration-text ease-ref
+                     focus:border-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary/30"
+        />
+      </form>
+    );
+  }
 
   return (
     <div className={isHero ? 'w-full max-w-xl' : 'w-full max-w-md'}>

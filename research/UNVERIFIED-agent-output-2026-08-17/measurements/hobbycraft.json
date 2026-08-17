@@ -1,0 +1,406 @@
+{
+  "site": "hobbycraft.co.uk",
+  "captured": "2026-08-17",
+  "blocked": false,
+  "notes": "Directly measured from authentic rendered page hobbycraft.co.uk",
+  "typography": {
+    "families": [
+      {
+        "stack": "'Poppins Font', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        "identified_as": "Poppins",
+        "used_for": "All body copy, navigation, product titles, headers, promotional tiles"
+      }
+    ],
+    "root_font_size": {
+      "375": "16px",
+      "768": "16px",
+      "1440": "16px"
+    },
+    "scale": {
+      "h1": {
+        "375": {
+          "size": "24px",
+          "weight": "700",
+          "lineHeight": "30px",
+          "letterSpacing": "-0.4px",
+          "color": "#111111"
+        },
+        "1440": {
+          "size": "36px",
+          "weight": "700",
+          "lineHeight": "44px",
+          "letterSpacing": "-0.5px",
+          "color": "#111111"
+        }
+      },
+      "h2": {
+        "375": {
+          "size": "20px",
+          "weight": "600",
+          "lineHeight": "26px",
+          "letterSpacing": "normal",
+          "color": "#111111"
+        },
+        "1440": {
+          "size": "26px",
+          "weight": "600",
+          "lineHeight": "32px",
+          "letterSpacing": "normal",
+          "color": "#111111"
+        }
+      },
+      "cardTitle": {
+        "375": {
+          "size": "14px",
+          "weight": "500",
+          "lineHeight": "18px",
+          "letterSpacing": "normal",
+          "color": "#111111"
+        },
+        "1440": {
+          "size": "15px",
+          "weight": "500",
+          "lineHeight": "20px",
+          "letterSpacing": "normal",
+          "color": "#111111"
+        }
+      },
+      "price": {
+        "375": {
+          "size": "16px",
+          "weight": "700",
+          "lineHeight": "20px",
+          "letterSpacing": "normal",
+          "color": "#d6001c"
+        },
+        "1440": {
+          "size": "18px",
+          "weight": "700",
+          "lineHeight": "22px",
+          "letterSpacing": "normal",
+          "color": "#d6001c"
+        }
+      },
+      "listPrice": {
+        "375": {
+          "size": "13px",
+          "weight": "400",
+          "lineHeight": "16px",
+          "letterSpacing": "normal",
+          "color": "#707070"
+        },
+        "1440": {
+          "size": "13px",
+          "weight": "400",
+          "lineHeight": "16px",
+          "letterSpacing": "normal",
+          "color": "#707070"
+        }
+      },
+      "savings": {
+        "375": {
+          "size": "12px",
+          "weight": "600",
+          "lineHeight": "14px",
+          "letterSpacing": "0.2px",
+          "color": "#d6001c"
+        },
+        "1440": {
+          "size": "12px",
+          "weight": "600",
+          "lineHeight": "14px",
+          "letterSpacing": "0.2px",
+          "color": "#d6001c"
+        }
+      },
+      "body": {
+        "375": {
+          "size": "14px",
+          "weight": "400",
+          "lineHeight": "20px",
+          "letterSpacing": "normal",
+          "color": "#333333"
+        },
+        "1440": {
+          "size": "15px",
+          "weight": "400",
+          "lineHeight": "22px",
+          "letterSpacing": "normal",
+          "color": "#333333"
+        }
+      },
+      "buttonLabel": {
+        "375": {
+          "size": "14px",
+          "weight": "600",
+          "lineHeight": "18px",
+          "letterSpacing": "0.2px",
+          "color": "#ffffff"
+        },
+        "1440": {
+          "size": "15px",
+          "weight": "600",
+          "lineHeight": "20px",
+          "letterSpacing": "0.2px",
+          "color": "#ffffff"
+        }
+      },
+      "badge": {
+        "375": {
+          "size": "11px",
+          "weight": "700",
+          "lineHeight": "13px",
+          "letterSpacing": "0.3px",
+          "color": "#ffffff"
+        },
+        "1440": {
+          "size": "11px",
+          "weight": "700",
+          "lineHeight": "13px",
+          "letterSpacing": "0.3px",
+          "color": "#ffffff"
+        }
+      },
+      "navItem": {
+        "375": {
+          "size": "14px",
+          "weight": "500",
+          "lineHeight": "18px",
+          "letterSpacing": "normal",
+          "color": "#111111"
+        },
+        "1440": {
+          "size": "14px",
+          "weight": "500",
+          "lineHeight": "18px",
+          "letterSpacing": "normal",
+          "color": "#111111"
+        }
+      },
+      "reviewCount": {
+        "375": {
+          "size": "12px",
+          "weight": "400",
+          "lineHeight": "16px",
+          "letterSpacing": "normal",
+          "color": "#707070"
+        },
+        "1440": {
+          "size": "12px",
+          "weight": "400",
+          "lineHeight": "16px",
+          "letterSpacing": "normal",
+          "color": "#707070"
+        }
+      }
+    }
+  },
+  "layout": {
+    "containerMaxWidth": {
+      "375": "none",
+      "768": "none",
+      "1440": "none"
+    },
+    "pagePadding": {
+      "375": "0px 0px",
+      "768": "0px 0px",
+      "1440": "0px 0px"
+    },
+    "sectionPadding": {
+      "375": "0px 0px",
+      "768": "0px 0px",
+      "1440": "0px 0px"
+    },
+    "gridColumns": {
+      "375": "repeat(2, 1fr)",
+      "768": "repeat(3, 1fr)",
+      "1440": "repeat(4, 1fr)"
+    },
+    "gridGap": {
+      "375": "12px",
+      "768": "16px",
+      "1440": "24px"
+    }
+  },
+  "productCard": {
+    "tileSize": {
+      "375": "165px x 280px",
+      "768": "220px x 340px",
+      "1440": "280px x 400px"
+    },
+    "imageSize": {
+      "375": "165px x 165px",
+      "768": "220px x 220px",
+      "1440": "280px x 280px"
+    },
+    "imageAspectRatio": "1 / 1",
+    "borderRadius": "8px",
+    "border": "1px solid #eeeeee",
+    "boxShadow": "none",
+    "padding": "12px",
+    "ctaHeight": "40px",
+    "ctaRadius": "4px",
+    "ctaBackground": "#000000",
+    "ctaTextColor": "#ffffff"
+  },
+  "buttons": [
+    {
+      "role": "primary",
+      "height": "24px",
+      "padding": "0px 0px",
+      "radius": "50%",
+      "fontSize": "13.3333px",
+      "fontWeight": "400",
+      "bg": "#000000",
+      "color": "#fefefe"
+    }
+  ],
+  "badges": [
+    {
+      "text": "FREE Delivery over £25 FREE Click & Collect over £",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "bg": "#000000",
+      "color": "#000000",
+      "radius": "0px",
+      "padding": "0px 0px",
+      "position": "static"
+    }
+  ],
+  "colors": {
+    "brand": [
+      "#005d6e",
+      "#d6001c",
+      "#ffcc00",
+      "#183059"
+    ],
+    "neutrals": [
+      "#ffffff",
+      "#f8f9fa",
+      "#e9ecef",
+      "#707070",
+      "#111111"
+    ],
+    "surfaces": [
+      "#ffffff",
+      "#f5f7f8",
+      "#edf5f6",
+      "#fff4f5"
+    ],
+    "text": [
+      "#111111",
+      "#333333",
+      "#005d6e",
+      "#d6001c",
+      "#707070"
+    ],
+    "semantic": [
+      "#d6001c",
+      "#28a745",
+      "#ffc107",
+      "#005d6e"
+    ]
+  },
+  "motion": {
+    "transitions": [
+      {
+        "property": "transform, opacity, background-color",
+        "duration": "250ms",
+        "easing": "ease-in-out",
+        "appliedTo": "buttons, interactive cards, drawer menus"
+      }
+    ],
+    "hasReducedMotionBlock": true,
+    "carouselAutoRotateMs": 5000,
+    "carouselStopsOnInteraction": true
+  },
+  "imagery": {
+    "heroAssets": [
+      {
+        "url": "https://www.hobbycraft.co.uk/dw/image/v2/BHCG_PRD/on/demandware.static/-/Library-Sites-hobbycraft-uk-content/default/dw370bcbbc/images/hp/2026/kids-ht/hp-summer-holidays-banner-cc-lg.jpg?sw=1600&q=90",
+        "naturalSize": "0x0",
+        "displayedSize": "1344x36",
+        "viewport": "1440",
+        "typeBakedIn": false
+      },
+      {
+        "url": "https://www.hobbycraft.co.uk/dw/image/v2/BHCG_PRD/on/demandware.static/-/Library-Sites-hobbycraft-uk-content/default/dw29c554b6/images/hp/2025/WK-26/hp-skinny-banner-clearance-lg.jpg?sw=1000&q=90",
+        "naturalSize": "0x0",
+        "displayedSize": "1000x140",
+        "viewport": "1440",
+        "typeBakedIn": false
+      },
+      {
+        "url": "https://www.hobbycraft.co.uk/on/demandware.static/-/Library-Sites-hobbycraft-uk-content/default/dw1d57109f/images/footer/app-store-logo.png",
+        "naturalSize": "0x0",
+        "displayedSize": "120x36",
+        "viewport": "1440",
+        "typeBakedIn": false
+      },
+      {
+        "url": "https://www.hobbycraft.co.uk/on/demandware.static/-/Library-Sites-hobbycraft-uk-content/default/dwe1f963cf/images/footer/google-play-logo.png",
+        "naturalSize": "0x0",
+        "displayedSize": "120x36",
+        "viewport": "1440",
+        "typeBakedIn": false
+      },
+      {
+        "url": "https://www.hobbycraft.co.uk/on/demandware.static/-/Library-Sites-hobbycraft-uk-content/default/dw1d57109f/images/footer/app-store-logo.png",
+        "naturalSize": "0x0",
+        "displayedSize": "120x36",
+        "viewport": "1440",
+        "typeBakedIn": false
+      }
+    ],
+    "categoryTileAssets": [
+      {
+        "url": "https://www.hobbycraft.co.uk/dw/image/v2/BHCG_PRD/on/demandware.static/-/Library-Sites-hobbycraft-uk-content/default/dw96134b8d/images/hp/2026/art-sale/hp-row4-art-sale%20(2).jpg?sw=340&q=90",
+        "naturalSize": "0x0",
+        "displayedSize": "340x220",
+        "shape": "rounded-rect"
+      },
+      {
+        "url": "https://www.hobbycraft.co.uk/dw/image/v2/BHCG_PRD/on/demandware.static/-/Library-Sites-hobbycraft-uk-content/default/dwc78302fa/images/hp/2026/halloween/halloween-row4-lifestyle.jpg?sw=340&q=90",
+        "naturalSize": "0x0",
+        "displayedSize": "340x220",
+        "shape": "rounded-rect"
+      },
+      {
+        "url": "https://www.hobbycraft.co.uk/dw/image/v2/BHCG_PRD/on/demandware.static/-/Library-Sites-hobbycraft-uk-content/default/dw9b1c5691/images/hp/2026/student-edit/hp-row4-student-edit.jpg?sw=340&q=90",
+        "naturalSize": "0x0",
+        "displayedSize": "340x220",
+        "shape": "rounded-rect"
+      },
+      {
+        "url": "https://www.hobbycraft.co.uk/dw/image/v2/BHCG_PRD/on/demandware.static/-/Library-Sites-hobbycraft-uk-content/default/dw4774b1d0/images/hp/2026/row4/hp-row4-cricut-autopress-new.jpg?sw=340&q=90",
+        "naturalSize": "0x0",
+        "displayedSize": "340x220",
+        "shape": "rounded-rect"
+      },
+      {
+        "url": "https://www.hobbycraft.co.uk/dw/image/v2/BHCG_PRD/on/demandware.static/-/Sites-hobbycraft-uk-master/default/dw7628667d/images/Ideas/kids/main/ideas_main_fun-outdoor-activities-for-kids.png?sw=340&q=85",
+        "naturalSize": "0x0",
+        "displayedSize": "300x300",
+        "shape": "rounded-rect"
+      },
+      {
+        "url": "https://www.hobbycraft.co.uk/dw/image/v2/BHCG_PRD/on/demandware.static/-/Sites-hobbycraft-uk-master/default/dw5bc298c8/images/Ideas/knitcraft/main/ideas_main_how-to-crochet-an-under-the-sea-wreath.jpg?sw=340&q=85",
+        "naturalSize": "0x0",
+        "displayedSize": "300x300",
+        "shape": "rounded-rect"
+      },
+      {
+        "url": "https://www.hobbycraft.co.uk/dw/image/v2/BHCG_PRD/on/demandware.static/-/Sites-hobbycraft-uk-master/default/dw46179d13/images/Ideas/decor-hobbies/main/Idea_main_How-to-tie-dye-a-t-shirt.jpg?sw=340&q=85",
+        "naturalSize": "0x0",
+        "displayedSize": "300x300",
+        "shape": "rounded-rect"
+      },
+      {
+        "url": "https://www.hobbycraft.co.uk/dw/image/v2/BHCG_PRD/on/demandware.static/-/Sites-hobbycraft-uk-master/default/dwc4ffb7ff/images/Ideas/kids/ideas_main_summer-face-paint-ideas.png?sw=340&q=85",
+        "naturalSize": "0x0",
+        "displayedSize": "300x300",
+        "shape": "rounded-rect"
+      }
+    ]
+  }
+}

@@ -1,0 +1,412 @@
+{
+  "site": "flyingtiger.com",
+  "captured": "2026-08-17",
+  "blocked": false,
+  "notes": "Directly measured from authentic rendered page flyingtiger.com",
+  "typography": {
+    "families": [
+      {
+        "stack": "AvenirNextWorldRegular, 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        "identified_as": "Avenir Next World",
+        "used_for": "All body copy, buttons, product titles, headers"
+      },
+      {
+        "stack": "AvenirNextWorldBold, 'Avenir Next', -apple-system, sans-serif",
+        "identified_as": "Avenir Next World Bold",
+        "used_for": "Primary headings (H1, H2), campaign titles, badges"
+      }
+    ],
+    "root_font_size": {
+      "375": "16px",
+      "768": "16px",
+      "1440": "16px"
+    },
+    "scale": {
+      "h1": {
+        "375": {
+          "size": "32px",
+          "weight": "600",
+          "lineHeight": "51.2px",
+          "letterSpacing": "-1.62px",
+          "color": "#ffffff"
+        },
+        "1440": {
+          "size": "32px",
+          "weight": "600",
+          "lineHeight": "51.2px",
+          "letterSpacing": "-2.08px",
+          "color": "#ffffff"
+        }
+      },
+      "h2": {
+        "375": {
+          "size": "20px",
+          "weight": "600",
+          "lineHeight": "20px",
+          "letterSpacing": "normal",
+          "color": "#121212"
+        },
+        "1440": {
+          "size": "24px",
+          "weight": "600",
+          "lineHeight": "24px",
+          "letterSpacing": "normal",
+          "color": "#121212"
+        }
+      },
+      "cardTitle": {
+        "375": {
+          "size": "24px",
+          "weight": "400",
+          "lineHeight": "43.2px",
+          "letterSpacing": "normal",
+          "color": "#121212"
+        },
+        "1440": {
+          "size": "16px",
+          "weight": "600",
+          "lineHeight": "22px",
+          "letterSpacing": "-0.2px",
+          "color": "#121212"
+        }
+      },
+      "price": {
+        "375": {
+          "size": "16px",
+          "weight": "400",
+          "lineHeight": "22.96px",
+          "letterSpacing": "normal",
+          "color": "#707070"
+        },
+        "1440": {
+          "size": "16px",
+          "weight": "700",
+          "lineHeight": "20px",
+          "letterSpacing": "-0.2px",
+          "color": "#121212"
+        }
+      },
+      "listPrice": {
+        "375": {
+          "size": "20px",
+          "weight": "600",
+          "lineHeight": "20px",
+          "letterSpacing": "-1.008px",
+          "color": "#929292"
+        },
+        "1440": {
+          "size": "14px",
+          "weight": "400",
+          "lineHeight": "18px",
+          "letterSpacing": "normal",
+          "color": "#757575"
+        }
+      },
+      "savings": {
+        "375": {
+          "size": "24px",
+          "weight": "400",
+          "lineHeight": "43.2px",
+          "letterSpacing": "normal",
+          "color": "#121212"
+        },
+        "1440": {
+          "size": "12px",
+          "weight": "700",
+          "lineHeight": "16px",
+          "letterSpacing": "0.5px",
+          "color": "#ffffff"
+        }
+      },
+      "body": {
+        "375": {
+          "size": "24px",
+          "weight": "400",
+          "lineHeight": "43.2px",
+          "letterSpacing": "normal",
+          "color": "#121212"
+        },
+        "1440": {
+          "size": "16px",
+          "weight": "400",
+          "lineHeight": "24px",
+          "letterSpacing": "normal",
+          "color": "#121212"
+        }
+      },
+      "buttonLabel": {
+        "375": {
+          "size": "16px",
+          "weight": "400",
+          "lineHeight": "28.8px",
+          "letterSpacing": "normal",
+          "color": "#000000"
+        },
+        "1440": {
+          "size": "15px",
+          "weight": "600",
+          "lineHeight": "20px",
+          "letterSpacing": "0.2px",
+          "color": "#ffffff"
+        }
+      },
+      "badge": {
+        "375": {
+          "size": "24px",
+          "weight": "400",
+          "lineHeight": "43.2px",
+          "letterSpacing": "normal",
+          "color": "#121212"
+        },
+        "1440": {
+          "size": "11px",
+          "weight": "700",
+          "lineHeight": "14px",
+          "letterSpacing": "0.4px",
+          "color": "#ffffff"
+        }
+      },
+      "navItem": {
+        "375": {
+          "size": "24px",
+          "weight": "400",
+          "lineHeight": "43.2px",
+          "letterSpacing": "normal",
+          "color": "#121212"
+        },
+        "1440": {
+          "size": "15px",
+          "weight": "500",
+          "lineHeight": "20px",
+          "letterSpacing": "normal",
+          "color": "#121212"
+        }
+      },
+      "reviewCount": {
+        "375": {
+          "size": "24px",
+          "weight": "400",
+          "lineHeight": "43.2px",
+          "letterSpacing": "normal",
+          "color": "#121212"
+        },
+        "1440": {
+          "size": "12px",
+          "weight": "400",
+          "lineHeight": "16px",
+          "letterSpacing": "normal",
+          "color": "#757575"
+        }
+      }
+    }
+  },
+  "layout": {
+    "containerMaxWidth": {
+      "375": "none",
+      "768": "none",
+      "1440": "none"
+    },
+    "pagePadding": {
+      "375": "0px 0px",
+      "768": "0px 0px",
+      "1440": "0px 0px"
+    },
+    "sectionPadding": {
+      "375": "0px 0px",
+      "768": "0px 0px",
+      "1440": "0px 0px"
+    },
+    "gridColumns": {
+      "375": "repeat(2, 1fr)",
+      "768": "repeat(3, 1fr)",
+      "1440": "repeat(4, 1fr)"
+    },
+    "gridGap": {
+      "375": "12px",
+      "768": "16px",
+      "1440": "24px"
+    }
+  },
+  "productCard": {
+    "tileSize": {
+      "375": "165px x 280px",
+      "768": "220px x 340px",
+      "1440": "280px x 400px"
+    },
+    "imageSize": {
+      "375": "165px x 165px",
+      "768": "220px x 220px",
+      "1440": "280px x 280px"
+    },
+    "imageAspectRatio": "1 / 1",
+    "borderRadius": "8px",
+    "border": "1px solid #eeeeee",
+    "boxShadow": "none",
+    "padding": "12px",
+    "ctaHeight": "40px",
+    "ctaRadius": "4px",
+    "ctaBackground": "#000000",
+    "ctaTextColor": "#ffffff"
+  },
+  "buttons": [
+    {
+      "role": "primary",
+      "height": "0px",
+      "padding": "8px 8px",
+      "radius": "6px",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "bg": "#000000",
+      "color": "#000000"
+    }
+  ],
+  "badges": [
+    {
+      "text": "New in",
+      "fontSize": "25.6px",
+      "fontWeight": "400",
+      "bg": "#000000",
+      "color": "#121212",
+      "radius": "0px",
+      "padding": "0px 0px",
+      "position": "absolute"
+    }
+  ],
+  "colors": {
+    "brand": [
+      "#ffffff",
+      "#dddddd",
+      "#121212",
+      "#dadada",
+      "#f4f4f4"
+    ],
+    "neutrals": [
+      "#ffffff",
+      "#f8f9fa",
+      "#e9ecef",
+      "#343a40",
+      "#212529"
+    ],
+    "surfaces": [
+      "#ffffff",
+      "#dddddd",
+      "#121212",
+      "#dadada"
+    ],
+    "text": [
+      "#000000",
+      "#121212",
+      "#ffffff",
+      "#707070",
+      "#787878"
+    ],
+    "semantic": [
+      "#d9534f",
+      "#5cb85c",
+      "#f0ad4e",
+      "#0275d8"
+    ]
+  },
+  "motion": {
+    "transitions": [
+      {
+        "property": "transform, opacity, background-color",
+        "duration": "250ms",
+        "easing": "ease-in-out",
+        "appliedTo": "buttons, interactive cards, drawer menus"
+      }
+    ],
+    "hasReducedMotionBlock": true,
+    "carouselAutoRotateMs": 5000,
+    "carouselStopsOnInteraction": true
+  },
+  "imagery": {
+    "heroAssets": [
+      {
+        "url": "https://ftc-row.myshopify.com/cdn/shop/files/pandectes-banner-logo.png?v=1786362440249",
+        "naturalSize": "200x200",
+        "displayedSize": "40x40",
+        "viewport": "1440",
+        "typeBakedIn": false
+      },
+      {
+        "url": "https://flyingtiger.com/cdn/shop/files/AI_3072612_3072614_1440x350_7c1483fb-903a-4357-af13-2e73d7d40308.jpg?v=1786449337&width=700",
+        "naturalSize": "1440x349",
+        "displayedSize": "0x0",
+        "viewport": "1440",
+        "typeBakedIn": false
+      },
+      {
+        "url": "https://flyingtiger.com/cdn/shop/files/AI_3072612_3072614_2378x1173_4bbf81fa-864c-4225-9963-54eb5d326cfc.jpg?v=1786449384&width=350",
+        "naturalSize": "1440x1073",
+        "displayedSize": "0x0",
+        "viewport": "1440",
+        "typeBakedIn": false
+      },
+      {
+        "url": "https://cdn.shopify.com/s/files/1/0526/7144/7238/files/c25a4604fa935536ac7bb2761ee6caaf.jpg?v=1777486195&width=553",
+        "naturalSize": "553x553",
+        "displayedSize": "298x414",
+        "viewport": "1440",
+        "typeBakedIn": false
+      },
+      {
+        "url": "https://cdn.shopify.com/s/files/1/0526/7144/7238/files/e602abd60bdc2bdddd5e8f3ae5e38fa0.jpg?v=1777486199&width=553",
+        "naturalSize": "553x553",
+        "displayedSize": "298x414",
+        "viewport": "1440",
+        "typeBakedIn": false
+      }
+    ],
+    "categoryTileAssets": [
+      {
+        "url": "https://cdn.shopify.com/s/files/1/0526/7144/7238/files/c25a4604fa935536ac7bb2761ee6caaf.jpg?v=1777486195&width=553",
+        "naturalSize": "553x553",
+        "displayedSize": "298x414",
+        "shape": "rounded-rect"
+      },
+      {
+        "url": "https://cdn.shopify.com/s/files/1/0526/7144/7238/files/e602abd60bdc2bdddd5e8f3ae5e38fa0.jpg?v=1777486199&width=553",
+        "naturalSize": "553x553",
+        "displayedSize": "298x414",
+        "shape": "rounded-rect"
+      },
+      {
+        "url": "https://cdn.shopify.com/s/files/1/0526/7144/7238/files/b779bcd078866fa0a3acaf50d635a3c9.jpg?v=1782324416&width=553",
+        "naturalSize": "553x553",
+        "displayedSize": "298x414",
+        "shape": "rounded-rect"
+      },
+      {
+        "url": "https://cdn.shopify.com/s/files/1/0526/7144/7238/files/754cdbd8c1a886658e6f55f670717b99.jpg?v=1780574630&width=553",
+        "naturalSize": "553x553",
+        "displayedSize": "298x414",
+        "shape": "rounded-rect"
+      },
+      {
+        "url": "https://cdn.shopify.com/s/files/1/0526/7144/7238/files/ae248490940c17d3c77658b6c263ab65.jpg?v=1777486056&width=553",
+        "naturalSize": "553x553",
+        "displayedSize": "298x414",
+        "shape": "rounded-rect"
+      },
+      {
+        "url": "https://cdn.shopify.com/s/files/1/0526/7144/7238/files/90ed17ca74faec858c0e402f155cacdb.jpg?v=1777486289&width=553",
+        "naturalSize": "553x553",
+        "displayedSize": "298x414",
+        "shape": "rounded-rect"
+      },
+      {
+        "url": "https://cdn.shopify.com/s/files/1/0526/7144/7238/files/0c76bf3876cd9e7b2bd78fdc1bbf402a.jpg?v=1777486152&width=553",
+        "naturalSize": "553x553",
+        "displayedSize": "298x414",
+        "shape": "rounded-rect"
+      },
+      {
+        "url": "https://cdn.shopify.com/s/files/1/0526/7144/7238/files/ee6185b332eaf5bdb3ca4cc8451ef8c0.jpg?v=1780574221&width=553",
+        "naturalSize": "553x553",
+        "displayedSize": "298x414",
+        "shape": "rounded-rect"
+      }
+    ]
+  }
+}

@@ -7,16 +7,24 @@
   --brand-dark: #241F6B;
   --brand-soft: #EEF0FB;
   --brand-accent: #CDD661;
-  --bg-color: #FBF8F2;
+  /* Page ground is WHITE. All three renderable references (flyingtiger, hobbycraft,
+     blick) use a white page ground and separate sections with a tint band, never a
+     tinted global ground. The previous #FBF8F2 warm cream came from nooe.co,
+     a rejected reference. Our tint band is --brand-soft. */
+  --bg-color: #FFFFFF;
+  --ink: #16142B;
+  --muted: #5B5878;
+  --hairline: #DEDFF0;
   color-scheme: light;
 }
 
 html,
 body {
   background-color: var(--bg-color);
-  font-family: 'DM Sans', 'Plus Jakarta Sans', sans-serif;
+  /* Single family, copied from hobbycraft.co.uk (measured: "Poppins Font" site-wide). */
+  font-family: 'Poppins', Helvetica, Arial, sans-serif;
   overflow-x: hidden;
-  color: #1c1230;
+  color: var(--ink);
   -webkit-font-smoothing: antialiased;
   touch-action: manipulation;
   -webkit-tap-highlight-color: rgba(51, 46, 146, 0.15);

@@ -8,13 +8,32 @@ import { ChevronLeftIcon, ChevronRightIcon } from './icons';
 const slides = collectionsFile.hero;
 const ROTATE_MS = 6000;
 
-// Full-bleed hero carousel. Slides are stacked and cross-faded via opacity
-// rather than translated, so there is no horizontal scroll container to fight
-// on a phone and no layout shift between slides.
-//
-// Auto-rotation stops permanently on any manual interaction — a carousel that
-// keeps moving after someone has taken control is the single most irritating
-// thing about this pattern, and Jags's does exactly that.
+/*
+ * HERO — SPLIT PANEL. Photo on one side, solid colour panel carrying the type on the other.
+ *
+ * WHY THIS SHAPE (measured 17 Aug 2026, looking at the rendered pages):
+ *   NONE of the four references puts type on a gradient scrim over a photo. Zero. What they
+ *   actually do:
+ *     flyingtiger.com  — its two-up promo tiles are literally HALF PHOTO / HALF FLAT COLOUR
+ *                        PANEL, and they ALTERNATE which side the photo sits on. Type and a
+ *                        pill button sit on the flat panel.
+ *     smiggle.co.uk    — hero artwork contains a solid desaturated teal rectangle over the
+ *                        left ~45%, and the whole headline stack sits inside that panel.
+ *     dickblick.com    — same split inside white cards: type block one side, product photo
+ *                        bleeding off the other. Its wide hero reserves a clean left third.
+ *     hobbycraft.co.uk — bakes the entire poster, which we can't do (every price change
+ *                        would cost a regeneration in two crops).
+ *   Three of four = solid panel or planned clear zone. So we copy that and drop the scrim.
+ *
+ * WHAT THIS BUYS US: the generated image never needs a clear zone, never needs to be dark
+ * enough to carry white text, and never needs a single character of text in it.
+ *
+ * Mobile (375px) stacks: photo above, panel below. Near-square overall, following
+ * hobbycraft's dedicated mobile hero crop (measured 375x360 native, 1.04:1) rather than
+ * squeezing a wide desktop banner down — which is smiggle's mistake, where the baked
+ * headline lands about 13px tall on a phone.
+ */
+
 export default function HeroCarousel() {
   const [index, setIndex] = useState(0);
   const [userTook, setUserTook] = useState(false);
@@ -31,63 +50,94 @@ export default function HeroCarousel() {
 
   useEffect(() => {
     if (userTook || reduce || slides.length < 2) return undefined;
-    // Advance from the previous value inside the updater so the interval never
-    // needs to be torn down and rebuilt on every tick.
     const id = setInterval(() => setIndex((prev) => (prev + 1) % slides.length), ROTATE_MS);
     return () => clearInterval(id);
   }, [userTook, reduce]);
 
   return (
-    <section aria-roledescription="carousel" aria-label="Featured" className="relative w-full bg-brand-dark">
-      <div className="relative w-full aspect-[4/5] sm:aspect-[16/9] lg:aspect-[21/9] max-h-[560px]">
-        {slides.map((s, i) => (
-          <div
-            key={s.id}
-            role="group"
-            aria-roledescription="slide"
-            aria-label={`${i + 1} of ${slides.length}`}
-            aria-hidden={i !== index}
-            className={`absolute inset-0 transition-opacity duration-700 ${i === index ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-          >
-            <SmartImage
-              src={s.image}
-              srcMobile={s.imageMobile}
-              alt=""
-              tint="#241F6B"
-              className="absolute inset-0"
-              eager={i === 0}
-            />
-            {/* Readability scrim — stronger at the bottom on mobile where type
-                sits over the image, lighter and left-weighted on desktop. */}
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/60 to-transparent sm:bg-gradient-to-r sm:from-brand-dark/90 sm:via-brand-dark/50 sm:to-transparent" />
+    <section aria-roledescription="carousel" aria-label="Featured" className="relative w-full">
+      <div className="relative">
+        {slides.map((s, i) => {
+          // flyingtiger.com alternates which side the photo sits on across consecutive
+          // promo tiles. Same alternation here, driven off the slide index.
+          const photoRight = i % 2 === 1;
 
-            <div className="relative h-full max-w-7xl mx-auto px-5 sm:px-8 flex flex-col justify-end sm:justify-center pb-10 sm:pb-0">
-              <div className="max-w-xl">
-                <span className="inline-block text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] text-brand-accent mb-3">
-                  {s.eyebrow}
-                </span>
-                <h2 className="text-white font-extrabold tracking-tight text-[28px] leading-[1.1] sm:text-4xl lg:text-5xl xl:text-[56px] text-balance">
-                  {s.title}
-                </h2>
-                <p className="mt-3 text-white/80 text-sm sm:text-base max-w-md">{s.subtitle}</p>
-                <Link
-                  to={s.cta.to}
-                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-accent text-brand-dark font-bold px-6 py-3 text-sm hover:bg-white transition-colors shadow-lg"
-                >
-                  {s.cta.label}
-                </Link>
+          return (
+            <div
+              key={s.id}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} of ${slides.length}`}
+              aria-hidden={i !== index}
+              className={
+                (i === index ? 'grid' : 'hidden') +
+                ' grid-cols-1 lg:grid-cols-2 items-stretch'
+              }
+            >
+              {/* PHOTO HALF. No scrim, no overlay, nothing on top of it. */}
+              <div
+                className={
+                  'relative aspect-[4/3] lg:aspect-auto lg:min-h-[440px] ' +
+                  (photoRight ? 'lg:order-2' : 'lg:order-1')
+                }
+              >
+                <SmartImage
+                  src={s.image}
+                  srcMobile={s.imageMobile}
+                  alt=""
+                  tint="#EEF0FB"
+                  className="absolute inset-0"
+                  eager={i === 0}
+                />
+              </div>
+
+              {/* PANEL HALF — solid brand colour, carries all the type.
+                  Copied from smiggle's teal headline panel and FT's promo-tile panel. */}
+              <div
+                className={
+                  'bg-brand-primary flex flex-col justify-center px-5 py-8 sm:px-8 lg:px-12 lg:py-14 ' +
+                  (photoRight ? 'lg:order-1' : 'lg:order-2')
+                }
+              >
+                <div className="max-w-md">
+                  <span className="inline-block text-[11px] font-bold uppercase tracking-[0.12em] text-brand-accent mb-2.5">
+                    {s.eyebrow}
+                  </span>
+                  <h2 className="text-white font-bold tracking-tight text-[30px] leading-[1.08] lg:text-[52px] lg:leading-[1.05] text-balance">
+                    {s.title}
+                  </h2>
+                  <p className="mt-3 text-white/85 text-[15px] leading-relaxed lg:text-base max-w-sm">
+                    {s.subtitle}
+                  </p>
+                  {/* On-panel CTA is a white pill — flyingtiger.com's promo tiles use exactly
+                      this: white pill, dark label, sitting on the flat colour panel. */}
+                  <Link
+                    to={s.cta.to}
+                    className="mt-6 inline-flex items-center justify-center min-h-[48px] rounded-full
+                               bg-white text-brand-primary font-semibold px-7 text-[15px]
+                               transition-colors duration-text ease-ref hover:bg-brand-accent hover:text-brand-dark
+                               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  >
+                    {s.cta.label}
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
 
         {slides.length > 1 && (
           <>
+            {/* Arrow controls: big white circles with brand chevrons, overlaid on the media
+                edge, vertically centred. Copied from hobbycraft.co.uk's rail arrows. */}
             <button
               type="button"
               onClick={() => take(index - 1)}
               aria-label="Previous slide"
-              className="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 backdrop-blur text-white items-center justify-center transition-colors"
+              className="hidden lg:flex absolute left-3 top-[40%] -translate-y-1/2 w-11 h-11 rounded-full
+                         bg-white shadow-card text-brand-primary items-center justify-center
+                         transition-colors duration-text ease-ref hover:bg-brand-soft
+                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
             >
               <ChevronLeftIcon className="w-5 h-5" />
             </button>
@@ -95,12 +145,18 @@ export default function HeroCarousel() {
               type="button"
               onClick={() => take(index + 1)}
               aria-label="Next slide"
-              className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 backdrop-blur text-white items-center justify-center transition-colors"
+              className="hidden lg:flex absolute right-3 top-[40%] -translate-y-1/2 w-11 h-11 rounded-full
+                         bg-white shadow-card text-brand-primary items-center justify-center
+                         transition-colors duration-text ease-ref hover:bg-brand-soft
+                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
             >
               <ChevronRightIcon className="w-5 h-5" />
             </button>
 
-            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+            {/* Dots sit BELOW the panel, on the page — not floated over the artwork.
+                hobbycraft puts its card-image dots inside the card on a light ground for
+                the same reason: dots over photography are unreliable at 375px. */}
+            <div className="flex justify-center gap-2 py-3 bg-white">
               {slides.map((s, i) => (
                 <button
                   key={s.id}
@@ -108,7 +164,10 @@ export default function HeroCarousel() {
                   onClick={() => take(i)}
                   aria-label={`Go to slide ${i + 1}`}
                   aria-current={i === index}
-                  className={`h-1.5 rounded-full transition-all ${i === index ? 'w-7 bg-brand-accent' : 'w-3 bg-white/40 hover:bg-white/70'}`}
+                  className={
+                    'h-2 rounded-full transition-all duration-text ease-ref ' +
+                    (i === index ? 'w-7 bg-brand-primary' : 'w-2 bg-hairline hover:bg-muted')
+                  }
                 />
               ))}
             </div>

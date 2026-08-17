@@ -1,9 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import { STORE, waLink } from '../lib/utils';
-import { WhatsAppIcon, PhoneIcon, SearchIcon, MenuIcon, StarIcon, CloseIcon } from './icons';
+import { WhatsAppIcon, SearchIcon, MenuIcon, CloseIcon } from './icons';
 import AskBox from './AskBox';
+
+/*
+ * HEADER — copied from hobbycraft.co.uk, measured live at 375px on 17 Aug 2026.
+ *
+ * Structure being copied, in order:
+ *   1. Notice / announcement bar          (flyingtiger.com: full-bleed dark, 34px, centred,
+ *                                          rotates claims; hobbycraft adds the X to dismiss)
+ *   2. Icon row with TEXT LABEL UNDER EACH ICON, centred logo   (hobbycraft — its distinguishing
+ *                                          header trait: Menu / Stores / [logo] / Sign in / Basket)
+ *   3. Full-width rounded search pill on its own row            (unanimous across all three
+ *                                          sites I could render: FT, hobbycraft, blick)
+ *   4. Trust strip: two claims split by a vertical divider      (hobbycraft: "FREE Delivery
+ *                                          over £25 │ FREE Click & Collect over £10", ~38px)
+ *
+ * Brand swap only. No glassmorphism, no floating nav pill, no spring animations — none of the
+ * four references has any of that, and the previous version of this file did.
+ */
 
 const nav = [
   { to: '/', label: 'Home' },
@@ -12,28 +28,61 @@ const nav = [
   { to: '/contact', label: 'Contact Store' },
 ];
 
-const marqueeItems = [
-  <span key="rating" className="inline-flex items-center gap-1">
-    <StarIcon className="w-3 h-3 text-brand-accent" />
-    {STORE.rating}/5 · {STORE.reviewCount} Google reviews
-  </span>,
-  <span key="mrp">Below MRP every day</span>,
-  <span key="parking">Free parking</span>,
-  <span key="hours">Mon–Sat 9:30 AM – 8 PM</span>,
-  <span key="location">Opposite Metro Pillar 837, Vyttila</span>,
+// flyingtiger.com rotates three claims in its announcement bar. Same count, our claims.
+const announcements = [
+  'Below MRP every day',
+  `${STORE.rating}★ from ${STORE.reviewCount} Google reviews`,
+  'Bulk rates for schools & offices',
 ];
 
-export default function Header() {
-  const [open, setOpen] = useState(false);
-  const [askOpen, setAskOpen] = useState(false);
-  const askRef = useRef(null);
+function ShopPinIcon({ className = 'w-6 h-6' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
 
-  // Close the ask popover on outside click or Escape.
+/* Icon + label stacked, label underneath — hobbycraft's pattern. Their labels measure ~11px. */
+function HeaderAction({ as = 'button', to, href, icon, label, onClick, ...rest }) {
+  const inner = (
+    <>
+      {icon}
+      <span className="text-[11px] leading-none font-medium">{label}</span>
+    </>
+  );
+  const cls =
+    'flex flex-col items-center justify-center gap-1 min-w-[52px] min-h-[52px] px-1 text-brand-dark ' +
+    'transition-colors duration-text ease-ref hover:text-brand-primary ' +
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded-md';
+
+  if (as === 'link') return <Link to={to} className={cls} {...rest}>{inner}</Link>;
+  if (as === 'a') return <a href={href} className={cls} {...rest}>{inner}</a>;
+  return <button type="button" onClick={onClick} className={cls} {...rest}>{inner}</button>;
+}
+
+export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [noticeOpen, setNoticeOpen] = useState(true);
+  const [claim, setClaim] = useState(0);
+  const panelRef = useRef(null);
+
+  // Rotate the announcement claims. flyingtiger.com rotates; interval not measurable
+  // from a static inspection, so 5s is our choice and is flagged as such.
   useEffect(() => {
-    if (!askOpen) return;
-    const onKey = (e) => e.key === 'Escape' && setAskOpen(false);
+    if (!noticeOpen) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const id = setInterval(() => setClaim((c) => (c + 1) % announcements.length), 5000);
+    return () => clearInterval(id);
+  }, [noticeOpen]);
+
+  // Close the menu panel on Escape or outside click.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e) => e.key === 'Escape' && setMenuOpen(false);
     const onClick = (e) => {
-      if (askRef.current && !askRef.current.contains(e.target)) setAskOpen(false);
+      if (panelRef.current && !panelRef.current.contains(e.target)) setMenuOpen(false);
     };
     window.addEventListener('keydown', onKey);
     window.addEventListener('mousedown', onClick);
@@ -41,152 +90,130 @@ export default function Header() {
       window.removeEventListener('keydown', onKey);
       window.removeEventListener('mousedown', onClick);
     };
-  }, [askOpen]);
+  }, [menuOpen]);
 
   return (
-    <header className="sticky top-0 z-50">
-      <div className="flex justify-center bg-brand-dark py-1.5">
-        <div className="w-[375px] overflow-hidden text-white/80 text-[11px] leading-none">
-          <div className="adv-marquee adv-marquee--slow">
-            {[0, 1].map((rep) => (
-              <div key={rep} className="flex items-center shrink-0" aria-hidden={rep === 1}>
-                {marqueeItems.map((item, i) => (
-                  <React.Fragment key={i}>
-                    <span className="px-3">{item}</span>
-                    <span className="text-white/25" aria-hidden="true">·</span>
-                  </React.Fragment>
-                ))}
-              </div>
-            ))}
-          </div>
+    <header className="sticky top-0 z-50 bg-white">
+      {/* 1 — Announcement bar. flyingtiger.com: full-bleed dark, 34px @375, centred white text. */}
+      {noticeOpen && (
+        <div className="relative bg-brand-dark text-white">
+          <p
+            className="h-[34px] flex items-center justify-center px-10 text-center text-[12px] leading-none font-medium"
+            aria-live="polite"
+          >
+            {announcements[claim]}
+          </p>
+          <button
+            type="button"
+            onClick={() => setNoticeOpen(false)}
+            aria-label="Dismiss announcement"
+            className="absolute right-1 top-1/2 -translate-y-1/2 p-2 text-white/70 hover:text-white transition-colors duration-text ease-ref"
+          >
+            <CloseIcon className="w-4 h-4" />
+          </button>
         </div>
-      </div>
+      )}
 
-      <div className="glass border-b border-white/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-          <Link to="/" className="group flex items-center gap-2.5 shrink-0">
-            <img src="/logo.webp" alt="Stationery Point Logo" width={128} height={128} className="w-9 h-9 rounded-xl object-cover ring-2 ring-brand-primary/15 group-hover:ring-brand-primary/40 group-hover:-rotate-3 transition-all duration-300" />
-            <span className="font-extrabold tracking-tight text-lg leading-none group-hover:text-brand-primary transition-colors duration-300" translate="no">STATIONERY<br className="hidden sm:block" /> POINT</span>
+      {/* 2 — Icon row, labels underneath, logo centred. hobbycraft's structure. */}
+      <div className="border-b border-hairline">
+        <div className="max-w-[1280px] mx-auto px-2 sm:px-4 flex items-center justify-between gap-1">
+          <div className="flex items-center">
+            <HeaderAction
+              onClick={() => setMenuOpen((v) => !v)}
+              icon={<MenuIcon className="w-6 h-6" />}
+              label="Menu"
+              aria-expanded={menuOpen}
+              aria-controls="main-menu"
+            />
+            <HeaderAction
+              as="a"
+              href={STORE.mapsLink}
+              target="_blank"
+              rel="noreferrer"
+              icon={<ShopPinIcon />}
+              label="Shop"
+            />
+          </div>
+
+          <Link
+            to="/"
+            className="flex items-center gap-2 py-2.5 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded-md"
+          >
+            <img
+              src="/logo.webp"
+              alt=""
+              width={128}
+              height={128}
+              className="w-8 h-8 rounded-lg object-cover"
+            />
+            <span
+              className="font-bold tracking-tight text-brand-primary text-[15px] sm:text-lg leading-[1.05]"
+              translate="no"
+            >
+              STATIONERY<br />POINT
+            </span>
           </Link>
 
-          <nav aria-label="Primary" className="hidden lg:flex items-center gap-0.5 glass rounded-full px-1.5 py-1.5 border border-white/60 shadow-soft">
-            {nav.map((n) => (
-              <NavLink
-                key={n.to}
-                to={n.to}
-                end={n.to === '/'}
-                className="relative px-4 py-2 rounded-full text-sm font-semibold focus-visible:ring-2 focus-visible:ring-brand-primary"
-              >
-                {({ isActive }) => (
-                  <>
-                    {isActive && (
-                      <motion.span
-                        layoutId="nav-active-pill"
-                        transition={{ type: 'spring', damping: 27, stiffness: 350 }}
-                        className="absolute inset-0 rounded-full bg-brand-primary shadow-[0_4px_14px_rgba(51,46,146,0.35)]"
-                        aria-hidden="true"
-                      />
-                    )}
-                    <span className={`relative z-10 transition-colors duration-200 ${isActive ? 'text-white' : 'text-gray-700 hover:text-brand-primary'}`}>
-                      {n.label}
-                    </span>
-                  </>
-                )}
-              </NavLink>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-2">
-            <div className="relative" ref={askRef}>
-              <button
-                type="button"
-                onClick={() => setAskOpen((v) => !v)}
-                aria-expanded={askOpen}
-                aria-label="Ask about a product or paste a list"
-                className="flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-gray-700 hover:text-brand-primary transition-colors"
-              >
-                <SearchIcon className="w-4 h-4" /> <span className="hidden sm:inline">Ask / Find</span>
-              </button>
-              <AnimatePresence>
-                {askOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    className="fixed sm:absolute inset-x-4 sm:inset-x-auto top-20 sm:top-full right-0 sm:mt-2 sm:w-96 max-w-[92vw] mx-auto sm:mx-0 rounded-2xl bg-brand-dark p-4 shadow-2xl z-50"
-                  >
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-white/70 text-xs font-bold uppercase tracking-wide">Quick ask</span>
-                      <button type="button" onClick={() => setAskOpen(false)} aria-label="Close" className="text-white/50 hover:text-white p-1">
-                        <CloseIcon className="w-4 h-4" />
-                      </button>
-                    </div>
-                    <AskBox variant="header" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-            <a href={`tel:${STORE.phoneTel}`} className="hidden md:flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold border border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white transition-colors duration-300">
-              <PhoneIcon className="w-4 h-4" /> Call
-            </a>
-            <a href={waLink()} target="_blank" rel="noreferrer" className="relative flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-semibold bg-[#25D366] text-white hover:bg-[#1da851] hover:shadow-lg hover:-translate-y-px transition-all duration-200" aria-label="Enquire on WhatsApp">
-              <WhatsAppIcon className="w-4 h-4" /> <span className="hidden sm:inline">WhatsApp</span>
-            </a>
-            <button
-              type="button"
-              onClick={() => setOpen((v) => !v)}
-              className="lg:hidden p-2 rounded-lg hover:bg-brand-soft"
-              aria-label={open ? 'Close menu' : 'Open menu'}
-              aria-expanded={open}
-              aria-controls="mobile-nav"
-            >
-              <MenuIcon />
-            </button>
+          <div className="flex items-center">
+            <HeaderAction
+              as="a"
+              href={waLink()}
+              target="_blank"
+              rel="noreferrer"
+              icon={<WhatsAppIcon className="w-6 h-6" />}
+              label="WhatsApp"
+            />
           </div>
         </div>
-
-        <AnimatePresence>
-          {open && (
-            <motion.nav
-              id="mobile-nav"
-              aria-label="Mobile"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="lg:hidden overflow-hidden bg-white border-t border-gray-100"
-            >
-              <motion.div
-                initial="closed"
-                animate="open"
-                variants={{ open: { transition: { staggerChildren: 0.05, delayChildren: 0.05 } } }}
-                className="px-4 py-3 flex flex-col gap-1"
-              >
-                {nav.map((n) => (
-                  <motion.div key={n.to} variants={{ closed: { opacity: 0, x: -14 }, open: { opacity: 1, x: 0 } }}>
-                    <NavLink
-                      to={n.to}
-                      end={n.to === '/'}
-                      onClick={() => setOpen(false)}
-                      className={({ isActive }) =>
-                        `flex items-center justify-between px-4 py-3 rounded-xl font-semibold transition-colors ${
-                          isActive ? 'bg-brand-soft text-brand-primary' : 'text-gray-700 hover:bg-gray-50'
-                        }`
-                      }
-                    >
-                      {({ isActive }) => (
-                        <>
-                          <span>{n.label}</span>
-                          {isActive && <span className="w-2 h-2 rounded-full bg-brand-primary" aria-hidden="true" />}
-                        </>
-                      )}
-                    </NavLink>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.nav>
-          )}
-        </AnimatePresence>
       </div>
+
+      {/* 3 — Full-width search pill, own row. Unanimous across FT / hobbycraft / blick.
+             Placeholder carries the item count: copied from blick's "Search 110,000+ art supplies". */}
+      <div className="border-b border-hairline bg-white">
+        <div className="max-w-[1280px] mx-auto px-4 py-2.5">
+          <AskBox variant="header" />
+        </div>
+      </div>
+
+      {/* 4 — Trust strip. hobbycraft: light band, centred, two claims split by a divider, ~38px. */}
+      <div className="bg-brand-soft">
+        <div className="max-w-[1280px] mx-auto px-4 min-h-[38px] flex items-center justify-center">
+          <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-0.5 py-2 text-center text-[11px] leading-tight font-medium text-brand-dark">
+            <span>Free delivery across Kochi</span>
+            <span className="text-brand-primary/30" aria-hidden="true">│</span>
+            <span>Or pick up from the shop</span>
+          </p>
+        </div>
+      </div>
+
+      {/* Menu panel. hobbycraft opens a full nav drawer from the Menu action. */}
+      {menuOpen && (
+        <nav
+          id="main-menu"
+          ref={panelRef}
+          aria-label="Main"
+          className="absolute inset-x-0 top-full bg-white border-b border-hairline shadow-card"
+        >
+          <ul className="max-w-[1280px] mx-auto px-4 py-2">
+            {nav.map((n) => (
+              <li key={n.to}>
+                <NavLink
+                  to={n.to}
+                  end={n.to === '/'}
+                  onClick={() => setMenuOpen(false)}
+                  className={({ isActive }) =>
+                    'flex items-center min-h-[48px] px-2 text-[15px] font-medium border-b border-hairline last:border-b-0 ' +
+                    'transition-colors duration-text ease-ref ' +
+                    (isActive ? 'text-brand-primary' : 'text-ink hover:text-brand-primary')
+                  }
+                >
+                  {n.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
     </header>
   );
 }

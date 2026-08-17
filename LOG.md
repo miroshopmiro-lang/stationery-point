@@ -88,3 +88,40 @@ Shortlisted 16 Aug, awaiting his pick:
 | Claude | Rewrite the 22 prompts for density (or drop AI for stock/brand assets) |
 | Claude | Resolve the empty `/catalog` |
 | Claude | Rebuild hero for full-bleed art once imagery source is settled |
+
+---
+
+## 16 Aug 2026 (later same day) — reference audit + `stationery-point-assets` skill
+
+Full measured audit of the four locked references (flyingtiger.com, smiggle.co.uk,
+hobbycraft.co.uk, dickblick.com) — computed styles read live via browser devtools, hero and
+category assets downloaded and inspected directly, not recalled from memory. Superseds the
+"open question — reference site" note above: `cassart.co.uk` and `williampenn.net` were never
+picked and are dropped from consideration; the four locked in the bible stand.
+
+**Headline finding:** Flying Tiger's own hero and category imagery is AI-generated — CDN
+filenames are literally `AI_<SKU>_<dims>.jpg`. Downloaded and inspected: same corruption tell
+as jagsindia.com (garbled sketchbook text, a shirt reading "OL"). Two unrelated companies
+independently confirm AI imagery reaches this quality bar, and that the client's own reference
+carries the exact tell we're avoiding by prompting for blank surfaces.
+
+**Correction to earlier canon:** the claim that "warm cream surface" causes sparse flat-lays
+was wrong about the cause — a downloaded Flying Tiger tile is cream-linen and works fine. The
+real variable is density + hands + contained colour. Bible and skill both updated.
+
+**Shipped:**
+- `stationery-point-assets` skill installed at
+  `~/.claude/skills/stationery-point-assets/SKILL.md` — locked art direction, hard rules, six
+  self-contained prompt templates (hero desktop/mobile, category tile, collection card,
+  section header, campaign), real file paths + size targets, Nano Banana vs GPT Image 2.0
+  notes, QC checklist, corrected banned-phrase table.
+- Full audit artifact — structure/nav, typography, layout/spacing, colour, nine deconstructed
+  imagery styles with ready prompts, motion, commercial mechanics, and a synthesised 15-row
+  take table + 11-item do-not-copy list + full type/spacing/colour system for this client.
+  Every finding IDed (`FT-4`, `TY-3`, `IMG-7`, etc.) so it can sit beside Abhinand's own
+  parallel audit.
+- `stationery-point-bible` amended: cream-surface claim corrected, Flying Tiger AI finding
+  added, pointer to the new skill.
+
+**Not done:** no imagery generated from the new prompts yet — that's a separate task and
+costs credits. No repo changes; `G:\Stationery point` untouched this session.

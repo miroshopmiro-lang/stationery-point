@@ -11,9 +11,11 @@ export default {
   ],
   theme: {
     extend: {
+      // Single family, copied from hobbycraft.co.uk (measured live: "Poppins Font"
+      // across the entire site). No serif key — none of the four references uses a
+      // serif; the old Playfair Display pair came from nooe.co, a rejected reference.
       fontFamily: {
-        sans: ['"DM Sans"', '"Plus Jakarta Sans"', 'sans-serif'],
-        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans: ['Poppins', 'Helvetica', 'Arial', 'sans-serif'],
       },
       colors: {
         // Sampled directly from the real signboard (asset-originals/gallery_1.jpg) —
@@ -22,9 +24,26 @@ export default {
         'brand-dark': '#241F6B',
         'brand-soft': '#EEF0FB',
         'brand-accent': '#CDD661',
+        // Derived indigo-biased neutrals. Replaces the pure greys the references use
+        // (hobbycraft #F2F2F2, blick #EAEAEA) so section bands carry the brand hue.
+        'ink': '#16142B',
+        'muted': '#5B5878',
+        'hairline': '#DEDFF0',
       },
+      // Copied from hobbycraft.co.uk product tile: 0 0 8px rgba(0,0,0,.1)
       boxShadow: {
+        card: '0 0 8px rgba(0, 0, 0, 0.1)',
         soft: '0 10px 40px -12px rgba(51, 46, 146, 0.18)',
+      },
+      // Motion tokens copied wholesale from hobbycraft.co.uk (the only reference whose
+      // transitions I measured): 0.2s for text-level, 0.4s for surface-level, one curve.
+      // Paint properties only — they transition zero transforms, deliberately.
+      transitionTimingFunction: {
+        ref: 'cubic-bezier(0.3, 0.46, 0.45, 0.94)',
+      },
+      transitionDuration: {
+        text: '200ms',
+        surface: '400ms',
       },
       scale: {
         102: '1.02',
