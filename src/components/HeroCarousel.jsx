@@ -75,9 +75,14 @@ export default function HeroCarousel() {
               }
             >
               {/* PHOTO HALF. No scrim, no overlay, nothing on top of it. */}
+              {/* 16:10 at phone width, not 4:3. Measured 17 Aug: at 4:3 the whole hero came to
+                  575px tall at 375px, against flyingtiger's 223px and hobbycraft's dedicated
+                  360px mobile hero. Being 2.6x taller than the visual reference is a density
+                  failure, and it pushes the kit tiles — the highest-converting block — below
+                  the fold. 16:10 + a tighter panel brings the hero to roughly 400px. */}
               <div
                 className={
-                  'relative aspect-[4/3] lg:aspect-auto lg:min-h-[440px] ' +
+                  'relative aspect-[16/10] lg:aspect-auto lg:min-h-[440px] ' +
                   (photoRight ? 'lg:order-2' : 'lg:order-1')
                 }
               >
@@ -95,7 +100,7 @@ export default function HeroCarousel() {
                   Copied from smiggle's teal headline panel and FT's promo-tile panel. */}
               <div
                 className={
-                  'bg-brand-primary flex flex-col justify-center px-5 py-8 sm:px-8 lg:px-12 lg:py-14 ' +
+                  'bg-brand-primary flex flex-col justify-center px-5 py-5 sm:px-8 lg:px-12 lg:py-14 ' +
                   (photoRight ? 'lg:order-1' : 'lg:order-2')
                 }
               >
@@ -106,14 +111,14 @@ export default function HeroCarousel() {
                   <h2 className="text-white font-bold tracking-tight text-[30px] leading-[1.08] lg:text-[52px] lg:leading-[1.05] text-balance">
                     {s.title}
                   </h2>
-                  <p className="mt-3 text-white/85 text-[15px] leading-relaxed lg:text-base max-w-sm">
+                  <p className="mt-2 text-white/85 text-[14px] leading-snug lg:text-base lg:leading-relaxed max-w-sm">
                     {s.subtitle}
                   </p>
                   {/* On-panel CTA is a white pill — flyingtiger.com's promo tiles use exactly
                       this: white pill, dark label, sitting on the flat colour panel. */}
                   <Link
                     to={s.cta.to}
-                    className="mt-6 inline-flex items-center justify-center min-h-[48px] rounded-full
+                    className="mt-4 lg:mt-6 inline-flex items-center justify-center min-h-[48px] rounded-full
                                bg-white text-brand-primary font-semibold px-7 text-[15px]
                                transition-colors duration-text ease-ref hover:bg-brand-accent hover:text-brand-dark
                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"

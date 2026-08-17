@@ -10,7 +10,7 @@ export default function VisitShop() {
   return (
     <section className="py-12 sm:py-16 bg-brand-dark text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-        <div className="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+        <div className="rounded overflow-hidden shadow-2xl border border-white/10">
           <img
             src="/storefront.jpg"
             alt={`${STORE.name} shopfront on Jr Janatha Road, Vyttila`}

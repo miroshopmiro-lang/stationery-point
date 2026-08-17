@@ -50,7 +50,13 @@ export default function Home() {
       <BrandWall />
       <Testimonials />
       <VisitShop />
-      <AdvantageCards />
+      {/* AdvantageCards removed from the homepage 17 Aug 2026.
+          At 1110px it was the TALLEST block on the page — taller than the hero — and not one
+          of the four references has a "why choose us" / benefits grid on its homepage at all.
+          Its 44px headline also exceeded every reference H2 (flyingtiger 32px, blick 28px,
+          hobbycraft 24px), and it hardcoded #1C1230, which is not in the locked palette.
+          Its job — stating the trust claims — is already done by the header trust strip in 38px.
+          The component is kept for a possible /about page rather than deleted. */}
 
       {/* KOCHI DELIVERY BANNER — removed pending client sign-off.
           The copy claimed "our warehouse in Vyttila" and dispatch to Edappally,

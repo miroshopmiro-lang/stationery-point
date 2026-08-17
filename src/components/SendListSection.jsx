@@ -11,7 +11,7 @@ export default function SendListSection() {
   return (
     <section className="py-12 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="rounded-3xl bg-brand-primary overflow-hidden">
+        <div className="rounded bg-brand-primary overflow-hidden">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 p-6 sm:p-10 lg:p-12 items-center">
             <div className="text-white">
               <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-brand-accent mb-3">
@@ -40,7 +40,7 @@ export default function SendListSection() {
               </ul>
             </div>
 
-            <div className="rounded-2xl bg-brand-dark/40 p-4 sm:p-5">
+            <div className="rounded bg-brand-dark/40 p-4 sm:p-5">
               <AskBox variant="header" defaultMode="list" />
             </div>
           </div>

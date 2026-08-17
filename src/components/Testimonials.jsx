@@ -1,305 +1,167 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { STORE } from '../lib/utils';
+import React, { useRef } from 'react';
+import reviewsFile from '../data/reviews.json';
 import { StarIcon, ChevronLeftIcon, ChevronRightIcon } from './icons';
 
-// Verbatim Google reviews. Text is quoted exactly as written — including the
-// authors' own spelling — because an edited review is no longer a review.
-// Cuts within a review are marked with an ellipsis.
-//
-// `avatar` is the reviewer's Google profile picture, saved into
-// public/reviewers/ rather than hotlinked from googleusercontent. The site's
-// CSP is `img-src 'self' data:`, so a remote avatar loads fine in dev and
-// renders blank on Cloudflare. A missing avatar falls back to initials.
-const reviews = [
-  {
-    name: 'Vivek D',
-    meta: 'Local Guide · 74 reviews',
-    when: '5 months ago',
-    stars: 5,
-    avatar: '/reviewers/vivek-d.png',
-    text: 'This place is hidden treasure in city. One shop for all the stationary and craft items. Their customer service and aquaintance is appreciable. They gave much discount to the things I brought… I saw greeting card here which is not common in shops now a days.',
-  },
-  {
-    name: 'Gowree Sankar',
-    meta: 'Local Guide · 5 reviews',
-    when: 'a year ago',
-    stars: 5,
-    avatar: '/reviewers/gowree.png',
-    text: 'Such a lovely little shop! Stationary Point has a great selection of cute cards, books, pens and a variety of craft materials. The shop is well organized, and everything feels thoughtfully picked. Sam, the owner, is super friendly and helpful — always happy to recommend something if you’re unsure. Definitely a go to spot for anyone who loves stationery in kochi!',
-  },
-  {
-    name: 'Athul Ts',
-    meta: '4 reviews',
-    when: 'a year ago',
-    stars: 5,
-    avatar: '/reviewers/athul-ts.png',
-    text: 'Whether it’s notebooks, pens, art supplies, or office materials, they have everything we need. The staff is friendly, knowledgeable, and always ready to help. Prices are reasonable, and the store is well-organized and clean.',
-  },
-  {
-    name: 'Adhinath umesh Kumar',
-    meta: '2 reviews',
-    when: '2 months ago',
-    stars: 5,
-    avatar: '/reviewers/adhinath.png',
-    text: 'Great shop! they have a lot of art supplies and other stationery items. Products are priced below MRP and had a great experience overall. Availability of parking is a plus.',
-  },
-  {
-    name: 'Toshin U.T',
-    meta: 'Local Guide · 46 reviews',
-    when: '3 years ago',
-    stars: 5,
-    avatar: '/reviewers/toshin.png',
-    text: 'I regularly purchase office stationary items for my office from Stationery Point. There is a wide range of masking tapes, cello tapes and brown tapes of various sizes here. A4 papers of various brands are sold at very good price.',
-  },
-  {
-    name: 'Feba Biju',
-    meta: 'Local Guide · 5 reviews',
-    when: '2 years ago',
-    stars: 5,
-    avatar: '/reviewers/feba-biju.png',
-    text: 'The store is a hidden gem. It had all the journaling supplies I was looking for. I found plenty of planners, diaries, washi tapes, etc., that too at prices below MRP.',
-  },
-  {
-    name: 'Kripa sreedhar',
-    meta: '3 reviews',
-    when: '3 years ago',
-    stars: 5,
-    avatar: '/reviewers/kripa.png',
-    text: 'Perfect place to buy stationary items. As an architect student i need lots of stationary items, they helped to find high quality architecture stationary in an affordable price range.',
-  },
-  {
-    name: 'Abila Abraham',
-    meta: '2 reviews',
-    when: '3 years ago',
-    stars: 5,
-    avatar: '/reviewers/abila.png',
-    text: 'My kids love Stationery Point! Variety of art items and colouring books, stickers, board games, charts and maps available. I also bought some glass paints and liners for me. All products sold below MRP.',
-  },
-  {
-    name: 'Kumar Aryan',
-    meta: '6 reviews',
-    when: '11 months ago',
-    stars: 5,
-    avatar: '/reviewers/kumar-aryan.png',
-    text: 'Very good stationary place, everything is available and even if something is not then they get it in 1-2 days for you.',
-  },
-  {
-    name: 'Bijuna K Vinod',
-    meta: '12 reviews',
-    when: '2 months ago',
-    stars: 5,
-    avatar: '/reviewers/bijuna.png',
-    text: 'I come here almost every week for all my emergency supplies and they have it all. Affordable prices and at a very convenient location too.',
-  },
-];
+const { aggregate, items: reviews } = reviewsFile;
 
-function initials(name) {
-  return name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((w) => w[0].toUpperCase())
-    .join('');
+/*
+ * REVIEWS — the one block on this page that NO reference site can show.
+ *
+ * Measured 16-17 Aug 2026: flyingtiger and smiggle carry ZERO social proof on their
+ * homepages. hobbycraft and dickblick show per-PRODUCT star ratings only. Not one of the four
+ * has a named local business with a verified rating behind it, because none of them IS one.
+ * Sam's 4.8 from 150+ Google reviews beats every individual product rating measured on
+ * dickblick (4.5, 4.7, 4.7, 4.7) and it is about the shop, not a SKU. So this sits high on the
+ * page, not in the footer.
+ *
+ * There is no reference layout to copy for a reviews section, so the STRUCTURE is borrowed from
+ * hobbycraft's product rail — the closest analogous pattern on any of the four: tinted band,
+ * flat white cards, horizontal rail with a card cut off at the right edge to cue the swipe,
+ * white circular arrows with brand chevrons at desktop, heading centred above.
+ *
+ * The star treatment is copied from hobbycraft exactly: BRAND-colour stars, not gold, with the
+ * count ALWAYS shown. dickblick renders a bare "5 out of 5 stars" with no count, which reads
+ * identically whether it came from one review or four hundred. We have 150+ real ones and no
+ * reason to be vague.
+ *
+ * Replaces a 305-line framer-motion single-review carousel with slide transitions and
+ * glassmorphism. No reference animates a review, uses glass, or shows one testimonial at a
+ * time. Scroll and paint only — nothing that costs a frame on a mid-range Android.
+ *
+ * Review text, names, avatars and dates are REAL and live in src/data/reviews.json, extracted
+ * verbatim. Text is quoted exactly as written, including the authors' own spelling, because an
+ * edited review is no longer a review. Cuts within a review are marked with an ellipsis.
+ * Never edit, shorten, paraphrase or invent entries.
+ *
+ * `avatar` is the reviewer's Google profile picture saved into public/reviewers/ rather than
+ * hotlinked from googleusercontent: the site's CSP is `img-src 'self' data:`, so a remote
+ * avatar loads fine in dev and renders blank on Cloudflare. Missing avatars fall back to
+ * initials.
+ */
+
+function Stars({ count = 5 }) {
+  return (
+    <span className="flex items-center gap-px" aria-hidden="true">
+      {[0, 1, 2, 3, 4].map((i) => (
+        <StarIcon
+          key={i}
+          className={'w-4 h-4 ' + (i < count ? 'text-brand-primary' : 'text-hairline')}
+        />
+      ))}
+    </span>
+  );
 }
 
-const slideVariants = {
-  enter: (direction) => ({
-    opacity: 0,
-    x: direction > 0 ? 30 : -30,
-  }),
-  center: {
-    opacity: 1,
-    x: 0,
-  },
-  exit: (direction) => ({
-    opacity: 0,
-    x: direction > 0 ? -30 : 30,
-  }),
-};
+function initials(name) {
+  return name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('');
+}
+
+function ReviewCard({ review }) {
+  return (
+    <article className="flex flex-col h-full bg-white rounded border border-hairline shadow-card p-4">
+      <div className="flex items-center gap-2.5">
+        {review.avatar ? (
+          <img
+            src={review.avatar}
+            alt=""
+            width={36}
+            height={36}
+            loading="lazy"
+            className="w-9 h-9 rounded-full object-cover shrink-0"
+          />
+        ) : (
+          <span className="w-9 h-9 rounded-full bg-brand-soft text-brand-primary text-[13px] font-bold flex items-center justify-center shrink-0">
+            {initials(review.name)}
+          </span>
+        )}
+        <span className="min-w-0">
+          <span className="block text-[14px] font-semibold text-ink truncate">{review.name}</span>
+          {review.meta && (
+            <span className="block text-[12px] text-muted truncate">{review.meta}</span>
+          )}
+        </span>
+      </div>
+
+      <div className="flex items-center gap-2 mt-2.5">
+        <Stars count={review.stars} />
+        {review.when && <span className="text-[12px] text-muted">{review.when}</span>}
+        <span className="sr-only">{`Rated ${review.stars} out of 5`}</span>
+      </div>
+
+      <p className="mt-2 text-[14px] leading-[1.55] text-ink">{review.text}</p>
+    </article>
+  );
+}
 
 export default function Testimonials() {
-  const [i, setI] = useState(0);
-  const [direction, setDirection] = useState(1);
-  const [pauseDuration, setPauseDuration] = useState(5000);
-  const [isHovered, setIsHovered] = useState(false);
-  const reduce = useReducedMotion();
-  const r = reviews[i];
+  const railRef = useRef(null);
 
-  const handlePrev = () => {
-    setDirection(-1);
-    setI((prev) => (prev - 1 + reviews.length) % reviews.length);
-    setPauseDuration(10000); // 10s extended reading delay after manual click
+  if (!reviews.length) return null;
+
+  const scrollBy = (dir) => {
+    railRef.current?.scrollBy({ left: dir * 290, behavior: 'smooth' });
   };
-
-  const handleNext = () => {
-    setDirection(1);
-    setI((prev) => (prev + 1) % reviews.length);
-    setPauseDuration(10000); // 10s extended reading delay after manual click
-  };
-
-  const handleDotClick = (k) => {
-    if (k === i) return;
-    setDirection(k > i ? 1 : -1);
-    setI(k);
-    setPauseDuration(10000); // 10s extended reading delay after manual click
-  };
-
-  useEffect(() => {
-    if (reduce || isHovered) return; // Respect reduced motion and pause on hover
-
-    const timer = setTimeout(() => {
-      setDirection(1);
-      setI((prev) => (prev + 1) % reviews.length);
-      setPauseDuration(5000); // Reset back to default 5s interval for subsequent auto ticks
-    }, pauseDuration);
-
-    return () => clearTimeout(timer);
-  }, [i, pauseDuration, reduce, isHovered]);
 
   return (
-    <section className="bg-brand-soft py-12 sm:py-16" aria-roledescription="carousel" aria-label="Customer reviews">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-primary/80 block mb-1">
-              Verified Google Reviews
-            </span>
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-gray-900">Loved by Kochi</h2>
-            <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span className="flex items-center gap-1 text-brand-accent" aria-hidden="true">
-                {Array.from({ length: 5 }).map((_, k) => (<StarIcon key={k} className="w-4 h-4" />))}
-              </span>
-              <span className="text-gray-700 font-bold text-xs sm:text-sm tabular-nums">{STORE.rating} / 5</span>
-              <span className="text-gray-500 text-xs sm:text-sm">from {STORE.reviewCount} Google reviews</span>
-            </div>
-          </div>
-
-          {/* Direct Arrow Navigation for Header on larger screens */}
-          <div className="hidden sm:flex items-center gap-2" aria-label="Review navigation">
-            <button
-              type="button"
-              onClick={handlePrev}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand-primary shadow-soft border border-brand-primary/10 transition-all hover:bg-brand-primary hover:text-white hover:border-brand-primary active:scale-95 focus:outline-none focus:ring-2 focus:ring-brand-primary/50"
-              aria-label="Previous review"
-            >
-              <ChevronLeftIcon className="h-5 w-5" />
-            </button>
-            <button
-              type="button"
-              onClick={handleNext}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand-primary shadow-soft border border-brand-primary/10 transition-all hover:bg-brand-primary hover:text-white hover:border-brand-primary active:scale-95 focus:outline-none focus:ring-2 focus:ring-brand-primary/50"
-              aria-label="Next review"
-            >
-              <ChevronRightIcon className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
-
-        {/* min-h is sized to the longest review so the card doesn't resize
-            under the reader as it rotates. */}
-        <div
-          className="mt-8 bg-white rounded-2xl shadow-soft p-8 min-h-[430px] sm:min-h-[300px] md:min-h-[260px] flex flex-col relative overflow-hidden"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          aria-live="polite"
-        >
-          <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
-              key={i}
-              custom={direction}
-              variants={slideVariants}
-              initial={reduce ? false : 'enter'}
-              animate="center"
-              exit={reduce ? { opacity: 0 } : 'exit'}
-              transition={{ duration: 0.35, ease: 'easeOut' }}
-              className="flex flex-col h-full"
-            >
-              <div className="flex gap-1 text-brand-accent mb-3" aria-label={`${r.stars} out of 5 stars`}>
-                {Array.from({ length: r.stars }).map((_, k) => (<StarIcon key={k} className="w-4 h-4" />))}
-              </div>
-              <p className="text-lg text-gray-700 leading-relaxed flex-grow">“{r.text}”</p>
-
-              <div className="mt-6 flex items-center gap-3">
-                {r.avatar ? (
-                  <img
-                    src={r.avatar}
-                    alt=""
-                    width={80}
-                    height={80}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-11 w-11 shrink-0 rounded-full object-cover bg-brand-soft"
-                  />
-                ) : (
-                  <span
-                    aria-hidden="true"
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-primary text-sm font-bold text-white"
-                  >
-                    {initials(r.name)}
-                  </span>
-                )}
-                <span className="min-w-0">
-                  <span className="block truncate font-bold text-brand-primary">{r.name}</span>
-                  <span className="block truncate text-xs text-gray-500">{r.meta} · {r.when}</span>
-                </span>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Controls bar below review card */}
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            {/* Navigation Arrows for Mobile / General */}
-            <div className="flex items-center gap-1.5 sm:hidden" aria-label="Review navigation controls">
-              <button
-                type="button"
-                onClick={handlePrev}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-brand-primary shadow-soft border border-brand-primary/10 transition-all hover:bg-brand-primary hover:text-white active:scale-95 focus:outline-none focus:ring-2 focus:ring-brand-primary/50"
-                aria-label="Previous review"
-              >
-                <ChevronLeftIcon className="h-5 w-5" />
-              </button>
-              <button
-                type="button"
-                onClick={handleNext}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-brand-primary shadow-soft border border-brand-primary/10 transition-all hover:bg-brand-primary hover:text-white active:scale-95 focus:outline-none focus:ring-2 focus:ring-brand-primary/50"
-                aria-label="Next review"
-              >
-                <ChevronRightIcon className="h-5 w-5" />
-              </button>
-            </div>
-
-            {/* Indicator Dots */}
-            <div role="tablist" aria-label="Select a review" className="flex items-center gap-1.5 flex-wrap">
-              {reviews.map((rev, k) => (
-                <button
-                  key={rev.name}
-                  type="button"
-                  role="tab"
-                  aria-selected={k === i}
-                  onClick={() => handleDotClick(k)}
-                  className={`h-2.5 rounded-full transition-[width,background-color] duration-300 ${
-                    k === i ? 'w-8 bg-brand-primary' : 'w-2.5 bg-brand-primary/30 hover:bg-brand-primary/60'
-                  }`}
-                  aria-label={`Show review ${k + 1} of ${reviews.length} by ${rev.name}`}
-                />
-              ))}
-            </div>
-          </div>
-
-          <a
-            href={STORE.mapsLink}
-            target="_blank"
-            rel="noreferrer"
-            className="text-sm font-bold text-brand-primary hover:text-brand-dark underline underline-offset-4 whitespace-nowrap transition-colors"
+    <section aria-labelledby="reviews-heading" className="bg-brand-soft">
+      <div className="max-w-[1280px] mx-auto py-8 lg:py-14">
+        <div className="px-4 lg:px-8 text-center">
+          <h2
+            id="reviews-heading"
+            className="font-bold tracking-tight text-brand-primary text-[22px] leading-[1.18] lg:text-[32px]"
           >
-            Read them all on Google &rarr;
-          </a>
+            What Kochi says about us
+          </h2>
+
+          {/* The aggregate, stated plainly and high. This is the number no reference has. */}
+          <p className="mt-2.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+            <Stars count={5} />
+            <span className="text-[15px] font-bold text-ink tabular-nums">{aggregate.rating}</span>
+            <span className="text-[14px] text-muted">
+              from {aggregate.count} {aggregate.source} reviews
+            </span>
+          </p>
+        </div>
+
+        <div className="relative mt-6">
+          {/* ~1.2 cards visible at 375px so the cut-off card cues the swipe — hobbycraft's rail. */}
+          <ul
+            ref={railRef}
+            className="flex gap-3 overflow-x-auto px-4 pb-2 lg:px-8 lg:gap-6
+                       [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+                       snap-x snap-mandatory"
+          >
+            {reviews.map((r) => (
+              <li key={r.name} className="shrink-0 snap-start w-[280px] lg:w-[340px] flex">
+                <ReviewCard review={r} />
+              </li>
+            ))}
+          </ul>
+
+          <button
+            type="button"
+            onClick={() => scrollBy(-1)}
+            aria-label="Scroll reviews left"
+            className="hidden lg:flex absolute left-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full
+                       bg-white shadow-card text-brand-primary items-center justify-center
+                       transition-colors duration-text ease-ref hover:bg-brand-accent
+                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
+          >
+            <ChevronLeftIcon className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollBy(1)}
+            aria-label="Scroll reviews right"
+            className="hidden lg:flex absolute right-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full
+                       bg-white shadow-card text-brand-primary items-center justify-center
+                       transition-colors duration-text ease-ref hover:bg-brand-accent
+                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
+          >
+            <ChevronRightIcon className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </section>
   );
 }
-

@@ -1,0 +1,90 @@
+{
+  "_note": "REAL Google reviews for Stationery Point, with real reviewer names and avatars. Confirmed data — do NOT edit, paraphrase, shorten or invent entries. Extracted verbatim from the previous Testimonials.jsx on 17 Aug 2026.",
+  "aggregate": {
+    "rating": "4.8",
+    "count": "150+",
+    "source": "Google"
+  },
+  "items": [
+    {
+      "name": "Vivek D",
+      "meta": "Local Guide · 74 reviews",
+      "when": "5 months ago",
+      "stars": 5,
+      "avatar": "/reviewers/vivek-d.png",
+      "text": "This place is hidden treasure in city. One shop for all the stationary and craft items. Their customer service and aquaintance is appreciable. They gave much discount to the things I brought… I saw greeting card here which is not common in shops now a days."
+    },
+    {
+      "name": "Gowree Sankar",
+      "meta": "Local Guide · 5 reviews",
+      "when": "a year ago",
+      "stars": 5,
+      "avatar": "/reviewers/gowree.png",
+      "text": "Such a lovely little shop! Stationary Point has a great selection of cute cards, books, pens and a variety of craft materials. The shop is well organized, and everything feels thoughtfully picked. Sam, the owner, is super friendly and helpful — always happy to recommend something if you’re unsure. Definitely a go to spot for anyone who loves stationery in kochi!"
+    },
+    {
+      "name": "Athul Ts",
+      "meta": "4 reviews",
+      "when": "a year ago",
+      "stars": 5,
+      "avatar": "/reviewers/athul-ts.png",
+      "text": "Whether it’s notebooks, pens, art supplies, or office materials, they have everything we need. The staff is friendly, knowledgeable, and always ready to help. Prices are reasonable, and the store is well-organized and clean."
+    },
+    {
+      "name": "Adhinath umesh Kumar",
+      "meta": "2 reviews",
+      "when": "2 months ago",
+      "stars": 5,
+      "avatar": "/reviewers/adhinath.png",
+      "text": "Great shop! they have a lot of art supplies and other stationery items. Products are priced below MRP and had a great experience overall. Availability of parking is a plus."
+    },
+    {
+      "name": "Toshin U.T",
+      "meta": "Local Guide · 46 reviews",
+      "when": "3 years ago",
+      "stars": 5,
+      "avatar": "/reviewers/toshin.png",
+      "text": "I regularly purchase office stationary items for my office from Stationery Point. There is a wide range of masking tapes, cello tapes and brown tapes of various sizes here. A4 papers of various brands are sold at very good price."
+    },
+    {
+      "name": "Feba Biju",
+      "meta": "Local Guide · 5 reviews",
+      "when": "2 years ago",
+      "stars": 5,
+      "avatar": "/reviewers/feba-biju.png",
+      "text": "The store is a hidden gem. It had all the journaling supplies I was looking for. I found plenty of planners, diaries, washi tapes, etc., that too at prices below MRP."
+    },
+    {
+      "name": "Kripa sreedhar",
+      "meta": "3 reviews",
+      "when": "3 years ago",
+      "stars": 5,
+      "avatar": "/reviewers/kripa.png",
+      "text": "Perfect place to buy stationary items. As an architect student i need lots of stationary items, they helped to find high quality architecture stationary in an affordable price range."
+    },
+    {
+      "name": "Abila Abraham",
+      "meta": "2 reviews",
+      "when": "3 years ago",
+      "stars": 5,
+      "avatar": "/reviewers/abila.png",
+      "text": "My kids love Stationery Point! Variety of art items and colouring books, stickers, board games, charts and maps available. I also bought some glass paints and liners for me. All products sold below MRP."
+    },
+    {
+      "name": "Kumar Aryan",
+      "meta": "6 reviews",
+      "when": "11 months ago",
+      "stars": 5,
+      "avatar": "/reviewers/kumar-aryan.png",
+      "text": "Very good stationary place, everything is available and even if something is not then they get it in 1-2 days for you."
+    },
+    {
+      "name": "Bijuna K Vinod",
+      "meta": "12 reviews",
+      "when": "2 months ago",
+      "stars": 5,
+      "avatar": "/reviewers/bijuna.png",
+      "text": "I come here almost every week for all my emergency supplies and they have it all. Affordable prices and at a very convenient location too."
+    }
+  ]
+}
