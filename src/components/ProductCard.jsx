@@ -86,12 +86,12 @@ export default function ProductCard({ product }) {
   const saving = hasBothPrices ? Number(product.mrp) - Number(product.ourPrice) : 0;
   const savingPct = hasBothPrices ? Math.round((saving / Number(product.mrp)) * 100) : 0;
 
+  // h-full so every card in a rail or grid is the same height. Without it the cards size to
+  // their own content, their bottoms land at different points, and the bottom-pinned CTAs stop
+  // aligning — the audit measured a one-line title lifting a card's CTA ~22px above its
+  // neighbours. hobbycraft's row aligns because the cards are equal height AND the CTA is
+  // pinned; both halves are needed.
   return (
-    {/* h-full so every card in a rail or grid is the same height. Without it the cards size to
-        their own content, their bottoms land at different points, and the bottom-pinned CTAs
-        stop aligning — the audit measured a one-line title lifting a card's CTA ~22px above its
-        neighbours. hobbycraft's row aligns because the cards are equal height AND the CTA is
-        pinned; both halves are needed. */}
     <article
       className="relative flex flex-col h-full bg-white rounded border border-hairline shadow-card overflow-hidden
                  transition-colors duration-surface ease-ref hover:border-brand-primary/40"
