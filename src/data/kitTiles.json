@@ -20,14 +20,17 @@
       "badge": "Best value",
       "isPriceBand": true,
       "image": "/kit-tiles/kits-all-bands.webp",
-      "to": "/catalog?collection=school-kits",
+      "_toFixed": "Was /catalog?collection=school-kits. Nothing reads ?collection=, so this silently showed the whole catalogue; and Sam stocks no ready-made kit SKU to point at. The kit service is real (see subheading), so it goes to the enquiry flow until a kit product exists.",
+      "to": "/contact",
       "_imageBrief": "Must show a COMPLETE KIT — multiple items together (notebook stack, pouch, geometry box, pencils, bottle, lunch box) — deliberately more objects than any other tile, copying smiggle's lead-tile contrast."
     },
-    { "id": "notebooks", "label": "Notebooks", "image": "/kit-tiles/notebooks.webp", "to": "/catalog?category=notebooks" },
+    { "id": "notebooks", "label": "Notebooks", "image": "/kit-tiles/notebooks.webp", "to": "/catalog?q=notebook" },
     { "id": "art", "label": "Art & Colouring", "image": "/kit-tiles/art.webp", "to": "/catalog?category=art-supplies" },
-    { "id": "geometry", "label": "Geometry Boxes", "image": "/kit-tiles/geometry.webp", "to": "/catalog?category=geometry" },
-    { "id": "pouches", "label": "Pencil Pouches", "image": "/kit-tiles/pouches.webp", "to": "/catalog?category=pouches" },
-    { "id": "bottles", "label": "Bottles & Lunch Boxes", "image": "/kit-tiles/bottles.webp", "to": "/catalog?category=bottles" }
+    { "_wasGeometryBoxes": "Sam's item list has no geometry box at all, so that tile could never resolve. Swapped for pencils, which he does stock. smiggle rotates tiles 5-6 by campaign, so changing a tile is within the copied pattern; inventing stock is not.",
+      "id": "pencils", "label": "Pencils", "image": "/kit-tiles/geometry.webp", "to": "/catalog?q=pencil" },
+    { "id": "pouches", "label": "Pencil Pouches", "image": "/kit-tiles/pouches.webp", "to": "/catalog?q=pouch" },
+    { "_wasBottlesAndLunchBoxes": "Renamed: Sam stocks a water bottle and no lunch box, so the old label promised stock that is not there.",
+      "id": "bottles", "label": "Water Bottles", "image": "/kit-tiles/bottles.webp", "to": "/catalog?q=bottle" }
   ],
 
   "bands": [

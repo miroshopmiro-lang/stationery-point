@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node tools/check-placeholders.mjs && vite build",
+    "build": "node tools/check-placeholders.mjs && node tools/check-links.mjs && vite build",
     "preview": "vite preview",
-    "check:placeholders": "node tools/check-placeholders.mjs"
+    "check:placeholders": "node tools/check-placeholders.mjs",
+    "check:links": "node tools/check-links.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

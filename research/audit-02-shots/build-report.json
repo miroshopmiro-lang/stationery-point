@@ -1,0 +1,110 @@
+{
+  "home@375": {
+    "height": 6260,
+    "frames": 8,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "catalog@375": {
+    "height": 1983,
+    "frames": 3,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "catalog-art@375": {
+    "height": 5860,
+    "frames": 8,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "catalog-camel@375": {
+    "height": 2960,
+    "frames": 4,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "about@375": {
+    "height": 2857,
+    "frames": 4,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "contact@375": {
+    "height": 2728,
+    "frames": 4,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "home@768": {
+    "height": 7663,
+    "frames": 8,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "catalog@768": {
+    "height": 1604,
+    "frames": 2,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "catalog-art@768": {
+    "height": 4842,
+    "frames": 5,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "catalog-camel@768": {
+    "height": 2487,
+    "frames": 3,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "about@768": {
+    "height": 2266,
+    "frames": 3,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "contact@768": {
+    "height": 2222,
+    "frames": 3,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "home@1440": {
+    "height": 6572,
+    "frames": 8,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "catalog@1440": {
+    "height": 1891,
+    "frames": 3,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "catalog-art@1440": {
+    "height": 5705,
+    "frames": 7,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "catalog-camel@1440": {
+    "height": 2830,
+    "frames": 4,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "about@1440": {
+    "height": 1906,
+    "frames": 3,
+    "failed": [],
+    "consoleErrs": []
+  },
+  "contact@1440": {
+    "height": 1830,
+    "frames": 3,
+    "failed": [],
+    "consoleErrs": []
+  }
+}

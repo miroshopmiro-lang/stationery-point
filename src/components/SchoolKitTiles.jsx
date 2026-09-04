@@ -30,7 +30,7 @@ function KitTile({ tile }) {
   return (
     <Link
       to={tile.to}
-      className="group relative flex flex-col rounded-lg bg-brand-soft overflow-hidden
+      className="group relative flex flex-col rounded-lg bg-bed overflow-hidden
                  transition-colors duration-surface ease-ref hover:bg-hairline
                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
     >
@@ -39,7 +39,7 @@ function KitTile({ tile }) {
         <SmartImage
           src={tile.image}
           alt=""
-          tint="#EEF0FB"
+          tint="var(--bed)"
           className="absolute inset-0"
         />
 

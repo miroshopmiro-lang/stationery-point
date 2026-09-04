@@ -254,3 +254,68 @@ measured: footer 940px (15% of the page), SchoolKitTiles 820, VisitShop 732, Sen
 **Not touched and still true:** the hero has no artwork (`public/hero/` does not exist, so
 `SmartImage` falls back), and the seven category-circle images are the sparse beige AI set the
 bible warns about — regenerating them costs credits and is a separate approved job.
+
+## 2026-09-04 (later) — AUDIT-02: independent screenshot audit, and the regression it caught
+
+Full report at `research/AUDIT-02.md`, 144 screenshots in `research/audit-02-shots/`.
+**Score 5.5/10** against AUDIT-01's 4.5.
+
+### The regression — a rule violation, shipped in the session that claimed to remove dead ends
+
+`SchoolKitTiles`, the lead merchandising block on the homepage, had **five of six tiles landing
+on "No products match your search"**. The morning's dead-end sweep only fixed links derived from
+`categories.json` slugs; the kit tiles carry their own hardcoded set, and `notebooks`,
+`geometry`, `pouches` and `bottles` are not category slugs at all. The lead "Best value" tile
+and the desktop nav both pointed at `?collection=school-kits` — a parameter **nothing in the app
+reads**, so it silently rendered the entire catalogue.
+
+Fixed, against real stock only:
+- Ready-Made Kits → `/contact`. Sam has no kit SKU; the kit service is real, so a human picks it up.
+- Notebooks → `?q=notebook` (4) · Art & Colouring → `?category=art-supplies` (25, unchanged)
+- **Geometry Boxes deleted** — Sam stocks no geometry box, so that tile could never resolve.
+  Replaced with Pencils → `?q=pencil` (8).
+- Pencil Pouches → `?q=pouch` (1)
+- **"Bottles & Lunch Boxes" renamed "Water Bottles"** → `?q=bottle` (1). He stocks a bottle and
+  no lunch box; the old label promised stock that is not there.
+
+**`tools/check-links.mjs` now blocks the build on any merchandising link that matches zero
+products or uses a query parameter the app does not read.** Wired into `npm run build`. Verified
+by reintroducing the original bug and confirming it fails, then reverting. A visual audit caught
+this class of bug; no code did. Now code does.
+
+### Corrections to this morning's claims
+
+- **"1.36× flyingtiger" was wrong.** flyingtiger measured live today is **3,711px** at 375, not
+  the 4,609 carried over from AUDIT-01. Our 6,260 is **1.69×**, not 1.36×. Strip both footers and
+  our content area is ~2.5× theirs. The height number itself (7,946 → 6,260) was confirmed exact.
+- **768 is still the tallest layout** (7,663 vs 6,260 at 375). AUDIT-01's core structural failure
+  — the page growing as it gets wider — is untouched.
+- **"Label moved inside the tile on the media bed" — the audit called this FALSE; it is not.**
+  The audit ran against a dev server that had never reloaded `tailwind.config.js`, so the new
+  `bg-bed` utility did not exist in its CSS and the tile rendered transparent over white. The
+  class is present in the production bundle and the tile computes `rgb(224,222,217)` after a
+  server restart. **Restart the dev server after touching `tailwind.config.js` — Vite does not
+  pick it up, and the whole audit was skewed by it.**
+- **Media bed — the audit was right.** `SchoolKitTiles` was still `#EEF0FB`, on the one block
+  that is a direct copy of smiggle's grey-bed tile. Now `bg-bed` / `var(--bed)` like the rest.
+
+### Biggest open finding
+
+**The homepage carries zero product cards.** We have 78 real products and 19 real photographs and
+put none of them in front of a visitor; the offers rail renders nothing because it needs an MRP
+and a selling price to compute a saving. flyingtiger has priced product with an Add-to-bag button
+inside the first 812px. This is the strongest argument yet for getting prices out of Sam.
+
+### Could not verify — needs Abhinand
+
+- **hobbycraft.co.uk: HTTP 403, Cloudflare bot check.** It is the stated source for our header,
+  offers rail and product card, and it also blocked AUDIT-01. Those three blocks remain unaudited
+  against their own reference. No bypass attempted.
+- **dickblick.com: IP-blocked** ("Restricted Access 2023"). No bypass attempted.
+- Both need screenshots captured from a normal phone browser and handed over.
+
+### Clean passes
+
+Zero hits on any of the six banned hexes across all 83 build screenshots. No invented price,
+rating, review count, stock badge or offer anywhere. No meta-commentary in rendered copy. All
+six pages loaded at three widths with zero 4xx and zero console errors.

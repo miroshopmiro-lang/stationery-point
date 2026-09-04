@@ -31,7 +31,9 @@ const nav = [
 /* Desktop category nav, mirroring flyingtiger.com's horizontal bar. Sourced from the real
    category list so we are not padding the count to look bigger than the shop is. */
 const categoryNav = [
-  { label: 'School kits', to: '/catalog?collection=school-kits' },
+  // Was ?collection=school-kits — nothing reads that param, so it silently rendered the
+  // whole catalogue. No kit SKU exists yet, so it goes to the enquiry flow.
+  { label: 'School kits', to: '/contact' },
   { label: 'Stationery', to: '/catalog?category=stationery' },
   { label: 'Art supplies', to: '/catalog?category=art-supplies' },
   { label: 'Craft', to: '/catalog?category=craft-material' },

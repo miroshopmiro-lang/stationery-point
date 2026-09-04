@@ -1,0 +1,65 @@
+{
+  "flyingtiger@375": {
+    "status": 200,
+    "title": "Flying Tiger Copenhagen",
+    "height": 3711,
+    "frames": 5,
+    "snippet": "Flying Tiger uses different types of cookies (necessary, functional, performance and ads personalisation) when you visit our website. Some cookies are our own and others are set up by third party serv"
+  },
+  "flyingtiger@768": {
+    "status": 200,
+    "title": "Flying Tiger Copenhagen",
+    "height": 4059,
+    "frames": 4,
+    "snippet": "Flying Tiger uses different types of cookies (necessary, functional, performance and ads personalisation) when you visit our website. Some cookies are our own and others are set up by third party serv"
+  },
+  "flyingtiger@1440": {
+    "status": 200,
+    "title": "Flying Tiger Copenhagen",
+    "height": 3975,
+    "frames": 5,
+    "snippet": "Flying Tiger uses different types of cookies (necessary, functional, performance and ads personalisation) when you visit our website. Some cookies are our own and others are set up by third party serv"
+  },
+  "dickblick@375": {
+    "status": 200,
+    "title": "Restricted Access 2023",
+    "height": 2123,
+    "frames": 3,
+    "snippet": ""
+  },
+  "dickblick@768": {
+    "status": 200,
+    "title": "Restricted Access 2023",
+    "height": 1024,
+    "frames": 1,
+    "snippet": ""
+  },
+  "dickblick@1440": {
+    "status": 200,
+    "title": "Restricted Access 2023",
+    "height": 1024,
+    "frames": 2,
+    "snippet": ""
+  },
+  "hobbycraft@375": {
+    "status": 403,
+    "title": "Just a moment...",
+    "height": 812,
+    "frames": 1,
+    "snippet": "www.hobbycraft.co.uk Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Ray I"
+  },
+  "hobbycraft@768": {
+    "status": 403,
+    "title": "Just a moment...",
+    "height": 1024,
+    "frames": 1,
+    "snippet": "www.hobbycraft.co.uk Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Ray I"
+  },
+  "hobbycraft@1440": {
+    "status": 403,
+    "title": "Just a moment...",
+    "height": 900,
+    "frames": 1,
+    "snippet": "www.hobbycraft.co.uk Performing security verification This website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot. Ray I"
+  }
+}
