@@ -1,0 +1,11 @@
+{
+  "id": 11,
+  "name": "Parker Pen Folio",
+  "sourceDescription": "PARKER PEN FOLIO",
+  "brand": "Parker",
+  "brandSource": "list",
+  "category": "stationery",
+  "unit": "PCS",
+  "image": "/shop-catalogue-images/11_parker_pen_folio.webp",
+  "newArrival": false
+}

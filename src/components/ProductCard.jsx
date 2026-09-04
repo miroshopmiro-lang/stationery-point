@@ -100,7 +100,7 @@ export default function ProductCard({ product }) {
       {/* 1:1 media panel — hobbycraft's ratio. */}
       <div className="relative aspect-square">
         {product.image ? (
-          <SmartImage src={product.image} alt={product.name} tint="#EEF0FB" className="absolute inset-0" />
+          <SmartImage src={product.image} alt={product.name} tint="#E0DED9" className="absolute inset-0" />
         ) : (
           <CardImagePlaceholder />
         )}
@@ -154,8 +154,10 @@ export default function ProductCard({ product }) {
         ) : (
           // No price is worse than any price — the research is explicit that a customer with
           // no number on screen leaves for Amazon. Never render an empty price slot.
-          <span className="mt-0.5 text-[13px] font-medium text-muted">
-            WhatsApp for today&rsquo;s price
+          // Kept to ONE line: the card reserves a fixed 44px base for the CTA, so a price line
+          // that wraps pushes its own descenders under the button and is clipped.
+          <span className="mt-0.5 block whitespace-nowrap text-[13px] font-medium text-muted">
+            Price on WhatsApp
           </span>
         )}
 

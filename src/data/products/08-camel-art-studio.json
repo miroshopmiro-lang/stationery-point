@@ -1,0 +1,11 @@
+{
+  "id": 8,
+  "name": "Camel Art Studio",
+  "sourceDescription": "CAMEL ART STUDIO",
+  "brand": "Camel",
+  "brandSource": "list",
+  "category": "art-supplies",
+  "unit": "PCS",
+  "image": "/shop-catalogue-images/08_camel_art_studio.webp",
+  "newArrival": false
+}
