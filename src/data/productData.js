@@ -53,3 +53,19 @@ export const products = allProducts
       (a.id ?? 9999) - (b.id ?? 9999) ||
       a.name.localeCompare(b.name)
   );
+
+/*
+ * Categories that actually have products behind them.
+ *
+ * The browse UIs must use this, not `categories`. Sam's real item list has nothing in
+ * Return Gifts or Special Edition, so those two tiles rendered a link straight to an empty
+ * grid — a dead end, which the AskBox rule forbids anywhere on this site. They stay in
+ * categories.json (they are real departments in the shop and the CMS still offers them);
+ * they simply do not get a browse tile until something is filed under them.
+ */
+export const productCountByCategory = products.reduce((acc, p) => {
+  acc[p.category] = (acc[p.category] ?? 0) + 1;
+  return acc;
+}, {});
+
+export const activeCategories = categories.filter((c) => productCountByCategory[c.id] > 0);

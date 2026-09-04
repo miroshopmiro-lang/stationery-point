@@ -37,7 +37,9 @@ const categoryNav = [
   { label: 'Craft', to: '/catalog?category=craft-material' },
   { label: 'Office', to: '/catalog?category=office-supplies' },
   { label: 'Party & gifts', to: '/catalog?category=party-gifts' },
-  { label: 'Return gifts', to: '/catalog?category=return-gifts' },
+  // 'Return gifts' removed 4 Sep 2026: Sam's item list files nothing under it, so the link
+  // landed on an empty grid. Restore the moment a return-gift product exists.
+
   { label: 'Bulk orders', to: '/contact' },
 ];
 

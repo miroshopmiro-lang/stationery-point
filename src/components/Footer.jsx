@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { STORE, waLink } from '../lib/utils';
-import { categories } from '../data/productData';
+import { activeCategories } from '../data/productData';
 import { PhoneIcon, WhatsAppIcon, InstagramIcon } from './icons';
 
 export default function Footer() {
@@ -12,7 +12,8 @@ export default function Footer() {
           <div>
             <h2 className="font-bold text-lg mb-4 border-b border-white/15 pb-2">Catalog</h2>
             <ul className="space-y-2 text-white/75 text-sm">
-              {categories.map((c) => (
+              {/* activeCategories: a footer link to an empty category is still a dead end. */}
+              {activeCategories.map((c) => (
                 <li key={c.id}><Link to={`/catalog?category=${c.id}`} className="hover:text-brand-accent transition-colors">{c.title}</Link></li>
               ))}
             </ul>

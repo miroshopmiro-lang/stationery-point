@@ -1,12 +1,15 @@
 import React, { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { products, categories } from '../data/productData';
+import { products, categories, activeCategories } from '../data/productData';
 import { SearchIcon } from './icons';
 import ProductCard from './ProductCard';
 import CategoryCard from './CategoryCard';
 
-const filters = [{ id: 'all', label: 'All Products' }, ...categories.map((c) => ({ id: c.id, label: c.title }))];
+// Filters and browse tiles list only categories that have products; `categories`
+// stays the lookup table so a direct ?category= link to an empty one still resolves
+// its title instead of rendering an untitled page.
+const filters = [{ id: 'all', label: 'All Products' }, ...activeCategories.map((c) => ({ id: c.id, label: c.title }))];
 
 export default function Catalog() {
   // Deep-link filter + search via URL query params (back button, sharing).
@@ -32,11 +35,15 @@ export default function Catalog() {
     const q = query.trim().toLowerCase();
     return products.filter((p) => {
       const matchCat = active === 'all' || p.category === active;
+      // Every field is guarded. Sam's item list carries name, brand and unit and nothing
+      // else — no description, no tags — so an unguarded read here took the whole catalogue
+      // page down with a TypeError the moment anyone typed in the search box.
       const matchSearch =
         !q ||
-        p.name.toLowerCase().includes(q) ||
-        p.description.toLowerCase().includes(q) ||
-        p.categoryLabel.toLowerCase().includes(q) ||
+        (p.name || '').toLowerCase().includes(q) ||
+        (p.brand || '').toLowerCase().includes(q) ||
+        (p.description || '').toLowerCase().includes(q) ||
+        (p.categoryLabel || '').toLowerCase().includes(q) ||
         (p.tags || []).some((t) => t.toLowerCase().includes(q));
       return matchCat && matchSearch;
     });
@@ -76,7 +83,7 @@ export default function Catalog() {
         <div>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900 mb-5">Find by Category</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {categories.map((c) => (
+            {activeCategories.map((c) => (
               <CategoryCard
                 key={c.id}
                 name={c.title}

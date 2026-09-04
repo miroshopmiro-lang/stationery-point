@@ -1,12 +1,15 @@
 {
-  "_note": "Collections are merchandising groupings, not catalogue data — each maps to a catalog filter that already works. Art is generated lifestyle scenes (no legible branding, per the art-direction lock). Until the real assets land, `image` points at a placeholder and the card falls back to a tinted panel.",
+  "_note": "Collections are merchandising groupings, not catalogue data. Every entry below was validated on 2026-09-04 against Sam's real 78-product list and resolves to at least three products — a collection that lands on an empty grid is a dead end, which this site does not do. Regenerate/re-validate whenever the item list changes. Images are real product photos from public/shop-catalogue-images, standing in for the collection.",
   "hero": [
     {
       "id": "school",
       "eyebrow": "Back to school",
       "title": "Everything on the list.",
       "subtitle": "Notebooks, geometry boxes, pens and the rest — sorted in one trip.",
-      "cta": { "label": "Shop school supplies", "to": "/catalog?category=stationery" },
+      "cta": {
+        "label": "Shop school supplies",
+        "to": "/catalog?category=stationery"
+      },
       "image": "/hero/hero-school.webp",
       "imageMobile": "/hero/hero-school-mobile.webp"
     },
@@ -15,7 +18,10 @@
       "eyebrow": "Art & craft",
       "title": "Colour, paper, everything in between.",
       "subtitle": "Watercolours, canvases, brushes and craft material for every project.",
-      "cta": { "label": "Shop art supplies", "to": "/catalog?category=art-supplies" },
+      "cta": {
+        "label": "Shop art supplies",
+        "to": "/catalog?category=art-supplies"
+      },
       "image": "/hero/hero-art.webp",
       "imageMobile": "/hero/hero-art-mobile.webp"
     },
@@ -24,19 +30,62 @@
       "eyebrow": "For offices & schools",
       "title": "Bulk orders, handled.",
       "subtitle": "Volume pricing, GST invoices and delivery across Kochi.",
-      "cta": { "label": "Get a bulk quote", "to": "/contact" },
+      "cta": {
+        "label": "Get a bulk quote",
+        "to": "/contact"
+      },
       "image": "/hero/hero-office.webp",
       "imageMobile": "/hero/hero-office-mobile.webp"
     }
   ],
   "collections": [
-    { "id": "school-kits", "title": "School Kits", "blurb": "Class-wise essentials, ready to go", "to": "/catalog?q=kit", "image": "/collections/school-kits.webp", "tint": "#EEF0FB" },
-    { "id": "pens-writing", "title": "Pens & Writing", "blurb": "Gel, ball, fountain and refills", "to": "/catalog?category=stationery", "image": "/collections/pens-writing.webp", "tint": "#F3F1FA" },
-    { "id": "notebooks", "title": "Notebooks & Paper", "blurb": "Ruled, plain, spiral and chart", "to": "/catalog?category=stationery", "image": "/collections/notebooks.webp", "tint": "#FAF6EC" },
-    { "id": "art-colour", "title": "Art & Colour", "blurb": "Watercolour, acrylic, pastels", "to": "/catalog?category=art-supplies", "image": "/collections/art-colour.webp", "tint": "#F0F4EC" },
-    { "id": "office-essentials", "title": "Office Essentials", "blurb": "Files, staplers, tape, A4 paper", "to": "/catalog?category=office-supplies", "image": "/collections/office-essentials.webp", "tint": "#EEF0FB" },
-    { "id": "craft", "title": "Craft Material", "blurb": "Foam, glitter, ribbon, origami", "to": "/catalog?category=craft-material", "image": "/collections/craft.webp", "tint": "#FAF0F2" },
-    { "id": "return-gifts", "title": "Return Gifts", "blurb": "Birthday and event favourites", "to": "/catalog?category=return-gifts", "image": "/collections/return-gifts.webp", "tint": "#FAF6EC" },
-    { "id": "premium-pens", "title": "Premium Pens", "blurb": "Gifting-grade writing instruments", "to": "/catalog?category=special-edition", "image": "/collections/premium-pens.webp", "tint": "#F3F1FA" }
+    {
+      "id": "copier-paper",
+      "title": "Copier Paper",
+      "to": "/catalog?q=paper",
+      "image": "/shop-catalogue-images/01_reflection_paper_a4_80_gsm.webp"
+    },
+    {
+      "id": "craft-material",
+      "title": "Craft Material",
+      "to": "/catalog?category=craft-material",
+      "image": "/shop-catalogue-images/20_jags_air_dry_clay_250g.webp"
+    },
+    {
+      "id": "sketch",
+      "title": "Sketch Pens & Books",
+      "to": "/catalog?q=sketch",
+      "image": "/shop-catalogue-images/14_camel_sketch_pen_24pcs.webp"
+    },
+    {
+      "id": "colour-pencils",
+      "title": "Colour Pencils",
+      "to": "/catalog?q=colour%20pencil",
+      "image": "/shop-catalogue-images/16_camel_colour_pencil_24_shades.webp"
+    },
+    {
+      "id": "crayons",
+      "title": "Crayons",
+      "to": "/catalog?q=crayon",
+      "image": "/shop-catalogue-images/19_fc_jumbo_washable_crayons_24_shades.webp"
+    },
+    {
+      "id": "brushes",
+      "title": "Brushes & Brush Pens",
+      "to": "/catalog?q=brush",
+      "image": "/shop-catalogue-images/07_doms_brush_pen_12_shade.webp"
+    },
+    {
+      "id": "tapes",
+      "title": "Tapes",
+      "to": "/catalog?q=tape",
+      "image": "/shop-catalogue-images/09_alpha_clear_tape_2_inch.webp"
+    },
+    {
+      "id": "notebooks",
+      "title": "Notebooks",
+      "to": "/catalog?q=notebook",
+      "image": ""
+    }
   ]
 }

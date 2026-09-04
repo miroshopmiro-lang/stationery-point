@@ -12,6 +12,8 @@
      tinted global ground. The previous #FBF8F2 warm cream came from nooe.co,
      a rejected reference. Our tint band is --brand-soft. */
   --bg-color: #FFFFFF;
+  /* Product/tile media bed — see tailwind.config.js. */
+  --bed: #E0DED9;
   --ink: #16142B;
   --muted: #5B5878;
   --hairline: #DEDFF0;

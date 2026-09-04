@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import categoriesFile from '../data/categories.json';
+import { activeCategories } from '../data/productData';
 import SmartImage from './SmartImage';
 
-const items = categoriesFile.items || [];
+// activeCategories, not the raw file: a circle for an empty category is a dead end.
+const items = activeCategories;
 
 /*
  * CATEGORY CIRCLES — copied from flyingtiger.com and dickblick.com.

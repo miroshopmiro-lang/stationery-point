@@ -26,6 +26,12 @@ export default {
         'brand-accent': '#CDD661',
         // Derived indigo-biased neutrals. Replaces the pure greys the references use
         // (hobbycraft #F2F2F2, blick #EAEAEA) so section bands carry the brand hue.
+        // Product/tile media bed. Measured off smiggle.co.uk and required by AUDIT-01
+        // Defect 8: an #EEF0FB (blue) bed fights blue school products, and every reference
+        // beds product photography on ONE neutral grey. It is baked into the pack-shot
+        // pipeline output too (tools/product-shots/pack-shots.mjs), so tiles must use this
+        // token or they render two-tone against their own photos.
+        'bed': '#E0DED9',
         'ink': '#16142B',
         'muted': '#5B5878',
         'hairline': '#DEDFF0',

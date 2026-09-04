@@ -212,3 +212,45 @@ his description), `derived` (an abbreviation expanded).
 
 Prices for all 78. Photos for 21–78. The six FC brand confirmations. The pricing conversation
 with Sam has not happened and stays deliberately deferred until there is a good build to show.
+
+### Later the same day — reference-copy pass resumed, and two real bugs found
+
+**A crash I introduced, found and fixed.** `Catalog.jsx` read `p.description.toLowerCase()`
+unguarded. Sam's products have no `description`, so typing anything into the catalogue search
+threw a TypeError and took the whole page down. Every field in that filter is guarded now, and
+`brand` was added to the searchable set since it is finally real data.
+
+**Dead-end links removed.** Sam's list files nothing under Return Gifts or Special Edition, so
+every tile and nav link pointing at those two categories landed on an empty grid — which the
+AskBox's governing rule forbids anywhere on this site. `productData.js` now exports
+`activeCategories` (categories with at least one product) and `productCountByCategory`; the
+category circles, catalogue browse tiles, catalogue filters, footer links and header menu all
+source from it. Both categories stay in `categories.json` — they are real departments and the
+CMS still offers them — they just do not get a link until something is filed under them.
+The promo tile CTA that pointed at Return Gifts now points at the enquiry form, so the service
+is still sold without the link dying.
+
+**CollectionCards rebuilt** (967px → 801px), closing four AUDIT-01 entries at once: the pale
+pink/cream/green beds are gone (all three were off-palette), the elevation shadow is gone, the
+per-tile blurb is gone, and the label moved from a separate white panel to inside the tile on
+the media bed — which is what the school-kit block twenty percent up the page already did.
+One page, one tile language. The collection set itself was rebuilt from the real item list and
+every entry validated to return at least three products before it shipped.
+
+**PromoTiles** was the audit's single worst offender ("~50% of the block's area is blank white
+at 375"). The cause was a photo half held open for artwork that does not exist. A tile with no
+photograph now spans its panel full width instead. Tile 1 carries a real reams-of-copier-paper
+shot from Sam's photos; tile 2 has none and reads as a full-width band.
+
+**`bed` (#E0DED9) is now a real theme token** in `tailwind.config.js` and `index.css` rather
+than a hex pasted into two components. It has to match the bed baked into `pack-shots.mjs`
+output or tiles render two-tone against their own photographs.
+
+**Page height at 375px: 7,946 (17 Aug audit) → 6,474 (start of today) → 6,260.** Flying Tiger
+is 4,609, so we are at 1.36x and the gap is no longer in the blocks fixed today. What is left,
+measured: footer 940px (15% of the page), SchoolKitTiles 820, VisitShop 732, SendListSection
+580, Testimonials 502 for a single review, header chrome 190 against flyingtiger's 145.
+
+**Not touched and still true:** the hero has no artwork (`public/hero/` does not exist, so
+`SmartImage` falls back), and the seven category-circle images are the sparse beige AI set the
+bible warns about — regenerating them costs credits and is a separate approved job.

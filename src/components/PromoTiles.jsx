@@ -29,7 +29,9 @@ const tiles = [
     title: 'Buying for a whole class?',
     body: 'Send us the list. We quote with GST, deliver across Kochi, and you pay on invoice.',
     cta: { label: 'Get a bulk quote', to: '/contact' },
-    image: '/promo/bulk.webp',
+    // A real reams-of-copier-paper shot from Sam's own photos. The generated art briefed
+    // below would be better here, but nothing is worth a half-empty tile in the meantime.
+    image: '/shop-catalogue-images/03_jk_copy_paper_a4_80gsm.webp',
     panel: 'bg-brand-primary',
     _imageBrief: 'Dense overhead flat-lay of institutional-quantity stationery — stacked plain notebooks, boxed pens, bulk paper reams. Blank unmarked surfaces, no text anywhere.',
   },
@@ -38,8 +40,14 @@ const tiles = [
     eyebrow: 'Parties & events',
     title: 'Return gifts, sorted in one trip.',
     body: 'Pick a budget per head and a quantity. We pack them ready to hand out.',
-    cta: { label: 'Plan return gifts', to: '/catalog?category=return-gifts' },
-    image: '/promo/return-gifts.webp',
+    // Was /catalog?category=return-gifts. Sam's item list files nothing under Return Gifts,
+    // so that link landed on an empty grid — a dead end. Return gifts ARE a real part of the
+    // shop, so the service stays and the CTA goes to the enquiry form instead of being cut.
+    cta: { label: 'Plan return gifts', to: '/contact' },
+    // No photograph exists for this one and none of Sam's product shots honestly represents
+    // a per-head return gift. Empty string, so the tile renders as a full-width panel rather
+    // than reserving half its area for a placeholder. See PromoTile below.
+    image: '',
     panel: 'bg-brand-dark',
     _imageBrief: 'Dense overhead of small plain gift boxes, coloured tissue, ribbon spools, plain pouches. Colour-blocked. No text, no logos.',
   },
@@ -48,20 +56,30 @@ const tiles = [
 function PromoTile({ tile, index }) {
   // flyingtiger alternates the photo side between consecutive tiles.
   const photoRight = index % 2 === 1;
+  const hasPhoto = Boolean(tile.image);
 
+  /*
+   * A tile with no artwork spans the panel across the whole width instead of holding half
+   * the tile open for a placeholder. AUDIT-01 ranked this block the single worst offender on
+   * the page — "~50% of the block's area is blank white at 375" — and the cause was a photo
+   * half reserved for art that does not exist. flyingtiger's split is still the pattern; a
+   * tile just does not get one until it has a photograph to put in it.
+   */
   return (
-    <article className="grid grid-cols-2 lg:grid-cols-2 overflow-hidden rounded-lg">
+    <article className={(hasPhoto ? 'grid grid-cols-2 ' : '') + 'overflow-hidden rounded-lg'}>
       {/* PHOTO HALF — nothing overlaid on it, ever. */}
-      <div className={'relative aspect-square ' + (photoRight ? 'order-2' : 'order-1')}>
-        <SmartImage src={tile.image} alt="" tint="#EEF0FB" className="absolute inset-0" />
-      </div>
+      {hasPhoto && (
+        <div className={'relative aspect-square ' + (photoRight ? 'order-2' : 'order-1')}>
+          <SmartImage src={tile.image} alt="" tint="var(--bed)" className="absolute inset-0" />
+        </div>
+      )}
 
       {/* PANEL HALF — flat colour, carries all the type and the pill button. */}
       <div
         className={
           tile.panel +
           ' flex flex-col justify-center px-4 py-5 lg:px-8 lg:py-10 ' +
-          (photoRight ? 'order-1' : 'order-2')
+          (hasPhoto ? (photoRight ? 'order-1' : 'order-2') : '')
         }
       >
         <span className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.12em] text-brand-accent mb-1.5">
@@ -70,7 +88,7 @@ function PromoTile({ tile, index }) {
         <h3 className="text-white font-bold tracking-tight text-[15px] leading-[1.15] lg:text-[26px] lg:leading-[1.1] text-balance">
           {tile.title}
         </h3>
-        <p className="hidden sm:block mt-2 text-white/85 text-[13px] leading-relaxed lg:text-[15px]">
+        <p className={(hasPhoto ? 'hidden sm:block ' : '') + 'mt-2 text-white/85 text-[13px] leading-relaxed lg:text-[15px]'}>
           {tile.body}
         </p>
         {/* White pill on the flat panel — flyingtiger's exact CTA treatment. */}

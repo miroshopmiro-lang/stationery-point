@@ -37,7 +37,7 @@ import SmartImage from './SmartImage';
 // Rendered when a product has no photograph yet, so the grid keeps its rhythm.
 function CardImagePlaceholder() {
   return (
-    <div className="w-full h-full flex items-center justify-center bg-brand-soft" aria-hidden="true">
+    <div className="w-full h-full flex items-center justify-center bg-bed" aria-hidden="true">
       <svg viewBox="0 0 32 32" className="w-9 h-9 opacity-25">
         <rect width="32" height="32" rx="8" fill="#332E92" />
         <path d="M9 22L20 6l4 3-11 16-5 1z" fill="#CDD661" />
@@ -100,7 +100,7 @@ export default function ProductCard({ product }) {
       {/* 1:1 media panel — hobbycraft's ratio. */}
       <div className="relative aspect-square">
         {product.image ? (
-          <SmartImage src={product.image} alt={product.name} tint="#E0DED9" className="absolute inset-0" />
+          <SmartImage src={product.image} alt={product.name} tint="var(--bed)" className="absolute inset-0" />
         ) : (
           <CardImagePlaceholder />
         )}
