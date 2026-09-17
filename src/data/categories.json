@@ -3,27 +3,27 @@
     {
       "id": "stationery",
       "title": "Stationery",
-      "image": "/category-tiles/stationery.webp"
+      "image": "/ai-product-shots/stationery-hero.webp"
     },
     {
       "id": "office-supplies",
       "title": "Office Supplies",
-      "image": "/category-tiles/office-supplies.webp"
+      "image": "/ai-product-shots/09-alpha-clear-tape-2-inch.webp"
     },
     {
       "id": "art-supplies",
       "title": "Art Supplies",
-      "image": "/category-tiles/art-supplies.webp"
+      "image": "/ai-product-shots/07-doms-brush-pen-12-shade.webp"
     },
     {
       "id": "craft-material",
       "title": "Craft Material",
-      "image": "/category-tiles/craft-material.webp"
+      "image": "/ai-product-shots/20-jags-air-dry-clay-250g.webp"
     },
     {
       "id": "party-gifts",
       "title": "Party & Gifts",
-      "image": "/category-tiles/party-gifts.webp"
+      "image": "/ai-product-shots/74-popular-jar-candle-perfumed.webp"
     },
     {
       "id": "return-gifts",

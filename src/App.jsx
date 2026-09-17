@@ -8,6 +8,8 @@ import Home from './components/Home';
 import Catalog from './components/Catalog';
 import About from './components/About';
 import Contact from './components/Contact';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import Terms from './components/Terms';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import EnquiryBasket from './components/EnquiryBasket';
 import { EnquiryListProvider } from './context/EnquiryListContext';
@@ -41,6 +43,8 @@ export default function App() {
                 <Route path="/catalog" element={<Catalog />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/terms" element={<Terms />} />
               </Routes>
             </main>
             <Footer />

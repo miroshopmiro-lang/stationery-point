@@ -31,7 +31,7 @@ export default {
         // beds product photography on ONE neutral grey. It is baked into the pack-shot
         // pipeline output too (tools/product-shots/pack-shots.mjs), so tiles must use this
         // token or they render two-tone against their own photos.
-        'bed': '#E0DED9',
+        'bed': '#F2F2F2',
         'ink': '#16142B',
         'muted': '#5B5878',
         'hairline': '#DEDFF0',

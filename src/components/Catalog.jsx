@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Fuse from 'fuse.js';
 import { products, categories, activeCategories } from '../data/productData';
 import { SearchIcon } from './icons';
 import ProductCard from './ProductCard';
@@ -10,6 +11,15 @@ import CategoryCard from './CategoryCard';
 // stays the lookup table so a direct ?category= link to an empty one still resolves
 // its title instead of rendering an untitled page.
 const filters = [{ id: 'all', label: 'All Products' }, ...activeCategories.map((c) => ({ id: c.id, label: c.title }))];
+
+// Same Fuse.js typo-tolerant matching as lib/search.js's AskBox engine (see that file's
+// comment for why Fuse over a hand-rolled fuzzy function) — a shopper typing "pensil" or
+// "noteboks" here should still find products, not hit "no results" over a spelling slip.
+const productFuse = new Fuse(products, {
+  keys: ['name', 'brand', 'categoryLabel'],
+  threshold: 0.35,
+  ignoreLocation: true,
+});
 
 export default function Catalog() {
   // Deep-link filter + search via URL query params (back button, sharing).
@@ -32,21 +42,13 @@ export default function Catalog() {
   };
 
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return products.filter((p) => {
-      const matchCat = active === 'all' || p.category === active;
-      // Every field is guarded. Sam's item list carries name, brand and unit and nothing
-      // else — no description, no tags — so an unguarded read here took the whole catalogue
-      // page down with a TypeError the moment anyone typed in the search box.
-      const matchSearch =
-        !q ||
-        (p.name || '').toLowerCase().includes(q) ||
-        (p.brand || '').toLowerCase().includes(q) ||
-        (p.description || '').toLowerCase().includes(q) ||
-        (p.categoryLabel || '').toLowerCase().includes(q) ||
-        (p.tags || []).some((t) => t.toLowerCase().includes(q));
-      return matchCat && matchSearch;
-    });
+    const q = query.trim();
+    // Fuzzy-matched product pool for a non-empty query (typo-tolerant, see productFuse
+    // above); the full catalogue otherwise. Exact substring hits still rank first because
+    // Fuse scores an exact match at 0 — the best possible score — so nothing regresses for
+    // someone who spells the product correctly.
+    const pool = q ? productFuse.search(q).map((r) => r.item) : products;
+    return pool.filter((p) => active === 'all' || active === 'everything' || p.category === active);
   }, [active, query]);
 
   // Jags-style browsing: the catalog landing shows category cards; a chosen
@@ -82,7 +84,17 @@ export default function Catalog() {
       {showLanding ? (
         <div>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900 mb-5">Find by Category</h2>
+          {/* "All Categories" tile — added 17 Sep 2026 on request: with a catalogue this
+              small, and plenty of products genuinely belonging under more than one category
+              (stationery/office-supplies overlap constantly), forcing a category pick first
+              costs a shopper clicks for no real payoff. This tile skips straight to every
+              product, unfiltered. */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            <CategoryCard
+              name="All Categories"
+              image="/ai-product-shots/kit-bundle.webp"
+              categoryId="everything"
+            />
             {activeCategories.map((c) => (
               <CategoryCard
                 key={c.id}
@@ -139,6 +151,7 @@ export default function Catalog() {
         <div className="min-w-0">
           <div className="mb-4 flex items-end justify-between gap-3">
             <div>
+              {active === 'everything' && <h2 className="text-xl font-extrabold text-gray-800">All Categories</h2>}
               {activeCategory && <h2 className="text-xl font-extrabold text-gray-800">{activeCategory.title}</h2>}
               {/* Result counts deliberately not shown — a category reading
                   "7 products" reads as a small shop, not a curated one. */}

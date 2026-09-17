@@ -58,7 +58,7 @@ function initials(name) {
 
 function ReviewCard({ review }) {
   return (
-    <article className="flex flex-col h-full bg-white rounded border border-hairline shadow-card p-4">
+    <article className="flex flex-col w-full h-full bg-white rounded border border-hairline shadow-card p-4">
       <div className="flex items-center gap-2.5">
         {review.avatar ? (
           <img
@@ -103,12 +103,12 @@ export default function Testimonials() {
   };
 
   return (
-    <section aria-labelledby="reviews-heading" className="bg-brand-soft">
+    <section aria-labelledby="reviews-heading" className="bg-bed">
       <div className="max-w-[1280px] mx-auto py-8 lg:py-14">
         <div className="px-4 lg:px-8 text-center">
           <h2
             id="reviews-heading"
-            className="font-bold tracking-tight text-brand-primary text-[22px] leading-[1.18] lg:text-[32px]"
+            className="font-bold tracking-tight text-ink text-[22px] leading-[1.18] lg:text-[32px]"
           >
             What Kochi says about us
           </h2>

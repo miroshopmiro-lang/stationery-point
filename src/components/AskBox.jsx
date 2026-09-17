@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { matchQuery, matchList } from '../lib/search';
 import { STORE } from '../lib/utils';
 import { SearchIcon, WhatsAppIcon, ListIcon } from './icons';
@@ -85,6 +85,7 @@ export default function AskBox({ variant = 'hero', defaultMode = 'single' }) {
   const [value, setValue] = useState('');
   const isHero = variant === 'hero';
   const isHeader = variant === 'header';
+  const navigate = useNavigate();
 
   /*
    * HEADER VARIANT — full-width rounded search pill on its own row.
@@ -95,12 +96,19 @@ export default function AskBox({ variant = 'hero', defaultMode = 'single' }) {
    *                      "Search 110,000+ art supplies" — a free range/trust signal.
    * We copy hobbycraft's shape and blick's count-in-placeholder idea.
    * No mode-toggle chips here; those belong to the hero/section variant.
+   *
+   * Submitting used to just preventDefault with nothing else — the box captured typing
+   * but never went anywhere, header search was a dead end everywhere except the homepage
+   * hero. It now hands off to the catalog's own ?q= filter (Catalog.jsx already reads it).
    */
   if (isHeader) {
     return (
       <form
         role="search"
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (value.trim()) navigate(`/catalog?q=${encodeURIComponent(value.trim())}`);
+        }}
         className="relative w-full"
       >
         <SearchIcon className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
@@ -111,9 +119,9 @@ export default function AskBox({ variant = 'hero', defaultMode = 'single' }) {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           aria-label="Search items or paste your supply list"
-          placeholder="Search items — or paste your list"
+          placeholder="Search items or paste your list"
           className="w-full h-11 rounded-full border border-hairline bg-white pl-11 pr-4 text-[14px] text-ink
-                     placeholder:text-muted outline-none
+                     placeholder:text-ink/70 outline-none
                      transition-colors duration-text ease-ref
                      focus:border-brand-primary focus-visible:ring-2 focus-visible:ring-brand-primary/30"
         />

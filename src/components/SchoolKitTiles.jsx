@@ -4,6 +4,25 @@ import kitData from '../data/kitTiles.json';
 import SmartImage from './SmartImage';
 
 /*
+ * AI PRODUCT SHOTS (16 Sep 2026): kitTiles.json's six `/kit-tiles/*.webp` images were never
+ * generated — the tiles rendered as blank tinted panels (see SmartImage's fallback). Same
+ * homepage-only override pattern as NewInRail.jsx: 'notebooks', 'art' and 'pencils' reuse
+ * assets already generated for other homepage rails (same real Stationery Point stock, so
+ * no new generation needed); 'kits', 'pouches' and 'bottles' are new studio shots grounded
+ * in Sam's real pencil-pouch photo and a flyingtiger.com reference (bottles have no real
+ * Stationery Point photo on file — id 39 Alpha Waterbottle's `image` is empty — so that tile
+ * renders a generic, unbranded studio water bottle rather than inventing a label).
+ */
+const HOME_SHOT_OVERRIDES = {
+  kits: '/ai-product-shots/kit-bundle.webp',
+  notebooks: '/ai-product-shots/33-factor-note-notebook.webp',
+  art: '/ai-product-shots/16-camel-colour-pencil-24-shades.webp',
+  pencils: '/ai-product-shots/34-apsara-pencil-pkt.webp',
+  pouches: '/ai-product-shots/alpha-pencil-pouch.webp',
+  bottles: '/ai-product-shots/water-bottle-generic.webp',
+};
+
+/*
  * SCHOOL KIT TILE BLOCK — copied 1:1 from smiggle.co.uk's "READY. SET. BACK TO SCHOOL."
  * block, verified from a rendered screenshot at 375px on 17 Aug 2026.
  *
@@ -37,7 +56,7 @@ function KitTile({ tile }) {
       {/* Square media panel, product centred. smiggle's tiles are near-square (821x858 native). */}
       <div className="relative aspect-square">
         <SmartImage
-          src={tile.image}
+          src={HOME_SHOT_OVERRIDES[tile.id] || tile.image}
           alt=""
           tint="var(--bed)"
           className="absolute inset-0"

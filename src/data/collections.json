@@ -4,8 +4,8 @@
     {
       "id": "school",
       "eyebrow": "Back to school",
-      "title": "Everything on the list.",
-      "subtitle": "Notebooks, geometry boxes, pens and the rest — sorted in one trip.",
+      "title": "The whole list, below MRP.",
+      "subtitle": "Notebooks to backpacks, sorted in one trip. Every item priced below MRP, every time.",
       "cta": {
         "label": "Shop school supplies",
         "to": "/catalog?category=stationery"
@@ -15,9 +15,9 @@
     },
     {
       "id": "art",
-      "eyebrow": "Art & craft",
-      "title": "Colour, paper, everything in between.",
-      "subtitle": "Watercolours, canvases, brushes and craft material for every project.",
+      "eyebrow": "Fine art & craft",
+      "title": "The art supplies Kochi's students ask for, below MRP.",
+      "subtitle": "Brustro, Camlin, Faber-Castell and more, always in stock.",
       "cta": {
         "label": "Shop art supplies",
         "to": "/catalog?category=art-supplies"
@@ -27,11 +27,11 @@
     },
     {
       "id": "office",
-      "eyebrow": "For offices & schools",
-      "title": "Bulk orders, handled.",
-      "subtitle": "Volume pricing, GST invoices and delivery across Kochi.",
+      "eyebrow": "Office & institutional",
+      "title": "Bulk orders. GST invoice. No minimum.",
+      "subtitle": "Volume pricing below MRP, GST invoices, delivered across Kochi.",
       "cta": {
-        "label": "Get a bulk quote",
+        "label": "Get bulk quote",
         "to": "/contact"
       },
       "image": "/hero/hero-office.webp",
@@ -49,7 +49,7 @@
       "id": "craft-material",
       "title": "Craft Material",
       "to": "/catalog?category=craft-material",
-      "image": "/shop-catalogue-images/20_jags_air_dry_clay_250g.webp"
+      "image": "/shop-catalogue-images-raw/20_jags_air_hardening_clay_250g.webp"
     },
     {
       "id": "sketch",
@@ -85,7 +85,7 @@
       "id": "notebooks",
       "title": "Notebooks",
       "to": "/catalog?q=notebook",
-      "image": ""
+      "image": "/shop-catalogue-images-raw/33_factor_note_note_book.webp"
     }
   ]
 }

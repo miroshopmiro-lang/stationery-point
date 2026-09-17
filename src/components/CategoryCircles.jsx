@@ -7,6 +7,17 @@ import SmartImage from './SmartImage';
 const items = activeCategories;
 
 /*
+ * AI PRODUCT SHOTS (17 Sep 2026): category-tiles/*.webp were a generic cream/beige flatlay
+ * stock set that didn't match the site's locked palette or the flyingtiger-style studio shots
+ * used everywhere else on the site. Fixed at the source — categories.json's `image` field now
+ * points at the AI shots directly, so this renders correctly here AND on the /catalog landing
+ * page's category cards, which used the same stock set. office-supplies, art-supplies,
+ * craft-material and party-gifts reuse assets already generated for other rails; stationery is
+ * a dedicated studio shot (pen + pencil + notebook grouping), since no single real product
+ * represents the whole "Stationery" department.
+ */
+
+/*
  * CATEGORY CIRCLES — copied from flyingtiger.com and dickblick.com.
  *
  * Both use CIRCULAR category tiles, verified from rendered screenshots at 375px on
@@ -28,13 +39,13 @@ export default function CategoryCircles() {
   if (!items.length) return null;
 
   return (
-    <section aria-labelledby="cat-circles-heading" className="bg-brand-soft">
+    <section aria-labelledby="cat-circles-heading" className="bg-bed">
       <div className="max-w-[1280px] mx-auto py-8 lg:py-14">
         {/* Heading centred with an underlined "view all" beneath — blick's treatment. */}
         <div className="px-4 lg:px-8 text-center">
           <h2
             id="cat-circles-heading"
-            className="font-bold tracking-tight text-brand-primary text-[22px] leading-[1.18] lg:text-[32px]"
+            className="font-bold tracking-tight text-ink text-[22px] leading-[1.18] lg:text-[32px]"
           >
             Shop by category
           </h2>
@@ -54,7 +65,8 @@ export default function CategoryCircles() {
         <ul
           className="mt-6 flex gap-4 overflow-x-auto px-4 pb-2 lg:px-8 lg:gap-7
                      [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
-                     snap-x snap-mandatory"
+                     snap-x snap-mandatory
+                     lg:flex-wrap lg:justify-center lg:overflow-visible"
         >
           {items.map((c) => (
             <li key={c.id} className="shrink-0 snap-start">

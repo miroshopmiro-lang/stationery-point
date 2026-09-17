@@ -319,3 +319,115 @@ inside the first 812px. This is the strongest argument yet for getting prices ou
 Zero hits on any of the six banned hexes across all 83 build screenshots. No invented price,
 rating, review count, stock badge or offer anywhere. No meta-commentary in rendered copy. All
 six pages loaded at three widths with zero 4xx and zero console errors.
+
+## 2026-09-11 — Batch 1 asset generation: prompts written, skills reconciled
+
+**Nothing had ever been generated from the assets skill.** Verified on disk today: `public/hero/`
+and `public/kit-tiles/` do not exist, so all 6 hero crops and all 6 school-kit tiles fall through
+to `SmartImage`'s placeholder. `public/category-tiles/` is dated 13 Aug — three days *before* the
+four-site reference audit finished, so every image currently on the site predates the audit that
+was supposed to define it. `public/hero-desktop.webp` and `hero-mobile.webp` at the root are
+9 Aug orphans; nothing reads them.
+
+### Handoff canon installed into `stationery-point-bible`
+
+Decisions that existed only in a chat handoff and would not have survived the session: Poppins as
+the single type family (copied from hobbycraft, no serif); the motion spec (paint properties only,
+0.2s text / 0.4s surface, `cubic-bezier(.3,.46,.45,.94)`, zero transform transitions); the
+split-panel hero; product card copies hobbycraft not flyingtiger; copy the references 1:1 first,
+brand-swap only. Added mistakes 6–8 (DOM scans produce wrong findings — four confirmed misreads;
+`vite build | tail` hides failures; the fabricated agent output). Added §8, the access state of all
+four references, and §9, the reference-audit method of record.
+
+### Three corrections to `stationery-point-assets`
+
+The skill is the Part H deliverable of the 16 Aug audit and is otherwise sound. Three things had
+gone stale against decisions made after it was written:
+
+1. **The hero clear zone is gone.** §3.1/§3.2 reserved a third of the frame as a calm zone for a
+   headline. The hero was locked as a split panel on 4 Sep — the type sits in a solid CSS panel
+   beside the photo — so a clear zone inside the photo throws away a third of the asset, and empty
+   surface is exactly what §7 says produces the sparse look. Both hero prompts rewritten dense to
+   all four edges, with a `[SUBJECT]` swap. Trait 5 in §1 now scopes itself to the assets that
+   actually carry type on the image.
+2. **Hero paths corrected.** §4 listed one desktop and one mobile hero at the repo root; the build
+   wants six files under `public/hero/` per `collections.json`.
+3. **Kit-tile spec added** — §3.7 plus a §4 row. It never had one, on the block that leads the
+   homepage. Carries smiggle's lead-tile contrast rule and both stock traps (`geometry.webp` is
+   pencils, `bottles.webp` is bottles only).
+
+### Batch 1 prompt pack published
+
+12 prompts — 6 hero crops, 6 kit tiles — each a self-contained copy-paste block tied to the exact
+filename its output must be saved as, with tool routing, the palette swatches, the reject list and
+per-slot trap notes. Artifact: https://claude.ai/code/artifact/68eb23ce-05f5-48c5-84ba-652e2b1160db
+
+**No code changed today.** Working tree still at `8a2ee83`. Next: Abhinand generates, hands back
+the raw PNGs; then convert to WebP at spec, wire into `SchoolKitTiles` and `HeroCarousel` (closing
+AUDIT-02 #3 and #4), build the homepage product rail (#2), and re-audit.
+
+## 11 September 2026 — Reference Capture Audit & Hero Section Overhaul
+
+### Problem addressed
+The previous hero section relied on a rigid 50/50 split-panel layout (square photo boxed against a massive solid flat `#332E92` blue block). This differed markedly from all four locked reference sites and produced a dated, corporate landing page appearance rather than an energetic consumer retail and bulk stationery store.
+
+### Live reference captures established
+Captured authentic live desktop & mobile screenshots of all four reference sites:
+- **Flying Tiger Copenhagen** (`flyingtiger.com`): Full-bleed lifestyle hero with organic typography, pill CTA, and immediate product carousel.
+- **Dick Blick** (`dickblick.com`): 3-column asymmetric multi-panel merchandising grid on clean neutral `#E0DED9` beds.
+- **Smiggle UK** (`smiggle.co.uk`): High-energy campaign banner paired with quick-action deal boxes and dual promo cards.
+- **Hobbycraft UK** (`hobbycraft.co.uk`): Wide handcrafted seasonal campaign banner with pill CTA and value-proposition strip.
+All captures archived under `research/reference-captures/` and documented in the IDE audit gallery.
+
+### Code changes
+1. **`src/components/HeroCarousel.jsx`**:
+   - Replaced the rigid 50/50 split box with a full-bleed, responsive hero banner spanning the full container width.
+   - Applied smooth contrast gradients (`from-brand-dark/95 via-brand-dark/85 to-transparent`) ensuring 100% WCAG contrast while letting the real stationery photography breathe across the frame.
+   - Added `#CDD661` lime pill badge (`BACK TO SCHOOL`) and bold headline typography (`text-[32px]` to `text-[50px]`).
+   - Implemented dual CTAs: Flying Tiger white pill button (`Shop school supplies`) + frosted glass button with WhatsApp icon routing directly to bulk enquiry.
+   - Docked a 4-card quick-action merchandising strip directly beneath the hero banner (School Kits, Art & Craft, Office Bulk, and Vyttila Shop) for rapid conversion.
+2. **`src/components/Home.jsx`**:
+   - Passed `onOpenListModal={() => setListModalOpen(true)}` to `<HeroCarousel />` so that clicking the School Kits card immediately opens the interactive booklist modal.
+
+### Verification
+- `npm run build`: Exit code 0, 507 modules transformed, built in 23.72s.
+- `node tools/check-links.mjs`: All 21 merchandising routes resolve cleanly.
+- Visual check: Captured at 1440px and 375px; responsive layout and touch targets verified.
+
+### Zero-Gradient Hero Revision (11 September 2026)
+- **Problem identified**: Initial iteration placed a leftward dark fading gradient across the photography. Inspection of all four reference sites confirmed that zero reference sites use a gradient wash over photography; gradients muddy real photography and degrade aesthetic sharpness.
+- **Clean Reference Resolution**:
+  - Captured `smiggle.co.uk` with region selection and cookie modals dismissed (`research/reference-captures/smiggle-clean-hero.png`), revealing the unoccluded, bold candy-pink sale hero and tiered price cards.
+  - Captured `hobbycraft.co.uk` (`research/reference-captures/hobbycraft-hero-clean.png`) showing its solid organic card shape beside unwashed craft photography.
+- **Hero redesign**:
+  - Stripped all gradient overlays from `src/components/HeroCarousel.jsx`.
+  - Staged the full flat-lay photography in 100% natural, crisp, unwashed color.
+  - Housed typography and dual CTAs inside a crisp, solid branded retail card (`bg-brand-dark rounded-2xl border border-white/10 shadow-2xl`).
+- **Build verification**: `npm run build` passed cleanly in 16.59s; all 21 links verified.
+
+## 2026-09-11 11:05 IST — School Desktop Hero Banner Integrated (Zero Box, Zero Gradient, Interactive HTML CTAs in Negative Space)
+- Processed newly generated School Desktop banner: converted to optimized WebP at public/hero/hero-school.webp (68 KB).
+- Updated collections.json with hasEngravedText: true for slide 'school'.
+- Refactored HeroCarousel.jsx: removed floating HTML card and gradient overlays for engraved artwork; placed interactive HTML pill buttons ('Shop school supplies' and 'WhatsApp Enquiry') in the reserved lower-left negative space.
+- Added sr-only accessibility titles and subtitles for SEO and screen-readers.
+- Verified build and routing: npm run build exits 0 (507 modules, built in 14.77s), tools/check-links.mjs confirms 21/21 routes resolve.
+- Live captured desktop screenshot at 1440px confirming exact visual alignment.
+
+## 2026-09-11 11:46 IST — Full 3-Slide Hero Banner Suite Completed (Wide 21:9 Format, Compact Vertical Footprint, Zero Cropping)
+- Processed and converted all 3 user-generated hero banners to WebP:
+  - School: public/hero/hero-school.webp (68 KB)
+  - Art: public/hero/hero-art.webp (84 KB, fitted to 1024x384 canvas with zero text clipping)
+  - Office: public/hero/hero-office.webp (64 KB)
+- Updated src/data/collections.json: all 3 hero slides configured with hasEngravedText: true and shared wide assets for desktop and mobile.
+- Refactored src/components/HeroCarousel.jsx:
+  - Constrained desktop hero container to max-w-[1240px] with natural 1024/384 aspect ratio, reducing vertical height while preserving 100% of the graphic width without cropping.
+  - Set wide banner format on mobile as requested, keeping zero image clipping.
+  - Aligned interactive HTML pill buttons (Collection link and WhatsApp) cleanly in the lower-left negative space.
+- Verified build and routing: npm run build exits 0 (507 modules transformed), tools/check-links.mjs confirms 21/21 links resolve.
+- Live captured screenshots across desktop and mobile across all three slides.
+
+## 2026-09-11 12:01 IST — Full-Bleed Edge-to-Edge Hero Banner Updated
+- Refactored HeroCarousel.jsx to 100% full bleed: removed outer container max-width, padding, and rounded borders.
+- Preserved natural wide banner ratio (1024/384 ~ 21:9) across both desktop and mobile without cropping.
+- Aligned real interactive HTML pill CTAs in negative space on both desktop and mobile.
+- Verified production build and live captures across all 3 slides.

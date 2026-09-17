@@ -131,8 +131,14 @@ export default function Header() {
         </div>
       )}
 
-      {/* 2 — Icon row, labels underneath, logo centred. hobbycraft's structure. */}
-      <div className="border-b border-hairline">
+      {/* 2 — MOBILE/TABLET (below lg): icon row, labels underneath, logo centred, hobbycraft's
+             structure, THEN a separate full-width search row beneath it — matching how
+             flyingtiger.com and dickblick.com both still split these two rows at phone width
+             (measured live, both sites). Only DESKTOP merges them (block 2b below): at 1280px+
+             there is enough horizontal room to hold logo, search and actions on one line the way
+             every reference site does it there, and the audit flagged our three stacked rows
+             (announcement, icon row, search row) as one row too many once that room exists. */}
+      <div className="lg:hidden border-b border-hairline">
         <div className="max-w-[1280px] mx-auto px-2 sm:px-4 flex items-center justify-between gap-1">
           <div className="flex items-center">
             <HeaderAction
@@ -161,13 +167,13 @@ export default function Header() {
               alt=""
               width={128}
               height={128}
-              className="w-8 h-8 rounded-lg object-cover"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg object-cover"
             />
             {/* Wraps to two lines at phone width where horizontal room is scarce, but stays on
                 ONE line from sm up. The audit found it wrapping at every breakpoint including
                 1440px, which made the wordmark read as cramped on a header with 900px spare. */}
             <span
-              className="font-bold tracking-tight text-brand-primary text-[15px] sm:text-lg leading-[1.05]"
+              className="font-bold tracking-tight text-brand-primary text-base sm:text-xl leading-[1.05]"
               translate="no"
             >
               STATIONERY<br className="sm:hidden" />
@@ -188,11 +194,83 @@ export default function Header() {
         </div>
       </div>
 
-      {/* 3 — Full-width search pill, own row. Unanimous across FT / hobbycraft / blick.
-             Placeholder carries the item count: copied from blick's "Search 110,000+ art supplies". */}
-      <div className="border-b border-hairline bg-white">
+      {/* Full-width search pill, own row — mobile/tablet only, see note above. Placeholder
+          carries the item count: copied from blick's "Search 110,000+ art supplies". */}
+      <div className="lg:hidden border-b border-hairline bg-white">
         <div className="max-w-[1280px] mx-auto px-4 py-2.5">
           <AskBox variant="header" />
+        </div>
+      </div>
+
+      {/* 2b — DESKTOP (lg+): logo, search and actions on ONE row, matching flyingtiger.com and
+          dickblick.com (both measured live, 16 Sep 2026) rather than stacking search on its own
+          row underneath — there is no reason to spend a whole extra row on it once the header is
+          1280px wide. Logo runs noticeably larger here too, closer to blick's bold wordmark
+          weight, since a 36px mark that was sized for a 375px phone read as small next to 900px+
+          of spare header width. */}
+      <div className="hidden lg:block border-b border-hairline">
+        <div className="max-w-[1280px] mx-auto px-8 py-3 flex items-center gap-6">
+          <button
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-expanded={menuOpen}
+            aria-controls="main-menu"
+            aria-label="Menu"
+            className="flex items-center gap-1.5 text-brand-dark shrink-0
+                       transition-colors duration-text ease-ref hover:text-brand-primary
+                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded-md px-1 py-1"
+          >
+            <MenuIcon className="w-6 h-6" />
+            <span className="text-sm font-medium">Menu</span>
+          </button>
+
+          <Link
+            to="/"
+            className="flex items-center gap-2.5 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded-md"
+          >
+            <img
+              src="/logo.webp"
+              alt=""
+              width={128}
+              height={128}
+              className="w-12 h-12 xl:w-14 xl:h-14 rounded-lg object-cover"
+            />
+            <span
+              className="font-bold tracking-tight text-brand-primary text-2xl xl:text-[28px] leading-none whitespace-nowrap"
+              translate="no"
+            >
+              STATIONERY POINT
+            </span>
+          </Link>
+
+          <div className="flex-1 max-w-xl">
+            <AskBox variant="header" />
+          </div>
+
+          <div className="flex items-center gap-4 shrink-0">
+            <a
+              href={STORE.mapsLink}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1.5 text-brand-dark
+                         transition-colors duration-text ease-ref hover:text-brand-primary
+                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded-md px-1 py-1"
+            >
+              <ShopPinIcon className="w-6 h-6" />
+              <span className="text-sm font-medium">Shop</span>
+            </a>
+            <a
+              href={waLink()}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1.5 text-brand-dark
+                         transition-colors duration-text ease-ref hover:text-brand-primary
+                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded-md px-1 py-1"
+            >
+              <WhatsAppIcon className="w-6 h-6" />
+              <span className="text-sm font-medium">WhatsApp</span>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -224,17 +302,6 @@ export default function Header() {
           ))}
         </ul>
       </nav>
-
-      {/* 4 — Trust strip. hobbycraft: light band, centred, two claims split by a divider, ~38px. */}
-      <div className="bg-brand-soft">
-        <div className="max-w-[1280px] mx-auto px-4 min-h-[38px] flex items-center justify-center">
-          <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-0.5 py-2 text-center text-[11px] leading-tight font-medium text-brand-dark">
-            <span>Free delivery across Kochi</span>
-            <span className="text-brand-primary/30" aria-hidden="true">│</span>
-            <span>Or pick up from the shop</span>
-          </p>
-        </div>
-      </div>
 
       {/* Menu panel. hobbycraft opens a full nav drawer from the Menu action. */}
       {menuOpen && (

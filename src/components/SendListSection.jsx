@@ -40,8 +40,14 @@ export default function SendListSection() {
               </ul>
             </div>
 
+            {/* variant="header" used to be passed here, which was a real bug: AskBox's
+                header variant is a single-line box that ignores `defaultMode` completely
+                and ejects straight to a catalog search — this section's whole point (paste
+                a multi-line list, get the mode toggle + WhatsApp list-send) never rendered.
+                Dropping the variant falls through to the full hero-style UI, which is the
+                only one that actually supports list mode (fixed 17 Sep 2026). */}
             <div className="rounded bg-brand-dark/40 p-4 sm:p-5">
-              <AskBox variant="header" defaultMode="list" />
+              <AskBox defaultMode="list" />
             </div>
           </div>
         </div>

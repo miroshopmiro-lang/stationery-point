@@ -29,11 +29,10 @@ const tiles = [
     title: 'Buying for a whole class?',
     body: 'Send us the list. We quote with GST, deliver across Kochi, and you pay on invoice.',
     cta: { label: 'Get a bulk quote', to: '/contact' },
-    // A real reams-of-copier-paper shot from Sam's own photos. The generated art briefed
-    // below would be better here, but nothing is worth a half-empty tile in the meantime.
-    image: '/shop-catalogue-images/03_jk_copy_paper_a4_80gsm.webp',
+    // AI studio shot (17 Sep 2026) of Sam's real JK Copier A4 ream, same treatment as the
+    // rest of the site — replaces the real phone-camera photo that read as "cheap" here.
+    image: '/ai-product-shots/03-jk-copy-paper-a4-80gsm.webp',
     panel: 'bg-brand-primary',
-    _imageBrief: 'Dense overhead flat-lay of institutional-quantity stationery — stacked plain notebooks, boxed pens, bulk paper reams. Blank unmarked surfaces, no text anywhere.',
   },
   {
     id: 'return-gifts',

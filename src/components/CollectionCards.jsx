@@ -6,6 +6,23 @@ import SmartImage from './SmartImage';
 const collections = collectionsFile.collections;
 
 /*
+ * AI PRODUCT SHOTS (16 Sep 2026): same homepage-only override as NewInRail.jsx / ProductRail.jsx
+ * — see NewInRail.jsx for the full reasoning. Keyed by collection id since collections.json has
+ * no product id, but most of these tile images are the same real photos already replaced for
+ * the other two rails, so this reuses those generated assets directly.
+ */
+const HOME_SHOT_OVERRIDES = {
+  'copier-paper': '/ai-product-shots/01-reflection-paper-a4-80-gsm.webp',
+  'craft-material': '/ai-product-shots/20-jags-air-dry-clay-250g.webp',
+  sketch: '/ai-product-shots/14-camel-sketch-pen-24pcs.webp',
+  'colour-pencils': '/ai-product-shots/16-camel-colour-pencil-24-shades.webp',
+  crayons: '/ai-product-shots/19-fc-jumbo-washable-crayons-24-shades.webp',
+  brushes: '/ai-product-shots/07-doms-brush-pen-12-shade.webp',
+  tapes: '/ai-product-shots/09-alpha-clear-tape-2-inch.webp',
+  notebooks: '/ai-product-shots/33-factor-note-notebook.webp',
+};
+
+/*
  * COLLECTION TILES — hobbycraft's category tile row (3:2 media, two across at 375, four at
  * desktop, centred heading with an underlined "View all" beneath), carrying smiggle's tile
  * anatomy: the label sits INSIDE the tile on the media bed, centred and underlined.
@@ -33,7 +50,7 @@ export default function CollectionCards() {
         <div className="px-4 lg:px-8 text-center">
           <h2
             id="collections-heading"
-            className="font-bold tracking-tight text-brand-primary text-[22px] leading-[1.18] lg:text-[32px]"
+            className="font-bold tracking-tight text-ink text-[22px] leading-[1.18] lg:text-[32px]"
           >
             What people come in for
           </h2>
@@ -61,7 +78,12 @@ export default function CollectionCards() {
               >
                 {/* 3:2 — hobbycraft's measured tile ratio, held at both breakpoints. */}
                 <div className="relative aspect-[3/2]">
-                  <SmartImage src={c.image} alt="" tint="var(--bed)" className="absolute inset-0" />
+                  <SmartImage
+                    src={HOME_SHOT_OVERRIDES[c.id] || c.image}
+                    alt=""
+                    tint="var(--bed)"
+                    className="absolute inset-0"
+                  />
                 </div>
 
                 {/* Label inside the tile, centred, underlined — block 4's anatomy exactly.

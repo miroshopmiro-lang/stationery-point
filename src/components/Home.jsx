@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import SendListModal from './SendListModal';
 import HeroCarousel from './HeroCarousel';
+import NewInRail from './NewInRail';
 import SchoolKitTiles from './SchoolKitTiles';
 import CategoryCircles from './CategoryCircles';
 import OffersRail from './OffersRail';
+import ProductRail from './ProductRail';
 import PromoTiles from './PromoTiles';
 import OfferStrip from './OfferStrip';
 import CollectionCards from './CollectionCards';
@@ -30,7 +32,16 @@ export default function Home() {
     <div>
       <SendListModal open={listModalOpen} onClose={() => setListModalOpen(false)} />
 
-      <HeroCarousel />
+      <HeroCarousel onOpenListModal={() => setListModalOpen(true)} />
+      {/* New In sits directly under the hero, above the kit tiles — flyingtiger's placement
+          for its new-arrivals rail. Sourced from newArrival:true product flags. */}
+      <NewInRail />
+      {/* Reviews moved up from just above VisitShop (was section 12 of 13, past where most
+          visitors scroll) to right under New In — CRO audit 17 Sep 2026: the 4.8★/150+ Google
+          reviews are the one proof point no competitor (online marketplace, distributor with no
+          storefront) can show, and a page's first proof point should land before the halfway
+          scroll mark, not near the bottom. */}
+      <Testimonials />
       {/* Kit tiles sit DIRECTLY under the hero — smiggle.co.uk's placement, above every
           product, collection and category. In school-buying season the parent's first
           question is "how much for the whole list", not "show me bags". */}
@@ -41,6 +52,9 @@ export default function Home() {
       <CategoryCircles />
       {/* Offers rail on a tinted band — hobbycraft's "Our best offers". Renders nothing
           when no product is genuinely below MRP. */}
+      {/* Product rail on a tinted band — flyingtiger / hobbycraft pattern (AUDIT-02 #2).
+          Shows 10 real photographed products with 'Price on WhatsApp'. */}
+      <ProductRail />
       <OffersRail />
       {/* Half-photo / half-flat-panel tiles with alternating photo side — flyingtiger's
           promo block. Type lives on the panel so artwork carries no text at all. */}
@@ -48,7 +62,6 @@ export default function Home() {
       <CollectionCards />
       <SendListSection />
       <BrandWall />
-      <Testimonials />
       <VisitShop />
       {/* AdvantageCards removed from the homepage 17 Aug 2026.
           At 1110px it was the TALLEST block on the page — taller than the hero — and not one

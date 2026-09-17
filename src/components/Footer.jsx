@@ -42,7 +42,11 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <p className="mt-12 text-center text-xs text-white/50">© {new Date().getFullYear()} Stationery Point, Kochi. All rights reserved.</p>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-white/60">
+          <Link to="/privacy" className="hover:text-brand-accent transition-colors underline underline-offset-4">Privacy Policy</Link>
+          <Link to="/terms" className="hover:text-brand-accent transition-colors underline underline-offset-4">Terms of Use</Link>
+        </div>
+        <p className="mt-4 text-center text-xs text-white/50">© {new Date().getFullYear()} Stationery Point, Kochi. All rights reserved.</p>
       </div>
       <div className="overflow-hidden" aria-hidden="true">
         <span className="block text-center uppercase font-extrabold leading-none text-white/10 text-[14vw] tracking-tight select-none -mb-[2vw]" translate="no">

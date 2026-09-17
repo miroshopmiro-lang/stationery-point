@@ -42,12 +42,12 @@ export default function OffersRail() {
   };
 
   return (
-    <section aria-labelledby="offers-heading" className="bg-brand-soft">
+    <section aria-labelledby="offers-heading" className="bg-bed">
       <div className="max-w-[1280px] mx-auto py-8 lg:py-14">
         <div className="px-4 lg:px-8 text-center">
           <h2
             id="offers-heading"
-            className="font-bold tracking-tight text-brand-primary text-[22px] leading-[1.18] lg:text-[32px]"
+            className="font-bold tracking-tight text-ink text-[22px] leading-[1.18] lg:text-[32px]"
           >
             Below MRP right now
           </h2>
@@ -60,7 +60,7 @@ export default function OffersRail() {
           {/* Rail. ~2.2 cards visible at 375px — hobbycraft's cut-off-card swipe cue. */}
           <ul
             ref={railRef}
-            className="flex gap-3 overflow-x-auto px-4 pb-2 lg:px-8 lg:gap-6
+            className="flex gap-4 overflow-x-auto px-5 pb-2 lg:px-8 lg:gap-6
                        [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
                        snap-x snap-mandatory"
           >

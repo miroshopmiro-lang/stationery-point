@@ -1,182 +1,134 @@
-import React, { useCallback, useEffect, useState } from 'react';
+﻿import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useReducedMotion } from 'framer-motion';
 import collectionsFile from '../data/collections.json';
 import SmartImage from './SmartImage';
-import { ChevronLeftIcon, ChevronRightIcon } from './icons';
+import { WhatsAppIcon } from './icons';
 
 const slides = collectionsFile.hero;
-const ROTATE_MS = 6000;
-
-/*
- * HERO — SPLIT PANEL. Photo on one side, solid colour panel carrying the type on the other.
- *
- * WHY THIS SHAPE (measured 17 Aug 2026, looking at the rendered pages):
- *   NONE of the four references puts type on a gradient scrim over a photo. Zero. What they
- *   actually do:
- *     flyingtiger.com  — its two-up promo tiles are literally HALF PHOTO / HALF FLAT COLOUR
- *                        PANEL, and they ALTERNATE which side the photo sits on. Type and a
- *                        pill button sit on the flat panel.
- *     smiggle.co.uk    — hero artwork contains a solid desaturated teal rectangle over the
- *                        left ~45%, and the whole headline stack sits inside that panel.
- *     dickblick.com    — same split inside white cards: type block one side, product photo
- *                        bleeding off the other. Its wide hero reserves a clean left third.
- *     hobbycraft.co.uk — bakes the entire poster, which we can't do (every price change
- *                        would cost a regeneration in two crops).
- *   Three of four = solid panel or planned clear zone. So we copy that and drop the scrim.
- *
- * WHAT THIS BUYS US: the generated image never needs a clear zone, never needs to be dark
- * enough to carry white text, and never needs a single character of text in it.
- *
- * Mobile (375px) stacks: photo above, panel below. Near-square overall, following
- * hobbycraft's dedicated mobile hero crop (measured 375x360 native, 1.04:1) rather than
- * squeezing a wide desktop banner down — which is smiggle's mistake, where the baked
- * headline lands about 13px tall on a phone.
- */
+const ROTATE_MS = 6500;
 
 export default function HeroCarousel() {
   const [index, setIndex] = useState(0);
-  const [userTook, setUserTook] = useState(false);
   const reduce = useReducedMotion();
 
   const go = useCallback((next) => {
     setIndex(() => (next + slides.length) % slides.length);
   }, []);
 
-  const take = useCallback((next) => {
-    setUserTook(true);
-    go(next);
-  }, [go]);
-
+  // Always auto-rotates on every breakpoint — no arrow controls, and jumping to a
+  // slide via the dots below no longer stops the interval (17 Sep 2026, on request).
   useEffect(() => {
-    if (userTook || reduce || slides.length < 2) return undefined;
+    if (reduce || slides.length < 2) return undefined;
     const id = setInterval(() => setIndex((prev) => (prev + 1) % slides.length), ROTATE_MS);
     return () => clearInterval(id);
-  }, [userTook, reduce]);
+  }, [reduce]);
 
   return (
-    <section aria-roledescription="carousel" aria-label="Featured" className="relative w-full">
-      <div className="relative">
+    <section aria-roledescription="carousel" aria-label="Featured Collections" className="relative w-full bg-[#241F6B]">
+      {/* FULL-BLEED HERO BANNER. Re-measured live off flyingtiger.com on 16 Sep 2026, twice, at
+          two different viewport widths, and it is NOT aspect-ratio-driven below desktop: their
+          .banner_container holds a FIXED PIXEL HEIGHT (208px) from phone widths up through
+          tablet, then jumps to a second fixed height (350px, which is also exactly their
+          measured 1400x350 desktop ratio, 4:1, once their page-width max-width caps the
+          container at 1400px). The ratio only looks wide because the WIDTH changes under a
+          constant height, not because they picked a wide aspect-ratio directly. An earlier
+          version of this comment tried a fixed aspect-[2.75/1] on mobile to avoid over-cropping
+          the source photo, but that made the banner too short/thin on an actual phone (the
+          previous 2.75:1 guess did not match either of flyingtiger's two real measured heights).
+          Matching their real mechanism instead: fixed height on phone/tablet, switching to the
+          4:1 ratio only at the lg breakpoint. */}
+      <div
+        className="relative w-full overflow-hidden bg-brand-dark h-[208px] sm:h-[280px] lg:h-auto lg:aspect-[4/1]"
+      >
         {slides.map((s, i) => {
-          // flyingtiger.com alternates which side the photo sits on across consecutive
-          // promo tiles. Same alternation here, driven off the slide index.
-          const photoRight = i % 2 === 1;
-
+          const isActive = i === index;
           return (
             <div
               key={s.id}
               role="group"
               aria-roledescription="slide"
-              aria-label={`${i + 1} of ${slides.length}`}
-              aria-hidden={i !== index}
-              className={
-                (i === index ? 'grid' : 'hidden') +
-                ' grid-cols-1 lg:grid-cols-2 items-stretch'
-              }
+              aria-label={s.title}
+              aria-hidden={!isActive}
+              className={`absolute inset-0 transition-opacity duration-surface ease-ref ${
+                isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+              }`}
             >
-              {/* PHOTO HALF. No scrim, no overlay, nothing on top of it. */}
-              {/* 16:10 at phone width, not 4:3. Measured 17 Aug: at 4:3 the whole hero came to
-                  575px tall at 375px, against flyingtiger's 223px and hobbycraft's dedicated
-                  360px mobile hero. Being 2.6x taller than the visual reference is a density
-                  failure, and it pushes the kit tiles — the highest-converting block — below
-                  the fold. 16:10 + a tighter panel brings the hero to roughly 400px. */}
-              <div
-                className={
-                  'relative aspect-[16/10] lg:aspect-auto lg:min-h-[440px] ' +
-                  (photoRight ? 'lg:order-2' : 'lg:order-1')
-                }
-              >
+              {/* Edge-to-edge natural photography banner — uncropped. Copy (eyebrow, title,
+                  subtitle) is baked into the generated art itself, not rendered as HTML — on
+                  explicit direction (16 Sep 2026): an image model integrates title typography
+                  into the composition (matching its own lighting/colour/layout) in a way a
+                  generic HTML overlay + gradient scrim can't match. Only the buttons stay real
+                  HTML, since they need to be clickable. Accessible text below stands in for the
+                  baked copy for screen readers/SEO. See research/hero-references/PROMPTS.md for
+                  the exact prompts (incl. the copy to bake in) used to generate each image. */}
+              <div className="absolute inset-0 w-full h-full">
                 <SmartImage
                   src={s.image}
                   srcMobile={s.imageMobile}
-                  alt=""
-                  tint="#EEF0FB"
-                  className="absolute inset-0"
+                  alt={`${s.title} — ${s.subtitle}`}
+                  tint="#241F6B"
+                  className="absolute inset-0 w-full h-full"
+                  imgClassName="object-left"
                   eager={i === 0}
                 />
               </div>
 
-              {/* PANEL HALF — solid brand colour, carries all the type.
-                  Copied from smiggle's teal headline panel and FT's promo-tile panel. */}
-              <div
-                className={
-                  'bg-brand-primary flex flex-col justify-center px-5 py-5 sm:px-8 lg:px-12 lg:py-14 ' +
-                  (photoRight ? 'lg:order-1' : 'lg:order-2')
-                }
-              >
-                <div className="max-w-md">
-                  <span className="inline-block text-[11px] font-bold uppercase tracking-[0.12em] text-brand-accent mb-2.5">
-                    {s.eyebrow}
-                  </span>
-                  <h2 className="text-white font-bold tracking-tight text-[30px] leading-[1.08] lg:text-[52px] lg:leading-[1.05] text-balance">
-                    {s.title}
-                  </h2>
-                  <p className="mt-2 text-white/85 text-[14px] leading-snug lg:text-base lg:leading-relaxed max-w-sm">
-                    {s.subtitle}
-                  </p>
-                  {/* On-panel CTA is a white pill — flyingtiger.com's promo tiles use exactly
-                      this: white pill, dark label, sitting on the flat colour panel. */}
+              <div className="sr-only">
+                <span>{s.eyebrow}</span>
+                <h2>{s.title}</h2>
+                <p>{s.subtitle}</p>
+              </div>
+
+              <div className="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 flex flex-col justify-end pb-3 sm:pb-5 lg:pb-6 pointer-events-none z-20">
+                <div className="flex items-center gap-1.5 sm:gap-3 pointer-events-auto">
                   <Link
                     to={s.cta.to}
-                    className="mt-4 lg:mt-6 inline-flex items-center justify-center min-h-[48px] rounded-full
-                               bg-white text-brand-primary font-semibold px-7 text-[15px]
-                               transition-colors duration-text ease-ref hover:bg-brand-accent hover:text-brand-dark
-                               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                    className="inline-flex items-center justify-center h-9 sm:h-10 lg:h-11 rounded-full
+                               bg-white text-brand-primary font-bold px-4 sm:px-6 lg:px-7 text-xs sm:text-sm
+                               shadow-lg transition-all duration-text ease-ref
+                               hover:bg-brand-accent hover:text-brand-dark hover:scale-[1.02]
+                               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent shrink-0"
                   >
                     {s.cta.label}
                   </Link>
+
+                  <a
+                    href="https://wa.me/919447144005?text=Hi%20Stationery%20Point%2C%20I%20would%20like%20to%20enquire%20about%20supplies"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 h-9 sm:h-10 lg:h-11 rounded-full
+                               bg-brand-dark/85 hover:bg-brand-dark backdrop-blur-sm border border-white/25
+                               text-white font-medium px-3 sm:px-5 text-xs sm:text-sm
+                               transition-all duration-text ease-ref hover:scale-[1.02]
+                               shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent shrink-0"
+                  >
+                    <WhatsAppIcon className="w-4 h-4 text-brand-accent" />
+                    <span>WhatsApp</span>
+                  </a>
                 </div>
               </div>
             </div>
           );
         })}
 
+        {/* Slide indicators only — no prev/next arrows (17 Sep 2026, on request). Dots still
+            let a visitor jump to a slide, but no longer stop the auto-rotate. */}
         {slides.length > 1 && (
-          <>
-            {/* Arrow controls: big white circles with brand chevrons, overlaid on the media
-                edge, vertically centred. Copied from hobbycraft.co.uk's rail arrows. */}
-            <button
-              type="button"
-              onClick={() => take(index - 1)}
-              aria-label="Previous slide"
-              className="hidden lg:flex absolute left-3 top-[40%] -translate-y-1/2 w-11 h-11 rounded-full
-                         bg-white shadow-card text-brand-primary items-center justify-center
-                         transition-colors duration-text ease-ref hover:bg-brand-soft
-                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
-            >
-              <ChevronLeftIcon className="w-5 h-5" />
-            </button>
-            <button
-              type="button"
-              onClick={() => take(index + 1)}
-              aria-label="Next slide"
-              className="hidden lg:flex absolute right-3 top-[40%] -translate-y-1/2 w-11 h-11 rounded-full
-                         bg-white shadow-card text-brand-primary items-center justify-center
-                         transition-colors duration-text ease-ref hover:bg-brand-soft
-                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
-            >
-              <ChevronRightIcon className="w-5 h-5" />
-            </button>
-
-            {/* Dots sit BELOW the panel, on the page — not floated over the artwork.
-                hobbycraft puts its card-image dots inside the card on a light ground for
-                the same reason: dots over photography are unreliable at 375px. */}
-            <div className="flex justify-center gap-2 py-3 bg-white">
-              {slides.map((s, i) => (
-                <button
-                  key={s.id}
-                  type="button"
-                  onClick={() => take(i)}
-                  aria-label={`Go to slide ${i + 1}`}
-                  aria-current={i === index}
-                  className={
-                    'h-2 rounded-full transition-all duration-text ease-ref ' +
-                    (i === index ? 'w-7 bg-brand-primary' : 'w-2 bg-hairline hover:bg-muted')
-                  }
-                />
-              ))}
-            </div>
-          </>
+          <div className="absolute bottom-1.5 sm:bottom-3 left-0 right-0 z-30 flex justify-center gap-1.5 sm:gap-2">
+            {slides.map((s, i) => (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => go(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                aria-current={i === index}
+                className={`h-1.5 sm:h-2 rounded-full transition-all duration-text ease-ref ${
+                  i === index ? 'w-5 sm:w-7 bg-brand-accent' : 'w-1.5 sm:w-2 bg-white/70 hover:bg-white shadow-sm'
+                }`}
+              />
+            ))}
+          </div>
         )}
       </div>
     </section>

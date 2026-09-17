@@ -147,7 +147,9 @@ export default function SendListModal({ open, onClose }) {
                 </button>
               ) : (
                 <div className="rounded-xl border border-brand-primary/30 bg-brand-dark px-4 py-4">
-                  <AskBox variant="header" defaultMode="list" />
+                  {/* Same fix as SendListSection.jsx: variant="header" silently skips list
+                      mode entirely, so this never showed the paste-list textarea. */}
+                  <AskBox defaultMode="list" />
                 </div>
               )}
             </div>
