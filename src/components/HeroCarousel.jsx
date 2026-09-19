@@ -4,6 +4,7 @@ import { useReducedMotion } from 'framer-motion';
 import collectionsFile from '../data/collections.json';
 import SmartImage from './SmartImage';
 import { WhatsAppIcon } from './icons';
+import { STORE } from '../lib/utils';
 
 const slides = collectionsFile.hero;
 const ROTATE_MS = 2500;
@@ -94,7 +95,7 @@ export default function HeroCarousel() {
                   </Link>
 
                   <a
-                    href="https://wa.me/919447144005?text=Hi%20Stationery%20Point%2C%20I%20would%20like%20to%20enquire%20about%20supplies"
+                    href={`https://wa.me/${STORE.whatsapp}?text=Hi%20Stationery%20Point%2C%20I%20would%20like%20to%20enquire%20about%20supplies`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 h-9 sm:h-10 lg:h-11 rounded-full

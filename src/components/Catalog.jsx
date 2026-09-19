@@ -3,7 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Fuse from 'fuse.js';
 import { products, categories, activeCategories } from '../data/productData';
-import { SearchIcon } from './icons';
+import { SearchIcon, WhatsAppIcon } from './icons';
+import { STORE } from '../lib/utils';
 import ProductCard from './ProductCard';
 import CategoryCard from './CategoryCard';
 
@@ -16,8 +17,12 @@ const filters = [{ id: 'all', label: 'All Products' }, ...activeCategories.map((
 // comment for why Fuse over a hand-rolled fuzzy function) — a shopper typing "pensil" or
 // "noteboks" here should still find products, not hit "no results" over a spelling slip.
 const productFuse = new Fuse(products, {
-  keys: ['name', 'brand', 'categoryLabel'],
-  threshold: 0.35,
+  keys: [
+    { name: 'name', weight: 3 },
+    { name: 'brand', weight: 2 },
+    { name: 'categoryLabel', weight: 0.5 },
+  ],
+  threshold: 0.22,
   ignoreLocation: true,
 });
 
@@ -174,7 +179,24 @@ export default function Catalog() {
           </div>
           {filtered.length === 0 && (
             <div className="text-center py-20 text-gray-400 flex flex-col items-center justify-center">
-              <p>No products match your search. Try a different term or clear filters.</p>
+              <p className="text-gray-600 font-medium">
+                {query.trim()
+                  ? `We haven't listed "${query.trim()}" yet — but we may still have it.`
+                  : 'No products in this category yet.'}
+              </p>
+              <p className="mt-1 text-sm">Our shop stocks far more than this page shows. Ask Sam and he'll confirm.</p>
+              <a
+                href={`https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(
+                  query.trim()
+                    ? `Hi Stationery Point, I'm looking for: ${query.trim()}. Could you confirm if you have this in stock and the price?`
+                    : 'Hi Stationery Point, I have a question about your products.'
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex items-center gap-2 px-6 py-3 bg-[#25D366] text-[#053D1E] font-bold rounded-full shadow-md hover:bg-[#3DE07D] transition-colors text-sm"
+              >
+                <WhatsAppIcon className="w-4 h-4" /> Ask on WhatsApp
+              </a>
               <button
                 type="button"
                 onClick={() => setSearchParams({})}

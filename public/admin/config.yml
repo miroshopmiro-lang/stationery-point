@@ -55,6 +55,9 @@ collections:
       - { name: newArrival, label: Show in New Arrivals, widget: boolean, default: false }
       - { name: description, label: Description, widget: text, required: false, default: '' }
       - { name: tags, label: Search Tags, widget: list, required: false, default: [] }
+      - { name: unit, label: Unit, widget: string, required: false, hint: 'NOS, PACK, etc. Leave as is' }
+      - { name: sourceDescription, label: 'Original list name', widget: hidden, required: false }
+      - { name: brandSource, label: 'Brand source', widget: hidden, required: false }
       - { name: id, label: Internal ID, widget: number, required: false, hint: 'Leave empty for new products' }
 
   - name: settings
