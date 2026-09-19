@@ -10,8 +10,8 @@
         "label": "Shop school supplies",
         "to": "/catalog?category=stationery"
       },
-      "image": "/hero/hero-school.webp",
-      "imageMobile": "/hero/hero-school-mobile.webp"
+      "image": "/hero/hero-school-v2.webp",
+      "imageMobile": "/hero/hero-school-mobile-v2.webp"
     },
     {
       "id": "art",
@@ -22,8 +22,8 @@
         "label": "Shop art supplies",
         "to": "/catalog?category=art-supplies"
       },
-      "image": "/hero/hero-art.webp",
-      "imageMobile": "/hero/hero-art-mobile.webp"
+      "image": "/hero/hero-art-v2.webp",
+      "imageMobile": "/hero/hero-art-mobile-v2.webp"
     },
     {
       "id": "office",
@@ -34,8 +34,8 @@
         "label": "Get bulk quote",
         "to": "/contact"
       },
-      "image": "/hero/hero-office.webp",
-      "imageMobile": "/hero/hero-office-mobile.webp"
+      "image": "/hero/hero-office-v2.webp",
+      "imageMobile": "/hero/hero-office-mobile-v2.webp"
     }
   ],
   "collections": [
