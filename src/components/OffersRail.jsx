@@ -81,7 +81,7 @@ export default function OffersRail() {
             type="button"
             onClick={() => scrollBy(-1)}
             aria-label="Scroll offers left"
-            className="hidden lg:flex absolute left-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full
+            className="hidden lg:flex absolute left-2 top-[30%] -translate-y-1/2 z-10 w-11 h-11 rounded-full
                        bg-white shadow-card text-brand-primary items-center justify-center
                        transition-colors duration-text ease-ref hover:bg-brand-accent
                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
@@ -92,7 +92,7 @@ export default function OffersRail() {
             type="button"
             onClick={() => scrollBy(1)}
             aria-label="Scroll offers right"
-            className="hidden lg:flex absolute right-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full
+            className="hidden lg:flex absolute right-2 top-[30%] -translate-y-1/2 z-10 w-11 h-11 rounded-full
                        bg-white shadow-card text-brand-primary items-center justify-center
                        transition-colors duration-text ease-ref hover:bg-brand-accent
                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"

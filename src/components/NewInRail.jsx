@@ -86,40 +86,46 @@ export default function NewInRail() {
               Just landed at the shop
             </p>
           </div>
-
-          <div className="flex items-center gap-2 shrink-0">
-            <button
-              type="button"
-              onClick={() => scrollBy(-1)}
-              aria-label="Scroll new arrivals left"
-              className="flex w-9 h-9 lg:w-10 lg:h-10 rounded-full border border-ink/15 bg-white text-ink items-center justify-center shadow-card transition-colors duration-text ease-ref hover:bg-ink hover:text-white hover:border-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
-            >
-              <ChevronLeftIcon className="w-4 h-4 lg:w-5 lg:h-5" />
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollBy(1)}
-              aria-label="Scroll new arrivals right"
-              className="flex w-9 h-9 lg:w-10 lg:h-10 rounded-full border border-ink/15 bg-white text-ink items-center justify-center shadow-card transition-colors duration-text ease-ref hover:bg-ink hover:text-white hover:border-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
-            >
-              <ChevronRightIcon className="w-4 h-4 lg:w-5 lg:h-5" />
-            </button>
-          </div>
         </div>
 
-        <ul
-          ref={railRef}
-          className="mt-5 flex gap-4 overflow-x-auto px-5 pb-2 lg:px-8 lg:gap-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory"
-        >
-          {newArrivals.map((p) => (
-            <li
-              key={p.id ?? p.name}
-              className="shrink-0 snap-start flex w-[158px] sm:w-[190px] lg:w-[232px]"
-            >
-              <ProductCard product={p} />
-            </li>
-          ))}
-        </ul>
+        <div className="relative mt-5">
+          <ul
+            ref={railRef}
+            className="flex gap-4 overflow-x-auto px-5 pb-2 lg:px-8 lg:gap-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory"
+          >
+            {newArrivals.map((p) => (
+              <li
+                key={p.id ?? p.name}
+                className="shrink-0 snap-start flex w-[158px] sm:w-[190px] lg:w-[232px]"
+              >
+                <ProductCard product={p} />
+              </li>
+            ))}
+          </ul>
+
+          <button
+            type="button"
+            onClick={() => scrollBy(-1)}
+            aria-label="Scroll new arrivals left"
+            className="hidden lg:flex absolute left-2 top-[30%] -translate-y-1/2 z-10 w-11 h-11 rounded-full
+                       bg-white shadow-card border border-ink/10 text-ink items-center justify-center
+                       transition-colors duration-text ease-ref hover:bg-ink hover:text-white
+                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
+          >
+            <ChevronLeftIcon className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollBy(1)}
+            aria-label="Scroll new arrivals right"
+            className="hidden lg:flex absolute right-2 top-[30%] -translate-y-1/2 z-10 w-11 h-11 rounded-full
+                       bg-white shadow-card border border-ink/10 text-ink items-center justify-center
+                       transition-colors duration-text ease-ref hover:bg-ink hover:text-white
+                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
+          >
+            <ChevronRightIcon className="w-5 h-5" />
+          </button>
+        </div>
 
         <div className="mt-6 flex justify-center px-4">
           <Link
