@@ -11,6 +11,7 @@ import React, { useState } from 'react';
 export default function SmartImage({
   src,
   srcMobile,
+  sizes,
   alt = '',
   tint = '#EEF0FB',
   className = '',
@@ -48,6 +49,10 @@ export default function SmartImage({
           {srcMobile && <source media="(max-width: 639px)" srcSet={srcMobile} />}
           <img
             src={src}
+            {...(sizes && /\.webp$/.test(src) ? {
+              srcSet: `${src.replace(/\.webp$/, '-480.webp')} 480w, ${src.replace(/\.webp$/, '-800.webp')} 800w, ${src} 1200w`,
+              sizes,
+            } : {})}
             alt={alt}
             width={width}
             height={height}

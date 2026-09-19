@@ -40,7 +40,7 @@ export default function HeroCarousel() {
           Matching their real mechanism instead: fixed height on phone/tablet, switching to the
           4:1 ratio only at the lg breakpoint. */}
       <div
-        className="relative w-full overflow-hidden bg-brand-dark h-[208px] sm:h-[280px] lg:h-auto lg:aspect-[3.2/1]"
+        className="relative w-full overflow-hidden bg-brand-dark aspect-[2.25/1] sm:aspect-auto sm:h-[280px] lg:h-auto lg:aspect-[3.2/1]"
       >
         {slides.map((s, i) => {
           const isActive = i === index;
@@ -81,12 +81,12 @@ export default function HeroCarousel() {
                 <p>{s.subtitle}</p>
               </div>
 
-              <div className="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 flex flex-col justify-end pb-3 sm:pb-5 lg:pb-6 pointer-events-none z-20">
+              <div className="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 flex flex-col justify-end pb-2 sm:pb-5 lg:pb-6 pointer-events-none z-20">
                 <div className="flex items-center gap-1.5 sm:gap-3 pointer-events-auto">
                   <Link
                     to={s.cta.to}
-                    className="inline-flex items-center justify-center h-9 sm:h-10 lg:h-11 rounded-full
-                               bg-white text-brand-primary font-bold px-4 sm:px-6 lg:px-7 text-xs sm:text-sm
+                    className="inline-flex items-center justify-center h-8 sm:h-10 lg:h-11 rounded-full
+                               bg-white text-brand-primary font-bold px-3.5 sm:px-6 lg:px-7 text-[11px] sm:text-sm
                                shadow-lg transition-all duration-text ease-ref
                                hover:bg-brand-accent hover:text-brand-dark hover:scale-[1.02]
                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent shrink-0"
@@ -98,7 +98,7 @@ export default function HeroCarousel() {
                     href={`https://wa.me/${STORE.whatsapp}?text=Hi%20Stationery%20Point%2C%20I%20would%20like%20to%20enquire%20about%20supplies`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 h-9 sm:h-10 lg:h-11 rounded-full
+                    className="inline-flex items-center gap-1.5 h-8 sm:h-10 lg:h-11 rounded-full
                                bg-[#25D366] hover:bg-[#3DE07D] border border-white/60
                                text-[#053D1E] font-bold px-3 sm:px-5 text-xs sm:text-sm
                                transition-all duration-text ease-ref hover:scale-[1.02]

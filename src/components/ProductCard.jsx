@@ -48,7 +48,7 @@ export default function ProductCard({ product }) {
       {/* Plain neutral-grey square media, no border, no radius — flyingtiger's tile. */}
       <div className="relative aspect-square bg-bed">
         {product.image ? (
-          <SmartImage src={product.image} alt={product.name} tint="var(--bed)" className="absolute inset-0" />
+          <SmartImage src={product.image} alt={product.name} tint="var(--bed)" className="absolute inset-0" sizes="(max-width: 767px) 46vw, 320px" />
         ) : (
           <CardImagePlaceholder />
         )}
