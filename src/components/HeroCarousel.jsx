@@ -96,6 +96,9 @@ export default function HeroCarousel() {
                   className="absolute inset-0 w-full h-full"
                   imgClassName="object-left"
                   eager={i === 0}
+                  // All slides load up front: with a 2.5s rotation, a lazy slide 2 was still
+                  // downloading when it faded in, showing a blank navy panel on first visit.
+                  loading="eager"
                 />
               </div>
 

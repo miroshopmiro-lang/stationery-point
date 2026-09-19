@@ -19,6 +19,7 @@ export default function SmartImage({
   width,
   height,
   eager = false,
+  loading: loadingProp,
   children,
 }) {
   const [failed, setFailed] = useState(false);
@@ -56,7 +57,7 @@ export default function SmartImage({
             alt={alt}
             width={width}
             height={height}
-            loading={eager ? 'eager' : 'lazy'}
+            loading={loadingProp || (eager ? 'eager' : 'lazy')}
             decoding={eager ? 'sync' : 'async'}
             {...(eager ? { fetchpriority: 'high' } : {})}
             onError={() => setFailed(true)}
