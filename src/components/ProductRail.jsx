@@ -56,7 +56,7 @@ export default function ProductRail() {
               id="featured-products-heading"
               className="font-bold tracking-tight text-ink text-[20px] leading-[1.2] lg:text-[28px]"
             >
-              Popular in store right now
+              Popular in store <span className="hl-slant">right now</span>
             </h2>
             <p className="mt-1 text-[13px] text-muted lg:text-[14px]">
               Real stock on the shelves in Vyttila

@@ -113,12 +113,14 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white">
       {/* 1 — Announcement bar. flyingtiger.com: full-bleed dark, 34px @375, centred white text. */}
       {noticeOpen && (
-        <div className="relative bg-brand-dark text-white">
+        <div className="relative text-white border-b-[3px] border-[#FFC107]" style={{ background: 'linear-gradient(90deg,#241F6B 0%,#3A34A8 50%,#241F6B 100%)' }}>
           <p
             className="h-[34px] flex items-center justify-center px-10 text-center text-[12px] leading-none font-medium"
             aria-live="polite"
           >
+            <span className="text-[#FFC107] mr-2" aria-hidden="true">✦</span>
             {announcements[claim]}
+            <span className="text-[#FFC107] ml-2" aria-hidden="true">✦</span>
           </p>
           <button
             type="button"

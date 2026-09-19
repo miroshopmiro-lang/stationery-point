@@ -52,7 +52,7 @@ export default function CollectionCards() {
             id="collections-heading"
             className="font-bold tracking-tight text-ink text-[22px] leading-[1.18] lg:text-[32px]"
           >
-            What people come in for
+            What people <span className="hl-slant">come in for</span>
           </h2>
           <Link
             to="/catalog"

@@ -12,14 +12,14 @@ const brands = brandsFile.confirmed.map((b) => b.name);
 
 export default function BrandWall() {
   return (
-    <section className="py-12 sm:py-16">
+    <section className="band-doodle py-12 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="mb-6">
+        <div className="mb-6 band-title">
           <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-brand-primary/70 block mb-1.5">
             On our shelves
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900">
-            Brands we stock
+            Brands <span className="hl-slant">we stock</span>
           </h2>
         </div>
 
@@ -34,7 +34,7 @@ export default function BrandWall() {
           ))}
         </ul>
 
-        <p className="mt-4 text-xs text-gray-500">
+        <p className="mt-5 inline-block rounded-full bg-white px-4 py-2 text-sm text-gray-700 shadow-sm">
           Looking for something else? Ask us — we carry more than we can list here.
         </p>
       </div>

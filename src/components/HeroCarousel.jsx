@@ -6,7 +6,7 @@ import SmartImage from './SmartImage';
 import { WhatsAppIcon } from './icons';
 
 const slides = collectionsFile.hero;
-const ROTATE_MS = 6500;
+const ROTATE_MS = 2500;
 
 export default function HeroCarousel() {
   const [index, setIndex] = useState(0);
@@ -39,7 +39,7 @@ export default function HeroCarousel() {
           Matching their real mechanism instead: fixed height on phone/tablet, switching to the
           4:1 ratio only at the lg breakpoint. */}
       <div
-        className="relative w-full overflow-hidden bg-brand-dark h-[208px] sm:h-[280px] lg:h-auto lg:aspect-[4/1]"
+        className="relative w-full overflow-hidden bg-brand-dark h-[208px] sm:h-[280px] lg:h-auto lg:aspect-[3.2/1]"
       >
         {slides.map((s, i) => {
           const isActive = i === index;
@@ -98,12 +98,12 @@ export default function HeroCarousel() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 h-9 sm:h-10 lg:h-11 rounded-full
-                               bg-brand-dark/85 hover:bg-brand-dark backdrop-blur-sm border border-white/25
-                               text-white font-medium px-3 sm:px-5 text-xs sm:text-sm
+                               bg-[#25D366] hover:bg-[#3DE07D] border border-white/60
+                               text-[#053D1E] font-bold px-3 sm:px-5 text-xs sm:text-sm
                                transition-all duration-text ease-ref hover:scale-[1.02]
                                shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent shrink-0"
                   >
-                    <WhatsAppIcon className="w-4 h-4 text-brand-accent" />
+                    <WhatsAppIcon className="w-4 h-4 text-[#053D1E]" />
                     <span>WhatsApp</span>
                   </a>
                 </div>

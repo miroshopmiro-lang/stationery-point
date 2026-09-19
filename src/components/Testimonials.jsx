@@ -1,8 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import reviewsFile from '../data/reviews.json';
-import { StarIcon, ChevronLeftIcon, ChevronRightIcon } from './icons';
+import { StarIcon } from './icons';
 
-const { aggregate, items: reviews } = reviewsFile;
+const { aggregate, items: allReviews } = reviewsFile;
+
+// Rail shows only reviews short enough to sit in equal-height cards. Long ones stay in
+// reviews.json untouched; nothing is cut or paraphrased, so every card is a full review.
+const MAX_CHARS = 265;
+const reviews = allReviews.filter((r) => r.text.length <= MAX_CHARS);
 
 /*
  * REVIEWS — the one block on this page that NO reference site can show.
@@ -95,22 +100,83 @@ function ReviewCard({ review }) {
 
 export default function Testimonials() {
   const railRef = useRef(null);
+  const trackRef = useRef(null);
+
+  // Same mechanism as augzet v2's review rail: rAF auto-scroll, pointer drag with inertia.
+  // Nothing pauses on hover; the rail only stops while it is pressed/dragged, and resumes on release.
+  useEffect(() => {
+    const rail = railRef.current;
+    const track = trackRef.current;
+    if (!rail || !track) return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+
+    let half = track.scrollWidth / 2;
+    const onResize = () => { half = track.scrollWidth / 2; };
+    window.addEventListener('resize', onResize);
+
+    let x = 0, velocity = 0, dragging = false, startX = 0, dragStart = 0, lastX = 0, lastT = 0, raf = 0;
+    const AUTO = -0.7;
+    const wrap = (v) => {
+      if (half <= 0) return v;
+      while (v < -half) v += half;
+      while (v > 0) v -= half;
+      return v;
+    };
+    const render = () => { x = wrap(x); track.style.transform = `translate3d(${x}px,0,0)`; };
+    const tick = () => {
+      if (!dragging) {
+        if (Math.abs(velocity) > 0.05) { x += velocity; velocity *= 0.94; } else { x += AUTO; }
+        render();
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+
+    const down = (e) => {
+      dragging = true; startX = e.clientX; dragStart = x; velocity = 0; lastX = e.clientX; lastT = performance.now();
+      rail.style.cursor = 'grabbing';
+      try { rail.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+    };
+    const move = (e) => {
+      if (!dragging) return;
+      x = wrap(dragStart + (e.clientX - startX));
+      render();
+      const now = performance.now();
+      const dt = now - lastT;
+      if (dt > 0) { velocity = ((e.clientX - lastX) / dt) * 16; lastX = e.clientX; lastT = now; }
+    };
+    const up = (e) => {
+      if (!dragging) return;
+      dragging = false;
+      rail.style.cursor = 'grab';
+      try { rail.releasePointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+    };
+    rail.addEventListener('pointerdown', down);
+    rail.addEventListener('pointermove', move);
+    rail.addEventListener('pointerup', up);
+    rail.addEventListener('pointercancel', up);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', onResize);
+      rail.removeEventListener('pointerdown', down);
+      rail.removeEventListener('pointermove', move);
+      rail.removeEventListener('pointerup', up);
+      rail.removeEventListener('pointercancel', up);
+    };
+  }, []);
 
   if (!reviews.length) return null;
 
-  const scrollBy = (dir) => {
-    railRef.current?.scrollBy({ left: dir * 290, behavior: 'smooth' });
-  };
-
   return (
-    <section aria-labelledby="reviews-heading" className="bg-bed">
+    <section aria-labelledby="reviews-heading" className="band-doodle">
       <div className="max-w-[1280px] mx-auto py-8 lg:py-14">
         <div className="px-4 lg:px-8 text-center">
+         <div className="band-title">
           <h2
             id="reviews-heading"
             className="font-bold tracking-tight text-ink text-[22px] leading-[1.18] lg:text-[32px]"
           >
-            What Kochi says about us
+            What Kochi says <span className="hl-slant">about us</span>
           </h2>
 
           {/* The aggregate, stated plainly and high. This is the number no reference has. */}
@@ -121,45 +187,24 @@ export default function Testimonials() {
               from {aggregate.count} {aggregate.source} reviews
             </span>
           </p>
+         </div>
         </div>
 
-        <div className="relative mt-6">
-          {/* ~1.2 cards visible at 375px so the cut-off card cues the swipe — hobbycraft's rail. */}
-          <ul
-            ref={railRef}
-            className="flex gap-3 overflow-x-auto px-4 pb-2 lg:px-8 lg:gap-6
-                       [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
-                       snap-x snap-mandatory"
-          >
-            {reviews.map((r) => (
-              <li key={r.name} className="shrink-0 snap-start w-[280px] lg:w-[340px] flex">
+        {/* Auto-scrolling marquee. The list is rendered twice and the track slides -50%, so the
+            loop is seamless. Driven by rAF, draggable, pauses only while pressed; with reduced motion it becomes a normal
+            swipeable rail and the duplicate set is hidden. */}
+        <div ref={railRef} className="reviews-marquee relative mt-6">
+          <ul ref={trackRef} className="reviews-track flex gap-3 lg:gap-6 w-max px-4 lg:px-8 pb-2">
+            {[...reviews, ...reviews].map((r, i) => (
+              <li
+                key={r.name + i}
+                aria-hidden={i >= reviews.length ? 'true' : undefined}
+                className={'shrink-0 w-[280px] lg:w-[340px] flex' + (i >= reviews.length ? ' reviews-dup' : '')}
+              >
                 <ReviewCard review={r} />
               </li>
             ))}
           </ul>
-
-          <button
-            type="button"
-            onClick={() => scrollBy(-1)}
-            aria-label="Scroll reviews left"
-            className="hidden lg:flex absolute left-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full
-                       bg-white shadow-card text-brand-primary items-center justify-center
-                       transition-colors duration-text ease-ref hover:bg-brand-accent
-                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
-          >
-            <ChevronLeftIcon className="w-5 h-5" />
-          </button>
-          <button
-            type="button"
-            onClick={() => scrollBy(1)}
-            aria-label="Scroll reviews right"
-            className="hidden lg:flex absolute right-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full
-                       bg-white shadow-card text-brand-primary items-center justify-center
-                       transition-colors duration-text ease-ref hover:bg-brand-accent
-                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
-          >
-            <ChevronRightIcon className="w-5 h-5" />
-          </button>
         </div>
       </div>
     </section>

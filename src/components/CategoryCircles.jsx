@@ -39,15 +39,15 @@ export default function CategoryCircles() {
   if (!items.length) return null;
 
   return (
-    <section aria-labelledby="cat-circles-heading" className="bg-bed">
+    <section aria-labelledby="cat-circles-heading" className="band-doodle">
       <div className="max-w-[1280px] mx-auto py-8 lg:py-14">
         {/* Heading centred with an underlined "view all" beneath — blick's treatment. */}
-        <div className="px-4 lg:px-8 text-center">
+        <div className="px-4 lg:px-8 text-center"><div className="band-title">
           <h2
             id="cat-circles-heading"
             className="font-bold tracking-tight text-ink text-[22px] leading-[1.18] lg:text-[32px]"
           >
-            Shop by category
+            Shop by <span className="hl-slant">category</span>
           </h2>
           <Link
             to="/catalog"
@@ -58,7 +58,7 @@ export default function CategoryCircles() {
           >
             View all
           </Link>
-        </div>
+        </div></div>
 
         {/* Horizontal scroll rail — flyingtiger's phone behaviour. Scrolls inside itself so
             the page body never scrolls sideways. */}

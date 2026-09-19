@@ -49,7 +49,7 @@ export default function OffersRail() {
             id="offers-heading"
             className="font-bold tracking-tight text-ink text-[22px] leading-[1.18] lg:text-[32px]"
           >
-            Below MRP right now
+            <span className="hl-slant">Below MRP</span> right now
           </h2>
           <p className="mt-2 text-[14px] leading-relaxed text-muted max-w-md mx-auto lg:text-[15px]">
             Everyday prices, not a sale. Add what you need to a list and send it in one message.

@@ -199,3 +199,56 @@ h1, h2, h3, h4 {
   animation: scrollMarquee 9s linear infinite;
 }
 
+
+/* ---- Sunny accent system (added 19 Sep 2026) ----
+   The hero banners moved from dark walnut to bright marigold-yellow (Indian clients read dark
+   heroes as dull), so the site gets the same yellow as a sparing accent next to indigo.
+   --sun matches the banner surface; --sun-soft is a pale tint for section bands. */
+:root {
+  --sun: #FFC107;
+  --sun-soft: #FFE46B;
+}
+
+/* Slanted marker-style underline behind a word or two of a heading. */
+.hl-slant {
+  position: relative;
+  display: inline-block;
+  z-index: 0;
+  white-space: nowrap;
+}
+.hl-slant::after {
+  content: '';
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  bottom: 0.04em;
+  height: 0.34em;
+  background: var(--sun);
+  transform: rotate(-1.6deg) skewX(-14deg);
+  border-radius: 2px;
+  z-index: -1;
+}
+
+/* Doodle band: pale yellow with a scatter of tiny stars, dots and squiggles, in a tile that
+   repeats. Decorative only, mixed indigo/coral/blue/green marks at medium contrast, cards on top stay readable. */
+.band-doodle {
+  background-color: var(--sun-soft);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160' fill='none' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='%23332E92' stroke-opacity='.3' d='M22 30l3 7 7 1-5 5 2 7-7-4-7 4 2-7-5-5 7-1z'/%3E%3Ccircle stroke='%23FF5A5F' stroke-opacity='.55' cx='98' cy='24' r='4'/%3E%3Cpath stroke='%232196F3' stroke-opacity='.5' d='M128 62q6-8 12 0t12 0'/%3E%3Ccircle stroke='%2300B894' stroke-opacity='.55' cx='40' cy='96' r='3.5'/%3E%3Cpath stroke='%23FF5A5F' stroke-opacity='.5' d='M84 92l8 8m0-8l-8 8'/%3E%3Cpath stroke='%23332E92' stroke-opacity='.3' d='M112 128q6-8 12 0t12 0'/%3E%3Cpath stroke='%2300B894' stroke-opacity='.5' d='M28 140l3 7 7 1-5 5'/%3E%3Ccircle stroke='%232196F3' stroke-opacity='.5' cx='70' cy='140' r='4'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+/* Reviews rail — JS-driven (rAF + drag), see Testimonials.jsx. */
+.reviews-marquee {
+  overflow: hidden; cursor: grab; user-select: none; -webkit-user-select: none; touch-action: pan-y;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+}
+.reviews-marquee img { pointer-events: none; -webkit-user-drag: none; }
+.reviews-track { will-change: transform; }
+@media (prefers-reduced-motion: reduce) {
+  .reviews-marquee { overflow-x: auto; scrollbar-width: none; }
+  .reviews-dup { display: none; }
+}
+
+/* Solid backing behind headings that sit on a doodle band, so shapes never touch the text. */
+.band-title { display: inline-block; background: var(--sun-soft); padding: .3rem 1.25rem .45rem; border-radius: 16px; }
