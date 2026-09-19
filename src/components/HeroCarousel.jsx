@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useEffect, useState } from 'react';
+﻿import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useReducedMotion } from 'framer-motion';
 import collectionsFile from '../data/collections.json';
@@ -17,13 +17,32 @@ export default function HeroCarousel() {
     setIndex(() => (next + slides.length) % slides.length);
   }, []);
 
-  // Always auto-rotates on every breakpoint — no arrow controls, and jumping to a
-  // slide via the dots below no longer stops the interval (17 Sep 2026, on request).
+  // Auto-rotates on every breakpoint. Dragging or swiping the banner changes slide too; the
+  // timer restarts after any slide change and holds while a finger/pointer is down.
+  const pressed = useRef(false);
+  const drag = useRef(null);
   useEffect(() => {
     if (reduce || slides.length < 2) return undefined;
-    const id = setInterval(() => setIndex((prev) => (prev + 1) % slides.length), ROTATE_MS);
+    const id = setInterval(() => {
+      if (!pressed.current) setIndex((prev) => (prev + 1) % slides.length);
+    }, ROTATE_MS);
     return () => clearInterval(id);
-  }, [reduce]);
+  }, [reduce, index]);
+
+  const onDown = (e) => {
+    pressed.current = true;
+    drag.current = { x: e.clientX, y: e.clientY };
+  };
+  const onUp = (e) => {
+    pressed.current = false;
+    const d = drag.current;
+    drag.current = null;
+    if (!d) return;
+    const dx = e.clientX - d.x;
+    const dy = e.clientY - d.y;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(index + (dx < 0 ? 1 : -1));
+  };
+  const onCancel = () => { pressed.current = false; drag.current = null; };
 
   return (
     <section aria-roledescription="carousel" aria-label="Featured Collections" className="relative w-full bg-[#241F6B]">
@@ -40,6 +59,11 @@ export default function HeroCarousel() {
           Matching their real mechanism instead: fixed height on phone/tablet, switching to the
           4:1 ratio only at the lg breakpoint. */}
       <div
+        onPointerDown={onDown}
+        onPointerUp={onUp}
+        onPointerCancel={onCancel}
+        onPointerLeave={onCancel}
+        style={{ touchAction: 'pan-y' }}
         className="relative w-full overflow-hidden bg-brand-dark aspect-[2.25/1] sm:aspect-auto sm:h-[280px] lg:h-auto lg:aspect-[3.2/1]"
       >
         {slides.map((s, i) => {
