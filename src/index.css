@@ -240,8 +240,6 @@ h1, h2, h3, h4 {
 /* Reviews rail — JS-driven (rAF + drag), see Testimonials.jsx. */
 .reviews-marquee {
   overflow: hidden; cursor: grab; user-select: none; -webkit-user-select: none; touch-action: pan-y;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
 }
 .reviews-marquee img { pointer-events: none; -webkit-user-drag: none; }
 .reviews-track { will-change: transform; }
