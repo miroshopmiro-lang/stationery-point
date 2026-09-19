@@ -32,7 +32,7 @@ export const STORE = {
 
 // One WhatsApp message for a whole enquiry list: [{ name, qty }, ...]
 export function waListLink(items) {
-  const lines = items.map((i, idx) => `${idx + 1}. ${i.name} — Qty: ${i.qty}`);
+  const lines = items.map((i, idx) => `${idx + 1}. ${i.name} (Qty: ${i.qty})`);
   const msg = `Hi Stationery Point, I would like to enquire about these items:\n\n${lines.join('\n')}\n\nPlease share prices and availability.`;
   return `https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(msg)}`;
 }

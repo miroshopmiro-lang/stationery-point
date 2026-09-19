@@ -127,6 +127,6 @@ function buildListWaLink(results) {
     const tag = r.category ? ` (${r.category.title})` : '';
     return `${i + 1}. ${r.text}${tag}`;
   });
-  const msg = `Hi Stationery Point, here's my list — could you confirm availability and price for each?\n\n${lines.join('\n')}`;
+  const msg = `Hi Stationery Point, here's my list. Could you confirm availability and price for each?\n\n${lines.join('\n')}`;
   return `https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(msg)}`;
 }
