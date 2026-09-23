@@ -431,3 +431,9 @@ All captures archived under `research/reference-captures/` and documented in the
 - Preserved natural wide banner ratio (1024/384 ~ 21:9) across both desktop and mobile without cropping.
 - Aligned real interactive HTML pill CTAs in negative space on both desktop and mobile.
 - Verified production build and live captures across all 3 slides.
+
+## 2026-09-23 — Homepage reordered to Sam's list
+- New order: hero → Shop by category → Schools & offices bulk tile → reviews → send your list → brands → Parties & events tile → What people come in for → visit us.
+- PromoTiles takes `only="<id>"` so the two tiles sit in separate slots.
+- Off the homepage (components kept): New In, School kits, Popular in store, offer strip, below-MRP rail.
+- Build OK; order, console and 375px layout checked in the browser.

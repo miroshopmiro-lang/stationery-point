@@ -105,11 +105,14 @@ function PromoTile({ tile, index }) {
   );
 }
 
-export default function PromoTiles() {
+// `only` renders a single tile by id, so the homepage can place the bulk and return-gift
+// tiles in separate slots (Sam's section order, 23 Sep 2026). Omit it to render both.
+export default function PromoTiles({ only }) {
+  const shown = only ? tiles.filter((t) => t.id === only) : tiles;
   return (
     <section aria-label="Services" className="bg-white">
       <div className="max-w-[1280px] mx-auto px-4 py-8 lg:px-8 lg:py-14 grid gap-4 lg:gap-6">
-        {tiles.map((t, i) => (
+        {shown.map((t, i) => (
           <PromoTile key={t.id} tile={t} index={i} />
         ))}
       </div>
