@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CtaLink from './CtaLink';
 import SmartImage from './SmartImage';
 
@@ -27,7 +28,9 @@ const tiles = [
     id: 'bulk',
     eyebrow: 'Schools & offices',
     title: 'Buying for a whole class?',
-    body: 'Send us the list. We quote with GST, deliver across Kochi, and you pay on invoice.',
+    body: 'Send us the list. We quote with GST and you pay on invoice.',
+    // Shown at every width (body is hidden on phones beside a photo). Sam, 23 Sep 2026.
+    note: 'Delivery for corporate orders only. T&C apply.',
     cta: { label: 'Get a bulk quote', to: 'wa:bulk' },
     // AI studio shot (17 Sep 2026) of Sam's real JK Copier A4 ream, same treatment as the
     // rest of the site — replaces the real phone-camera photo that read as "cheap" here.
@@ -90,6 +93,12 @@ function PromoTile({ tile, index }) {
         <p className={(hasPhoto ? 'hidden sm:block ' : '') + 'mt-2 text-white/85 text-[13px] leading-relaxed lg:text-[15px]'}>
           {tile.body}
         </p>
+        {tile.note && (
+          <p className="mt-1.5 text-white/75 text-[11px] leading-snug lg:text-[13px]">
+            {tile.note}{' '}
+            <Link to="/terms#delivery" className="underline underline-offset-2">Details</Link>
+          </p>
+        )}
         {/* White pill on the flat panel — flyingtiger's exact CTA treatment. */}
         <CtaLink
           to={tile.cta.to}

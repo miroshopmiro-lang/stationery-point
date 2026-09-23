@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import AskBox from './AskBox';
 import { ListIcon } from './icons';
 
@@ -35,7 +36,10 @@ export default function SendListSection() {
                 </li>
                 <li className="flex gap-2.5">
                   <span className="text-brand-accent font-bold" aria-hidden="true">&rarr;</span>
-                  Delivery across Kochi, or collect from the shop
+                  <span>
+                    Collect from the shop. Delivery for corporate orders only,{' '}
+                    <Link to="/terms#delivery" className="underline underline-offset-4">T&amp;C apply</Link>
+                  </span>
                 </li>
               </ul>
             </div>

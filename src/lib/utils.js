@@ -53,9 +53,9 @@ export function waLink(productName) {
 // "wa:<key>"; CtaLink resolves them.
 export const WA_ENQUIRIES = {
   bulk:
-    'Hi Stationery Point, I would like a bulk quote.\n\nSchool / company:\nItems and quantities:\nNeeded by:\nGST invoice needed (yes/no):\nPickup or delivery:',
+    'Hi Stationery Point, I would like a bulk quote.\n\nSchool / company:\nItems and quantities:\nNeeded by:\nGST invoice needed (yes/no):\nPickup, or delivery (corporate orders only):',
   'return-gifts':
-    'Hi Stationery Point, I would like to plan return gifts.\n\nOccasion:\nNumber of gifts:\nBudget per gift (Rs):\nNeeded by:\nPickup or delivery:',
+    'Hi Stationery Point, I would like to plan return gifts.\n\nOccasion:\nNumber of gifts:\nBudget per gift (Rs):\nNeeded by:\nPickup, or delivery (corporate orders only):',
   'school-kits':
     'Hi Stationery Point, I would like a school kit.\n\nSchool and class:\nNumber of kits:\nNeeded by:\n\nI can send the book list as a photo.',
 };

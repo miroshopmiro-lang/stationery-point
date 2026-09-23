@@ -23,7 +23,7 @@ export default function Terms() {
           <p>
             The Contact form, "Add to list", and every "Enquire on WhatsApp" button send an enquiry or quote
             request — they don't place a confirmed order. An order is confirmed only once Sam replies on WhatsApp
-            with stock, pricing and delivery/pickup details and you agree to them.
+            with stock, pricing and pickup details (or delivery details, for corporate customers) and you agree to them.
           </p>
         </section>
 
@@ -35,8 +35,17 @@ export default function Terms() {
           </p>
         </section>
 
+        <section id="delivery">
+          <h2 className="text-xl font-bold text-gray-900 mb-2">4. Delivery</h2>
+          <p>
+            Delivery is available to corporate customers only, and terms and conditions apply. They are
+            confirmed with you on WhatsApp for each order. All other orders are collected from the shop at
+            Katti Tower, Vyttila.
+          </p>
+        </section>
+
         <section>
-          <h2 className="text-xl font-bold text-gray-900 mb-2">4. Your information</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">5. Your information</h2>
           <p>
             How we handle anything you send us is covered in our{' '}
             <Link to="/privacy" className="text-brand-primary underline underline-offset-4">Privacy Policy</Link>.
@@ -44,7 +53,7 @@ export default function Terms() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-gray-900 mb-2">5. Contact us</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">6. Contact us</h2>
           <p>
             Questions about these terms — reach us on WhatsApp
             (<a href={waLink()} target="_blank" rel="noreferrer" className="text-brand-primary underline underline-offset-4">{STORE.phoneDisplay}</a>)
