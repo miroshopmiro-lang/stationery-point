@@ -58,9 +58,6 @@ export default function ProductRail() {
             >
               Popular in store <span className="hl-slant">right now</span>
             </h2>
-            <p className="mt-1 text-[13px] text-muted lg:text-[14px]">
-              Real stock on the shelves in Vyttila
-            </p>
           </div>
         </div>
 
