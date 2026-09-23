@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import CtaLink from './CtaLink';
 import SmartImage from './SmartImage';
 
 /*
@@ -28,7 +28,7 @@ const tiles = [
     eyebrow: 'Schools & offices',
     title: 'Buying for a whole class?',
     body: 'Send us the list. We quote with GST, deliver across Kochi, and you pay on invoice.',
-    cta: { label: 'Get a bulk quote', to: '/contact' },
+    cta: { label: 'Get a bulk quote', to: 'wa:bulk' },
     // AI studio shot (17 Sep 2026) of Sam's real JK Copier A4 ream, same treatment as the
     // rest of the site — replaces the real phone-camera photo that read as "cheap" here.
     image: '/ai-product-shots/03-jk-copy-paper-a4-80gsm.webp',
@@ -41,8 +41,8 @@ const tiles = [
     body: 'Pick a budget per head and a quantity. We pack them ready to hand out.',
     // Was /catalog?category=return-gifts. Sam's item list files nothing under Return Gifts,
     // so that link landed on an empty grid — a dead end. Return gifts ARE a real part of the
-    // shop, so the service stays and the CTA goes to the enquiry form instead of being cut.
-    cta: { label: 'Plan return gifts', to: '/contact' },
+    // shop, so the service stays and the CTA goes to a WhatsApp enquiry instead of being cut.
+    cta: { label: 'Plan return gifts', to: 'wa:return-gifts' },
     // No photograph exists for this one and none of Sam's product shots honestly represents
     // a per-head return gift. Empty string, so the tile renders as a full-width panel rather
     // than reserving half its area for a placeholder. See PromoTile below.
@@ -91,7 +91,7 @@ function PromoTile({ tile, index }) {
           {tile.body}
         </p>
         {/* White pill on the flat panel — flyingtiger's exact CTA treatment. */}
-        <Link
+        <CtaLink
           to={tile.cta.to}
           className="mt-3 lg:mt-5 inline-flex items-center justify-center self-start min-h-[40px] lg:min-h-[48px]
                      rounded-full bg-white text-brand-primary font-semibold px-4 lg:px-7 text-[13px] lg:text-[15px]
@@ -99,7 +99,7 @@ function PromoTile({ tile, index }) {
                      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
           {tile.cta.label}
-        </Link>
+        </CtaLink>
       </div>
     </article>
   );

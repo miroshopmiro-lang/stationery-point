@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import CtaLink from './CtaLink';
 import kitData from '../data/kitTiles.json';
 import SmartImage from './SmartImage';
 
@@ -47,7 +47,7 @@ const HOME_SHOT_OVERRIDES = {
 
 function KitTile({ tile }) {
   return (
-    <Link
+    <CtaLink
       to={tile.to}
       className="group relative flex flex-col rounded-lg bg-bed overflow-hidden
                  transition-colors duration-surface ease-ref hover:bg-hairline
@@ -90,7 +90,7 @@ function KitTile({ tile }) {
           {tile.label}
         </span>
       </span>
-    </Link>
+    </CtaLink>
   );
 }
 

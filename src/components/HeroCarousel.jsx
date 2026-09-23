@@ -1,5 +1,5 @@
 ﻿import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import CtaLink from './CtaLink';
 import { useReducedMotion } from 'framer-motion';
 import collectionsFile from '../data/collections.json';
 import SmartImage from './SmartImage';
@@ -110,7 +110,7 @@ export default function HeroCarousel() {
 
               <div className="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 flex flex-col justify-end pb-2 sm:pb-5 lg:pb-6 pointer-events-none z-20">
                 <div className="flex items-center gap-1.5 sm:gap-3 pointer-events-auto">
-                  <Link
+                  <CtaLink
                     to={s.cta.to}
                     className="inline-flex items-center justify-center h-8 sm:h-10 lg:h-11 rounded-full
                                bg-white text-brand-primary font-bold px-3.5 sm:px-6 lg:px-7 text-[11px] sm:text-sm
@@ -119,7 +119,7 @@ export default function HeroCarousel() {
                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent shrink-0"
                   >
                     {s.cta.label}
-                  </Link>
+                  </CtaLink>
 
                   <a
                     href={`https://wa.me/${STORE.whatsapp}?text=Hi%20Stationery%20Point%2C%20I%20would%20like%20to%20enquire%20about%20supplies`}

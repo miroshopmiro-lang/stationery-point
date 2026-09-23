@@ -21,7 +21,7 @@
       "isPriceBand": true,
       "image": "/kit-tiles/kits-all-bands.webp",
       "_toFixed": "Was /catalog?collection=school-kits. Nothing reads ?collection=, so this silently showed the whole catalogue; and Sam stocks no ready-made kit SKU to point at. The kit service is real (see subheading), so it goes to the enquiry flow until a kit product exists.",
-      "to": "/contact",
+      "to": "wa:school-kits",
       "_imageBrief": "Must show a COMPLETE KIT — multiple items together (notebook stack, pouch, geometry box, pencils, bottle, lunch box) — deliberately more objects than any other tile, copying smiggle's lead-tile contrast."
     },
     { "id": "notebooks", "label": "Notebooks", "image": "/kit-tiles/notebooks.webp", "to": "/catalog?q=notebook" },

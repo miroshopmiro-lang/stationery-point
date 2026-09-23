@@ -32,7 +32,7 @@
       "subtitle": "Volume pricing below MRP, GST invoices, delivered across Kochi.",
       "cta": {
         "label": "Get bulk quote",
-        "to": "/contact"
+        "to": "wa:bulk"
       },
       "image": "/hero/hero-office-v2.webp",
       "imageMobile": "/hero/hero-office-mobile-v2.webp"

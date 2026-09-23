@@ -441,3 +441,4 @@ All captures archived under `research/reference-captures/` and documented in the
 - Popular in store taken back out the same day: Abhinand chose Sam's exact order, since bulk enquiries are the goal. Its subtitle was removed too.
 - Doodle bands: stars/squiggles removed from Shop by category, reviews and Brands we stock; plain yellow kept (ties to the logo's gold). Brand-blue tint tried first and rejected as grey/old-looking.
 - Solid black 5/6px divider (MarkerDivider) between hero and the yellow category band; a hand-drawn marker version was tried first and dropped.
+- Bulk quote, return gifts and school kits CTAs now open WhatsApp with a pre-filled enquiry template (WA_ENQUIRIES in src/lib/utils.js, resolved by CtaLink) instead of the /contact form. Header 'Contact Store' still goes to /contact.

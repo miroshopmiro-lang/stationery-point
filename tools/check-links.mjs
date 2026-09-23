@@ -69,7 +69,16 @@ const targets = [
 
 const failures = [];
 
+// "wa:<key>" targets open a pre-filled WhatsApp enquiry (src/lib/utils.js WA_ENQUIRIES).
+const WA_KEYS = new Set(['bulk', 'return-gifts', 'school-kits']);
+
 for (const t of targets) {
+  if (t.to.startsWith('wa:')) {
+    if (!WA_KEYS.has(t.to.slice(3))) failures.push(`${t.where}
+       ${t.to}
+       -> unknown WhatsApp enquiry key.`);
+    continue;
+  }
   const [path, search = ''] = t.to.split('?');
   const params = new URLSearchParams(search);
 

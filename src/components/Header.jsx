@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { STORE, waLink } from '../lib/utils';
+import CtaLink from './CtaLink';
 import { WhatsAppIcon, SearchIcon, MenuIcon, CloseIcon } from './icons';
 import AskBox from './AskBox';
 
@@ -33,7 +34,7 @@ const nav = [
 const categoryNav = [
   // Was ?collection=school-kits — nothing reads that param, so it silently rendered the
   // whole catalogue. No kit SKU exists yet, so it goes to the enquiry flow.
-  { label: 'School kits', to: '/contact' },
+  { label: 'School kits', to: 'wa:school-kits' },
   { label: 'Stationery', to: '/catalog?category=stationery' },
   { label: 'Art supplies', to: '/catalog?category=art-supplies' },
   { label: 'Craft', to: '/catalog?category=craft-material' },
@@ -42,7 +43,7 @@ const categoryNav = [
   // 'Return gifts' removed 4 Sep 2026: Sam's item list files nothing under it, so the link
   // landed on an empty grid. Restore the moment a return-gift product exists.
 
-  { label: 'Bulk orders', to: '/contact' },
+  { label: 'Bulk orders', to: 'wa:bulk' },
 ];
 
 // flyingtiger.com rotates three claims in its announcement bar. Same count, our claims.
@@ -288,8 +289,9 @@ export default function Header() {
       <nav aria-label="Categories" className="hidden lg:block border-b border-hairline bg-white">
         <ul className="max-w-[1280px] mx-auto px-8 flex items-center justify-center gap-1 xl:gap-2">
           {categoryNav.map((c) => (
-            <li key={c.to}>
-              <NavLink
+            <li key={c.label}>
+              <CtaLink
+                nav
                 to={c.to}
                 className={({ isActive }) =>
                   'inline-flex items-center h-11 px-3 text-[14px] font-medium whitespace-nowrap ' +
@@ -299,7 +301,7 @@ export default function Header() {
                 }
               >
                 {c.label}
-              </NavLink>
+              </CtaLink>
             </li>
           ))}
         </ul>

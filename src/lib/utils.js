@@ -45,3 +45,21 @@ export function waLink(productName) {
   const msg = `Hi Stationery Point, I am interested in inquiring about the ${productName} from your website.`;
   return `${base}${encodeURIComponent(msg)}`;
 }
+
+// Pre-filled WhatsApp enquiries for the service CTAs (bulk quote, return gifts, school kits).
+// Replaced the /contact form on 23 Sep 2026: a form is one step too many for buyers who
+// already live on WhatsApp. Each template asks for what Sam needs to quote in one reply
+// (research.md: blank chats flood with "price please?"). Data files point at these as
+// "wa:<key>"; CtaLink resolves them.
+export const WA_ENQUIRIES = {
+  bulk:
+    'Hi Stationery Point, I would like a bulk quote.\n\nSchool / company:\nItems and quantities:\nNeeded by:\nGST invoice needed (yes/no):\nPickup or delivery:',
+  'return-gifts':
+    'Hi Stationery Point, I would like to plan return gifts.\n\nOccasion:\nNumber of gifts:\nBudget per gift (Rs):\nNeeded by:\nPickup or delivery:',
+  'school-kits':
+    'Hi Stationery Point, I would like a school kit.\n\nSchool and class:\nNumber of kits:\nNeeded by:\n\nI can send the book list as a photo.',
+};
+
+export function waEnquiry(key) {
+  return `https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(WA_ENQUIRIES[key])}`;
+}
