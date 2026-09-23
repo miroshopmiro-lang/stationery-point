@@ -442,3 +442,10 @@ All captures archived under `research/reference-captures/` and documented in the
 - Doodle bands: stars/squiggles removed from Shop by category, reviews and Brands we stock; plain yellow kept (ties to the logo's gold). Brand-blue tint tried first and rejected as grey/old-looking.
 - Solid black 5/6px divider (MarkerDivider) between hero and the yellow category band; a hand-drawn marker version was tried first and dropped.
 - Bulk quote, return gifts and school kits CTAs now open WhatsApp with a pre-filled enquiry template (WA_ENQUIRIES in src/lib/utils.js, resolved by CtaLink) instead of the /contact form. Header 'Contact Store' still goes to /contact.
+
+## 2026-09-23 — Price decided, Sam's delivery rule, domain question
+- **Price: ₹20,000 one-time** (Abhinand's decision). Any maintenance / care plan is priced separately after a call with Sam. Supersedes ₹45k + ₹9,999/mo, the ₹55k floor, and the ₹75k recommendation.
+- Sam offered an advance and asked for the "full cost". Suggested terms: 50% (₹10,000) now, 50% when the site goes live on his domain. Domain renewal is Sam's own cost, paid to the registrar; hosting on Cloudflare Pages is ₹0.
+- **Delivery: corporate customers only, T&C apply** (Sam, 23 Sep). The site still promises delivery more broadly: hero office slide "delivered across Kochi", bulk tile "deliver across Kochi", and the return-gifts WhatsApp template asks "Pickup or delivery". Copy not yet changed; still need to ask Sam whether schools count as corporate and what the T&C are.
+- Sam asked how the domain and "uploads" work. Domain check: stationerypoint.com is taken; stationerypointkochi.com is free; .in could not be checked (registry lookup failed).
+- Site has been live on stationery-point.pages.dev since at least 19 Sep, so the launch leverage is gone. The domain connection is the handover and the billing point.
