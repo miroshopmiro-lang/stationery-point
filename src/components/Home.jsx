@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SendListModal from './SendListModal';
 import HeroCarousel from './HeroCarousel';
+import MarkerDivider from './MarkerDivider';
 import CategoryCircles from './CategoryCircles';
 import PromoTiles from './PromoTiles';
 import CollectionCards from './CollectionCards';
@@ -32,6 +33,7 @@ export default function Home() {
           the offer strip and the below-MRP rail are off the homepage per that list; the
           components are kept, re-add them here to restore. */}
       <HeroCarousel onOpenListModal={() => setListModalOpen(true)} />
+      <MarkerDivider />
       <CategoryCircles />
       <PromoTiles only="bulk" />
       <Testimonials />

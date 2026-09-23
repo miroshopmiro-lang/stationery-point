@@ -440,3 +440,4 @@ All captures archived under `research/reference-captures/` and documented in the
 - Build OK; order, console and 375px layout checked in the browser.
 - Popular in store taken back out the same day: Abhinand chose Sam's exact order, since bulk enquiries are the goal. Its subtitle was removed too.
 - Doodle bands: stars/squiggles removed from Shop by category, reviews and Brands we stock; plain yellow kept (ties to the logo's gold). Brand-blue tint tried first and rejected as grey/old-looking.
+- Solid black 5/6px divider (MarkerDivider) between hero and the yellow category band; a hand-drawn marker version was tried first and dropped.
