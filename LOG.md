@@ -435,5 +435,6 @@ All captures archived under `research/reference-captures/` and documented in the
 ## 2026-09-23 — Homepage reordered to Sam's list
 - New order: hero → Shop by category → Schools & offices bulk tile → reviews → send your list → brands → Parties & events tile → What people come in for → visit us.
 - PromoTiles takes `only="<id>"` so the two tiles sit in separate slots.
-- Off the homepage (components kept): New In, School kits, Popular in store, offer strip, below-MRP rail.
+- Off the homepage (components kept): New In, School kits, offer strip, below-MRP rail.
+- Popular in store re-added after Shop by category (same day): with it gone, the first product photo sat at 54% of the page at 375px; now 11%.
 - Build OK; order, console and 375px layout checked in the browser.
