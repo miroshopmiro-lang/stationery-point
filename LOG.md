@@ -438,3 +438,4 @@ All captures archived under `research/reference-captures/` and documented in the
 - Off the homepage (components kept): New In, School kits, offer strip, below-MRP rail.
 - Popular in store re-added after Shop by category (same day): with it gone, the first product photo sat at 54% of the page at 375px; now 11%.
 - Build OK; order, console and 375px layout checked in the browser.
+- Popular in store taken back out the same day: Abhinand chose Sam's exact order, since bulk enquiries are the goal. Its subtitle was removed too.

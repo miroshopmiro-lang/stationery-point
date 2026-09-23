@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import SendListModal from './SendListModal';
 import HeroCarousel from './HeroCarousel';
 import CategoryCircles from './CategoryCircles';
-import ProductRail from './ProductRail';
 import PromoTiles from './PromoTiles';
 import CollectionCards from './CollectionCards';
 import SendListSection from './SendListSection';
@@ -28,13 +27,12 @@ export default function Home() {
     <div>
       <SendListModal open={listModalOpen} onClose={() => setListModalOpen(false)} />
 
-      {/* Section order set by Sam, 23 Sep 2026, plus Popular in store after categories so
-          products show in the top half. New In, School kits,
+      {/* Section order set by Sam, 23 Sep 2026, kept exactly as he listed it (bulk enquiries
+          are the goal). New In, School kits, Popular in store,
           the offer strip and the below-MRP rail are off the homepage per that list; the
           components are kept, re-add them here to restore. */}
       <HeroCarousel onOpenListModal={() => setListModalOpen(true)} />
       <CategoryCircles />
-      <ProductRail />
       <PromoTiles only="bulk" />
       <Testimonials />
       <SendListSection />
