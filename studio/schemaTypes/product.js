@@ -77,11 +77,14 @@ export default defineType({
           return ourPrice < mrp ? true : 'Our price must be lower than MRP';
         }),
     }),
+    // Replaced by the "New In" list (schemaTypes/newIn.js) on 25 Sep 2026. Hidden rather than
+    // removed so old documents keep validating; the site ignores it once New In is published.
     defineField({
       name: 'newArrival',
       title: 'Show "New in" tag',
       type: 'boolean',
       initialValue: true,
+      hidden: true,
     }),
   ],
   orderings: [

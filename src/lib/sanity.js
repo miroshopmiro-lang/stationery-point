@@ -7,23 +7,35 @@ export const SANITY_DATASET = 'production';
 
 export const sanityConfigured = !/^REPLACE/.test(SANITY_PROJECT_ID);
 
-const QUERY = `*[_type == "product" && defined(name) && defined(category)] | order(_createdAt desc){
-  _id, _createdAt, name, brand, category, unit, mrp, ourPrice, newArrival,
-  "image": image.asset->url
+// One request for both: Sam's products, and the homepage "New In" list (null until he has
+// published it once; the site then keeps its built-in New In set).
+const QUERY = `{
+  "products": *[_type == "product" && defined(name) && defined(category)] | order(_createdAt desc){
+    _id, _createdAt, name, brand, category, unit, mrp, ourPrice, newArrival,
+    "image": image.asset->url
+  },
+  "newIn": *[_id == "newIn"][0].items[]{ _type, product, _ref }
 }`;
 
 // Card is a square at up to ~320 CSS px; 800 covers a 2x phone and auto=format serves WebP/AVIF.
 const imageUrl = (url) => (url ? `${url}?w=800&h=800&fit=max&auto=format` : '');
 
+// Returns { products, newIn }. newIn is an ordered list of product ids ("code-<id>" for
+// products in src/data/products, "sanity-<_id>" for Sam's), or null if never published.
 export async function fetchSanityProducts({ signal } = {}) {
-  if (!sanityConfigured) return [];
+  if (!sanityConfigured) return { products: [], newIn: null };
   const url =
     `https://${SANITY_PROJECT_ID}.api.sanity.io/v2025-02-19/data/query/${SANITY_DATASET}` +
     `?query=${encodeURIComponent(QUERY)}`;
   const res = await fetch(url, { signal, cache: 'no-store' });
   if (!res.ok) throw new Error(`Sanity ${res.status}`);
   const { result } = await res.json();
-  return (result || []).map((d) => ({
+  const newIn = Array.isArray(result?.newIn)
+    ? result.newIn
+        .map((i) => (i._type === 'shopItem' ? i.product : i._ref ? `sanity-${i._ref}` : null))
+        .filter(Boolean)
+    : null;
+  const products = (result?.products || []).map((d) => ({
     id: `sanity-${d._id}`,
     name: d.name.trim(),
     brand: d.brand || '',
@@ -35,4 +47,5 @@ export async function fetchSanityProducts({ signal } = {}) {
     source: 'sanity',
     createdAt: d._createdAt,
   }));
+  return { products, newIn };
 }

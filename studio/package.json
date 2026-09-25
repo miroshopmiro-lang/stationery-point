@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "sanity dev",
-    "build": "sanity build ../public/admin -y && node fix-admin-paths.js"
+    "build": "node gen-code-products.js && sanity build ../public/admin -y && node fix-admin-paths.js"
   },
   "dependencies": {
     "react": "^19.2.2",

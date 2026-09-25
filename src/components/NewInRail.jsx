@@ -1,6 +1,6 @@
 import React, { useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useProducts } from '../data/catalog';
+import { useNewIn } from '../data/catalog';
 import ProductCard from './ProductCard';
 import { ChevronLeftIcon, ChevronRightIcon } from './icons';
 
@@ -12,8 +12,8 @@ import { ChevronLeftIcon, ChevronRightIcon } from './icons';
  * visually collided with the product photo and, being lg-only, left mobile with no visible way
  * to see more — arrows now render at every breakpoint).
  *
- * Sourced from `newArrival: true` on the product data (src/data/products/*.json), not a
- * hardcoded id list, so this stays correct as Sam's stock rotates.
+ * Sourced from useNewIn(): the "New In" list Sam edits in /admin (add, remove, reorder), or,
+ * until he has published it once, `newArrival: true` on the code products.
  *
  * Selection basis (16 Sep 2026): from the 54 newly-photographed products, picked the ones with
  * (a) a verified real photo — checked against Sam's own item-list description, not just the
@@ -52,13 +52,13 @@ const HOME_SHOT_OVERRIDES = {
 
 export default function NewInRail() {
   const railRef = useRef(null);
-  const products = useProducts();
+  const newIn = useNewIn();
   const newArrivals = useMemo(
     () =>
-      products
-        .filter((p) => p.newArrival)
-        .map((p) => (HOME_SHOT_OVERRIDES[p.id] ? { ...p, image: HOME_SHOT_OVERRIDES[p.id] } : p)),
-    [products]
+      newIn.map((p) =>
+        p.source !== 'sanity' && HOME_SHOT_OVERRIDES[p.id] ? { ...p, image: HOME_SHOT_OVERRIDES[p.id] } : p
+      ),
+    [newIn]
   );
 
   if (newArrivals.length === 0) return null;

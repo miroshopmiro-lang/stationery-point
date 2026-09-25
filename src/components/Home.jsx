@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SendListModal from './SendListModal';
 import HeroCarousel from './HeroCarousel';
-import MarkerDivider from './MarkerDivider';
+import NewInRail from './NewInRail';
 import CategoryCircles from './CategoryCircles';
 import PromoTiles from './PromoTiles';
 import CollectionCards from './CollectionCards';
@@ -28,12 +28,12 @@ export default function Home() {
     <div>
       <SendListModal open={listModalOpen} onClose={() => setListModalOpen(false)} />
 
-      {/* Section order set by Sam, 23 Sep 2026, kept exactly as he listed it (bulk enquiries
-          are the goal). New In, School kits, Popular in store,
-          the offer strip and the below-MRP rail are off the homepage per that list; the
-          components are kept, re-add them here to restore. */}
+      {/* Section order set by Sam, 23 Sep 2026 (bulk enquiries are the goal). New In added
+          back under the hero on his request, 25 Sep; its contents are edited in /admin.
+          School kits, Popular in store, the offer strip and the below-MRP rail stay off;
+          the components are kept, re-add them here to restore. */}
       <HeroCarousel onOpenListModal={() => setListModalOpen(true)} />
-      <MarkerDivider />
+      <NewInRail />
       <CategoryCircles />
       <PromoTiles only="bulk" />
       <Testimonials />

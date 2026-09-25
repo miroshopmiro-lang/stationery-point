@@ -17,20 +17,25 @@ import { fetchSanityProducts, sanityConfigured } from '../lib/sanity';
  *     CMS cannot double a card.
  *   - Within a category, Sam's products come first, newest first, so a product he just
  *     added is easy to find. Code products follow in their existing order.
+ *   - NEW IN: once Sam has published the "New In" list in /admin, it alone decides which
+ *     products are new (rail order and the "New in" badge). Before that, the built-in
+ *     newArrival flags apply, exactly as before.
  */
 
-const CACHE_KEY = 'sp-sanity-products-v1';
+const CACHE_KEY = 'sp-sanity-v2';
 const categoryOrder = new Map(categories.map((c, i) => [c.id, i]));
 const categoryTitle = new Map(categories.map((c) => [c.id, c.title]));
 const nameKey = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 
+const EMPTY = { products: [], newIn: null };
+
 function readCache() {
-  if (!sanityConfigured) return [];
+  if (!sanityConfigured) return EMPTY;
   try {
-    const parsed = JSON.parse(localStorage.getItem(CACHE_KEY) || '[]');
-    return Array.isArray(parsed) ? parsed : [];
+    const parsed = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+    return parsed && Array.isArray(parsed.products) ? parsed : EMPTY;
   } catch {
-    return [];
+    return EMPTY;
   }
 }
 
@@ -42,7 +47,9 @@ function writeCache(list) {
   }
 }
 
-function merge(sanityList) {
+const listKey = (p) => (p.source === 'sanity' ? p.id : `code-${p.id}`);
+
+function mergeProducts(sanityList) {
   const taken = new Set(codeProducts.map((p) => nameKey(p.name)));
   const extra = sanityList
     // A category that does not exist in categories.json would land in no filter.
@@ -55,6 +62,23 @@ function merge(sanityList) {
   return [...extra, ...codeProducts].sort(
     (a, b) => (categoryOrder.get(a.category) ?? 99) - (categoryOrder.get(b.category) ?? 99)
   );
+}
+
+// Returns { products, newIn } where newIn is the ordered list of product objects for the rail.
+function merge({ products: sanityList, newIn: newInKeys }) {
+  let products = mergeProducts(sanityList);
+  if (!Array.isArray(newInKeys)) {
+    return { products, newIn: products.filter((p) => p.newArrival) };
+  }
+  const chosen = new Set(newInKeys);
+  products = products.map((p) => {
+    const isNew = chosen.has(listKey(p));
+    return p.newArrival === isNew ? p : { ...p, newArrival: isNew };
+  });
+  const byKey = new Map(products.map((p) => [listKey(p), p]));
+  // A key whose product was deleted (or is a hidden placeholder) is simply skipped.
+  const newIn = [...new Set(newInKeys)].map((k) => byKey.get(k)).filter(Boolean);
+  return { products, newIn };
 }
 
 let current = merge(readCache());
@@ -78,9 +102,9 @@ function load() {
 function refresh() {
   lastFetch = Date.now();
   fetchSanityProducts()
-    .then((list) => {
-      writeCache(list);
-      current = merge(list);
+    .then((data) => {
+      writeCache(data);
+      current = merge(data);
       listeners.forEach((l) => l());
     })
     .catch((err) => console.warn('[catalog] Sanity products not loaded, showing code products only.', err));
@@ -94,8 +118,17 @@ function subscribe(listener) {
 
 const snapshot = () => current;
 
-export function useProducts() {
+function useCatalog() {
   return useSyncExternalStore(subscribe, snapshot, snapshot);
+}
+
+export function useProducts() {
+  return useCatalog().products;
+}
+
+// The homepage "New In" rail, in the order Sam set in /admin.
+export function useNewIn() {
+  return useCatalog().newIn;
 }
 
 // Categories that have at least one product, code or Sanity. A browse link to an empty
