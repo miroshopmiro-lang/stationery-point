@@ -465,3 +465,7 @@ All captures archived under `research/reference-captures/` and documented in the
 - Verified in the browser with mocked Sanity data at 375px: Sam's product first, duplicate name skipped, bad category dropped, Return Gifts filter appeared, price + Save tag rendered. Studio build loads at /admin. Site build OK.
 - **Sanity account (created by Abhinand, 25 Sep): `hehnofe@gmail.com`.** Project `Stationerypoint`, project ID `j95yhvco`, dataset `production` (public). CORS origins added with credentials: `https://stationery-point.pages.dev`, `http://localhost:5173`. Checked from here: public read returns 200, both origins get Allow-Credentials. **When Sam's domain connects, add it as a CORS origin too, or /admin and his products break on that domain.**
 - Invite Sam at sanity.io/manage -> Members (Editor role) so he logs in with his own email.
+
+## 2026-09-25 — Price cut to ₹10,000 total
+- Sam's side was shocked at ₹20,000 and didn't want to pay it. **New price: ₹10,000 one-time total, full handover**, including the CMS, the 82 products and the 5 local search pages. Marketing/SEO only if they ask, quoted separately. Trying to close today.
+- **Fix (same day):** live /admin showed "Couldn't reach the Sanity servers". Cause: `public/_headers` still carried Decap's CSP (connect-src GitHub only), and the site-wide CSP also blocked `*.sanity.io` fetches and `cdn.sanity.io` images. Both CSPs now allow Sanity; the /admin one detaches the site-wide policy with `! Content-Security-Policy`. Checked live: /admin sends one CSP and shows the login screen.
