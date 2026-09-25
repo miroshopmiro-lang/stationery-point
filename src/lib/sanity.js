@@ -1,5 +1,6 @@
 // Read-only Sanity client for products Sam adds from /admin. Keep in step with studio/project.js.
-// No SDK: one GET to the public CDN endpoint. Drafts never come back from an unauthenticated
+// No SDK: one GET to the live API (not apicdn: its cache kept deleted products showing for
+// up to a minute, 25 Sep). A local shop's traffic is far inside the free API quota. Drafts never come back from an unauthenticated
 // read, so only products Sam has pressed Publish on reach the site.
 export const SANITY_PROJECT_ID = 'j95yhvco';
 export const SANITY_DATASET = 'production';
@@ -17,9 +18,9 @@ const imageUrl = (url) => (url ? `${url}?w=800&h=800&fit=max&auto=format` : '');
 export async function fetchSanityProducts({ signal } = {}) {
   if (!sanityConfigured) return [];
   const url =
-    `https://${SANITY_PROJECT_ID}.apicdn.sanity.io/v2025-02-19/data/query/${SANITY_DATASET}` +
+    `https://${SANITY_PROJECT_ID}.api.sanity.io/v2025-02-19/data/query/${SANITY_DATASET}` +
     `?query=${encodeURIComponent(QUERY)}`;
-  const res = await fetch(url, { signal });
+  const res = await fetch(url, { signal, cache: 'no-store' });
   if (!res.ok) throw new Error(`Sanity ${res.status}`);
   const { result } = await res.json();
   return (result || []).map((d) => ({

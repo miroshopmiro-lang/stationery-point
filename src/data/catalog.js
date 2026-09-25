@@ -10,7 +10,7 @@ import { fetchSanityProducts, sanityConfigured } from '../lib/sanity';
  * file exists instead of copying it.
  *
  *   - Code products (src/data/products/*.json) render on the first paint, as before.
- *   - Sanity products are fetched once per visit and merged in when they arrive. The last
+ *   - Sanity products are fetched on load and again when the tab regains focus. The last
  *     result is cached in localStorage so a returning visitor sees them immediately.
  *   - If Sanity is down or slow, the site simply shows the code products.
  *   - Same product name in both lists: the code one wins, so a duplicate entry in the
@@ -60,10 +60,23 @@ function merge(sanityList) {
 let current = merge(readCache());
 const listeners = new Set();
 let started = false;
+let lastFetch = 0;
 
+// Fetch on first use, then again whenever the tab comes back into view (at most every 20s),
+// so a product Sam adds or deletes shows up without anyone having to reload.
 function load() {
-  if (started || !sanityConfigured) return;
-  started = true;
+  if (!sanityConfigured) return;
+  if (!started) {
+    started = true;
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && Date.now() - lastFetch > 20000) refresh();
+    });
+  }
+  if (Date.now() - lastFetch > 20000) refresh();
+}
+
+function refresh() {
+  lastFetch = Date.now();
   fetchSanityProducts()
     .then((list) => {
       writeCache(list);
