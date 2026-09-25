@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { products } from '../data/productData';
+import { useProducts } from '../data/catalog';
 import ProductCard from './ProductCard';
 import { ChevronLeftIcon, ChevronRightIcon } from './icons';
 
@@ -50,12 +50,16 @@ const HOME_SHOT_OVERRIDES = {
   79: '/ai-product-shots/79-uni-pin-fineliner-pen.webp',
 };
 
-const newArrivals = products
-  .filter((p) => p.newArrival)
-  .map((p) => (HOME_SHOT_OVERRIDES[p.id] ? { ...p, image: HOME_SHOT_OVERRIDES[p.id] } : p));
-
 export default function NewInRail() {
   const railRef = useRef(null);
+  const products = useProducts();
+  const newArrivals = useMemo(
+    () =>
+      products
+        .filter((p) => p.newArrival)
+        .map((p) => (HOME_SHOT_OVERRIDES[p.id] ? { ...p, image: HOME_SHOT_OVERRIDES[p.id] } : p)),
+    [products]
+  );
 
   if (newArrivals.length === 0) return null;
 

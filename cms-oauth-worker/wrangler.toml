@@ -1,8 +1,0 @@
-name = "stationery-point-cms-oauth"
-main = "worker.js"
-compatibility_date = "2026-07-01"
-
-# GITHUB_CLIENT_ID can live here as a plain var (it is public by design).
-# GITHUB_CLIENT_SECRET must be a secret:  npx wrangler secret put GITHUB_CLIENT_SECRET
-[vars]
-GITHUB_CLIENT_ID = "REPLACE_WITH_OAUTH_APP_CLIENT_ID"

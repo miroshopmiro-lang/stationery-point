@@ -1,10 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { activeCategories } from '../data/productData';
+import { useActiveCategories } from '../data/catalog';
 import SmartImage from './SmartImage';
 
-// activeCategories, not the raw file: a circle for an empty category is a dead end.
-const items = activeCategories;
 
 /*
  * AI PRODUCT SHOTS (17 Sep 2026): category-tiles/*.webp were a generic cream/beige flatlay
@@ -36,6 +34,8 @@ const items = activeCategories;
  */
 
 export default function CategoryCircles() {
+  // Active categories, not the raw file: a circle for an empty category is a dead end.
+  const items = useActiveCategories();
   if (!items.length) return null;
 
   return (

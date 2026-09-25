@@ -450,3 +450,18 @@ All captures archived under `research/reference-captures/` and documented in the
 - Sam asked how the domain and "uploads" work. Domain check: stationerypoint.com is taken; stationerypointkochi.com is free; .in could not be checked (registry lookup failed).
 - Site has been live on stationery-point.pages.dev since at least 19 Sep, so the launch leverage is gone. The domain connection is the handover and the billing point.
 - Delivery wording made corporate-only across the site (Sam, 23 Sep): Schools & offices tile note (visible on phones), Send-your-list bullet, both WhatsApp templates, and a new Terms section 4 'Delivery' at /terms#delivery. The office hero banner was left as is (Abhinand: it's already corporate).
+
+## 2026-09-25 — CMS switched from Decap to Sanity (code + CMS products merge)
+- **Why:** the Decap `/admin` never worked on the live site. Its GitHub OAuth worker was never deployed (`base_url` was still the placeholder), so nobody could log in.
+- **New setup, modelled on Augzet V2 but fixed:** Sanity Studio lives in `studio/`, builds into `public/admin/` (`cd studio && npm run build`), and is served at `/admin`. `_redirects` now sends `/admin/*` to the studio's own index.html.
+- **Both lists show together.** Abhinand keeps adding products as JSON in `src/data/products/`; Sam adds extra ones in `/admin`. `src/data/catalog.js` fetches Sam's published products from Sanity's CDN at runtime and merges them in. Augzet shows Sanity *or* its code list, never both; this was the thing to avoid.
+  - Same product name in both: the code one wins (no duplicate cards).
+  - Within a category, Sam's products come first, newest first.
+  - Sanity down: the site shows the code products only. Last Sanity result is cached in localStorage.
+  - A category with only Sam's products (e.g. Return Gifts) now gets its filter, circle and footer link.
+- Sanity fields: name, category, photo (required), brand, unit, MRP, our price (must be below MRP), "New in" tag (on by default). Sam cannot edit or remove the code products from `/admin`, only his own.
+- Consumers moved to `useProducts()` / `useActiveCategories()`: Catalog, CategoryCircles, Footer, NewInRail, OffersRail. `LandingPage.jsx` (uncommitted 19 Sep work) still reads code products only.
+- Removed: `cms-oauth-worker/`, `docs/cms-setup.md`, Decap `config.yml`.
+- Verified in the browser with mocked Sanity data at 375px: Sam's product first, duplicate name skipped, bad category dropped, Return Gifts filter appeared, price + Save tag rendered. Studio build loads at /admin. Site build OK.
+- **Sanity account (created by Abhinand, 25 Sep): `hehnofe@gmail.com`.** Project `Stationerypoint`, project ID `j95yhvco`, dataset `production` (public). CORS origins added with credentials: `https://stationery-point.pages.dev`, `http://localhost:5173`. Checked from here: public read returns 200, both origins get Allow-Credentials. **When Sam's domain connects, add it as a CORS origin too, or /admin and his products break on that domain.**
+- Invite Sam at sanity.io/manage -> Members (Editor role) so he logs in with his own email.

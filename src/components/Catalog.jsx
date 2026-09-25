@@ -2,7 +2,8 @@ import React, { useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Fuse from 'fuse.js';
-import { products, categories, activeCategories } from '../data/productData';
+import { categories } from '../data/productData';
+import { useProducts, useActiveCategories } from '../data/catalog';
 import { SearchIcon, WhatsAppIcon } from './icons';
 import { STORE } from '../lib/utils';
 import ProductCard from './ProductCard';
@@ -11,12 +12,11 @@ import CategoryCard from './CategoryCard';
 // Filters and browse tiles list only categories that have products; `categories`
 // stays the lookup table so a direct ?category= link to an empty one still resolves
 // its title instead of rendering an untitled page.
-const filters = [{ id: 'all', label: 'All Products' }, ...activeCategories.map((c) => ({ id: c.id, label: c.title }))];
 
 // Same Fuse.js typo-tolerant matching as lib/search.js's AskBox engine (see that file's
 // comment for why Fuse over a hand-rolled fuzzy function) — a shopper typing "pensil" or
 // "noteboks" here should still find products, not hit "no results" over a spelling slip.
-const productFuse = new Fuse(products, {
+const fuseOptions = {
   keys: [
     { name: 'name', weight: 3 },
     { name: 'brand', weight: 2 },
@@ -24,11 +24,19 @@ const productFuse = new Fuse(products, {
   ],
   threshold: 0.22,
   ignoreLocation: true,
-});
+};
 
 export default function Catalog() {
   // Deep-link filter + search via URL query params (back button, sharing).
   const [searchParams, setSearchParams] = useSearchParams();
+  // Code products plus the ones Sam adds in /admin (see data/catalog.js).
+  const products = useProducts();
+  const activeCategories = useActiveCategories();
+  const filters = useMemo(
+    () => [{ id: 'all', label: 'All Products' }, ...activeCategories.map((c) => ({ id: c.id, label: c.title }))],
+    [activeCategories]
+  );
+  const productFuse = useMemo(() => new Fuse(products, fuseOptions), [products]);
   const active = searchParams.get('category') || 'all';
   const query = searchParams.get('q') || '';
 
@@ -54,7 +62,7 @@ export default function Catalog() {
     // someone who spells the product correctly.
     const pool = q ? productFuse.search(q).map((r) => r.item) : products;
     return pool.filter((p) => active === 'all' || active === 'everything' || p.category === active);
-  }, [active, query]);
+  }, [active, query, products, productFuse]);
 
   // Jags-style browsing: the catalog landing shows category cards; a chosen
   // category (or a search) shows the product grid.

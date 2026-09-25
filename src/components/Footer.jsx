@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { STORE, waLink } from '../lib/utils';
-import { activeCategories } from '../data/productData';
+import { useActiveCategories } from '../data/catalog';
 import { PhoneIcon, WhatsAppIcon, InstagramIcon } from './icons';
 
 export default function Footer() {
+  const activeCategories = useActiveCategories();
   return (
     <footer className="bg-brand-primary text-white mt-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14">

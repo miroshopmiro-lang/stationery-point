@@ -1,0 +1,16 @@
+{
+  "name": "stationery-point-studio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build ../public/admin -y && node fix-admin-paths.js"
+  },
+  "dependencies": {
+    "react": "^19.2.2",
+    "react-dom": "^19.2.2",
+    "sanity": "^6.16.0",
+    "styled-components": "^6.1.15"
+  }
+}

@@ -1,3 +1,7 @@
+# Sanity Studio (Sam's product panel) is a single-page app of its own under /admin.
+# Its deep links (/admin/structure/product/...) must get the studio's index.html, not the site's.
+/admin/* /admin/index.html 200
+
 # SPA fallback: deep links (/catalog, /new-arrivals, refreshes) serve the app.
-# Real files (including /admin/*) are served before redirects are evaluated.
+# Real files (including /admin/static/*) are served before redirects are evaluated.
 /* /index.html 200

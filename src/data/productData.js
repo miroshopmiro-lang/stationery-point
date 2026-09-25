@@ -1,6 +1,6 @@
-// Catalog data lives as JSON files (src/data/products/*.json + categories.json)
-// so it can be edited from the /admin CMS (Decap) without touching code.
-// Components keep importing { categories, products } from this module.
+// Code catalogue: src/data/products/*.json + categories.json, edited by hand.
+// Products Sam adds in /admin (Sanity) are merged on top at runtime in ./catalog.js;
+// UI that lists products should use useProducts()/useActiveCategories() from there.
 import categoriesFile from './categories.json';
 
 export const categories = categoriesFile.items;

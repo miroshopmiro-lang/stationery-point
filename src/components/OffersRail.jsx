@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { products } from '../data/productData';
+import { useProducts } from '../data/catalog';
 import ProductCard from './ProductCard';
 import { ChevronLeftIcon, ChevronRightIcon } from './icons';
 
@@ -26,11 +26,14 @@ import { ChevronLeftIcon, ChevronRightIcon } from './icons';
  * merchandising team fills it daily.
  */
 
-// Only genuine below-MRP items belong in an offers rail.
-const offers = products.filter((p) => p.mrp && p.ourPrice && Number(p.mrp) > Number(p.ourPrice));
-
 export default function OffersRail() {
   const railRef = useRef(null);
+  const products = useProducts();
+  // Only genuine below-MRP items belong in an offers rail.
+  const offers = useMemo(
+    () => products.filter((p) => p.mrp && p.ourPrice && Number(p.mrp) > Number(p.ourPrice)),
+    [products]
+  );
 
   if (offers.length === 0) return null;
 
