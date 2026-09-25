@@ -6,7 +6,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; frame-src https://www.google.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://cdn.sanity.io; media-src 'self'; connect-src 'self' https://*.sanity.io; frame-src https://www.google.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
 
 # Generated art (hero slides, category tiles, collection cards). Cached for a week
 # rather than a year with `immutable`, because these filenames are not
@@ -21,9 +21,10 @@
 /category-tiles/*
   Cache-Control: public, max-age=0, must-revalidate
 
-# The CMS needs its own policy: Decap loads from unpkg (pinned version) and
-# talks to GitHub + the OAuth worker.
+# Sanity Studio (/admin) talks to *.sanity.io over https and websockets, loads images and
+# workers from blob:, and Google/GitHub login. Detach the site-wide CSP first (the space after
+# ! matters), otherwise both policies apply and the stricter one wins.
 /admin/*
   X-Robots-Tag: noindex
-  !Content-Security-Policy
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.githubusercontent.com; connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://*.workers.dev; frame-src 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://*.sanity.io https://lh3.googleusercontent.com https://avatars.githubusercontent.com; media-src 'self' blob: https://cdn.sanity.io; connect-src 'self' https://*.sanity.io wss://*.sanity.io https://*.api.sanity.io wss://*.api.sanity.io; worker-src 'self' blob:; frame-src 'self' https://*.sanity.io; base-uri 'self'; form-action 'self' https://*.sanity.io; object-src 'none'
