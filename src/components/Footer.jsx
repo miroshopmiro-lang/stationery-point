@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { STORE, waLink } from '../lib/utils';
 import { useActiveCategories } from '../data/catalog';
+import { landingPages } from '../data/landingPages';
 import { PhoneIcon, WhatsAppIcon, InstagramIcon } from './icons';
 
 export default function Footer() {
@@ -43,7 +44,12 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-white/60">
+        <nav aria-label="Local guides" className="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-white/75">
+          {landingPages.map((l) => (
+            <Link key={l.slug} to={`/${l.slug}`} className="hover:text-brand-accent transition-colors">{l.navLabel}</Link>
+          ))}
+        </nav>
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-white/60">
           <Link to="/privacy" className="hover:text-brand-accent transition-colors underline underline-offset-4">Privacy Policy</Link>
           <Link to="/terms" className="hover:text-brand-accent transition-colors underline underline-offset-4">Terms of Use</Link>
         </div>

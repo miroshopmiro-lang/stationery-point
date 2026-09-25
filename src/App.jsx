@@ -10,6 +10,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Terms from './components/Terms';
+import LandingPage, { landingRoutes } from './components/LandingPage';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import EnquiryBasket from './components/EnquiryBasket';
 import { EnquiryListProvider } from './context/EnquiryListContext';
@@ -45,6 +46,9 @@ export default function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/terms" element={<Terms />} />
+                {landingRoutes.map((r) => (
+                  <Route key={r.path} path={r.path} element={<LandingPage slug={r.slug} />} />
+                ))}
               </Routes>
             </main>
             <Footer />
