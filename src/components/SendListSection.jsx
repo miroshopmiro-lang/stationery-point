@@ -6,7 +6,7 @@ import { ListIcon } from './icons';
 // The supply-list flow, given its own designed section rather than sitting
 // naked in the hero. Per the Reddit research this is the highest-value
 // interaction on the site: schools and offices keep their requirements as a
-// list and send it to two or three vendors — they do not click through a
+// list and send it to two or three vendors, they do not click through a
 // catalogue item by item.
 export default function SendListSection() {
   return (
@@ -32,7 +32,7 @@ export default function SendListSection() {
                 </li>
                 <li className="flex gap-2.5">
                   <span className="text-brand-accent font-bold" aria-hidden="true">&rarr;</span>
-                  Photos and PDFs work too — send them straight on WhatsApp
+                  Photos and PDFs work too. Send them straight on WhatsApp
                 </li>
                 <li className="flex gap-2.5">
                   <span className="text-brand-accent font-bold" aria-hidden="true">&rarr;</span>
@@ -46,7 +46,7 @@ export default function SendListSection() {
 
             {/* variant="header" used to be passed here, which was a real bug: AskBox's
                 header variant is a single-line box that ignores `defaultMode` completely
-                and ejects straight to a catalog search — this section's whole point (paste
+                and ejects straight to a catalog search, this section's whole point (paste
                 a multi-line list, get the mode toggle + WhatsApp list-send) never rendered.
                 Dropping the variant falls through to the full hero-style UI, which is the
                 only one that actually supports list mode (fixed 17 Sep 2026). */}

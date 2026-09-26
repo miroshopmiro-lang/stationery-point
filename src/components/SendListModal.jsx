@@ -12,7 +12,7 @@ import AskBox from './AskBox';
 // message that eventually goes out is itemised.
 //
 // Three routes in: browse the catalogue and tap "Add to list", paste/type a
-// list directly (AskBox in list mode — matches each line against known
+// list directly (AskBox in list mode, matches each line against known
 // categories and always produces a working WhatsApp message, matched or
 // not), or attach a photo/PDF straight in WhatsApp.
 
@@ -90,7 +90,7 @@ export default function SendListModal({ open, onClose }) {
             </div>
 
             <div className="px-6 py-5 flex flex-col gap-3">
-              {/* Already has a list — skip the pitch, let them send it. */}
+              {/* Already has a list, skip the pitch, let them send it. */}
               {count > 0 && (
                 <a
                   href={waListLink(items)}
@@ -141,7 +141,7 @@ export default function SendListModal({ open, onClose }) {
                       Paste or type your list
                     </span>
                     <span className="block text-xs text-gray-500 font-normal mt-0.5 leading-relaxed">
-                      School supply list, office refills, art kit — paste it in and we'll match it against what we stock.
+                      School supply list, office refills, art kit: paste it in and we'll match it against what we stock.
                     </span>
                   </span>
                 </button>

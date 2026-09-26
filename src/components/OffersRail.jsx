@@ -5,7 +5,7 @@ import ProductCard from './ProductCard';
 import { ChevronLeftIcon, ChevronRightIcon } from './icons';
 
 /*
- * OFFERS RAIL — copied from hobbycraft.co.uk's "Our best offers" block, verified from a
+ * OFFERS RAIL, copied from hobbycraft.co.uk's "Our best offers" block, verified from a
  * rendered screenshot at 375px on 17 Aug 2026.
  *
  * What hobbycraft actually does:
@@ -17,7 +17,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from './icons';
  *     the left and right edges, vertically centred
  *   - A single "Shop All Offers" PILL button, centred, beneath the rail
  *
- * Ours uses the brand tint (#EEF0FB) in place of hobbycraft's cream — our locked palette has
+ * Ours uses the brand tint (#EEF0FB) in place of hobbycraft's cream, our locked palette has
  * no cream, and CO-3 in the audit noted every reference separates sections with a pure grey
  * band while ours carries the brand hue instead.
  *
@@ -60,7 +60,7 @@ export default function OffersRail() {
         </div>
 
         <div className="relative mt-6">
-          {/* Rail. ~2.2 cards visible at 375px — hobbycraft's cut-off-card swipe cue. */}
+          {/* Rail. ~2.2 cards visible at 375px, hobbycraft's cut-off-card swipe cue. */}
           <ul
             ref={railRef}
             className="flex gap-4 overflow-x-auto px-5 pb-2 lg:px-8 lg:gap-6
@@ -77,7 +77,7 @@ export default function OffersRail() {
             ))}
           </ul>
 
-          {/* White circular arrows overlaid on the card edges — hobbycraft's controls.
+          {/* White circular arrows overlaid on the card edges, hobbycraft's controls.
               Desktop only: at 375px the cut-off card already communicates swipe, and
               hobbycraft's own arrows sit outside the thumb path on a phone. */}
           <button
@@ -104,7 +104,7 @@ export default function OffersRail() {
           </button>
         </div>
 
-        {/* Centred pill beneath the rail — hobbycraft's "Shop All Offers". */}
+        {/* Centred pill beneath the rail, hobbycraft's "Shop All Offers". */}
         <div className="mt-6 flex justify-center px-4">
           <Link
             to="/catalog"

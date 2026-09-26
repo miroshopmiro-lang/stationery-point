@@ -4,13 +4,13 @@ import CtaLink from './CtaLink';
 import SmartImage from './SmartImage';
 
 /*
- * PROMO TILES — copied from flyingtiger.com's two-up promo block, verified from a rendered
+ * PROMO TILES, copied from flyingtiger.com's two-up promo block, verified from a rendered
  * screenshot at 375px on 17 Aug 2026.
  *
  * What flyingtiger actually does, and the single most useful thing found in the whole audit:
  *   Each tile is HALF PHOTOGRAPH / HALF FLAT COLOUR PANEL, and consecutive tiles ALTERNATE
  *   which side the photo sits on. Tile 1 = photo left, cream panel right. Tile 2 = pink panel
- *   left, photo right. The headline and a WHITE PILL BUTTON sit on the flat panel — never over
+ *   left, photo right. The headline and a WHITE PILL BUTTON sit on the flat panel, never over
  *   the photograph, and never behind a scrim.
  *   dickblick.com does the same split inside white cards, so it is confirmed on two references.
  *
@@ -19,7 +19,7 @@ import SmartImage from './SmartImage';
  * typographic work in HTML, so copy changes cost nothing and never require regenerating art.
  *
  * Note flyingtiger uses per-campaign colours here (cream+dark red, pink+green) rather than
- * its brand blue. We use the locked brand palette instead — a deliberate departure, because
+ * its brand blue. We use the locked brand palette instead, a deliberate departure, because
  * we have four locked colours and no seasonal palette to draw on.
  */
 
@@ -33,7 +33,7 @@ const tiles = [
     note: 'Delivery for corporate orders only. T&C apply.',
     cta: { label: 'Get a bulk quote', to: 'wa:bulk' },
     // AI studio shot (17 Sep 2026) of Sam's real JK Copier A4 ream, same treatment as the
-    // rest of the site — replaces the real phone-camera photo that read as "cheap" here.
+    // rest of the site, replaces the real phone-camera photo that read as "cheap" here.
     image: '/ai-product-shots/03-jk-copy-paper-a4-80gsm.webp',
     panel: 'bg-brand-primary',
   },
@@ -43,7 +43,7 @@ const tiles = [
     title: 'Return gifts, sorted in one trip.',
     body: 'Pick a budget per head and a quantity. We pack them ready to hand out.',
     // Was /catalog?category=return-gifts. Sam's item list files nothing under Return Gifts,
-    // so that link landed on an empty grid — a dead end. Return gifts ARE a real part of the
+    // so that link landed on an empty grid, a dead end. Return gifts ARE a real part of the
     // shop, so the service stays and the CTA goes to a WhatsApp enquiry instead of being cut.
     cta: { label: 'Plan return gifts', to: 'wa:return-gifts' },
     // No photograph exists for this one and none of Sam's product shots honestly represents
@@ -63,20 +63,20 @@ function PromoTile({ tile, index }) {
   /*
    * A tile with no artwork spans the panel across the whole width instead of holding half
    * the tile open for a placeholder. AUDIT-01 ranked this block the single worst offender on
-   * the page — "~50% of the block's area is blank white at 375" — and the cause was a photo
+   * the page, "~50% of the block's area is blank white at 375", and the cause was a photo
    * half reserved for art that does not exist. flyingtiger's split is still the pattern; a
    * tile just does not get one until it has a photograph to put in it.
    */
   return (
     <article className={(hasPhoto ? 'grid grid-cols-2 ' : '') + 'overflow-hidden rounded-lg'}>
-      {/* PHOTO HALF — nothing overlaid on it, ever. */}
+      {/* PHOTO HALF, nothing overlaid on it, ever. */}
       {hasPhoto && (
         <div className={'relative aspect-square ' + (photoRight ? 'order-2' : 'order-1')}>
           <SmartImage src={tile.image} alt="" tint="var(--bed)" className="absolute inset-0" />
         </div>
       )}
 
-      {/* PANEL HALF — flat colour, carries all the type and the pill button. */}
+      {/* PANEL HALF, flat colour, carries all the type and the pill button. */}
       <div
         className={
           tile.panel +
@@ -99,7 +99,7 @@ function PromoTile({ tile, index }) {
             <Link to="/terms#delivery" className="underline underline-offset-2">Details</Link>
           </p>
         )}
-        {/* White pill on the flat panel — flyingtiger's exact CTA treatment. */}
+        {/* White pill on the flat panel, flyingtiger's exact CTA treatment. */}
         <CtaLink
           to={tile.cta.to}
           className="mt-3 lg:mt-5 inline-flex items-center justify-center self-start min-h-[40px] lg:min-h-[48px]

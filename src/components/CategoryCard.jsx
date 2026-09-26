@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// Category tile. The whole card is one link — no nested interactive elements,
+// Category tile. The whole card is one link, no nested interactive elements,
 // so nothing can overlap or steal the tap target. The per-category `color` that
 // drove the old chips is now gone from categories.json and from the CMS too:
 // they were stock Tailwind 500s, failed WCAG AA on white text, and fought the

@@ -14,7 +14,7 @@ import CategoryCard from './CategoryCard';
 // its title instead of rendering an untitled page.
 
 // Same Fuse.js typo-tolerant matching as lib/search.js's AskBox engine (see that file's
-// comment for why Fuse over a hand-rolled fuzzy function) — a shopper typing "pensil" or
+// comment for why Fuse over a hand-rolled fuzzy function), a shopper typing "pensil" or
 // "noteboks" here should still find products, not hit "no results" over a spelling slip.
 const fuseOptions = {
   keys: [
@@ -58,7 +58,7 @@ export default function Catalog() {
     const q = query.trim();
     // Fuzzy-matched product pool for a non-empty query (typo-tolerant, see productFuse
     // above); the full catalogue otherwise. Exact substring hits still rank first because
-    // Fuse scores an exact match at 0 — the best possible score — so nothing regresses for
+    // Fuse scores an exact match at 0, the best possible score, so nothing regresses for
     // someone who spells the product correctly.
     const pool = q ? productFuse.search(q).map((r) => r.item) : products;
     return pool.filter((p) => active === 'all' || active === 'everything' || p.category === active);
@@ -97,7 +97,7 @@ export default function Catalog() {
       {showLanding ? (
         <div>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900 mb-5">Find by Category</h2>
-          {/* "All Categories" tile — added 17 Sep 2026 on request: with a catalogue this
+          {/* "All Categories" tile, added 17 Sep 2026 on request: with a catalogue this
               small, and plenty of products genuinely belonging under more than one category
               (stationery/office-supplies overlap constantly), forcing a category pick first
               costs a shopper clicks for no real payoff. This tile skips straight to every
@@ -166,7 +166,7 @@ export default function Catalog() {
             <div>
               {active === 'everything' && <h2 className="text-xl font-extrabold text-gray-800">All Categories</h2>}
               {activeCategory && <h2 className="text-xl font-extrabold text-gray-800">{activeCategory.title}</h2>}
-              {/* Result counts deliberately not shown — a category reading
+              {/* Result counts deliberately not shown, a category reading
                   "7 products" reads as a small shop, not a curated one. */}
               <p className="sr-only" aria-live="polite">
                 {filtered.length} product{filtered.length !== 1 ? 's' : ''} found
@@ -189,7 +189,7 @@ export default function Catalog() {
             <div className="text-center py-20 text-gray-400 flex flex-col items-center justify-center">
               <p className="text-gray-600 font-medium">
                 {query.trim()
-                  ? `We haven't listed "${query.trim()}" yet — but we may still have it.`
+                  ? `We haven't listed "${query.trim()}" yet, but we may still have it.`
                   : 'No products in this category yet.'}
               </p>
               <p className="mt-1 text-sm">Our shop stocks far more than this page shows. Ask Sam and he'll confirm.</p>

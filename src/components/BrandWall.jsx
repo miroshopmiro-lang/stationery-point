@@ -3,7 +3,7 @@ import brandsFile from '../data/brands.json';
 
 // Brands stocked. Jags has no equivalent section, and per the Reddit research
 // Kerala shoppers check brand availability before deciding to travel to a shop
-// — so this is both a trust signal and a search play.
+//, so this is both a trust signal and a search play.
 //
 // Only the photo-confirmed list renders. `unconfirmed` entries in brands.json
 // stay out until Sam signs the list off; naming a brand a shop doesn't carry
@@ -35,7 +35,7 @@ export default function BrandWall() {
         </ul>
 
         <p className="mt-5 inline-block rounded-full bg-white px-4 py-2 text-sm text-gray-700 shadow-sm">
-          Looking for something else? Ask us — we carry more than we can list here.
+          Looking for something else? Ask us. We carry more than we can list here.
         </p>
       </div>
     </section>

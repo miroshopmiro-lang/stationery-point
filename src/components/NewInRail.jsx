@@ -5,34 +5,34 @@ import ProductCard from './ProductCard';
 import { ChevronLeftIcon, ChevronRightIcon } from './icons';
 
 /*
- * "NEW IN" RAIL — flyingtiger.com pattern, rebuilt 16 Sep 2026 on explicit direction to match
- * flyingtiger 1:1: left-aligned plain heading (no centred subtitle line — flyingtiger's "Shop
+ * "NEW IN" RAIL, flyingtiger.com pattern, rebuilt 16 Sep 2026 on explicit direction to match
+ * flyingtiger 1:1: left-aligned plain heading (no centred subtitle line, flyingtiger's "Shop
  * our favourites" carries no supporting sentence), prev/next controls docked in the HEADER row
  * rather than floating over the product images (the old floating-arrow-over-the-image approach
  * visually collided with the product photo and, being lg-only, left mobile with no visible way
- * to see more — arrows now render at every breakpoint).
+ * to see more, arrows now render at every breakpoint).
  *
  * Sourced from useNewIn(): the "New In" list Sam edits in /admin (add, remove, reorder), or,
  * until he has published it once, `newArrival: true` on the code products.
  *
  * Selection basis (16 Sep 2026): from the 54 newly-photographed products, picked the ones with
- * (a) a verified real photo — checked against Sam's own item-list description, not just the
+ * (a) a verified real photo, checked against Sam's own item-list description, not just the
  * distributor filename, after two mismatches were caught this way (a 14-shade paint pack
- * photographed as 12-shade; a 1mm Posca marker photographed as 0.7mm) — and (b) visual/seasonal
+ * photographed as 12-shade; a 1mm Posca marker photographed as 0.7mm), and (b) visual/seasonal
  * pull: art and craft novelties and Diwali-adjacent home-decor items, the next seasonal pull
  * after Onam. Google Suggest was checked for demand signal but returned nothing Kochi-specific;
  * that granularity needs a paid keyword tool this project doesn't have.
  *
- * Images are Sam's own photos, resized only — no cropping or background compositing (see
- * tools/product-shots — the bed-composite pipeline was tried and rejected 16 Sep 2026 for
+ * Images are Sam's own photos, resized only, no cropping or background compositing (see
+ * tools/product-shots, the bed-composite pipeline was tried and rejected 16 Sep 2026 for
  * producing mismatched fill ratios across a grid; ProductCard's fixed aspect-square + object-
  * cover is what makes a grid of inconsistent source photos look uniform).
  *
  * AI PRODUCT SHOTS (16 Sep 2026): the homepage's own product photography read as "cheap" next
- * to a redesigned site — real phone-camera shots on a cluttered background. Direction was to
+ * to a redesigned site, real phone-camera shots on a cluttered background. Direction was to
  * replace a FEW homepage-featured shots with proper studio-style AI-generated photography,
  * scoped to the homepage only (non-negotiable: this stays a homepage polish, not a catalogue
- * change — the full catalogue at Catalog.jsx keeps Sam's real photos, since a shopper who has
+ * change, the full catalogue at Catalog.jsx keeps Sam's real photos, since a shopper who has
  * to describe an item over WhatsApp needs to recognise the real object, not a generated one).
  * HOME_SHOT_OVERRIDES below swaps in the AI shot only for this rail's rendering; each product's
  * own JSON `image` field is untouched. If a generated shot garbles its own packaging text,
@@ -73,7 +73,7 @@ export default function NewInRail() {
 
   // Section background switched from bg-bed (the light indigo tint every other rail
   // sits on) to plain white on request 17 Sep 2026, to match the white the product
-  // name/price sits on inside each card — the tint was reading as an off-white seam
+  // name/price sits on inside each card, the tint was reading as an off-white seam
   // between the card and the section instead of one continuous white surface.
   return (
     <section aria-labelledby="new-in-heading" className="bg-white">

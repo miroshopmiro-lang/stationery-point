@@ -12,11 +12,11 @@ import Testimonials from './Testimonials';
 import AdvantageCards from './AdvantageCards';
 
 // Offer strip stays empty until Sam gives a real offer with a real number.
-// OfferStrip renders nothing when this is null — an invented discount on a
+// OfferStrip renders nothing when this is null, an invented discount on a
 // live client site is a promise they'd have to honour at the counter.
 //
 // Onam shape, for when he confirms:
-//   { headline: 'Onam offer — 10% off orders above ₹1,000',
+//   { headline: 'Onam offer, 10% off orders above ₹1,000',
 //     detail: 'Until 26 August',
 //     cta: { label: 'Shop now', to: '/catalog' } }
 const OFFER = null;
@@ -43,14 +43,14 @@ export default function Home() {
       <CollectionCards />
       <VisitShop />
       {/* AdvantageCards removed from the homepage 17 Aug 2026.
-          At 1110px it was the TALLEST block on the page — taller than the hero — and not one
+          At 1110px it was the TALLEST block on the page, taller than the hero, and not one
           of the four references has a "why choose us" / benefits grid on its homepage at all.
           Its 44px headline also exceeded every reference H2 (flyingtiger 32px, blick 28px,
           hobbycraft 24px), and it hardcoded #1C1230, which is not in the locked palette.
-          Its job — stating the trust claims — is already done by the header trust strip in 38px.
+          Its job, stating the trust claims, is already done by the header trust strip in 38px.
           The component is kept for a possible /about page rather than deleted. */}
 
-      {/* KOCHI DELIVERY BANNER — removed pending client sign-off.
+      {/* KOCHI DELIVERY BANNER, removed pending client sign-off.
           The copy claimed "our warehouse in Vyttila" and dispatch to Edappally,
           Kakkanad and Kadavanthra. Stationery Point is a ground-floor shop in
           Katti Tower, not a warehouse, and the delivery network is unconfirmed.

@@ -1,13 +1,13 @@
 {
-  "_note": "SCHOOL KIT TILE BLOCK — structure copied 1:1 from smiggle.co.uk's 'READY. SET. BACK TO SCHOOL.' block, verified from a rendered 375px screenshot on 17 Aug 2026. Six tiles, two per row, price-band tile first and carrying the only badge.",
+  "_note": "SCHOOL KIT TILE BLOCK, structure copied 1:1 from smiggle.co.uk's 'READY. SET. BACK TO SCHOOL.' block, verified from a rendered 375px screenshot on 17 Aug 2026. Six tiles, two per row, price-band tile first and carrying the only badge.",
   "_smiggle_reference": {
     "heading": "READY. SET. BACK TO SCHOOL.",
     "tiles_in_order": ["£30-£50 Bundles", "School Bags", "School Lunch Boxes", "School Bottles", "£2 Stationery", "30% Off Gift Packs"],
-    "observed": "Tile 1 is the price band and is the only tile with a roundel badge ('HOT OFFER', blue circle, top-right). Tile 1's image shows a COMPLETE KIT (bag + lunchbox + pencil case + bottle) while every other tile shows a SINGLE item — that contrast is how the bundle reads as more value at a glance. Labels sit inside the tile below the image, centred and underlined. Tile panel is a light warm grey, product photo centred on it.",
-    "note": "Smiggle rotates tiles 5 and 6 by campaign — on 16 Aug they were 'School Stationery' and 'School Pencil Cases'. Ours must therefore be data-driven, never hardcoded."
+    "observed": "Tile 1 is the price band and is the only tile with a roundel badge ('HOT OFFER', blue circle, top-right). Tile 1's image shows a COMPLETE KIT (bag + lunchbox + pencil case + bottle) while every other tile shows a SINGLE item, that contrast is how the bundle reads as more value at a glance. Labels sit inside the tile below the image, centred and underlined. Tile panel is a light warm grey, product photo centred on it.",
+    "note": "Smiggle rotates tiles 5 and 6 by campaign, on 16 Aug they were 'School Stationery' and 'School Pencil Cases'. Ours must therefore be data-driven, never hardcoded."
   },
 
-  "_UNCONFIRMED_PRICING": "The four ₹ bands below are INFERRED from bottom-up MRP arithmetic in research/market/price-bands.md, NOT confirmed by Sam. Every component price needs a live re-check before launch — one spot-check already found a Faber-Castell geometry box listed at ₹100 that is actually ₹95, i.e. rounded UP, which inflates the saving. DO NOT show a savings figure to a customer until Sam signs off the kit contents and the MRP totals.",
+  "_UNCONFIRMED_PRICING": "The four ₹ bands below are INFERRED from bottom-up MRP arithmetic in research/market/price-bands.md, NOT confirmed by Sam. Every component price needs a live re-check before launch, one spot-check already found a Faber-Castell geometry box listed at ₹100 that is actually ₹95, i.e. rounded UP, which inflates the saving. DO NOT show a savings figure to a customer until Sam signs off the kit contents and the MRP totals.",
 
   "heading": "School kits, sorted.",
   "subheading": "Pick a kit, send it on WhatsApp. We pack it before you reach the shop.",
@@ -16,13 +16,13 @@
     {
       "id": "kits",
       "label": "Ready-Made Kits",
-      "_labelPending": "smiggle's lead tile is '£30-£50 Bundles' — the PRICE BAND is the label, and that is the pattern we want. Ours stays non-numeric until Sam confirms real kit contents and prices from his item export. Then this becomes e.g. '₹499–₹2,999 Kits'.",
+      "_labelPending": "smiggle's lead tile is '£30-£50 Bundles', the PRICE BAND is the label, and that is the pattern we want. Ours stays non-numeric until Sam confirms real kit contents and prices from his item export. Then this becomes e.g. '₹499–₹2,999 Kits'.",
       "badge": "Best value",
       "isPriceBand": true,
       "image": "/kit-tiles/kits-all-bands.webp",
       "_toFixed": "Was /catalog?collection=school-kits. Nothing reads ?collection=, so this silently showed the whole catalogue; and Sam stocks no ready-made kit SKU to point at. The kit service is real (see subheading), so it goes to the enquiry flow until a kit product exists.",
       "to": "wa:school-kits",
-      "_imageBrief": "Must show a COMPLETE KIT — multiple items together (notebook stack, pouch, geometry box, pencils, bottle, lunch box) — deliberately more objects than any other tile, copying smiggle's lead-tile contrast."
+      "_imageBrief": "Must show a COMPLETE KIT, multiple items together (notebook stack, pouch, geometry box, pencils, bottle, lunch box), deliberately more objects than any other tile, copying smiggle's lead-tile contrast."
     },
     { "id": "notebooks", "label": "Notebooks", "image": "/kit-tiles/notebooks.webp", "to": "/catalog?q=notebook" },
     { "id": "art", "label": "Art & Colouring", "image": "/kit-tiles/art.webp", "to": "/catalog?category=art-supplies" },

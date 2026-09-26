@@ -5,12 +5,12 @@ import SmartImage from './SmartImage';
 
 /*
  * AI PRODUCT SHOTS (16 Sep 2026): kitTiles.json's six `/kit-tiles/*.webp` images were never
- * generated — the tiles rendered as blank tinted panels (see SmartImage's fallback). Same
+ * generated, the tiles rendered as blank tinted panels (see SmartImage's fallback). Same
  * homepage-only override pattern as NewInRail.jsx: 'notebooks', 'art' and 'pencils' reuse
  * assets already generated for other homepage rails (same real Stationery Point stock, so
  * no new generation needed); 'kits', 'pouches' and 'bottles' are new studio shots grounded
  * in Sam's real pencil-pouch photo and a flyingtiger.com reference (bottles have no real
- * Stationery Point photo on file — id 39 Alpha Waterbottle's `image` is empty — so that tile
+ * Stationery Point photo on file, id 39 Alpha Waterbottle's `image` is empty, so that tile
  * renders a generic, unbranded studio water bottle rather than inventing a label).
  */
 const HOME_SHOT_OVERRIDES = {
@@ -23,11 +23,11 @@ const HOME_SHOT_OVERRIDES = {
 };
 
 /*
- * SCHOOL KIT TILE BLOCK — copied 1:1 from smiggle.co.uk's "READY. SET. BACK TO SCHOOL."
+ * SCHOOL KIT TILE BLOCK, copied 1:1 from smiggle.co.uk's "READY. SET. BACK TO SCHOOL."
  * block, verified from a rendered screenshot at 375px on 17 Aug 2026.
  *
  * The structure being copied, exactly:
- *   - Section heading: uppercase, CENTRED, bold  (smiggle centres; flyingtiger left-aligns —
+ *   - Section heading: uppercase, CENTRED, bold  (smiggle centres; flyingtiger left-aligns -
  *     we follow smiggle here because this is smiggle's block)
  *   - SIX tiles, TWO per row, three rows at phone width
  *   - Tile = light neutral square panel, product photo centred on it
@@ -62,7 +62,7 @@ function KitTile({ tile }) {
           className="absolute inset-0"
         />
 
-        {/* Roundel badge — smiggle puts one on the lead tile only, top-right.
+        {/* Roundel badge, smiggle puts one on the lead tile only, top-right.
             Chartreuse with deep indigo text measures 7.9:1, a comfortable AA pass. */}
         {/* Roundel sized to ~26% of tile width, matching smiggle's proportion. Was 52px on a
             166px tile (35%), which the audit flagged as oversized against their badge. */}
@@ -100,7 +100,7 @@ export default function SchoolKitTiles() {
   return (
     <section aria-labelledby="kit-tiles-heading" className="bg-white">
       <div className="max-w-[1280px] mx-auto px-4 py-8 lg:px-8 lg:py-14">
-        {/* Uppercase, centred heading — smiggle's treatment for this block. */}
+        {/* Uppercase, centred heading, smiggle's treatment for this block. */}
         <h2
           id="kit-tiles-heading"
           className="text-center font-bold uppercase tracking-tight text-brand-primary
@@ -114,7 +114,7 @@ export default function SchoolKitTiles() {
           </p>
         )}
 
-        {/* Two per row at phone width — smiggle's grid. Three across from tablet up. */}
+        {/* Two per row at phone width, smiggle's grid. Three across from tablet up. */}
         {/* Row gap tightened to smiggle's ~6-7px. Ours was 14px. */}
         <div className="mt-5 grid grid-cols-2 gap-x-3 gap-y-2 sm:gap-4 lg:grid-cols-3 lg:gap-6">
           {tiles.map((tile) => (

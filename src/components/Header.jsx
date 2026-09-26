@@ -6,19 +6,19 @@ import { WhatsAppIcon, SearchIcon, MenuIcon, CloseIcon } from './icons';
 import AskBox from './AskBox';
 
 /*
- * HEADER — copied from hobbycraft.co.uk, measured live at 375px on 17 Aug 2026.
+ * HEADER, copied from hobbycraft.co.uk, measured live at 375px on 17 Aug 2026.
  *
  * Structure being copied, in order:
  *   1. Notice / announcement bar          (flyingtiger.com: full-bleed dark, 34px, centred,
  *                                          rotates claims; hobbycraft adds the X to dismiss)
- *   2. Icon row with TEXT LABEL UNDER EACH ICON, centred logo   (hobbycraft — its distinguishing
+ *   2. Icon row with TEXT LABEL UNDER EACH ICON, centred logo   (hobbycraft, its distinguishing
  *                                          header trait: Menu / Stores / [logo] / Sign in / Basket)
  *   3. Full-width rounded search pill on its own row            (unanimous across all three
  *                                          sites I could render: FT, hobbycraft, blick)
  *   4. Trust strip: two claims split by a vertical divider      (hobbycraft: "FREE Delivery
  *                                          over £25 │ FREE Click & Collect over £10", ~38px)
  *
- * Brand swap only. No glassmorphism, no floating nav pill, no spring animations — none of the
+ * Brand swap only. No glassmorphism, no floating nav pill, no spring animations, none of the
  * four references has any of that, and the previous version of this file did.
  */
 
@@ -32,7 +32,7 @@ const nav = [
 /* Desktop category nav, mirroring flyingtiger.com's horizontal bar. Sourced from the real
    category list so we are not padding the count to look bigger than the shop is. */
 const categoryNav = [
-  // Was ?collection=school-kits — nothing reads that param, so it silently rendered the
+  // Was ?collection=school-kits, nothing reads that param, so it silently rendered the
   // whole catalogue. No kit SKU exists yet, so it goes to the enquiry flow.
   { label: 'School kits', to: 'wa:school-kits' },
   { label: 'Stationery', to: '/catalog?category=stationery' },
@@ -62,7 +62,7 @@ function ShopPinIcon({ className = 'w-6 h-6' }) {
   );
 }
 
-/* Icon + label stacked, label underneath — hobbycraft's pattern. Their labels measure ~11px. */
+/* Icon + label stacked, label underneath, hobbycraft's pattern. Their labels measure ~11px. */
 function HeaderAction({ as = 'button', to, href, icon, label, onClick, ...rest }) {
   const inner = (
     <>
@@ -112,7 +112,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white">
-      {/* 1 — Announcement bar. flyingtiger.com: full-bleed dark, 34px @375, centred white text. */}
+      {/* 1, Announcement bar. flyingtiger.com: full-bleed dark, 34px @375, centred white text. */}
       {noticeOpen && (
         <div className="relative text-white border-b-[3px] border-[#FFC107]" style={{ background: 'linear-gradient(90deg,#241F6B 0%,#3A34A8 50%,#241F6B 100%)' }}>
           <p
@@ -134,8 +134,8 @@ export default function Header() {
         </div>
       )}
 
-      {/* 2 — MOBILE/TABLET (below lg): icon row, labels underneath, logo centred, hobbycraft's
-             structure, THEN a separate full-width search row beneath it — matching how
+      {/* 2, MOBILE/TABLET (below lg): icon row, labels underneath, logo centred, hobbycraft's
+             structure, THEN a separate full-width search row beneath it, matching how
              flyingtiger.com and dickblick.com both still split these two rows at phone width
              (measured live, both sites). Only DESKTOP merges them (block 2b below): at 1280px+
              there is enough horizontal room to hold logo, search and actions on one line the way
@@ -197,7 +197,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Full-width search pill, own row — mobile/tablet only, see note above. Placeholder
+      {/* Full-width search pill, own row, mobile/tablet only, see note above. Placeholder
           carries the item count: copied from blick's "Search 110,000+ art supplies". */}
       <div className="lg:hidden border-b border-hairline bg-white">
         <div className="max-w-[1280px] mx-auto px-4 py-2.5">
@@ -205,9 +205,9 @@ export default function Header() {
         </div>
       </div>
 
-      {/* 2b — DESKTOP (lg+): logo, search and actions on ONE row, matching flyingtiger.com and
+      {/* 2b, DESKTOP (lg+): logo, search and actions on ONE row, matching flyingtiger.com and
           dickblick.com (both measured live, 16 Sep 2026) rather than stacking search on its own
-          row underneath — there is no reason to spend a whole extra row on it once the header is
+          row underneath, there is no reason to spend a whole extra row on it once the header is
           1280px wide. Logo runs noticeably larger here too, closer to blick's bold wordmark
           weight, since a 36px mark that was sized for a 375px phone read as small next to 900px+
           of spare header width. */}
@@ -277,11 +277,11 @@ export default function Header() {
         </div>
       </div>
 
-      {/* 3b — DESKTOP CATEGORY NAV. Added 17 Aug 2026 after the visual audit found the 1440px
+      {/* 3b, DESKTOP CATEGORY NAV. Added 17 Aug 2026 after the visual audit found the 1440px
              header was ~900px of dead white carrying three icons and nothing else.
              This is the finding I got wrong first time round: a DOM query returned only "Menu"
              and I concluded flyingtiger.com was hamburger-only even at desktop. The screenshot
-             showed a full horizontal nav of FOURTEEN items — New in, Back To School,
+             showed a full horizontal nav of FOURTEEN items, New in, Back To School,
              Bestsellers, School & office, Home, Gifts, Food, Toys & games, Arts & crafts,
              Party & occasions, Accessories, Last Chance, Shop all, Inspiration.
              So: horizontal category nav at desktop, hamburger at phone width. Ours lists the

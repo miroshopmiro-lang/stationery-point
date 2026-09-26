@@ -1,5 +1,5 @@
 {
-  "_source": "Placeholder search vocabulary — generic stationery-shop terms plus items visibly confirmed in shelf photos (gallery_2/3/5). This is NOT Sam's real item master. It exists so the ask-box works and degrades gracefully before the real export lands. Every match routes to a WhatsApp confirmation, never a bare stock claim — see waLink usage in search.js. Replace subcategories.terms with real data once tools/import-catalog.mjs processes Sam's export; keep the category shell (id/title/image) which categories.json already owns.",
+  "_source": "Placeholder search vocabulary, generic stationery-shop terms plus items visibly confirmed in shelf photos (gallery_2/3/5). This is NOT Sam's real item master. It exists so the ask-box works and degrades gracefully before the real export lands. Every match routes to a WhatsApp confirmation, never a bare stock claim, see waLink usage in search.js. Replace subcategories.terms with real data once tools/import-catalog.mjs processes Sam's export; keep the category shell (id/title/image) which categories.json already owns.",
   "categories": [
     {
       "id": "stationery",

@@ -9,7 +9,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from './icons';
  * flyingtiger-style layout: left-aligned plain heading, prev/next controls docked beside it
  * (visible at every breakpoint) instead of floating over the product images.
  *
- * AI PRODUCT SHOTS (16 Sep 2026): same homepage-only override as NewInRail.jsx — see that file
+ * AI PRODUCT SHOTS (16 Sep 2026): same homepage-only override as NewInRail.jsx, see that file
  * for the full reasoning. Product 8 (Camel Art Studio) deliberately has no override: its real
  * photo is an 80+ piece art case with dozens of tiny illegible pen/pencil labels, too much fine
  * print for an AI generation to reproduce reliably without risking a misleading label, so it

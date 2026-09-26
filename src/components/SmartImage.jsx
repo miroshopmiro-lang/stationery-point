@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-// Every image on this site is generated art that may not exist on disk yet —
+// Every image on this site is generated art that may not exist on disk yet -
 // the layout has to be correct before the assets land, and a broken-image icon
 // in a client review is worse than no image at all. On error this falls back to
 // a tinted panel in the brand palette, so a missing file degrades to something
@@ -28,13 +28,13 @@ export default function SmartImage({
    * POSITION COLLISION FIX (17 Aug 2026).
    *
    * This used to hardcode `relative` into its own class string. Callers that need the wrapper
-   * to fill a sized parent pass `className="absolute inset-0"` — and Tailwind's `.relative`
+   * to fill a sized parent pass `className="absolute inset-0"`, and Tailwind's `.relative`
    * and `.absolute` have EQUAL specificity, so the winner is decided by order in the generated
    * stylesheet, not by order in the class attribute. `relative` won.
    *
    * Consequence, found by the visual audit and then confirmed by measurement: the wrapper
    * ignored `inset-0` and sized itself to the image's intrinsic ratio instead of its parent.
-   * A category circle measured 104x78 inside a 104x104 disc — the leftover 26px read as a
+   * A category circle measured 104x78 inside a 104x104 disc, the leftover 26px read as a
    * white crescent on every circle at every breakpoint. The hero and promo tiles had the same
    * hole. It looked like a missing-image problem; it was a CSS cascade problem.
    *

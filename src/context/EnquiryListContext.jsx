@@ -26,7 +26,7 @@ export function EnquiryListProvider({ children }) {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     } catch {
-      // Private mode / storage full — the list still works for this visit.
+      // Private mode / storage full, the list still works for this visit.
     }
   }, [items]);
 

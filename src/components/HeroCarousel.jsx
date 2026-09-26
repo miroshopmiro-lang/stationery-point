@@ -79,8 +79,8 @@ export default function HeroCarousel() {
                 isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
               }`}
             >
-              {/* Edge-to-edge natural photography banner — uncropped. Copy (eyebrow, title,
-                  subtitle) is baked into the generated art itself, not rendered as HTML — on
+              {/* Edge-to-edge natural photography banner, uncropped. Copy (eyebrow, title,
+                  subtitle) is baked into the generated art itself, not rendered as HTML, on
                   explicit direction (16 Sep 2026): an image model integrates title typography
                   into the composition (matching its own lighting/colour/layout) in a way a
                   generic HTML overlay + gradient scrim can't match. Only the buttons stay real
@@ -91,7 +91,7 @@ export default function HeroCarousel() {
                 <SmartImage
                   src={s.image}
                   srcMobile={s.imageMobile}
-                  alt={`${s.title} — ${s.subtitle}`}
+                  alt={`${s.title}: ${s.subtitle}`}
                   tint="#241F6B"
                   className="absolute inset-0 w-full h-full"
                   imgClassName="object-left"
@@ -140,7 +140,7 @@ export default function HeroCarousel() {
           );
         })}
 
-        {/* Slide indicators only — no prev/next arrows (17 Sep 2026, on request). Dots still
+        {/* Slide indicators only, no prev/next arrows (17 Sep 2026, on request). Dots still
             let a visitor jump to a slide, but no longer stop the auto-rotate. */}
         {slides.length > 1 && (
           <div className="absolute bottom-1.5 sm:bottom-3 left-0 right-0 z-30 flex justify-center gap-1.5 sm:gap-2">

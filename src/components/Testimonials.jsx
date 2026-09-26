@@ -10,7 +10,7 @@ const MAX_CHARS = 265;
 const reviews = allReviews.filter((r) => r.text.length <= MAX_CHARS);
 
 /*
- * REVIEWS — the one block on this page that NO reference site can show.
+ * REVIEWS, the one block on this page that NO reference site can show.
  *
  * Measured 16-17 Aug 2026: flyingtiger and smiggle carry ZERO social proof on their
  * homepages. hobbycraft and dickblick show per-PRODUCT star ratings only. Not one of the four
@@ -20,7 +20,7 @@ const reviews = allReviews.filter((r) => r.text.length <= MAX_CHARS);
  * page, not in the footer.
  *
  * There is no reference layout to copy for a reviews section, so the STRUCTURE is borrowed from
- * hobbycraft's product rail — the closest analogous pattern on any of the four: tinted band,
+ * hobbycraft's product rail, the closest analogous pattern on any of the four: tinted band,
  * flat white cards, horizontal rail with a card cut off at the right edge to cue the swipe,
  * white circular arrows with brand chevrons at desktop, heading centred above.
  *
@@ -31,7 +31,7 @@ const reviews = allReviews.filter((r) => r.text.length <= MAX_CHARS);
  *
  * Replaces a 305-line framer-motion single-review carousel with slide transitions and
  * glassmorphism. No reference animates a review, uses glass, or shows one testimonial at a
- * time. Scroll and paint only — nothing that costs a frame on a mid-range Android.
+ * time. Scroll and paint only, nothing that costs a frame on a mid-range Android.
  *
  * Review text, names, avatars and dates are REAL and live in src/data/reviews.json, extracted
  * verbatim. Text is quoted exactly as written, including the authors' own spelling, because an

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // The offer strip directly under the hero. Jags runs the same device and it
-// works — a real number with a real threshold converts far better than a
+// works, a real number with a real threshold converts far better than a
 // generic "shop now".
 //
 // Renders NOTHING until Sam supplies an actual offer. An invented discount on

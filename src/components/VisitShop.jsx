@@ -4,7 +4,7 @@ import { PhoneIcon, WhatsAppIcon } from './icons';
 import { waLink } from '../lib/utils';
 
 // The real shop. Jags is a distributor with no storefront, so this section is
-// structurally unavailable to them — it's one of the clearest places we win.
+// structurally unavailable to them, it's one of the clearest places we win.
 // Uses the genuine photograph of the shop, not generated art.
 export default function VisitShop() {
   return (

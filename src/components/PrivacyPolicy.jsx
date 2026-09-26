@@ -3,19 +3,19 @@ import { Link } from 'react-router-dom';
 import { STORE, waLink } from '../lib/utils';
 
 /*
- * PRIVACY POLICY — 17 Sep 2026. Audited against the actual codebase before writing a word:
+ * PRIVACY POLICY, 17 Sep 2026. Audited against the actual codebase before writing a word:
  *   - Contact.jsx's form never POSTs anywhere. "Send on WhatsApp" opens a wa.me deep link
  *     with the message pre-filled; "Send via Email" opens a mailto: draft. Nothing leaves
  *     the visitor's device until they personally hit send in WhatsApp or their email app.
- *   - EnquiryListContext.jsx persists the "My List" enquiry basket to localStorage only —
+ *   - EnquiryListContext.jsx persists the "My List" enquiry basket to localStorage only -
  *     device-side, never transmitted to us or anyone else until the visitor taps "Send
  *     List on WhatsApp", which is the same wa.me deep-link pattern.
  *   - No analytics, ad-pixel, or tracking script anywhere in the codebase (checked index.html
- *     and every component for gtag/fbq/GA/etc — none present).
+ *     and every component for gtag/fbq/GA/etc, none present).
  *   - Third parties actually loaded: Google Fonts (index.html), Google Maps embed
  *     (Contact.jsx iframe), and WhatsApp/Instagram as outbound links the visitor clicks.
  *   - No file upload field anywhere on the site.
- * Every claim below is true of this exact codebase — update this comment (and the page) if
+ * Every claim below is true of this exact codebase, update this comment (and the page) if
  * that ever changes, e.g. if analytics or a real backend gets added later.
  */
 export default function PrivacyPolicy() {
@@ -49,7 +49,7 @@ export default function PrivacyPolicy() {
           <h2 className="text-xl font-bold text-gray-900 mb-2">3. How these actually work</h2>
           <p>
             Nothing on this site is submitted to a server. The Contact form's "Send on WhatsApp" button opens a
-            WhatsApp chat to our number with your message already typed in — it only sends once you personally tap
+            WhatsApp chat to our number with your message already typed in. It only sends once you personally tap
             send inside WhatsApp. "Send via Email" does the same with your own email app. Every "Add to list" and
             "Enquire on WhatsApp" button across the site works the same way: your list is only sent when you open
             it and tap "Send List on WhatsApp".
@@ -58,16 +58,16 @@ export default function PrivacyPolicy() {
 
         <section>
           <h2 className="text-xl font-bold text-gray-900 mb-2">4. Why we use it</h2>
-          <p>Only to respond to your enquiry — confirm stock, pricing, or help with an order. Nothing else.</p>
+          <p>Only to respond to your enquiry: confirm stock, pricing, or help with an order. Nothing else.</p>
         </section>
 
         <section>
           <h2 className="text-xl font-bold text-gray-900 mb-2">5. Who else sees it</h2>
           <ul className="list-disc pl-5 flex flex-col gap-1">
-            <li><strong>WhatsApp (Meta Platforms, Inc.)</strong> — once you send a message from your own WhatsApp app to us.</li>
-            <li><strong>Your email provider</strong> — only if you use "Send via Email".</li>
-            <li><strong>Google Fonts</strong> (fonts.googleapis.com / fonts.gstatic.com) — loads the typeface used on this site; Google may log that request per its own policy.</li>
-            <li><strong>Google Maps</strong> — the map embedded on our Contact page is loaded from Google.</li>
+            <li><strong>WhatsApp (Meta Platforms, Inc.)</strong>: once you send a message from your own WhatsApp app to us.</li>
+            <li><strong>Your email provider</strong>: only if you use "Send via Email".</li>
+            <li><strong>Google Fonts</strong> (fonts.googleapis.com / fonts.gstatic.com), loads the typeface used on this site; Google may log that request per its own policy.</li>
+            <li><strong>Google Maps</strong>: the map embedded on our Contact page is loaded from Google.</li>
           </ul>
           <p className="mt-2">
             We don't run analytics or ad-tracking scripts, and we don't sell or share your details with anyone else.
@@ -78,7 +78,7 @@ export default function PrivacyPolicy() {
           <h2 className="text-xl font-bold text-gray-900 mb-2">6. Cookies</h2>
           <p>
             This site doesn't set cookies. Your "My List" basket is saved using your browser's local storage, purely
-            to remember it between visits on the same device — it stays on your device, is never sent to us or
+            to remember it between visits on the same device. It stays on your device, is never sent to us or
             anyone else, and you can clear it anytime with the "Clear list" button or by clearing your browser's
             site data.
           </p>
@@ -102,7 +102,7 @@ export default function PrivacyPolicy() {
           <h2 className="text-xl font-bold text-gray-900 mb-2">9. Your rights</h2>
           <p>
             Under the Digital Personal Data Protection Act, 2023, you can ask us to access, correct, or delete any
-            personal data you've sent us via WhatsApp or email — just message or call us using the details above.
+            personal data you've sent us via WhatsApp or email. Just message or call us using the details above.
           </p>
         </section>
 

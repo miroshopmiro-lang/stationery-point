@@ -59,7 +59,7 @@ export const products = allProducts
  *
  * The browse UIs must use this, not `categories`. Sam's real item list has nothing in
  * Return Gifts or Special Edition, so those two tiles rendered a link straight to an empty
- * grid — a dead end, which the AskBox rule forbids anywhere on this site. They stay in
+ * grid, a dead end, which the AskBox rule forbids anywhere on this site. They stay in
  * categories.json (they are real departments in the shop and the CMS still offers them);
  * they simply do not get a browse tile until something is filed under them.
  */

@@ -1,5 +1,5 @@
 /*
- * LOCAL LANDING PAGES — one per real search the shop should be found for.
+ * LOCAL LANDING PAGES, one per real search the shop should be found for.
  *
  * Why these five: they come from a Google Suggest harvest run on 19 Sep 2026
  * (G:\Agency\research\keyword-data, stationery-kochi.csv): "wholesale stationery shop in

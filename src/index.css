@@ -12,8 +12,8 @@
      tinted global ground. The previous #FBF8F2 warm cream came from nooe.co,
      a rejected reference. Our tint band is --brand-soft. */
   --bg-color: #FFFFFF;
-  /* Product/tile media bed — see tailwind.config.js. Neutral light grey (flyingtiger's
-     product-tile ground), not a warm/cardboard tone — corrected 16 Sep 2026 after the
+  /* Product/tile media bed, see tailwind.config.js. Neutral light grey (flyingtiger's
+     product-tile ground), not a warm/cardboard tone, corrected 16 Sep 2026 after the
      old #E0DED9 read as an off-white cardboard colour once it showed through on
      under-filled product photos. */
   --bed: #F2F2F2;
@@ -114,7 +114,7 @@ h1, h2, h3, h4 {
    the compositor and cannot be stalled by React re-rendering the catalogue
    on the main thread.
 
-   Reduced motion is handled entirely by the global rule above — there is no
+   Reduced motion is handled entirely by the global rule above, there is no
    JS flag for it, deliberately. None of these use animation-fill-mode, so
    when that rule collapses the duration they revert to their BASE state,
    and every base state here is the fully-readable one: marquee text at
@@ -161,12 +161,12 @@ h1, h2, h3, h4 {
 .adv-dot:nth-child(2) { animation-delay: 0.18s; }
 .adv-dot:nth-child(3) { animation-delay: 0.36s; }
 
-/* Strike-through draws once, and the drawn state is the DEFAULT — the draw
+/* Strike-through draws once, and the drawn state is the DEFAULT, the draw
    only runs when JS adds .is-drawing after the card is actually in view.
    This matters: an animation's 0% keyframe holds for as long as the animation
    is "running", and a frozen timeline (background tab, throttled renderer,
    a pane that isn't compositing) never advances it. Putting the animation on
-   the base class left the strike stuck at scaleX(0) — invisible — in exactly
+   the base class left the strike stuck at scaleX(0), invisible, in exactly
    those cases, which is the card's whole proposition silently missing. */
 @keyframes advStrike {
   from { transform: scaleX(0); }
@@ -177,7 +177,7 @@ h1, h2, h3, h4 {
   animation: advStrike 800ms cubic-bezier(0.2, 0.8, 0.2, 1) 1;
 }
 
-/* Off-screen cards stop animating — no battery burn on a phone parked
+/* Off-screen cards stop animating, no battery burn on a phone parked
    halfway down the page. Default is running, so if the observer never
    fires (or JS fails) the cards animate rather than freeze. */
 .adv-offscreen .adv-marquee,
@@ -239,7 +239,7 @@ h1, h2, h3, h4 {
   background-color: var(--sun-soft);
 }
 
-/* Reviews rail — JS-driven (rAF + drag), see Testimonials.jsx. */
+/* Reviews rail, JS-driven (rAF + drag), see Testimonials.jsx. */
 .reviews-marquee {
   overflow: hidden; cursor: grab; user-select: none; -webkit-user-select: none; touch-action: pan-y;
 }

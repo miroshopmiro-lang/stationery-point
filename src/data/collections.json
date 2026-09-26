@@ -1,5 +1,5 @@
 {
-  "_note": "Collections are merchandising groupings, not catalogue data. Every entry below was validated on 2026-09-04 against Sam's real 78-product list and resolves to at least three products — a collection that lands on an empty grid is a dead end, which this site does not do. Regenerate/re-validate whenever the item list changes. Images are real product photos from public/shop-catalogue-images, standing in for the collection.",
+  "_note": "Collections are merchandising groupings, not catalogue data. Every entry below was validated on 2026-09-04 against Sam's real 78-product list and resolves to at least three products, a collection that lands on an empty grid is a dead end, which this site does not do. Regenerate/re-validate whenever the item list changes. Images are real product photos from public/shop-catalogue-images, standing in for the collection.",
   "hero": [
     {
       "id": "school",

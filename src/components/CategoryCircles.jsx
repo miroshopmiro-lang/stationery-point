@@ -7,7 +7,7 @@ import SmartImage from './SmartImage';
 /*
  * AI PRODUCT SHOTS (17 Sep 2026): category-tiles/*.webp were a generic cream/beige flatlay
  * stock set that didn't match the site's locked palette or the flyingtiger-style studio shots
- * used everywhere else on the site. Fixed at the source — categories.json's `image` field now
+ * used everywhere else on the site. Fixed at the source, categories.json's `image` field now
  * points at the AI shots directly, so this renders correctly here AND on the /catalog landing
  * page's category cards, which used the same stock set. office-supplies, art-supplies,
  * craft-material and party-gifts reuse assets already generated for other rails; stationery is
@@ -16,19 +16,19 @@ import SmartImage from './SmartImage';
  */
 
 /*
- * CATEGORY CIRCLES — copied from flyingtiger.com and dickblick.com.
+ * CATEGORY CIRCLES, copied from flyingtiger.com and dickblick.com.
  *
  * Both use CIRCULAR category tiles, verified from rendered screenshots at 375px on
- * 17 Aug 2026 — a detail no DOM query surfaced:
- *   flyingtiger.com  "Shop by category" — circular photo tiles, bold label CENTRED
+ * 17 Aug 2026, a detail no DOM query surfaced:
+ *   flyingtiger.com  "Shop by category", circular photo tiles, bold label CENTRED
  *                    BENEATH the circle, horizontal scroll at phone width.
- *   dickblick.com    "Browse Featured Categories" — circles filled with solid brand
+ *   dickblick.com    "Browse Featured Categories", circles filled with solid brand
  *                    colours (blue, blue, red), heading centred with a "View All"
  *                    underlined link beneath it.
  * Two of four references use circles for this block, so circles it is. hobbycraft is the
  * odd one out with rounded-rect tiles, and we already copy its product card instead.
  *
- * Horizontal scroll rail at 375px is flyingtiger's behaviour — categories run off the
+ * Horizontal scroll rail at 375px is flyingtiger's behaviour, categories run off the
  * right edge and you swipe. It keeps the block to a single row instead of a tall grid,
  * which matters because the kit tiles above it already occupy two rows.
  */
@@ -41,7 +41,7 @@ export default function CategoryCircles() {
   return (
     <section aria-labelledby="cat-circles-heading" className="band-doodle">
       <div className="max-w-[1280px] mx-auto py-8 lg:py-14">
-        {/* Heading centred with an underlined "view all" beneath — blick's treatment. */}
+        {/* Heading centred with an underlined "view all" beneath, blick's treatment. */}
         <div className="px-4 lg:px-8 text-center"><div className="band-title">
           <h2
             id="cat-circles-heading"
@@ -60,7 +60,7 @@ export default function CategoryCircles() {
           </Link>
         </div></div>
 
-        {/* Horizontal scroll rail — flyingtiger's phone behaviour. Scrolls inside itself so
+        {/* Horizontal scroll rail, flyingtiger's phone behaviour. Scrolls inside itself so
             the page body never scrolls sideways. */}
         <ul
           className="mt-6 flex gap-4 overflow-x-auto px-4 pb-2 lg:px-8 lg:gap-7
@@ -88,7 +88,7 @@ export default function CategoryCircles() {
                     className="absolute inset-0"
                   />
                 </div>
-                {/* Bold label centred BENEATH the circle — flyingtiger's treatment. */}
+                {/* Bold label centred BENEATH the circle, flyingtiger's treatment. */}
                 <span
                   className="text-center text-[14px] font-semibold leading-tight text-ink
                              transition-colors duration-text ease-ref group-hover:text-brand-primary"

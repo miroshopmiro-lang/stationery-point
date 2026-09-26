@@ -5,21 +5,21 @@ import { WhatsAppIcon, PlusIcon, MinusIcon } from './icons';
 import SmartImage from './SmartImage';
 
 /*
- * PRODUCT CARD — rebuilt 16 Sep 2026 to flyingtiger.com's tile anatomy on explicit direction
+ * PRODUCT CARD, rebuilt 16 Sep 2026 to flyingtiger.com's tile anatomy on explicit direction
  * ("get it 1:1 like the flying tiger one"). This replaces the hobbycraft-bordered-card
- * decision locked 4 Sep — superseded by this instruction.
+ * decision locked 4 Sep, superseded by this instruction.
  *
  * flyingtiger's measured tile:
  *   - NO card border, NO shadow, NO radius. The image sits directly on the page; tiles are
  *     separated only by grid/rail gutter.
  *   - Media: plain neutral-grey square (#F2F2F2), image itself letting the product be the only
  *     colour in the tile.
- *   - Badge: WHITE pill, black text, small, top-left over the image — not a brand-coloured tag.
+ *   - Badge: WHITE pill, black text, small, top-left over the image, not a brand-coloured tag.
  *   - No brand line, no star rating on the tile. Name, then price, then one flat CTA bar.
  *   - CTA is a single flat rectangular bar, no radius, no pill.
  *
  * Kept, deliberately not copied from flyingtiger (business-critical, not a style choice):
- *   - The WhatsApp enquiry action — Sam's whole sales flow runs through WhatsApp.
+ *   - The WhatsApp enquiry action, Sam's whole sales flow runs through WhatsApp.
  *   - "Price on WhatsApp" in place of a real price, honestly, until Sam's price list lands.
  */
 
@@ -45,7 +45,7 @@ export default function ProductCard({ product }) {
 
   return (
     <article className="relative flex flex-col w-full h-full bg-white" style={{ paddingBottom: 44 }}>
-      {/* Plain neutral-grey square media, no border, no radius — flyingtiger's tile. */}
+      {/* Plain neutral-grey square media, no border, no radius, flyingtiger's tile. */}
       <div className="relative aspect-square bg-bed">
         {product.image ? (
           <SmartImage src={product.image} alt={product.name} tint="var(--bed)" className="absolute inset-0" sizes="(max-width: 767px) 46vw, 320px" />
@@ -61,8 +61,8 @@ export default function ProductCard({ product }) {
         )}
       </div>
 
-      {/* Text/price sat flush against the card's edge — same edge as the full-bleed image
-          above it — reading as clipped (flagged 17 Sep 2026, flyingtiger insets this content
+      {/* Text/price sat flush against the card's edge, same edge as the full-bleed image
+          above it, reading as clipped (flagged 17 Sep 2026, flyingtiger insets this content
           slightly from the media instead of running it edge-to-edge). px-1 gives it breathing
           room without touching the image, which stays full-bleed. */}
       <div className="flex flex-col gap-1 pt-2.5 px-1">
@@ -94,13 +94,13 @@ export default function ProductCard({ product }) {
         )}
       </div>
 
-      {/* Flat rectangular CTA bar, no radius — flyingtiger's "Add to bag" anatomy, with the
+      {/* Flat rectangular CTA bar, no radius, flyingtiger's "Add to bag" anatomy, with the
           WhatsApp action kept alongside since that is Sam's real sales channel.
           The WhatsApp segment used to sit as a solid #25D366 green block flush against the
-          indigo bar — two saturated, unrelated brand colours colliding with no transition read
+          indigo bar, two saturated, unrelated brand colours colliding with no transition read
           as a slapped-on icon rather than a designed control (flagged 16 Sep 2026). It now stays
           in the card's own indigo family at rest, with a thin divider for separation, and only
-          turns WhatsApp green on hover/focus — the colour becomes a confirmation of the action
+          turns WhatsApp green on hover/focus, the colour becomes a confirmation of the action
           instead of a static clash. */}
       <div className="absolute bottom-0 left-0 right-0 flex items-stretch">
         {qty === 0 ? (

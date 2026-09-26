@@ -7,7 +7,7 @@ const collections = collectionsFile.collections;
 
 /*
  * AI PRODUCT SHOTS (16 Sep 2026): same homepage-only override as NewInRail.jsx / ProductRail.jsx
- * — see NewInRail.jsx for the full reasoning. Keyed by collection id since collections.json has
+ *, see NewInRail.jsx for the full reasoning. Keyed by collection id since collections.json has
  * no product id, but most of these tile images are the same real photos already replaced for
  * the other two rails, so this reuses those generated assets directly.
  */
@@ -23,14 +23,14 @@ const HOME_SHOT_OVERRIDES = {
 };
 
 /*
- * COLLECTION TILES — hobbycraft's category tile row (3:2 media, two across at 375, four at
+ * COLLECTION TILES, hobbycraft's category tile row (3:2 media, two across at 375, four at
  * desktop, centred heading with an underlined "View all" beneath), carrying smiggle's tile
  * anatomy: the label sits INSIDE the tile on the media bed, centred and underlined.
  *
  * Why the label moved inside (AUDIT-01, "THE OLD BLOCKS"): the previous version put the label
  * and a blurb in a separate white panel below the media, which meant this block and the school
  * kit block twenty percent up the same page used two different tile languages. One page, one
- * tile language — and block 4 is the one copied 1:1 from a reference, so this one moves.
+ * tile language, and block 4 is the one copied 1:1 from a reference, so this one moves.
  *
  * Also closed from the same audit entry:
  *   - the eight media beds were pale indigo, PINK, CREAM and GREEN. Pink, cream and green are
@@ -40,7 +40,7 @@ const HOME_SHOT_OVERRIDES = {
  *   - the per-tile blurb removed. It cost ~30px a tile for copy that restated the title.
  *
  * The collection set itself is data, and every entry is validated against the real item list
- * before it ships — see the note in collections.json. A tile that lands on an empty grid is a
+ * before it ships, see the note in collections.json. A tile that lands on an empty grid is a
  * dead end, and this site does not dead-end.
  */
 export default function CollectionCards() {
@@ -76,7 +76,7 @@ export default function CollectionCards() {
                            transition-colors duration-surface ease-ref hover:bg-hairline
                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
               >
-                {/* 3:2 — hobbycraft's measured tile ratio, held at both breakpoints. */}
+                {/* 3:2, hobbycraft's measured tile ratio, held at both breakpoints. */}
                 <div className="relative aspect-[3/2]">
                   <SmartImage
                     src={HOME_SHOT_OVERRIDES[c.id] || c.image}
@@ -86,7 +86,7 @@ export default function CollectionCards() {
                   />
                 </div>
 
-                {/* Label inside the tile, centred, underlined — block 4's anatomy exactly.
+                {/* Label inside the tile, centred, underlined, block 4's anatomy exactly.
                     min-h reserves two lines so a wrapping title ("Brushes & Brush Pens") does
                     not drop its row's baseline against the tile beside it. */}
                 <span className="px-1.5 pb-2 pt-1.5 text-center">

@@ -31,7 +31,7 @@ export default function EnquiryBasket() {
 
   return (
     <>
-      {/* Floating trigger — bottom-left, opposite the WhatsApp bubble */}
+      {/* Floating trigger, bottom-left, opposite the WhatsApp bubble */}
       <motion.button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -82,7 +82,7 @@ export default function EnquiryBasket() {
                 <div>
                   <h2 className="font-extrabold text-lg text-gray-800">My Enquiry List</h2>
                   <p className="text-xs text-gray-400 font-medium">
-                    {count} item{count !== 1 ? 's' : ''} — sent as one WhatsApp message
+                    {count} item{count !== 1 ? 's' : ''}, sent as one WhatsApp message
                   </p>
                 </div>
                 <button

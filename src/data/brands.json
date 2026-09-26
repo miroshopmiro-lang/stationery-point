@@ -1,5 +1,5 @@
 {
-  "_source": "Confirmed by direct visual inspection of asset-originals/gallery_2.jpg, gallery_3.jpg and gallery_5.jpg (real shelf photographs from the shop). NOT from Sam — needs his sign-off before this list goes live on a brand-index page. Safe to use for search matching now since matches route to a WhatsApp confirmation, never a bare claim of stock.",
+  "_source": "Confirmed by direct visual inspection of asset-originals/gallery_2.jpg, gallery_3.jpg and gallery_5.jpg (real shelf photographs from the shop). NOT from Sam, needs his sign-off before this list goes live on a brand-index page. Safe to use for search matching now since matches route to a WhatsApp confirmation, never a bare claim of stock.",
   "confirmed": [
     { "name": "Camlin", "seenIn": "gallery_2, gallery_3" },
     { "name": "Kangaro", "seenIn": "gallery_2, gallery_3" },
@@ -24,7 +24,7 @@
     { "name": "Uni-ball", "note": "recorded in earlier session notes, not directly re-verified this pass" },
     { "name": "Classmate", "note": "recorded in earlier session notes, not directly re-verified this pass" },
     { "name": "Ajanta", "note": "recorded in earlier session notes, not directly re-verified this pass" },
-    { "name": "Winsor & Newton", "note": "ask Sam — research shows Kerala buyers specifically search for this before travelling" },
-    { "name": "Brustro", "note": "ask Sam — same as above" }
+    { "name": "Winsor & Newton", "note": "ask Sam, research shows Kerala buyers specifically search for this before travelling" },
+    { "name": "Brustro", "note": "ask Sam, same as above" }
   ]
 }

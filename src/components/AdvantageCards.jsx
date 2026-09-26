@@ -48,7 +48,7 @@ export default function AdvantageCards() {
       <SendListModal open={listModalOpen} onClose={() => setListModalOpen(false)} />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-6">
-        {/* Section Header — Centered on Mobile, Left-aligned on Desktop */}
+        {/* Section Header, Centered on Mobile, Left-aligned on Desktop */}
         <div className="mb-8 sm:mb-12 max-w-2xl text-center md:text-left mx-auto md:mx-0">
           <span className="text-[13px] font-bold uppercase tracking-[0.15em] text-[#332E92] block mb-2 sm:mb-3">
             WHY SHOP WITH US
@@ -64,7 +64,7 @@ export default function AdvantageCards() {
           </p>
         </div>
 
-        {/* 3 Benefit Columns — Centered Flow on Mobile */}
+        {/* 3 Benefit Columns, Centered Flow on Mobile */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 md:gap-12 md:divide-x md:divide-[#E2DCF7] md:-mx-6">
           {/* Column 1: Save more */}
           <div className="flex flex-col justify-between items-center md:items-start text-center md:text-left md:h-full md:px-6 border-b border-[#E2DCF7]/70 pb-8 md:pb-0 md:border-b-0">

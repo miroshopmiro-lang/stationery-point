@@ -6,13 +6,13 @@ import { SearchIcon, WhatsAppIcon, ListIcon } from './icons';
 
 // The site's spine: one box that answers "do you have it / how much" for a
 // single item, or takes a whole pasted supply list and turns it into one
-// pre-filled WhatsApp message. It never dead-ends — an unmatched query still
+// pre-filled WhatsApp message. It never dead-ends, an unmatched query still
 // produces a usable WhatsApp link, because the real item master hasn't
 // landed yet and pretending otherwise would just be a fancier version of
 // Jags's unclickable product cards.
 //
-// variant="hero"   — large, used once on the homepage.
-// variant="header" — compact trigger that opens the same panel in a popover.
+// variant="hero"  , large, used once on the homepage.
+// variant="header", compact trigger that opens the same panel in a popover.
 
 const EXAMPLES = ['Camlin geometry box', 'A4 chart paper', 'Class 5 supply list', 'Parker pen'];
 
@@ -35,7 +35,7 @@ function SingleMatch({ query }) {
         </Link>
       ) : (
         <p className="text-xs text-gray-500 px-1">
-          Not sure from here — send it across and we'll check the shelf.
+          Not sure from here? Send it across and we'll check the shelf.
         </p>
       )}
       <a
@@ -44,7 +44,7 @@ function SingleMatch({ query }) {
         rel="noreferrer"
         className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] text-white font-bold px-4 py-3 text-sm hover:bg-[#1da851] transition-colors shadow-sm"
       >
-        <WhatsAppIcon className="w-4 h-4" /> Ask on WhatsApp — "{query.trim().slice(0, 40)}{query.trim().length > 40 ? '…' : ''}"
+        <WhatsAppIcon className="w-4 h-4" /> Ask on WhatsApp: "{query.trim().slice(0, 40)}{query.trim().length > 40 ? '…' : ''}"
       </a>
     </div>
   );
@@ -66,7 +66,7 @@ function ListMatch({ text }) {
         ))}
       </div>
       <p className="text-[11px] text-gray-400 px-1">
-        {matchedCount} of {total} matched to a category — every line still goes across, matched or not.
+        {matchedCount} of {total} matched to a category. Every line still goes across, matched or not.
       </p>
       <a
         href={waLink}
@@ -88,16 +88,16 @@ export default function AskBox({ variant = 'hero', defaultMode = 'single' }) {
   const navigate = useNavigate();
 
   /*
-   * HEADER VARIANT — full-width rounded search pill on its own row.
+   * HEADER VARIANT, full-width rounded search pill on its own row.
    * Copied from the one pattern all three renderable references agree on:
-   *   flyingtiger.com  — full-width row, own line, black submit button
-   *   hobbycraft.co.uk — full-width pill, magnifier LEFT, "What are you looking for today?"
-   *   dickblick.com    — full-width pill, and the ITEM COUNT is in the placeholder:
-   *                      "Search 110,000+ art supplies" — a free range/trust signal.
+   *   flyingtiger.com , full-width row, own line, black submit button
+   *   hobbycraft.co.uk, full-width pill, magnifier LEFT, "What are you looking for today?"
+   *   dickblick.com   , full-width pill, and the ITEM COUNT is in the placeholder:
+   *                      "Search 110,000+ art supplies", a free range/trust signal.
    * We copy hobbycraft's shape and blick's count-in-placeholder idea.
    * No mode-toggle chips here; those belong to the hero/section variant.
    *
-   * Submitting used to just preventDefault with nothing else — the box captured typing
+   * Submitting used to just preventDefault with nothing else, the box captured typing
    * but never went anywhere, header search was a dead end everywhere except the homepage
    * hero. It now hands off to the catalog's own ?q= filter (Catalog.jsx already reads it).
    */
@@ -166,7 +166,7 @@ export default function AskBox({ variant = 'hero', defaultMode = 'single' }) {
           <textarea
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            placeholder={'Paste or type your list, one item per line —\nCamlin geometry box x2\nA4 chart paper x10\nSketch pens'}
+            placeholder={'Paste or type your list, one item per line:\nCamlin geometry box x2\nA4 chart paper x10\nSketch pens'}
             rows={4}
             className="w-full rounded-2xl border-0 bg-white px-4 py-4 text-sm shadow-lg focus:ring-4 focus:ring-brand-accent/40 outline-none resize-none"
           />
@@ -192,7 +192,7 @@ export default function AskBox({ variant = 'hero', defaultMode = 'single' }) {
 
       {mode === 'list' && value.trim() && (
         <p className="mt-2 text-[11px] text-white/60 px-1">
-          Have a photo or PDF instead? Skip the typing — attach it straight in{' '}
+          Have a photo or PDF instead? Skip the typing and attach it straight in{' '}
           <a href={`https://wa.me/${STORE.whatsapp}`} target="_blank" rel="noreferrer" className="underline">WhatsApp</a>.
         </p>
       )}

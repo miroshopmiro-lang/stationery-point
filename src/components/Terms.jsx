@@ -14,7 +14,7 @@ export default function Terms() {
           <h2 className="text-xl font-bold text-gray-900 mb-2">1. What this site is</h2>
           <p>
             This website is a catalogue of what Stationery Point stocks, for browsing only. It isn't an online
-            store — there's no checkout, and nothing on it is a binding offer to sell at a stated price.
+            store. There's no checkout, and nothing on it is a binding offer to sell at a stated price.
           </p>
         </section>
 
@@ -22,7 +22,7 @@ export default function Terms() {
           <h2 className="text-xl font-bold text-gray-900 mb-2">2. Enquiries, not orders</h2>
           <p>
             The Contact form, "Add to list", and every "Enquire on WhatsApp" button send an enquiry or quote
-            request — they don't place a confirmed order. An order is confirmed only once Sam replies on WhatsApp
+            request. They don't place a confirmed order. An order is confirmed only once Sam replies on WhatsApp
             with stock, pricing and pickup details (or delivery details, for corporate customers) and you agree to them.
           </p>
         </section>
@@ -55,7 +55,7 @@ export default function Terms() {
         <section>
           <h2 className="text-xl font-bold text-gray-900 mb-2">6. Contact us</h2>
           <p>
-            Questions about these terms — reach us on WhatsApp
+            Questions about these terms? Reach us on WhatsApp
             (<a href={waLink()} target="_blank" rel="noreferrer" className="text-brand-primary underline underline-offset-4">{STORE.phoneDisplay}</a>)
             or call <a href={`tel:${STORE.phoneTel}`} className="text-brand-primary underline underline-offset-4">{STORE.phoneDisplay}</a>.
           </p>

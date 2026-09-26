@@ -10,7 +10,7 @@
 
 # Generated art (hero slides, category tiles, collection cards). Cached for a week
 # rather than a year with `immutable`, because these filenames are not
-# content-hashed — regenerating a tile reuses the same name, and an immutable year
+# content-hashed, regenerating a tile reuses the same name, and an immutable year
 # would strand visitors on the old art.
 /hero/*
   Cache-Control: public, max-age=0, must-revalidate
