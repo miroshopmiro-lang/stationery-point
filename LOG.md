@@ -479,3 +479,6 @@ All captures archived under `research/reference-captures/` and documented in the
 - New In rail back directly under the hero (Sam's request); the black MarkerDivider is removed since the hero now meets New In.
 - /admin has a 'New In (homepage)' singleton (studio/schemaTypes/newIn.js): Sam adds, removes and reorders items; each is either his own product (reference) or a product already on the site (dropdown built by studio/gen-code-products.js). It opens pre-filled with the current 9, and the site uses it only after the first Publish; until then the code newArrival flags apply. Published list also drives the 'New in' badge. Per-product 'New in' toggle hidden.
 - Verified with a mocked Sanity response: removal, reorder and a CMS product all render in list order.
+
+## 2026-09-26 - Em dashes removed
+- Every em dash stripped from the site (Abhinand). Visible copy rewritten by hand (colon, comma or full stop); comments and data notes switched to commas. One real Google review had one, swapped for a comma. Commit 08a25a0, live on stationery-point.pages.dev and checked: 0 em dashes in the live HTML and JS. The /admin Sanity library code still has some; that is Sanity's own code, not our copy.
