@@ -1,5 +1,5 @@
 {
-  "_note": "REAL Google reviews for Stationery Point, with real reviewer names and avatars. Confirmed data, do NOT edit, paraphrase, shorten or invent entries. Extracted verbatim from the previous Testimonials.jsx on 17 Aug 2026.",
+  "_note": "REAL Google reviews for Stationery Point, with real reviewer names and avatars. `text` is the full review exactly as written on Google (re-pulled 26 Sep 2026). `excerpt`, where present, is what the card shows: only whole verbatim fragments of `text` joined by an ellipsis, never reworded; tools check this. Never edit, paraphrase or invent entries.",
   "aggregate": {
     "rating": "4.8",
     "count": "150+",
@@ -7,123 +7,209 @@
   },
   "items": [
     {
-      "name": "Vivek D",
-      "meta": "Local Guide · 74 reviews",
-      "when": "5 months ago",
-      "stars": 5,
-      "avatar": "/reviewers/vivek-d.png",
-      "text": "This place is hidden treasure in city. One shop for all the stationary and craft items. Their customer service and aquaintance is appreciable. They gave much discount to the things I brought… I saw greeting card here which is not common in shops now a days."
-    },
-    {
       "name": "Gowree Sankar",
       "meta": "Local Guide · 5 reviews",
       "when": "a year ago",
       "stars": 5,
-      "avatar": "/reviewers/gowree.png",
-      "text": "Such a lovely little shop! Stationary Point has a great selection of cute cards, books, pens and a variety of craft materials. The shop is well organized, and everything feels thoughtfully picked. Sam, the owner, is super friendly and helpful, always happy to recommend something if you’re unsure. Definitely a go to spot for anyone who loves stationery in kochi!"
+      "avatar": "/reviewers/gowree.webp",
+      "text": "Such a lovely little shop! Stationary Point has a great selection of cute cards, books, pens and a variety of craft materials. The shop is well organized, and everything feels thoughtfully picked. Sam, the owner, is super friendly and helpful always happy to recommend something if you're unsure. Definitely a go to spot for anyone who loves stationery in kochi!",
+      "excerpt": "Such a lovely little shop!… Sam, the owner, is super friendly and helpful always happy to recommend something if you're unsure. Definitely a go to spot for anyone who loves stationery in kochi!"
     },
     {
-      "name": "Athul Ts",
-      "meta": "4 reviews",
+      "name": "SNIJO",
+      "meta": "Local Guide · 40 reviews",
       "when": "a year ago",
-      "stars": 5,
-      "avatar": "/reviewers/athul-ts.png",
-      "text": "Whether it’s notebooks, pens, art supplies, or office materials, they have everything we need. The staff is friendly, knowledgeable, and always ready to help. Prices are reasonable, and the store is well-organized and clean."
-    },
-    {
-      "name": "Adhinath umesh Kumar",
-      "meta": "2 reviews",
-      "when": "2 months ago",
-      "stars": 5,
-      "avatar": "/reviewers/adhinath.png",
-      "text": "Great shop! they have a lot of art supplies and other stationery items. Products are priced below MRP and had a great experience overall. Availability of parking is a plus."
+      "stars": 4,
+      "avatar": "/reviewers/snijo.webp",
+      "text": "Initially, I was hesitant about whether this shop could fulfill all my bulk item needs, especially on a Sunday. However, the shopping experience was fantastic…\nThe staff were incredibly friendly, and their stationery collection is excellent.\n\nRecommended."
     },
     {
       "name": "Toshin U.T",
       "meta": "Local Guide · 46 reviews",
       "when": "3 years ago",
       "stars": 5,
-      "avatar": "/reviewers/toshin.png",
-      "text": "I regularly purchase office stationary items for my office from Stationery Point. There is a wide range of masking tapes, cello tapes and brown tapes of various sizes here. A4 papers of various brands are sold at very good price."
+      "avatar": "/reviewers/toshin.webp",
+      "text": "I regularly purchase office stationary items for my office from Stationery Point. There is a wide range of masking tapes, cello tapes and brown tapes of various sizes here.Registers and Envelopes also available. A4 papers of various brands are sold at very good price",
+      "excerpt": "I regularly purchase office stationary items for my office from Stationery Point. There is a wide range of masking tapes, cello tapes and brown tapes of various sizes here.… A4 papers of various brands are sold at very good price"
+    },
+    {
+      "name": "Abhilash S",
+      "meta": "Local Guide · 86 reviews",
+      "when": "3 years ago",
+      "stars": 5,
+      "avatar": "/reviewers/abhilash.webp",
+      "text": "Located at Junior Janata Road, on the vay to Vyttila from Kadavanthra.\n\nExcellent Collection of Art and Craft items along with Quality Office and School Stationery Items.\n\nPrices are very economic.\n\nSpacious Car Parking facility available\n\nStaff and Management are very cooperative and supportive.",
+      "excerpt": "Excellent Collection of Art and Craft items along with Quality Office and School Stationery Items. Prices are very economic.… Staff and Management are very cooperative and supportive."
+    },
+    {
+      "name": "Vivek D",
+      "meta": "Local Guide · 74 reviews",
+      "when": "7 months ago",
+      "stars": 5,
+      "avatar": "/reviewers/vivek-d.webp",
+      "text": "This place is hidden treasure in city. One shop for all the stationary and craft items. Their customer service and aquaintance is appreciable. They gave much discount to the things I brought. Its just few steps from Sahodaran Ayyappan road, which is easily accessible. I saw greeting card here which is not common in shops now a days. I really had a wonderful experience from there. I will suggest this shop to everyone from my bottom of heart ❤️\n\n#stationary #shop #books #pen #craft #notebook #kochi",
+      "excerpt": "This place is hidden treasure in city. One shop for all the stationary and craft items. Their customer service and aquaintance is appreciable. They gave much discount to the things I brought.… I will suggest this shop to everyone from my bottom of heart ❤️"
+    },
+    {
+      "name": "Benjamin Joshy",
+      "meta": "5 reviews",
+      "when": "3 years ago",
+      "stars": 5,
+      "avatar": "/reviewers/benjamin.webp",
+      "text": "Commendable customer service. All products available, below mrp, with credit system. Had a satisfying experience!"
+    },
+    {
+      "name": "roshan daniel",
+      "meta": "Local Guide · 86 reviews",
+      "when": "2 years ago",
+      "stars": 5,
+      "avatar": "/reviewers/roshan.webp",
+      "text": "Great place for all your stationary needs in Kochi, does wholesale and retail as well and the owner is a Gem of a person."
+    },
+    {
+      "name": "Athul Ts",
+      "meta": "4 reviews",
+      "when": "a year ago",
+      "stars": 5,
+      "avatar": "/reviewers/athul-ts.webp",
+      "text": "Whether it’s notebooks, pens, art supplies, or office materials, they have everything we need. The staff is friendly, knowledgeable, and always ready to help. Prices are reasonable, and the store is well-organized and clean. Highly recommend it for students, professionals, or anyone who loves good stationery",
+      "excerpt": "Whether it’s notebooks, pens, art supplies, or office materials, they have everything we need. The staff is friendly, knowledgeable, and always ready to help.… Highly recommend it for students, professionals, or anyone who loves good stationery"
+    },
+    {
+      "name": "Akhil John Koshy",
+      "meta": "Local Guide · 44 reviews",
+      "when": "3 years ago",
+      "stars": 5,
+      "avatar": "/reviewers/akhil.webp",
+      "text": "I recently visited this stationary shop called \"Stationary Point\" and was blown away by the amazing selection of products they had to offer. From pens and pencils to notebooks and journals, this shop had everything I needed to get organized and stay on top of my work.\n\nThe staffs were incredibly friendly and helpful, offering suggestions and advice on the best products to suit my needs. They were knowledgeable about the different brands and styles of stationary, and were able to help me find exactly what I was looking for.\n\nThe quality of the products was exceptional, with a wide range of high-quality pens, markers, and highlighters that made writing and note-taking a pleasure. The notebooks and journals were also of excellent quality, with sturdy covers and high-quality paper that made writing a joy.\n\nOverall, I was extremely impressed with this stationary shop and would highly recommend it to anyone looking for high-quality stationary products. The staff were friendly and knowledgeable, the selection was excellent, and the quality of the products was exceptional. I will definitely be returning to this shop for all of my stationary needs in the future!",
+      "excerpt": "I recently visited this stationary shop called \"Stationary Point\" and was blown away by the amazing selection of products they had to offer.… I will definitely be returning to this shop for all of my stationary needs in the future!"
+    },
+    {
+      "name": "Silpa Gopakumar",
+      "meta": "6 reviews",
+      "when": "9 months ago",
+      "stars": 5,
+      "avatar": "/reviewers/silpa.webp",
+      "text": "A wonderful stationery shop with wide variety of pens, craft supplies and other carefully curated related items. The space is clean and well organised creating a calm and pleasant shopping experience. What truly elevated my visit is the extremely amazing owner- attentive, knowledgeable and deeply committed for personalised service. Highly recommended",
+      "excerpt": "A wonderful stationery shop with wide variety of pens, craft supplies… What truly elevated my visit is the extremely amazing owner- attentive, knowledgeable and deeply committed for personalised service. Highly recommended"
+    },
+    {
+      "name": "ARUNN Kumar",
+      "meta": "Local Guide · 301 reviews",
+      "when": "a year ago",
+      "stars": 5,
+      "avatar": "/reviewers/arunn.webp",
+      "text": "Wonder how i missed this shop even though i have paseed here through lot of times.\nGood genuine decent shop for all your stationery things.\nPurchased for a refill of old parker pen along with multi colour file and 2025 diary all with genuine rates.\nVasudev customer service is down to earth and friendly. Gave 15% discount too.\nWill recommend.\nParking 🅿️ ✅",
+      "excerpt": "Wonder how i missed this shop even though i have paseed here through lot of times.… Vasudev customer service is down to earth and friendly. Gave 15% discount too. Will recommend. Parking 🅿️ ✅"
+    },
+    {
+      "name": "Adhinath umesh Kumar",
+      "meta": "2 reviews",
+      "when": "4 months ago",
+      "stars": 5,
+      "avatar": "/reviewers/adhinath.webp",
+      "text": "Great shop! they have a lot of art supplies and other stationery items. Products are priced below MRP and had a great experience overall. Availability of parking is a plus."
     },
     {
       "name": "Feba Biju",
       "meta": "Local Guide · 5 reviews",
       "when": "2 years ago",
       "stars": 5,
-      "avatar": "/reviewers/feba-biju.png",
-      "text": "The store is a hidden gem. It had all the journaling supplies I was looking for. I found plenty of planners, diaries, washi tapes, etc., that too at prices below MRP."
-    },
-    {
-      "name": "Kripa sreedhar",
-      "meta": "3 reviews",
-      "when": "3 years ago",
-      "stars": 5,
-      "avatar": "/reviewers/kripa.png",
-      "text": "Perfect place to buy stationary items. As an architect student i need lots of stationary items, they helped to find high quality architecture stationary in an affordable price range."
-    },
-    {
-      "name": "Abila Abraham",
-      "meta": "2 reviews",
-      "when": "3 years ago",
-      "stars": 5,
-      "avatar": "/reviewers/abila.png",
-      "text": "My kids love Stationery Point! Variety of art items and colouring books, stickers, board games, charts and maps available. I also bought some glass paints and liners for me. All products sold below MRP."
+      "avatar": "/reviewers/feba-biju.webp",
+      "text": "The store is a hidden gem. It had all the journaling supplies I was looking for. I found plenty of planners, diaries, washi tapes, etc., that too at prices below MRP. Overall, the shopping experience was great."
     },
     {
       "name": "Kumar Aryan",
-      "meta": "6 reviews",
-      "when": "11 months ago",
-      "stars": 5,
-      "avatar": "/reviewers/kumar-aryan.png",
-      "text": "Very good stationary place, everything is available and even if something is not then they get it in 1-2 days for you."
-    },
-    {
-      "name": "Bijuna K Vinod",
-      "meta": "12 reviews",
-      "when": "2 months ago",
-      "stars": 5,
-      "avatar": "/reviewers/bijuna.png",
-      "text": "I come here almost every week for all my emergency supplies and they have it all. Affordable prices and at a very convenient location too."
-    },
-    {
-      "name": "Athira Mohandas",
-      "meta": "Local Guide · 117 reviews",
-      "when": "a month ago",
-      "stars": 5,
-      "avatar": "/reviewers/athira.png",
-      "text": "Best place for premium and affordable stationary for students,  craft enthusiasts, drawing artists etc.Both wholesale and retail available . Its hidden store near vytila,best in town.always welcoming with new products more over if you want to make pintresty things cone here and explore"
-    },
-    {
-      "name": "Silpa Gopakumar",
-      "meta": "6 reviews",
-      "when": "8 months ago",
-      "stars": 5,
-      "avatar": "/reviewers/silpa.png",
-      "text": "A wonderful stationery shop with wide variety of pens, craft supplies and other carefully curated related items. The space is clean and well organised creating a calm and pleasant shopping experience. What truly elevated my visit is the extremely amazing owner- attentive, knowledgeable and deeply committed for personalised service. Highly recommended"
-    },
-    {
-      "name": "ARUNN",
-      "meta": "Local Guide · 298 reviews",
+      "meta": "7 reviews",
       "when": "a year ago",
       "stars": 5,
-      "avatar": "/reviewers/arunn.png",
-      "text": "Wonder how i missed this shop even though i have paseed here through lot of times. Good genuine decent shop for all your stationery things. Purchased for a refill of old parker pen along with multi colour file and 2025 diary all with genuine rates. Vasudev customer service is down to earth and friendly. Gave 15% discount too. Will recommend. Parking 🅿️ ✅"
+      "avatar": "/reviewers/kumar-aryan.webp",
+      "text": "Very good stationary place, everything is available and even if something is not then they get it in 1-2 days for you.\n\nHighly recommended."
+    },
+    {
+      "name": "Thomas Varghese",
+      "meta": "5 reviews",
+      "when": "2 years ago",
+      "stars": 5,
+      "avatar": "/reviewers/thomas-varghese.webp",
+      "text": "Great place to find all kinds of stationary products! The customer service is lovely. Moreover, all the products you get here are discounted."
     },
     {
       "name": "Yazinist",
       "meta": "Local Guide · 57 reviews",
       "when": "2 years ago",
       "stars": 5,
-      "avatar": "/reviewers/yazinist.png",
-      "text": "The store boasts an extensive selection of high-quality products, from elegant notebooks and premium pens to unique greeting cards and stylish organizers. The layout is both inviting and well-organized, making it easy to find exactly what you need. The staff is exceptionally friendly and knowledgeable, always ready to offer personalized recommendations and helpful advice. Whether you're a student, a professional, or just a stationery enthusiast, this shop is a true gem. I highly recommend it for anyone seeking beautiful, functional, and inspiring stationery."
+      "avatar": "/reviewers/yazinist.webp",
+      "text": "The store boasts an extensive selection of high-quality products, from elegant notebooks and premium pens to unique greeting cards and stylish organizers. The layout is both inviting and well-organized, making it easy to find exactly what you need. The staff is exceptionally friendly and knowledgeable, always ready to offer personalized recommendations and helpful advice. Whether you're a student, a professional, or just a stationery enthusiast, this shop is a true gem. I highly recommend it for anyone seeking beautiful, functional, and inspiring stationery.",
+      "excerpt": "The store boasts an extensive selection of high-quality products, from elegant notebooks and premium pens to unique greeting cards and stylish organizers.… I highly recommend it for anyone seeking beautiful, functional, and inspiring stationery."
+    },
+    {
+      "name": "neeraj swaroop",
+      "meta": "6 reviews",
+      "when": "3 years ago",
+      "stars": 5,
+      "avatar": "/reviewers/neeraj.webp",
+      "text": "There are not much dedicated stationary shops around vytilla. We found this one on google. It was organized and neat and there were a wide range of products to choose from. The owner was very helpful. Overall great."
+    },
+    {
+      "name": "Abila Abraham",
+      "meta": "2 reviews",
+      "when": "3 years ago",
+      "stars": 4,
+      "avatar": "/reviewers/abila.webp",
+      "text": "My kids love Stationery Point! Variety of art items and colouring books, stickers, board games, charts and maps available. I also bought some glass paints and liners for me. Christmas decorations also available. All products sold below MRP and great customer service. Highly recommended",
+      "excerpt": "My kids love Stationery Point! Variety of art items and colouring books, stickers, board games, charts and maps available.… All products sold below MRP and great customer service. Highly recommended"
+    },
+    {
+      "name": "Athira Mohandas",
+      "meta": "Local Guide · 117 reviews",
+      "when": "a month ago",
+      "stars": 5,
+      "avatar": "/reviewers/athira.webp",
+      "text": "Best place for premium and affordable stationary for students,  craft enthusiasts, drawing artists etc.Both wholesale and retail available .\nIts hidden store near vytila,best in town.always welcoming with new products more over if you want to make pintresty things cone here and explore",
+      "excerpt": "Best place for premium and affordable stationary for students,  craft enthusiasts, drawing artists etc.Both wholesale and retail available .… if you want to make pintresty things cone here and explore"
+    },
+    {
+      "name": "Chitra Nair",
+      "meta": "3 reviews",
+      "when": "2 years ago",
+      "stars": 5,
+      "avatar": "/reviewers/chitra.webp",
+      "text": "Theres not one thing tht u would not find over here, you name it, and they have it!! There are variety of stationary items tht will tempt you enough to get it anyways..one wud really hv to fight the urge to buy anything nd everything, its all so neatly arranged which is a cherry on top, makes it very easy to locate things and the price of the products are too kept accordingly, very reasonable for sure! Really happy to hv found this place, lucky to hv it near to my place!! All Artists out there, do check this place out, damn sure u wudnt leave the place with a bright smile",
+      "excerpt": "Theres not one thing tht u would not find over here, you name it, and they have it!!… its all so neatly arranged which is a cherry on top… All Artists out there, do check this place out, damn sure u wudnt leave the place with a bright smile"
+    },
+    {
+      "name": "Kripa sreedhar",
+      "meta": "3 reviews",
+      "when": "3 years ago",
+      "stars": 5,
+      "avatar": "/reviewers/kripa.webp",
+      "text": "perfect place to buy stationary items. As an architect student i need lots of stationary items,they helped to find high quality architecture stationary in an affordable price range.Nice experience ,will definitely suggest this shop😊 …",
+      "excerpt": "perfect place to buy stationary items. As an architect student i need lots of stationary items,they helped to find high quality architecture stationary in an affordable price range.Nice experience ,will definitely suggest this shop😊"
+    },
+    {
+      "name": "Bijuna K Vinod",
+      "meta": "12 reviews",
+      "when": "4 months ago",
+      "stars": 5,
+      "avatar": "/reviewers/bijuna.webp",
+      "text": "I come here almost every week for all my emergency supplies and they have it all. Affordable prices and at a very convenient location too.\n\nReally love all the products the store has ❤️❤️"
+    },
+    {
+      "name": "jelitta johny",
+      "meta": "13 reviews",
+      "when": "a year ago",
+      "stars": 5,
+      "avatar": "/reviewers/jelitta.webp",
+      "text": "They have  unique and cute collections of stationery and craft items. It's a one stop point for school essentials, office stationery, craft and painting tools. Premium and  variety made available at very affordable prices & friendly staff. You will get a very satisfied  purchase 🤗 …",
+      "excerpt": "They have  unique and cute collections of stationery and craft items.… Premium and  variety made available at very affordable prices & friendly staff. You will get a very satisfied  purchase 🤗"
     },
     {
       "name": "alexina correya",
       "meta": "5 reviews",
       "when": "a year ago",
       "stars": 5,
-      "avatar": "/reviewers/alexina.png",
+      "avatar": "/reviewers/alexina.webp",
       "text": "Great place for fun stationary . It's my favourite place for office stationary and for art and craft supplies. The store owner is very knowledgeable and helps out with the right products once you make the purpose clear."
     },
     {
@@ -131,7 +217,7 @@
       "meta": "Local Guide · 34 reviews",
       "when": "2 years ago",
       "stars": 5,
-      "avatar": "/reviewers/avneesh.png",
+      "avatar": "/reviewers/avneesh.webp",
       "text": "Excellent shop with several good quality stationary items which I loved. They have decoration, books, school items, perfumed candels. The owner and staff is very helpful and everything is below mrp. Thank you so much!!"
     },
     {
@@ -139,24 +225,64 @@
       "meta": "9 reviews",
       "when": "3 years ago",
       "stars": 5,
-      "avatar": "/reviewers/abi-holly.png",
+      "avatar": "/reviewers/abi-holly.webp",
       "text": "A shop with all stationary items. Very good collection of Parker Pens and price is below MRP. Diaries and Planners are also available. Good customer service. Ample car parking"
     },
     {
-      "name": "Chitra Nair",
-      "meta": "3 reviews",
+      "name": "Vinu Varghese",
+      "meta": "4 reviews",
       "when": "2 years ago",
       "stars": 5,
-      "avatar": "/reviewers/chitra.png",
-      "text": "Theres not one thing tht u would not find over here, you name it, and they have it!! There are variety of stationary items tht will tempt you enough to get it anyways..one wud really hv to fight the urge to buy anything nd everything, its all so neatly arranged which is a cherry on top, makes it very easy to locate things and the price of the products are too kept accordingly, very reasonable for sure! Really happy to hv found this place, lucky to hv it near to my place!! All Artists out there, do check this place out, damn sure u wudnt leave the place with a bright smile"
+      "avatar": "/reviewers/vinu.webp",
+      "text": "This store has a lot of variety and this storre is ideal for people who are interested in art, drawing. These types of stores are hard to find and this store has a huge variety of choices and all the items were of good quality"
+    },
+    {
+      "name": "Sreelakshmi A",
+      "meta": "Local Guide · 9 reviews",
+      "when": "2 years ago",
+      "stars": 5,
+      "avatar": "/reviewers/sreelakshmi.webp",
+      "text": "I visited Stationary point for buying Journalling supplies. There are lots of art supplies available in this shop. Variety of Journals and planners are available here. I had a great shopping experience."
+    },
+    {
+      "name": "Aiswarya Vijayan",
+      "meta": "3 reviews",
+      "when": "a year ago",
+      "stars": 5,
+      "avatar": "/reviewers/aiswarya.webp",
+      "text": "Usually its hard to find good stationary, but like in Stationary point, I could find almost anything. Super friendly people and a great store"
+    },
+    {
+      "name": "Holly Ittoop",
+      "meta": "3 reviews",
+      "when": "3 years ago",
+      "stars": 5,
+      "avatar": "/reviewers/holly-ittoop.webp",
+      "text": "Bought some attractive and scented candles. Stiching, craft items and stationery are available here. Good collection of Christmas decorations.Friendly staff."
+    },
+    {
+      "name": "Sethu lakshmi",
+      "meta": "4 reviews",
+      "when": "a year ago",
+      "stars": 5,
+      "avatar": "/reviewers/sethu.webp",
+      "text": "Today, I happened to visit this store. The shop is well organised that makes easy to find the items we need and service is also very nice. Highly recommended!"
     },
     {
       "name": "Sreeram",
       "meta": "Local Guide · 14 reviews",
       "when": "a year ago",
       "stars": 5,
-      "avatar": "/reviewers/sreeram.png",
+      "avatar": "/reviewers/sreeram.webp",
       "text": "They have got good load of stuffs there for a stationary store. You need any urgent art/crafts materials you've got it there. The owners were very helpful and had a pleasant experience."
+    },
+    {
+      "name": "Adityan Pradeep Pillai",
+      "meta": "7 reviews",
+      "when": "a year ago",
+      "stars": 5,
+      "avatar": "/reviewers/adityan.webp",
+      "text": "Excellent customer service, really friendly and polite. Shop is well organized and has all stationary goods."
     }
   ]
 }

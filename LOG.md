@@ -482,3 +482,9 @@ All captures archived under `research/reference-captures/` and documented in the
 
 ## 2026-09-26 - Em dashes removed
 - Every em dash stripped from the site (Abhinand). Visible copy rewritten by hand (colon, comma or full stop); comments and data notes switched to commas. One real Google review had one, swapped for a comma. Commit 08a25a0, live on stationery-point.pages.dev and checked: 0 em dashes in the live HTML and JS. The /admin Sanity library code still has some; that is Sanity's own code, not our copy.
+
+## 2026-09-26 - Reviews: 19 to 33, long ones as excerpts
+- Re-pulled all 156 Google reviews (26 Sep). Rail now shows 33 (was 13 visible of 19). 14 new: SNIJO (bulk on a Sunday), Abhilash S, Benjamin Joshy (below MRP, credit system), roshan daniel (wholesale), Akhil John Koshy, neeraj swaroop, Vinu Varghese, Sreelakshmi A, Thomas Varghese, Aiswarya Vijayan, Holly Ittoop, Sethu lakshmi, Adityan Pradeep Pillai, jelitta johny.
+- `text` now holds the FULL Google text; long reviews carry an `excerpt` (verbatim fragments joined by an ellipsis, ending on the reviewer's own last line). The build script checks every fragment is in the original. Found and fixed: Athul, Abila, Toshin, Feba, Kumar Aryan, Bijuna and Kripa had been silently cut with no ellipsis.
+- Card height unchanged: 283px at 375, 261px at 1024 (measured before/after). MAX_CHARS 265 -> 258 as the guard; Silpa's excerpt trimmed because it made a 9th line.
+- Avatars now 72px WebP from Google (33 files, 41 KB total; the old 19 PNGs were ~260 KB). Old PNGs removed.

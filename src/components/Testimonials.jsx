@@ -4,10 +4,12 @@ import { StarIcon } from './icons';
 
 const { aggregate, items: allReviews } = reviewsFile;
 
-// Rail shows only reviews short enough to sit in equal-height cards. Long ones stay in
-// reviews.json untouched; nothing is cut or paraphrased, so every card is a full review.
-const MAX_CHARS = 265;
-const reviews = allReviews.filter((r) => r.text.length <= MAX_CHARS);
+// Rail shows only reviews short enough to sit in equal-height cards. A long review carries an
+// `excerpt`: verbatim fragments of its `text` joined by an ellipsis, never reworded. The card
+// shows the excerpt; the full text stays in reviews.json.
+const MAX_CHARS = 258;
+const shown = (r) => r.excerpt || r.text.replace(/\s+/g, ' ').trim();
+const reviews = allReviews.filter((r) => shown(r).length <= MAX_CHARS);
 
 /*
  * REVIEWS, the one block on this page that NO reference site can show.
@@ -93,7 +95,7 @@ function ReviewCard({ review }) {
         <span className="sr-only">{`Rated ${review.stars} out of 5`}</span>
       </div>
 
-      <p className="mt-2 text-[14px] leading-[1.55] text-ink">{review.text}</p>
+      <p className="mt-2 text-[14px] leading-[1.55] text-ink">{shown(review)}</p>
     </article>
   );
 }
