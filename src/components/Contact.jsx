@@ -1,17 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { STORE } from '../lib/utils';
+import { STORE, WEB3FORMS_KEY } from '../lib/utils';
 import { PhoneIcon, WhatsAppIcon, InstagramIcon } from './icons';
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', phone: '', email: '', message: '' });
+  const [form, setForm] = useState({ name: '', phone: '', email: '', message: '', botcheck: false });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('');
+  // Visible result of the email send: '', 'sending', 'sent', 'failed'.
+  const [mail, setMail] = useState('');
   const [dirty, setDirty] = useState(false);
   const refs = { name: useRef(null), phone: useRef(null), email: useRef(null), message: useRef(null) };
 
   const update = (k) => (e) => {
     setForm((f) => ({ ...f, [k]: e.target.value }));
     setDirty(true);
+    if (mail === 'sent' || mail === 'failed') setMail('');
   };
 
   // Warn before leaving with unsaved changes.
@@ -39,68 +42,85 @@ export default function Contact() {
     if (first && refs[first].current) refs[first].current.focus();
   };
 
-  const sendWhatsApp = (e) => {
-    e.preventDefault();
+  const checkForm = () => {
     const errs = validate();
     setErrors(errs);
     if (Object.keys(errs).length) {
       setStatus('Please fix the highlighted fields.');
       focusFirstError(errs);
-      return;
+      return false;
     }
+    return true;
+  };
+
+  const sendWhatsApp = (e) => {
+    e.preventDefault();
+    if (!checkForm()) return;
     const msg = `Hi Stationery Point, my name is ${form.name}.\nPhone: ${form.phone}\nEmail: ${form.email || 'N/A'}\n\n${form.message}`;
     setStatus('Opening WhatsApp…');
     setDirty(false);
     window.open(`https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
   };
 
-  const sendEmail = () => {
-    const errs = validate();
-    setErrors(errs);
-    if (Object.keys(errs).length) {
-      setStatus('Please fix the highlighted fields.');
-      focusFirstError(errs);
-      return;
+  // Sends the enquiry straight to the shop's inbox (Web3Forms), no email app needed.
+  const sendEmail = async () => {
+    if (!checkForm() || mail === 'sending') return;
+    setMail('sending');
+    setStatus('Sending your enquiry…');
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `Website enquiry from ${form.name}`,
+          from_name: 'Stationery Point website',
+          name: form.name,
+          phone: form.phone,
+          email: form.email || undefined,
+          message: form.message,
+          botcheck: form.botcheck,
+        }),
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.message);
+      setMail('sent');
+      setStatus('Enquiry sent. We will get back to you soon.');
+      setDirty(false);
+      setForm({ name: '', phone: '', email: '', message: '', botcheck: false });
+    } catch {
+      setMail('failed');
+      setStatus('Could not send the email. Please try WhatsApp or call us.');
     }
-    const subject = encodeURIComponent('Enquiry from website');
-    const body = encodeURIComponent(`Name: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\n\n${form.message}`);
-    setStatus('Opening your email app…');
-    setDirty(false);
-    window.location.href = `mailto:?subject=${subject}&body=${body}`;
   };
 
   const fieldClass = (k) =>
-    `rounded-xl border px-4 py-3 transition-colors focus:border-brand-primary ${errors[k] ? 'border-red-400' : 'border-gray-200'}`;
+    `w-full min-w-0 rounded-xl border px-4 py-3 transition-colors focus:border-brand-primary ${errors[k] ? 'border-red-400' : 'border-gray-200'}`;
+
+  const [weekdays, sunday] = STORE.hours.split(' | ');
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-      <div className="mb-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-8 pb-12 sm:py-12">
+      <div className="mb-6 sm:mb-8">
         <p className="text-sm font-medium text-gray-400 mb-2">We would love to hear from you</p>
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">Contact Store</h1>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8">
-        {/* LEFT - location */}
-        <div className="rounded-2xl bg-white border border-gray-100 shadow-soft overflow-hidden">
-          <iframe title="Stationery Point location on Google Maps" src={STORE.mapsEmbed} width="600" height="256" className="w-full h-64 border-0" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
-          <div className="p-8">
-            <h2 className="text-2xl font-bold">Visit Us</h2>
-            <p className="mt-3 text-gray-600">{STORE.address}</p>
-            <p className="text-brand-primary font-semibold mt-1">{STORE.landmark}</p>
-            <p className="mt-4 text-gray-500 text-sm">{STORE.hours}</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href={`tel:${STORE.phoneTel}`} className="inline-flex items-center gap-2 rounded-full border border-brand-primary text-brand-primary font-semibold px-5 py-2.5 hover:bg-brand-primary hover:text-white transition-colors duration-300">
-                <PhoneIcon className="w-4 h-4" /> {STORE.phoneDisplay}
-              </a>
-              <a href={STORE.instagram} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-gray-200 font-semibold px-5 py-2.5 hover:border-brand-primary transition-colors">
-                <InstagramIcon className="w-4 h-4" /> Instagram
-              </a>
-            </div>
-          </div>
-        </div>
+      {/* Quick actions: most customers just want to message or call. */}
+      <div className="grid grid-cols-2 gap-3 mb-6 sm:mb-8 lg:max-w-md">
+        <a href={`https://wa.me/${STORE.whatsapp}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] text-white font-semibold py-3 hover:bg-[#1da851] transition-colors">
+          <WhatsAppIcon className="w-5 h-5" /> WhatsApp
+        </a>
+        <a href={`tel:${STORE.phoneTel}`} className="inline-flex items-center justify-center gap-2 rounded-xl border border-brand-primary text-brand-primary font-semibold py-3 hover:bg-brand-primary hover:text-white transition-colors duration-300">
+          <PhoneIcon className="w-4 h-4" /> Call
+        </a>
+      </div>
 
-        {/* RIGHT - form */}
-        <form onSubmit={sendWhatsApp} noValidate className="rounded-2xl bg-white border border-gray-100 shadow-soft p-8 flex flex-col gap-4">
+      {/* grid-cols-1 (minmax(0,1fr)) + min-w-0 keep the cards inside the screen when
+          the phone's text size is set large; auto columns let them grow past it. */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+        {/* Form first on phones, right column on desktop */}
+        <form onSubmit={sendWhatsApp} noValidate className="min-w-0 lg:order-2 rounded-2xl bg-white border border-gray-100 shadow-soft p-5 sm:p-8 flex flex-col gap-4">
           <h2 className="text-2xl font-bold">Send an Enquiry</h2>
 
           <div className="flex flex-col gap-1">
@@ -127,17 +147,45 @@ export default function Contact() {
             {errors.message && <p id="err-message" className="text-xs text-red-500">{errors.message}</p>}
           </div>
 
+          {/* Spam trap: hidden from people, bots tick it. */}
+          <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" className="hidden" checked={form.botcheck} onChange={(e) => setForm((f) => ({ ...f, botcheck: e.target.checked }))} />
+
           <p className="sr-only" role="status" aria-live="polite">{status}</p>
 
           <div className="flex flex-col sm:flex-row gap-3">
             <button type="submit" className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] text-white font-semibold py-3 hover:bg-[#1da851] transition-colors">
               <WhatsAppIcon className="w-5 h-5" /> Send on WhatsApp
             </button>
-            <button type="button" onClick={sendEmail} className="flex-1 rounded-xl border border-brand-primary text-brand-primary font-semibold py-3 hover:bg-brand-primary hover:text-white transition-colors duration-300">
-              Send via Email
-            </button>
+            {WEB3FORMS_KEY && (
+              <button type="button" onClick={sendEmail} disabled={mail === 'sending'} className="flex-1 rounded-xl border border-brand-primary text-brand-primary font-semibold py-3 hover:bg-brand-primary hover:text-white transition-colors duration-300 disabled:opacity-60">
+                {mail === 'sending' ? 'Sending…' : 'Send by Email'}
+              </button>
+            )}
           </div>
+
+          {mail === 'sent' && <p className="text-sm font-medium text-green-700">Thanks, your enquiry has been sent. We will get back to you soon.</p>}
+          {mail === 'failed' && <p className="text-sm font-medium text-red-600">Could not send the email. Please try WhatsApp or call us.</p>}
         </form>
+
+        {/* Visit us */}
+        <div className="min-w-0 lg:order-1 rounded-2xl bg-white border border-gray-100 shadow-soft overflow-hidden">
+          <iframe title="Stationery Point location on Google Maps" src={STORE.mapsEmbed} className="block w-full h-48 sm:h-64 border-0" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+          <div className="p-5 sm:p-8">
+            <h2 className="text-2xl font-bold">Visit Us</h2>
+            <p className="mt-3 text-gray-600">{STORE.address}</p>
+            <p className="text-brand-primary font-semibold mt-1">{STORE.landmark}</p>
+            <p className="mt-4 text-gray-500 text-sm">{weekdays}</p>
+            {sunday && <p className="text-gray-500 text-sm">{sunday}</p>}
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href={STORE.mapsLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-brand-primary text-brand-primary font-semibold px-5 py-2.5 hover:bg-brand-primary hover:text-white transition-colors duration-300">
+                Get directions
+              </a>
+              <a href={STORE.instagram} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-gray-200 font-semibold px-5 py-2.5 hover:border-brand-primary transition-colors">
+                <InstagramIcon className="w-4 h-4" /> Instagram
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

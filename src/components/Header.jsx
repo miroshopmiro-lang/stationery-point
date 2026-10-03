@@ -163,20 +163,22 @@ export default function Header() {
 
           <Link
             to="/"
-            className="flex items-center gap-2 py-2.5 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded-md"
+            className="flex items-center gap-2 py-2.5 min-w-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded-md"
           >
             <img
               src="/logo.webp"
               alt=""
               width={128}
               height={128}
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg object-cover"
+              className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-lg object-cover"
             />
             {/* Wraps to two lines at phone width where horizontal room is scarce, but stays on
                 ONE line from sm up. The audit found it wrapping at every breakpoint including
                 1440px, which made the wordmark read as cramped on a header with 900px spare. */}
+            {/* min-w-0 on the link + overflow-hidden here: with the phone's text size set
+                large, the wordmark gives way instead of pushing WhatsApp off the screen. */}
             <span
-              className="font-bold tracking-tight text-brand-primary text-base sm:text-xl leading-[1.05]"
+              className="min-w-0 overflow-hidden font-bold tracking-tight text-brand-primary text-base sm:text-xl leading-[1.05]"
               translate="no"
             >
               STATIONERY<br className="sm:hidden" />

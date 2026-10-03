@@ -15,7 +15,7 @@
  * for anything not in the catalogue; product lists are read from the real catalogue.
  */
 
-export const SITE_URL = 'https://stationery-point.pages.dev';
+export const SITE_URL = 'https://stationerypoint.in';
 
 export const NAP = {
   name: 'Stationery Point',

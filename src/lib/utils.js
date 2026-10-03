@@ -30,6 +30,10 @@ export const STORE = {
   mapsLink: 'https://maps.google.com/?q=Stationery+Point+Katti+Tower+Vyttila+Kochi',
 };
 
+// Web3Forms access key for the contact form's email send. The key only decides which
+// inbox receives the enquiry, so it is safe in client code. Empty = the email button hides.
+export const WEB3FORMS_KEY = '';
+
 // One WhatsApp message for a whole enquiry list: [{ name, qty }, ...]
 export function waListLink(items) {
   const lines = items.map((i, idx) => `${idx + 1}. ${i.name} (Qty: ${i.qty})`);

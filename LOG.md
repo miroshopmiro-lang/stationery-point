@@ -488,3 +488,17 @@ All captures archived under `research/reference-captures/` and documented in the
 - `text` now holds the FULL Google text; long reviews carry an `excerpt` (verbatim fragments joined by an ellipsis, ending on the reviewer's own last line). The build script checks every fragment is in the original. Found and fixed: Athul, Abila, Toshin, Feba, Kumar Aryan, Bijuna and Kripa had been silently cut with no ellipsis.
 - Card height unchanged: 283px at 375, 261px at 1024 (measured before/after). MAX_CHARS 265 -> 258 as the guard; Silpa's excerpt trimmed because it made a 9th line.
 - Avatars now 72px WebP from Google (33 files, 41 KB total; the old 19 PNGs were ~260 KB). Old PNGs removed.
+
+## 2026-09-30 - Domain: stationerypoint.in moving to Cloudflare
+- Sam's domain is **stationerypoint.in**, registered at Hostinger (answers the 23 Sep ".in could not be checked"). Before the switch: Hostinger parking nameservers (dns-parking.com), A record 2.57.91.91 = Hostinger parking page, **no MX (no email on the domain), no TXT, DNSSEC off**. So moving nameservers breaks nothing.
+- Abhinand added the zone to Cloudflare (free plan). Next: Sam changes nameservers in hPanel (DNS / Nameservers > Change Nameservers) to the two Cloudflare ones.
+- After the zone is active: Pages > stationery-point > Custom domains > add stationerypoint.in + www; then add both as Sanity CORS origins (credentials on). The Pages step is the handover/billing point, not the nameserver change.
+
+## 2026-10-03 - Live on stationerypoint.in: domain fixes + contact page
+- Domain is live. Sanity CORS for https://stationerypoint.in and https://www.stationerypoint.in added by Abhinand; checked: Sanity answers the new origin with Allow-Credentials. Before that, Sam's /admin products and New In list did not load on the domain.
+- Canonical, JSON-LD, og/twitter image, sitemap, robots and landing-page SITE_URL switched from stationery-point.pages.dev to stationerypoint.in.
+- `functions/_middleware.js`: www.stationerypoint.in and stationery-point.pages.dev 301 to https://stationerypoint.in (path kept). Preview deploys (<hash>.stationery-point.pages.dev) are not redirected.
+- CSP: allows the Cloudflare Web Analytics beacon (was blocked on every page) and api.web3forms.com.
+- **Contact page cut off on the right on phones, no sideways scroll.** Cause: with the phone's text size set large, the grid's auto column let both cards grow ~27px past the screen, and html/body overflow-x:hidden hid it. Fixed with grid-cols-1 + min-w-0 + w-full inputs. Header had the same issue (WhatsApp pushed off at large text); the wordmark now gives way instead. Checked at 360px with root font at 100/125/150%: nothing past the screen edge.
+- Contact page reordered for phones: WhatsApp + Call buttons on top, form first, then the map (h-48 on phones) and Visit Us with Get directions. Hours on two lines.
+- "Send via Email" was a mailto with no recipient (went nowhere). Now posts to Web3Forms; the button stays hidden until WEB3FORMS_KEY in src/lib/utils.js is set. Waiting on which inbox gets the enquiries.
