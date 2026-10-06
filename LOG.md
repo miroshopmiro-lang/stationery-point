@@ -508,3 +508,4 @@ All captures archived under `research/reference-captures/` and documented in the
 - Landing pages now build as dist/<slug>.html (was <slug>/index.html, which made /<slug> 308 to /<slug>/, so the canonical and sitemap URL were redirects).
 - /catalog, /about, /contact, /privacy, /terms now get their own prerendered shell with their own title, description and canonical. Before, they served the homepage canonical and Google would fold them into the homepage.
 - Homepage title: spaced en dash swapped for "|".
+- Pushed 7 Oct (83e7faa), live within about 1 min. Checked live: www and pages.dev 301 to stationerypoint.in; the 5 landing pages, /catalog, /about and /contact answer 200 with their own canonical and title; homepage JSON-LD and og:image on stationerypoint.in; the wholesale page renders at 375px with no console errors. Next: Search Console (needs Abhinand's choice of Google account).
