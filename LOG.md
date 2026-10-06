@@ -502,3 +502,9 @@ All captures archived under `research/reference-captures/` and documented in the
 - **Contact page cut off on the right on phones, no sideways scroll.** Cause: with the phone's text size set large, the grid's auto column let both cards grow ~27px past the screen, and html/body overflow-x:hidden hid it. Fixed with grid-cols-1 + min-w-0 + w-full inputs. Header had the same issue (WhatsApp pushed off at large text); the wordmark now gives way instead. Checked at 360px with root font at 100/125/150%: nothing past the screen edge.
 - Contact page reordered for phones: WhatsApp + Call buttons on top, form first, then the map (h-48 on phones) and Visit Us with Get directions. Hours on two lines.
 - "Send via Email" was a mailto with no recipient (went nowhere). Now posts to Web3Forms; the button stays hidden until WEB3FORMS_KEY in src/lib/utils.js is set. Waiting on which inbox gets the enquiries.
+
+## 2026-10-07 - Indexing prep: 3 Oct commit was never deployed
+- Live check before Search Console: the live site still had canonical, JSON-LD and og:image on stationery-point.pages.dev, and www / pages.dev answered 200 instead of 301. Commit d89d638 (3 Oct) was local only, never pushed. Pushed today.
+- Landing pages now build as dist/<slug>.html (was <slug>/index.html, which made /<slug> 308 to /<slug>/, so the canonical and sitemap URL were redirects).
+- /catalog, /about, /contact, /privacy, /terms now get their own prerendered shell with their own title, description and canonical. Before, they served the homepage canonical and Google would fold them into the homepage.
+- Homepage title: spaced en dash swapped for "|".

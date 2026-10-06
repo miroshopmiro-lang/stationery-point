@@ -6,7 +6,7 @@
  * otherwise serve the same empty index.html. Google can run JavaScript, but a per-URL file
  * with its own title, description, canonical, structured data and readable content is the
  * dependable way to get a page indexed for its own search. Cloudflare Pages serves a real
- * file before it applies the redirect, so dist/<slug>/index.html wins.
+ * file before it applies the redirect, so dist/<slug>.html wins.
  *
  * The content comes from src/data/landingPages.js (same source the React page uses) and the
  * product names from the real catalogue JSON. React replaces the static markup when it mounts.
@@ -110,9 +110,48 @@ for (const page of landingPages) {
   // Page-specific structured data goes next to the shop's own Store block.
   swap(/<\/head>/, `<script type="application/ld+json">\n${jsonLd(page)}\n</script>\n</head>`);
 
-  const dir = join(dist, page.slug);
-  mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, 'index.html'), html);
+  // <slug>.html, not <slug>/index.html: Pages serves /<slug> from it with a 200. A folder
+  // index makes /<slug> 308 to /<slug>/, so the canonical and sitemap URL would be a redirect.
+  writeFileSync(join(dist, `${page.slug}.html`), html);
   written += 1;
 }
 console.log(`prerender-landing: wrote ${written} landing pages to dist/`);
+
+// The app's other routes get their own shell too. Without one, /catalog, /about and /contact
+// serve index.html with the homepage canonical, and Google folds them into the homepage.
+const routes = [
+  {
+    path: 'catalog',
+    title: 'Stationery Catalogue | Stationery Point, Vyttila, Kochi',
+    description: 'Browse notebooks, pens, art and craft supplies, office and school stationery at Stationery Point, Vyttila, Kochi. Priced below MRP. Enquire on WhatsApp.',
+  },
+  {
+    path: 'about',
+    title: 'About Stationery Point | Stationery Shop in Vyttila, Kochi',
+    description: 'Stationery Point is a stationery, art and craft shop at Katti Tower, Janatha Junction, Vyttila, Kochi, selling below MRP to shoppers, schools and offices.',
+  },
+  {
+    path: 'contact',
+    title: 'Contact and Directions | Stationery Point, Vyttila, Kochi',
+    description: 'Visit Stationery Point at Ground Floor, Katti Tower, Jr Janatha Rd, Vyttila, Kochi, or message us on WhatsApp for prices and bulk orders.',
+  },
+  { path: 'privacy', title: 'Privacy Policy | Stationery Point', description: 'How Stationery Point handles the details you send through this website.' },
+  { path: 'terms', title: 'Terms | Stationery Point', description: 'Terms of use for the Stationery Point website: enquiries, prices and stock, and delivery.' },
+];
+for (const r of routes) {
+  const url = `${SITE_URL}/${r.path}`;
+  let html = shell;
+  const swap = (re, to) => {
+    if (!re.test(html)) throw new Error(`prerender-landing: pattern not found for ${r.path}: ${re}`);
+    html = html.replace(re, () => to);
+  };
+  swap(/<title>[\s\S]*?<\/title>/, `<title>${esc(r.title)}</title>`);
+  swap(/<meta name="description"[^>]*>/, `<meta name="description" content="${esc(r.description)}" />`);
+  swap(/<link rel="canonical"[^>]*>/, `<link rel="canonical" href="${url}" />`);
+  swap(/<meta property="og:title"[^>]*>/, `<meta property="og:title" content="${esc(r.title)}" />`);
+  swap(/<meta property="og:description"[^>]*>/, `<meta property="og:description" content="${esc(r.description)}" />`);
+  swap(/<meta name="twitter:title"[^>]*>/, `<meta name="twitter:title" content="${esc(r.title)}" />`);
+  swap(/<meta name="twitter:description"[^>]*>/, `<meta name="twitter:description" content="${esc(r.description)}" />`);
+  writeFileSync(join(dist, `${r.path}.html`), html);
+}
+console.log(`prerender-landing: wrote ${routes.length} route shells to dist/`);
