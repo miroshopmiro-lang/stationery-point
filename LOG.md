@@ -509,3 +509,9 @@ All captures archived under `research/reference-captures/` and documented in the
 - /catalog, /about, /contact, /privacy, /terms now get their own prerendered shell with their own title, description and canonical. Before, they served the homepage canonical and Google would fold them into the homepage.
 - Homepage title: spaced en dash swapped for "|".
 - Pushed 7 Oct (83e7faa), live within about 1 min. Checked live: www and pages.dev 301 to stationerypoint.in; the 5 landing pages, /catalog, /about and /contact answer 200 with their own canonical and title; homepage JSON-LD and og:image on stationerypoint.in; the wholesale page renders at 375px with no console errors. Next: Search Console (needs Abhinand's choice of Google account).
+
+## 2026-10-07 - Search result look: title, description, favicon, site name
+- Google check (site: queries): zero pages indexed for stationerypoint.in or stationery-point.pages.dev. The "stationerypoint.shop" result under a "stationery point" search is a different shop (Atladara, Vadodara, +91 81362 51456), not Sam's.
+- Homepage title now "Stationery Point, Vyttila | Below MRP Stationery & Art Supplies" (63 chars, so Below MRP survives truncation). Description leads with "Everything below MRP" (148 chars); og/twitter match.
+- Favicons: Google needs a multiple of 48px, we only had 32 and 128. Added favicon-48.png and favicon-192.png from asset-originals/logo.png.
+- WebSite JSON-LD added (name "Stationery Point") so Google shows the name instead of the bare domain; Store JSON-LD gets a logo.
