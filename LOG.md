@@ -515,3 +515,11 @@ All captures archived under `research/reference-captures/` and documented in the
 - Homepage title now "Stationery Point, Vyttila | Below MRP Stationery & Art Supplies" (63 chars, so Below MRP survives truncation). Description leads with "Everything below MRP" (148 chars); og/twitter match.
 - Favicons: Google needs a multiple of 48px, we only had 32 and 128. Added favicon-48.png and favicon-192.png from asset-originals/logo.png.
 - WebSite JSON-LD added (name "Stationery Point") so Google shows the name instead of the bare domain; Store JSON-LD gets a logo.
+
+## 2026-10-07 - Search Console
+- Domain property stationerypoint.in added in Search Console under hehnofe@gmail.com. Verification by DNS TXT on the root (@): Abhinand adds it in Cloudflare. Then: verify, submit sitemap.xml, request indexing for home + 5 landing pages.
+
+## 2026-10-11 - Sam's son's corrections: homepage order, About, Terms, Privacy
+- Homepage order now: hero, New In, Shop by category, Send your whole list, What Kochi says, What people come in for, Return gifts, Brands we stock, Visit us. "Buying for a whole class?" tile removed from the homepage (component kept).
+- About intro, Terms and Privacy rewritten with his text verbatim; "Sam" replaced by "our team", Primus Establishments named as operator. Both legal pages dated 10 October 2026, numbering fixed (Terms 1-6, Privacy 1-10).
+- Verified at 375px: all 50 lines of his text match the rendered pages word for word, order checked, no console errors, no sideways overflow. Pushed 11 Oct.

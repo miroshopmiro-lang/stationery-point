@@ -28,7 +28,7 @@ export default function About() {
           <p className="text-sm font-medium text-gray-400 mb-2">About Stationery Point</p>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">Your one-stop stationery shop in <span className="text-gradient">Vyttila, Kochi</span></h1>
           <p className="mt-6 text-gray-600 leading-relaxed">
-            Welcome to Stationery Point, your ultimate one-stop shop in Kochi for all your writing supplies, craft items, school and office stationery, party products, and corporate gifts. We are proud to offer a massive variety of high-quality products at prices below MRP! Whether you are a student, an artist, or sourcing supplies for your office, Sam and the team are here to help you find exactly what you need, and if we don't have it on the shelf, we can usually source it within a day or two.
+            Welcome to Stationery Point, a venture by Primus Establishments. We are your ultimate destination in Kochi for all your writing supplies, craft items, school and office stationery, party products, and corporate gifts. We are proud to offer a massive variety of high-quality products at prices below MRP! Whether you are a student, an artist, or sourcing supplies for your office, our team is here to help you find exactly what you need. If an item isn't on the shelf, we can usually source it within a day or two.
           </p>
           <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-soft text-brand-primary font-semibold px-4 py-2">
             <StarIcon className="w-4 h-4 text-brand-accent" /> {STORE.rating} / 5 · {STORE.reviewCount} verified reviews

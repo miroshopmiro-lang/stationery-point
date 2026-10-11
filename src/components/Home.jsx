@@ -28,19 +28,18 @@ export default function Home() {
     <div>
       <SendListModal open={listModalOpen} onClose={() => setListModalOpen(false)} />
 
-      {/* Section order set by Sam, 23 Sep 2026 (bulk enquiries are the goal). New In added
-          back under the hero on his request, 25 Sep; its contents are edited in /admin.
-          School kits, Popular in store, the offer strip and the below-MRP rail stay off;
-          the components are kept, re-add them here to restore. */}
+      {/* Section order set by Sam, 11 Oct 2026. The "Buying for a whole class?" tile
+          (PromoTiles only="bulk") is off the homepage on his request; Send your whole list
+          takes its place. School kits, Popular in store, the offer strip and the below-MRP
+          rail stay off; the components are kept, re-add them here to restore. */}
       <HeroCarousel onOpenListModal={() => setListModalOpen(true)} />
       <NewInRail />
       <CategoryCircles />
-      <PromoTiles only="bulk" />
-      <Testimonials />
       <SendListSection />
-      <BrandWall />
-      <PromoTiles only="return-gifts" />
+      <Testimonials />
       <CollectionCards />
+      <PromoTiles only="return-gifts" />
+      <BrandWall />
       <VisitShop />
       {/* AdvantageCards removed from the homepage 17 Aug 2026.
           At 1110px it was the TALLEST block on the page, taller than the hero, and not one
