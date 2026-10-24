@@ -50,6 +50,9 @@ export const products = allProducts
   .sort(
     (a, b) =>
       (categoryOrder.get(a.category) ?? 99) - (categoryOrder.get(b.category) ?? 99) ||
+      // `priority` floats the season's lead products (the 2027 diaries) to the top of their
+      // category; everything else keeps Sam's list order.
+      (b.priority ?? 0) - (a.priority ?? 0) ||
       (a.id ?? 9999) - (b.id ?? 9999) ||
       a.name.localeCompare(b.name)
   );

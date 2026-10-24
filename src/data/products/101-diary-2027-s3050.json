@@ -8,5 +8,6 @@
   "unit": "NOS",
   "price": 220,
   "image": "/diaries-2027/diary-shot-s3050.webp",
-  "newArrival": false
+  "newArrival": false,
+  "priority": 1
 }

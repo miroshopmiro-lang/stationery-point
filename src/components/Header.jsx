@@ -25,6 +25,7 @@ import AskBox from './AskBox';
 const nav = [
   { to: '/', label: 'Home' },
   { to: '/catalog', label: 'Shop Catalog' },
+  { to: '/corporate-diaries-kochi', label: '2027 Diaries' },
   { to: '/about', label: 'About Us' },
   { to: '/contact', label: 'Contact Store' },
 ];
@@ -38,6 +39,7 @@ const categoryNav = [
   { label: 'Stationery', to: '/catalog?category=stationery' },
   { label: 'Art supplies', to: '/catalog?category=art-supplies' },
   { label: 'Craft', to: '/catalog?category=craft-material' },
+  { label: '2027 Diaries', to: '/corporate-diaries-kochi' },
   { label: 'Office', to: '/catalog?category=office-supplies' },
   { label: 'Party & gifts', to: '/catalog?category=party-gifts' },
   // 'Return gifts' removed 4 Sep 2026: Sam's item list files nothing under it, so the link

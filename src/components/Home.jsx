@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SendListModal from './SendListModal';
 import HeroCarousel from './HeroCarousel';
+import DiariesRail from './DiariesRail';
 import NewInRail from './NewInRail';
 import CategoryCircles from './CategoryCircles';
 import PromoTiles from './PromoTiles';
@@ -33,6 +34,10 @@ export default function Home() {
           takes its place. School kits, Popular in store, the offer strip and the below-MRP
           rail stay off; the components are kept, re-add them here to restore. */}
       <HeroCarousel onOpenListModal={() => setListModalOpen(true)} />
+      {/* 2027 diaries, added 24 Oct 2026 for the corporate-diary season (offices pick a diary
+          partner in Oct-Nov). Sits straight under the hero so the company-order page is one
+          tap from the homepage. Remove after the season. */}
+      <DiariesRail />
       <NewInRail />
       <CategoryCircles />
       <SendListSection />

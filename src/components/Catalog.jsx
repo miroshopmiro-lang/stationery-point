@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Fuse from 'fuse.js';
 import { categories } from '../data/productData';
@@ -180,6 +180,15 @@ export default function Catalog() {
               &larr; All Categories
             </button>
           </div>
+          {active === 'office-supplies' && !query.trim() && (
+            <Link
+              to="/corporate-diaries-kochi"
+              className="mb-4 flex items-center justify-between gap-3 bg-brand-soft px-4 py-3 text-[14px] font-semibold text-brand-primary transition-colors duration-text ease-ref hover:bg-brand-primary hover:text-white"
+            >
+              <span>2027 diaries first. Ordering 100 or more for your company? Get your name on the cover.</span>
+              <span aria-hidden="true">&rarr;</span>
+            </Link>
+          )}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {filtered.map((p) => (
               <ProductCard key={p.id ?? p.name} product={p} />
