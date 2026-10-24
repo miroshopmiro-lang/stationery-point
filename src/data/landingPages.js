@@ -213,6 +213,52 @@ export const landingPages = [
   },
 
   {
+    // Terms are Sam's own (WhatsApp, 24 Oct 2026): name on the front cover only, minimum 100,
+    // about 10 days, 25-50% advance, artwork from the customer, quantity confirmed with the
+    // distributor before booking. Prices are the ones in his photo filenames.
+    slug: 'corporate-diaries-kochi',
+    navLabel: 'Corporate diaries 2027',
+    title: 'Corporate Diaries 2027 with Your Logo, Kochi | Stationery Point',
+    description:
+      '2027 diaries in B5 and A5 from ₹114, with your company name printed on the cover for orders of 100 or more. Stationery Point, Vyttila, Kochi. Ask on WhatsApp.',
+    h1: '2027 diaries, with your company name on the cover',
+    lead:
+      'Our 2027 diary range comes in B5 and A5, from ₹114 to ₹520. Buy one at the counter, or order 100 or more with your company name printed on the front cover for your team and clients.',
+    sections: [
+      {
+        h2: 'Corporate orders, how it works',
+        body: [
+          'Pick a design from the range below and tell us the quantity. The minimum for printing your company name is 100 diaries. Your company name goes on the front cover.',
+          'Send us your artwork (logo or company name file). We confirm the quantity with our distributor, an advance of 25 to 50% books the order, and the diaries are ready in about 10 days.',
+        ],
+      },
+      {
+        h2: 'Order early',
+        body: [
+          'Diaries are made to order and the range is limited, so book well before the new year. Message us the design code and quantity and we confirm availability.',
+        ],
+      },
+      {
+        h2: 'Buying one or a few',
+        body: [
+          'Every diary below is also sold individually at the shop in Vyttila. We keep only a few of each, so message us the code to check it before you come in.',
+        ],
+      },
+    ],
+    products: { nameIncludes: ['diary 2027'], limit: 27 },
+    catalogLink: { to: '/catalog?q=diary', label: 'See all diaries in the catalogue' },
+    waMessage: 'Hi Stationery Point, I would like 2027 diaries with our company name. Design code, quantity and company name: ',
+    faqs: [
+      { q: 'What is the minimum order for printing our name?', a: '100 diaries.' },
+      { q: 'Where is the name printed?', a: 'On the front cover.' },
+      { q: 'How long does it take?', a: 'About 10 days after we confirm the quantity with our distributor and you book with the advance.' },
+      { q: 'Do you design the logo?', a: 'No, please send your own artwork (logo or company name file).' },
+      { q: 'How much advance is needed?', a: '25 to 50% of the order value books the order.' },
+    ],
+    related: ['office-stationery-kochi', 'wholesale-stationery-kochi'],
+  },
+
+  {
     slug: 'return-gifts-kochi',
     navLabel: 'Return gifts',
     title: 'Return Gifts in Kochi | Stationery Point, Vyttila',

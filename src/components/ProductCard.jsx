@@ -87,6 +87,11 @@ export default function ProductCard({ product }) {
               </span>
             )}
           </div>
+        ) : product.price ? (
+          // A single price Sam gave us (the 2027 diaries), shown as given, no MRP claim.
+          <span className="mt-0.5 block text-[16px] font-bold text-ink tabular-nums">
+            ₹{Number(product.price).toLocaleString('en-IN')}
+          </span>
         ) : (
           <span className="mt-0.5 block text-[13px] leading-[1.3] font-medium text-muted">
             Get your below MRP price on WhatsApp
