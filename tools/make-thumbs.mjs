@@ -6,7 +6,7 @@ import { readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
 
-const DIRS = ['public/shop-catalogue-images', 'public/shop-catalogue-images-raw', 'public/ai-product-shots'];
+const DIRS = ['public/shop-catalogue-images', 'public/shop-catalogue-images-raw', 'public/ai-product-shots', 'public/diaries-2027'];
 const SIZES = [480, 800];
 let made = 0;
 
