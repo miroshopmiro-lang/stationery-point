@@ -87,5 +87,38 @@
       "to": "/catalog?q=notebook",
       "image": "/shop-catalogue-images-raw/33_factor_note_note_book.webp"
     }
+  ],
+  "_note_extra": "Extra tiles used only on the area and guide pages (ShopPage), never on the homepage. Same rule: each lands on at least three real products, or on a real page.",
+  "extra": [
+    {
+      "id": "pens",
+      "title": "Pens",
+      "to": "/catalog?q=pen",
+      "image": "/ai-product-shots/11-parker-pen-folio.webp"
+    },
+    {
+      "id": "whiteboards",
+      "title": "Whiteboards & Markers",
+      "to": "/catalog?q=white%20board",
+      "image": "/shop-catalogue-images/markers-800.webp"
+    },
+    {
+      "id": "school-bags",
+      "title": "Bags, Pouches & Boxes",
+      "to": "/catalog?category=stationery",
+      "image": "/ai-product-shots/36-school-bag.webp"
+    },
+    {
+      "id": "diaries",
+      "title": "2027 Diaries",
+      "to": "/corporate-diaries-kochi",
+      "image": "/diaries-2027/diary-shot-s2811-800.webp"
+    },
+    {
+      "id": "return-gifts",
+      "title": "Return Gifts",
+      "to": "/return-gifts-kochi",
+      "image": "/ai-product-shots/74-popular-jar-candle-perfumed.webp"
+    }
   ]
 }

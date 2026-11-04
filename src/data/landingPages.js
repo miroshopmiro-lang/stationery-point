@@ -30,7 +30,10 @@ export const NAP = {
 export function selectProducts(products, spec) {
   if (!spec) return [];
   const needles = (spec.nameIncludes || []).map((s) => s.toLowerCase());
+  const skip = (spec.exclude || []).map((s) => s.toLowerCase());
   const out = products.filter((p) => {
+    const lower = (p.name || '').toLowerCase();
+    if (skip.some((n) => lower.includes(n))) return false;
     if (spec.categories && spec.categories.includes(p.category)) return true;
     const name = (p.name || '').toLowerCase();
     return needles.some((n) => name.includes(n));
@@ -41,6 +44,8 @@ export function selectProducts(products, spec) {
 export const landingPages = [
   {
     slug: 'wholesale-stationery-kochi',
+    eyebrow: 'Bulk orders',
+    collections: ['copier-paper', 'pens', 'notebooks', 'tapes', 'colour-pencils', 'craft-material'],
     navLabel: 'Wholesale stationery',
     title: 'Wholesale Stationery in Kochi | Stationery Point, Vyttila',
     description:
@@ -69,7 +74,7 @@ export const landingPages = [
         ],
       },
     ],
-    products: { categories: ['office-supplies'], limit: 8 },
+    products: { categories: ['office-supplies'], exclude: ['diary'], limit: 8 },
     catalogLink: { to: '/catalog?category=office-supplies', label: 'See office supplies in the catalogue' },
     waMessage: 'Hi Stationery Point, I would like a bulk quote for wholesale stationery. Items and quantities: ',
     faqs: [
@@ -91,6 +96,8 @@ export const landingPages = [
 
   {
     slug: 'office-stationery-kochi',
+    eyebrow: 'For offices',
+    collections: ['copier-paper', 'pens', 'whiteboards', 'tapes', 'notebooks', 'diaries'],
     navLabel: 'Office stationery',
     title: 'Office Stationery Supplier in Kochi | Stationery Point, Vyttila',
     description:
@@ -118,7 +125,7 @@ export const landingPages = [
         ],
       },
     ],
-    products: { categories: ['office-supplies'], limit: 12 },
+    products: { categories: ['office-supplies'], exclude: ['diary'], limit: 12 },
     catalogLink: { to: '/catalog?category=office-supplies', label: 'Browse all office supplies' },
     waMessage: 'Hi Stationery Point, I would like a quote for office stationery. Items and quantities: ',
     faqs: [
@@ -131,6 +138,8 @@ export const landingPages = [
 
   {
     slug: 'art-and-craft-supplies-kochi',
+    eyebrow: 'Art & craft',
+    collections: ['colour-pencils', 'sketch', 'brushes', 'crayons', 'craft-material', 'notebooks'],
     navLabel: 'Art & craft supplies',
     title: 'Art & Craft Supplies in Kochi | Stationery Point, Vyttila',
     description:
@@ -171,6 +180,8 @@ export const landingPages = [
 
   {
     slug: 'school-stationery-kochi',
+    eyebrow: 'School lists',
+    collections: ['notebooks', 'school-bags', 'pens', 'colour-pencils', 'crayons', 'sketch'],
     navLabel: 'School stationery',
     title: 'School Stationery Shop in Kochi | Stationery Point, Vyttila',
     description:
@@ -217,6 +228,8 @@ export const landingPages = [
     // about 10 days, 25-50% advance, artwork from the customer, quantity confirmed with the
     // distributor before booking. Prices are the ones in his photo filenames.
     slug: 'corporate-diaries-kochi',
+    eyebrow: '2027 diaries',
+    collections: [],
     navLabel: 'Corporate diaries 2027',
     title: 'Corporate Diaries 2027 with Your Logo, Kochi | Stationery Point',
     description:
@@ -260,6 +273,8 @@ export const landingPages = [
 
   {
     slug: 'return-gifts-kochi',
+    eyebrow: 'Return gifts',
+    collections: ['crayons', 'colour-pencils', 'sketch', 'craft-material'],
     navLabel: 'Return gifts',
     title: 'Return Gifts in Kochi | Stationery Point, Vyttila',
     description:

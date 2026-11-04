@@ -116,6 +116,54 @@ for (const page of landingPages) {
   written += 1;
 }
 console.log(`prerender-landing: wrote ${written} landing pages to dist/`);
+// Area pages (src/data/areaPages.js): same head treatment, static body from the same data.
+const collFile = JSON.parse(readFileSync(join(root, 'src', 'data', 'collections.json'), 'utf8'));
+const collById = new Map([...collFile.collections, ...(collFile.extra || [])].map((c) => [c.id, c]));
+const { areaPages, directionsUrl } = await import(pathToFileURL(join(root, 'src', 'data', 'areaPages.js')).href);
+for (const page of areaPages) {
+  const url = `${SITE_URL}/${page.slug}`;
+  let html = shell;
+  const swap = (re, to) => {
+    if (!re.test(html)) throw new Error(`prerender-landing: pattern not found for ${page.slug}: ${re}`);
+    html = html.replace(re, () => to);
+  };
+  const body = `
+<div style="max-width:960px;margin:0 auto;padding:24px 16px;font-family:Poppins,system-ui,sans-serif;color:#1c1a3a">
+  <p><a href="/">Home</a> / ${esc(page.navLabel)}</p>
+  <h1>${esc(page.h1)}</h1>
+  <p>${esc(page.lead)}</p>
+  <section><h2>${esc(page.tilesHeading)}</h2><ul>${page.collections.map((id) => collById.get(id)).filter(Boolean).map((c) => `<li><a href="${esc(c.to)}">${esc(c.title)}</a></li>`).join('')}</ul></section>
+  <section><h2>Questions from ${esc(page.area)}</h2>${page.faqs.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('')}</section>
+  <section><h2>Visit the shop</h2>
+    <p>${esc(NAP.name)}<br>${esc(NAP.address)}<br>${esc(NAP.landmark)}</p>
+    <p>${esc(NAP.hours)}</p>
+    <p>Phone: <a href="tel:${esc(NAP.phoneTel)}">${esc(NAP.phoneDisplay)}</a> · <a href="${esc(directionsUrl(page.directionsFrom))}">Directions from ${esc(page.area)}</a></p>
+  </section>
+</div>`;
+  const ld = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'WebPage', '@id': `${url}#page`, url, name: page.title, description: page.description,
+        isPartOf: { '@type': 'WebSite', url: `${SITE_URL}/`, name: NAP.name }, about: { '@id': `${SITE_URL}/#store` } },
+      { '@type': 'BreadcrumbList', itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+        { '@type': 'ListItem', position: 2, name: page.navLabel, item: url } ] },
+      { '@type': 'FAQPage', mainEntity: page.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+    ],
+  }, null, 2);
+  swap(/<title>[\s\S]*?<\/title>/, `<title>${esc(page.title)}</title>`);
+  swap(/<meta name="description"[^>]*>/, `<meta name="description" content="${esc(page.description)}" />`);
+  swap(/<link rel="canonical"[^>]*>/, `<link rel="canonical" href="${url}" />`);
+  swap(/<meta property="og:title"[^>]*>/, `<meta property="og:title" content="${esc(page.title)}" />`);
+  swap(/<meta property="og:description"[^>]*>/, `<meta property="og:description" content="${esc(page.description)}" />`);
+  swap(/<meta name="twitter:title"[^>]*>/, `<meta name="twitter:title" content="${esc(page.title)}" />`);
+  swap(/<meta name="twitter:description"[^>]*>/, `<meta name="twitter:description" content="${esc(page.description)}" />`);
+  swap(/<div id="root"><\/div>/, `<div id="root">${body}</div>`);
+  swap(/<\/head>/, `<script type="application/ld+json">\n${ld}\n</script>\n</head>`);
+  writeFileSync(join(dist, `${page.slug}.html`), html);
+}
+console.log(`prerender-landing: wrote ${areaPages.length} area pages to dist/`);
+
 
 // The app's other routes get their own shell too. Without one, /catalog, /about and /contact
 // serve index.html with the homepage canonical, and Google folds them into the homepage.

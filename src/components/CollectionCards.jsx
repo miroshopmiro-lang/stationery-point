@@ -4,6 +4,8 @@ import collectionsFile from '../data/collections.json';
 import SmartImage from './SmartImage';
 
 const collections = collectionsFile.collections;
+// Area and guide pages pick their own tiles by id, from the homepage set plus `extra`.
+const allById = Object.fromEntries([...collections, ...(collectionsFile.extra || [])].map((c) => [c.id, c]));
 
 /*
  * AI PRODUCT SHOTS (16 Sep 2026): same homepage-only override as NewInRail.jsx / ProductRail.jsx
@@ -43,7 +45,9 @@ const HOME_SHOT_OVERRIDES = {
  * before it ships, see the note in collections.json. A tile that lands on an empty grid is a
  * dead end, and this site does not dead-end.
  */
-export default function CollectionCards() {
+export default function CollectionCards({ ids, heading }) {
+  const items = ids ? ids.map((id) => allById[id]).filter(Boolean) : collections;
+  if (items.length === 0) return null;
   return (
     <section aria-labelledby="collections-heading" className="bg-white">
       <div className="max-w-[1280px] mx-auto py-8 lg:py-14">
@@ -52,7 +56,11 @@ export default function CollectionCards() {
             id="collections-heading"
             className="font-bold tracking-tight text-ink text-[22px] leading-[1.18] lg:text-[32px]"
           >
-            What people <span className="hl-slant">come in for</span>
+            {heading || (
+              <>
+                What people <span className="hl-slant">come in for</span>
+              </>
+            )}
           </h2>
           <Link
             to="/catalog"
@@ -68,7 +76,7 @@ export default function CollectionCards() {
         {/* Gap tightened towards smiggle's tile rhythm (~6-7px) from the 12px this block
             carried; the audit measured our tile blocks as roughly twice as loose as theirs. */}
         <ul className="mt-5 grid grid-cols-2 gap-2 px-4 lg:grid-cols-4 lg:gap-4 lg:px-8">
-          {collections.map((c) => (
+          {items.map((c) => (
             <li key={c.id}>
               <Link
                 to={c.to}
