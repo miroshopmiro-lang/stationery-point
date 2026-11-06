@@ -46,6 +46,8 @@ export default function HeroCarousel() {
 
   return (
     <section aria-roledescription="carousel" aria-label="Featured Collections" className="relative w-full bg-[#241F6B]">
+      {/* The homepage had no H1. Search engines and screen readers get the shop name; the design is unchanged. */}
+      <h1 className="sr-only">Stationery Point, stationery and art supplies shop in Vyttila, Kochi</h1>
       {/* FULL-BLEED HERO BANNER. Re-measured live off flyingtiger.com on 16 Sep 2026, twice, at
           two different viewport widths, and it is NOT aspect-ratio-driven below desktop: their
           .banner_container holds a FIXED PIXEL HEIGHT (208px) from phone widths up through

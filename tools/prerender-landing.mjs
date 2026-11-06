@@ -203,3 +203,33 @@ for (const r of routes) {
   writeFileSync(join(dist, `${r.path}.html`), html);
 }
 console.log(`prerender-landing: wrote ${routes.length} route shells to dist/`);
+
+// Homepage (6 Nov 2026): its server HTML was an empty shell, so for a search on the shop's
+// own name Google found more readable text on the area and wholesale pages than on the home
+// page. Same treatment as the landing pages: real text from the homepage itself in #root,
+// which React replaces on mount. Head tags stay as they are in index.html.
+{
+  const cats = categories;
+  const links = [...landingPages, ...areaPages].map((p) => `<a href="/${p.slug}">${esc(p.navLabel)}</a>`).join(' · ');
+  const body = `
+<div style="max-width:960px;margin:0 auto;padding:24px 16px;font-family:Poppins,system-ui,sans-serif;color:#1c1a3a">
+  <h1>Stationery Point, stationery and art supplies shop in Vyttila, Kochi</h1>
+  <p>Below MRP every day. Notebooks to backpacks, sorted in one trip. Every item priced below MRP, every time.</p>
+  <section><h2>The art supplies Kochi's students ask for, below MRP.</h2><p>Brustro, Camlin, Faber-Castell and more, always in stock.</p></section>
+  <section><h2>Bulk orders. GST invoice. No minimum.</h2><p>Volume pricing below MRP, GST invoices, delivered across Kochi.</p></section>
+  <section><h2>2027 diaries</h2><p>Buying for your company? Order 100 or more with your company name on the cover.</p></section>
+  <section><h2>Shop by category</h2><ul>${cats.map((c) => `<li><a href="/catalog?category=${esc(c.id)}">${esc(c.title)}</a></li>`).join('')}</ul><p><a href="/catalog">Full catalogue</a></p></section>
+  <section><h2>Send your whole list at once</h2><p>Paste your supply list and we'll come back with prices and availability on WhatsApp. Volume pricing and GST invoices for bulk orders.</p></section>
+  <section><h2>What Kochi says about us</h2><p>4.8 from 150+ Google reviews</p></section>
+  <section><h2>Visit the shop</h2>
+    <p>${esc(NAP.name)}<br>${esc(NAP.address)}<br>${esc(NAP.landmark)}</p>
+    <p>${esc(NAP.hours)}</p>
+    <p>Phone: <a href="tel:${esc(NAP.phoneTel)}">${esc(NAP.phoneDisplay)}</a></p>
+  </section>
+  <p>${links} · <a href="/about">About</a> · <a href="/contact">Contact</a></p>
+</div>`;
+  const home = readFileSync(join(dist, 'index.html'), 'utf8');
+  if (!/<div id="root"><\/div>/.test(home)) throw new Error('prerender-landing: empty #root not found in dist/index.html');
+  writeFileSync(join(dist, 'index.html'), home.replace(/<div id="root"><\/div>/, () => `<div id="root">${body}</div>`));
+  console.log('prerender-landing: wrote homepage content to dist/index.html');
+}
