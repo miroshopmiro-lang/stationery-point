@@ -49,7 +49,7 @@ export const landingPages = [
     navLabel: 'Wholesale stationery',
     title: 'Wholesale Stationery in Kochi | Stationery Point, Vyttila',
     description:
-      'Buying stationery in bulk in Kochi? Stationery Point in Vyttila offers volume pricing below MRP and GST invoices for schools, offices and shops. Ask for a quote on WhatsApp.',
+      'Wholesale stationery in Kochi: Stationery Point in Vyttila offers volume pricing below MRP and GST invoices for schools and offices. WhatsApp us.',
     h1: 'Wholesale stationery in Kochi',
     lead:
       'Stationery Point is a stationery and art supplies store at Janatha Junction, Vyttila. If you buy in volume for a school, an office, an institution or your own shop, we give volume pricing below MRP and a GST invoice.',
@@ -99,9 +99,9 @@ export const landingPages = [
     eyebrow: 'For offices',
     collections: ['copier-paper', 'pens', 'whiteboards', 'tapes', 'notebooks', 'diaries'],
     navLabel: 'Office stationery',
-    title: 'Office Stationery Supplier in Kochi | Stationery Point, Vyttila',
+    title: 'Office Stationery Supplier in Kochi | Stationery Point',
     description:
-      'Office stationery in Kochi: copier paper, files, staplers, tape, markers, whiteboards and printer ink at Stationery Point, Vyttila. Volume pricing and GST invoices.',
+      'Office stationery in Kochi: copier paper, files, staplers, tape, markers and printer ink at Stationery Point, Vyttila. Volume pricing and GST invoices.',
     h1: 'Office stationery in Kochi',
     lead:
       'Everything an office runs through in a month, from one shop in Vyttila: copier paper, tape, staplers, markers, whiteboards and printer ink, priced below MRP with a GST invoice for bulk orders.',
@@ -141,9 +141,9 @@ export const landingPages = [
     eyebrow: 'Art & craft',
     collections: ['colour-pencils', 'sketch', 'brushes', 'crayons', 'craft-material', 'notebooks'],
     navLabel: 'Art & craft supplies',
-    title: 'Art & Craft Supplies in Kochi | Stationery Point, Vyttila',
+    title: 'Art & Craft Supplies in Kochi | Stationery Point',
     description:
-      'Art and craft supplies in Vyttila, Kochi: colour pencils, acrylic paint, sketch books, canvas, brushes, markers and craft material from Camel, DOMS, Faber-Castell and more.',
+      'Art and craft supplies in Vyttila, Kochi: acrylics, sketchbooks, canvas, colours and craft tools from Camel, DOMS and Faber-Castell, all below MRP.',
     h1: 'Art and craft supplies in Kochi',
     lead:
       'A shop for students, hobby artists and craft projects at Janatha Junction, Vyttila. Colours, sketch books, canvas, brushes and craft material from the brands art students ask for, priced below MRP.',
@@ -185,7 +185,7 @@ export const landingPages = [
     navLabel: 'School stationery',
     title: 'School Stationery Shop in Kochi | Stationery Point, Vyttila',
     description:
-      'School stationery in Vyttila, Kochi: notebooks, pens, pencils, pouches, school bags and water bottles below MRP. Send your list on WhatsApp and we pack it before you arrive.',
+      'School stationery in Vyttila: notebooks, pens, pencils, school bags and bottles below MRP. Send your school list on WhatsApp and we pack it before you arrive.',
     h1: 'School stationery in Kochi',
     lead:
       'The whole school list in one trip. Notebooks, pens, pencils, pouches, school bags and water bottles, priced below MRP at Stationery Point in Vyttila.',
@@ -231,7 +231,7 @@ export const landingPages = [
     eyebrow: '2027 diaries',
     collections: [],
     navLabel: 'Corporate diaries 2027',
-    title: 'Corporate Diaries 2027 with Your Logo, Kochi | Stationery Point',
+    title: 'Corporate Diaries 2027 with Logo, Kochi | Stationery Point',
     description:
       '2027 diaries in B5 and A5 from ₹114, with your company name printed on the cover for orders of 100 or more. Stationery Point, Vyttila, Kochi. Ask on WhatsApp.',
     h1: '2027 diaries, with your company name on the cover',
@@ -278,7 +278,7 @@ export const landingPages = [
     navLabel: 'Return gifts',
     title: 'Return Gifts in Kochi | Stationery Point, Vyttila',
     description:
-      'Planning return gifts for a birthday or school event in Kochi? Tell Stationery Point in Vyttila your guest count and budget on WhatsApp and we will suggest options.',
+      'Planning return gifts for birthdays or events in Kochi? Message Stationery Point in Vyttila your guest count and budget on WhatsApp for options.',
     h1: 'Return gifts in Kochi',
     lead:
       'For birthdays, school events and small functions. Tell us how many guests and your budget per head, and we suggest options from what the shop carries.',

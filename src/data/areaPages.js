@@ -23,9 +23,9 @@ export const areaPages = [
     slug: 'stationery-kakkanad-infopark',
     area: 'Kakkanad and Infopark',
     navLabel: 'Kakkanad & Infopark',
-    title: 'Office Stationery for Kakkanad & Infopark | Stationery Point, Vyttila',
+    title: 'Stationery for Kakkanad & Infopark | Stationery Point',
     description:
-      'Office stationery for Kakkanad and Infopark companies: copier paper, files, pens and 2027 diaries with your company name, below MRP with a GST invoice. Send your list on WhatsApp.',
+      'Office stationery for Kakkanad & Infopark: copier paper, files, pens and 2027 custom diaries below MRP with GST invoices. Send your supply list on WhatsApp.',
     eyebrow: 'For Kakkanad & Infopark offices',
     h1: 'Office stationery for Kakkanad and Infopark',
     lead:
@@ -60,9 +60,9 @@ export const areaPages = [
     slug: 'stationery-shop-panampilly-nagar',
     area: 'Panampilly Nagar',
     navLabel: 'Panampilly Nagar',
-    title: 'Stationery & Art Supplies near Panampilly Nagar | Stationery Point, Vyttila',
+    title: 'Stationery near Panampilly Nagar | Stationery Point',
     description:
-      'School stationery, art supplies and return gifts near Panampilly Nagar, below MRP. Send your school list on WhatsApp and collect it at Janatha Junction, Vyttila.',
+      'School stationery, art supplies and return gifts near Panampilly Nagar, below MRP. Send your school list on WhatsApp and collect in Vyttila.',
     eyebrow: 'Near Panampilly Nagar',
     h1: 'Stationery and art supplies near Panampilly Nagar',
     lead:
@@ -99,7 +99,7 @@ export const areaPages = [
     navLabel: 'Vyttila NH Bypass',
     title: 'Stationery Shop near Vyttila NH Bypass | Stationery Point',
     description:
-      'Stationery shop near the NH 66 bypass at Vyttila: office supplies, pens, copier paper and 2027 diaries with your company name, below MRP with a GST invoice. Free parking.',
+      'Stationery shop near NH 66 bypass, Vyttila: office supplies, copier paper and 2027 corporate diaries below MRP with GST invoice. Stop by or order on WhatsApp.',
     eyebrow: 'Near the NH Bypass, Vyttila',
     h1: 'Stationery shop near the NH Bypass, Vyttila',
     lead:

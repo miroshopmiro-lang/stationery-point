@@ -25,7 +25,8 @@ if (!existsSync(join(dist, 'index.html'))) {
   console.error('prerender-landing: dist/index.html not found. Run vite build first.');
   process.exit(1);
 }
-const shell = readFileSync(join(dist, 'index.html'), 'utf8');
+let rawShell = readFileSync(join(dist, 'index.html'), 'utf8');
+const shell = rawShell.replace(/<div id="root">[\s\S]*?<\/div>/, '<div id="root"></div>');
 
 const categories = JSON.parse(readFileSync(join(root, 'src', 'data', 'categories.json'), 'utf8')).items;
 const catTitle = new Map(categories.map((c) => [c.id, c.title]));
@@ -44,7 +45,7 @@ function bodyHtml(page) {
   const picks = selectProducts(products, page.products);
   const others = page.related.map((s) => landingPages.find((p) => p.slug === s)).filter(Boolean);
   return `
-<div style="max-width:960px;margin:0 auto;padding:24px 16px;font-family:Poppins,system-ui,sans-serif;color:#1c1a3a">
+<main id="main-content" style="max-width:960px;margin:0 auto;padding:24px 16px;font-family:Poppins,system-ui,sans-serif;color:#1c1a3a">
   <p><a href="/">Home</a> / ${esc(page.navLabel)}</p>
   <h1>${esc(page.h1)}</h1>
   <p>${esc(page.lead)}</p>
@@ -59,7 +60,7 @@ function bodyHtml(page) {
     <p>Phone: <a href="tel:${esc(NAP.phoneTel)}">${esc(NAP.phoneDisplay)}</a></p>
   </section>
   <p>${others.map((o) => `<a href="/${o.slug}">${esc(o.navLabel)}</a>`).join(' · ')} · <a href="/catalog">Full catalogue</a></p>
-</div>`;
+</main>`;
 }
 
 function jsonLd(page) {
@@ -128,7 +129,7 @@ for (const page of areaPages) {
     html = html.replace(re, () => to);
   };
   const body = `
-<div style="max-width:960px;margin:0 auto;padding:24px 16px;font-family:Poppins,system-ui,sans-serif;color:#1c1a3a">
+<main id="main-content" style="max-width:960px;margin:0 auto;padding:24px 16px;font-family:Poppins,system-ui,sans-serif;color:#1c1a3a">
   <p><a href="/">Home</a> / ${esc(page.navLabel)}</p>
   <h1>${esc(page.h1)}</h1>
   <p>${esc(page.lead)}</p>
@@ -139,7 +140,7 @@ for (const page of areaPages) {
     <p>${esc(NAP.hours)}</p>
     <p>Phone: <a href="tel:${esc(NAP.phoneTel)}">${esc(NAP.phoneDisplay)}</a> · <a href="${esc(directionsUrl(page.directionsFrom))}">Directions from ${esc(page.area)}</a></p>
   </section>
-</div>`;
+</main>`;
   const ld = JSON.stringify({
     '@context': 'https://schema.org',
     '@graph': [
@@ -184,8 +185,52 @@ const routes = [
     description: 'Visit Stationery Point at Ground Floor, Katti Tower, Jr Janatha Rd, Vyttila, Kochi, or message us on WhatsApp for prices and bulk orders.',
   },
   { path: 'privacy', title: 'Privacy Policy | Stationery Point', description: 'How Stationery Point handles the details you send through this website.' },
-  { path: 'terms', title: 'Terms | Stationery Point', description: 'Terms of use for the Stationery Point website: enquiries, prices and stock, and delivery.' },
+  { path: 'terms', title: 'Terms of Use | Stationery Point, Vyttila', description: 'Terms of use for the Stationery Point website: enquiries, prices and stock, and delivery.' },
 ];
+const routeBodies = {
+  catalog: `
+<main id="main-content" style="max-width:960px;margin:0 auto;padding:24px 16px;font-family:Poppins,system-ui,sans-serif;color:#1c1a3a">
+  <h1>Stationery Catalogue</h1>
+  <p>Browse notebooks, pens, art and craft supplies, office and school stationery at Stationery Point, Vyttila, Kochi. Priced below MRP.</p>
+  <section><h2>Categories</h2><ul>${categories.map((c) => `<li><a href="/catalog?category=${esc(c.id)}">${esc(c.title)}</a></li>`).join('')}</ul></section>
+  <p><a href="/">Home</a> · <a href="/about">About</a> · <a href="/contact">Contact</a></p>
+</main>`,
+  about: `
+<main id="main-content" style="max-width:960px;margin:0 auto;padding:24px 16px;font-family:Poppins,system-ui,sans-serif;color:#1c1a3a">
+  <h1>About Stationery Point</h1>
+  <p>Stationery Point is a stationery, art and craft shop at Katti Tower, Janatha Junction, Vyttila, Kochi, selling below MRP to shoppers, schools and offices.</p>
+  <section><h2>Visit the shop</h2>
+    <p>${esc(NAP.name)}<br>${esc(NAP.address)}<br>${esc(NAP.landmark)}</p>
+    <p>${esc(NAP.hours)}</p>
+    <p>Phone: <a href="tel:${esc(NAP.phoneTel)}">${esc(NAP.phoneDisplay)}</a></p>
+  </section>
+  <p><a href="/">Home</a> · <a href="/catalog">Catalogue</a> · <a href="/contact">Contact</a></p>
+</main>`,
+  contact: `
+<main id="main-content" style="max-width:960px;margin:0 auto;padding:24px 16px;font-family:Poppins,system-ui,sans-serif;color:#1c1a3a">
+  <h1>Contact and Directions</h1>
+  <p>Visit Stationery Point at Ground Floor, Katti Tower, Jr Janatha Rd, Vyttila, Kochi, or message us on WhatsApp for prices and bulk orders.</p>
+  <section><h2>Visit the shop</h2>
+    <p>${esc(NAP.name)}<br>${esc(NAP.address)}<br>${esc(NAP.landmark)}</p>
+    <p>${esc(NAP.hours)}</p>
+    <p>Phone: <a href="tel:${esc(NAP.phoneTel)}">${esc(NAP.phoneDisplay)}</a></p>
+  </section>
+  <p><a href="/">Home</a> · <a href="/catalog">Catalogue</a> · <a href="/about">About</a></p>
+</main>`,
+  privacy: `
+<main id="main-content" style="max-width:960px;margin:0 auto;padding:24px 16px;font-family:Poppins,system-ui,sans-serif;color:#1c1a3a">
+  <h1>Privacy Policy</h1>
+  <p>How Stationery Point handles the details you send through this website.</p>
+  <p><a href="/">Home</a></p>
+</main>`,
+  terms: `
+<main id="main-content" style="max-width:960px;margin:0 auto;padding:24px 16px;font-family:Poppins,system-ui,sans-serif;color:#1c1a3a">
+  <h1>Terms of Use</h1>
+  <p>Terms of use for the Stationery Point website: enquiries, prices and stock, and delivery.</p>
+  <p><a href="/">Home</a></p>
+</main>`,
+};
+
 for (const r of routes) {
   const url = `${SITE_URL}/${r.path}`;
   let html = shell;
@@ -200,6 +245,9 @@ for (const r of routes) {
   swap(/<meta property="og:description"[^>]*>/, `<meta property="og:description" content="${esc(r.description)}" />`);
   swap(/<meta name="twitter:title"[^>]*>/, `<meta name="twitter:title" content="${esc(r.title)}" />`);
   swap(/<meta name="twitter:description"[^>]*>/, `<meta name="twitter:description" content="${esc(r.description)}" />`);
+  if (routeBodies[r.path]) {
+    swap(/<div id="root"><\/div>/, `<div id="root">${routeBodies[r.path]}</div>`);
+  }
   writeFileSync(join(dist, `${r.path}.html`), html);
 }
 console.log(`prerender-landing: wrote ${routes.length} route shells to dist/`);
@@ -212,7 +260,7 @@ console.log(`prerender-landing: wrote ${routes.length} route shells to dist/`);
   const cats = categories;
   const links = [...landingPages, ...areaPages].map((p) => `<a href="/${p.slug}">${esc(p.navLabel)}</a>`).join(' · ');
   const body = `
-<div style="max-width:960px;margin:0 auto;padding:24px 16px;font-family:Poppins,system-ui,sans-serif;color:#1c1a3a">
+<main id="main-content" style="max-width:960px;margin:0 auto;padding:24px 16px;font-family:Poppins,system-ui,sans-serif;color:#1c1a3a">
   <h1>Stationery Point, stationery and art supplies shop in Vyttila, Kochi</h1>
   <p>Below MRP every day. Notebooks to backpacks, sorted in one trip. Every item priced below MRP, every time.</p>
   <section><h2>The art supplies Kochi's students ask for, below MRP.</h2><p>Brustro, Camlin, Faber-Castell and more, always in stock.</p></section>
@@ -227,9 +275,8 @@ console.log(`prerender-landing: wrote ${routes.length} route shells to dist/`);
     <p>Phone: <a href="tel:${esc(NAP.phoneTel)}">${esc(NAP.phoneDisplay)}</a></p>
   </section>
   <p>${links} · <a href="/about">About</a> · <a href="/contact">Contact</a></p>
-</div>`;
+</main>`;
   const home = readFileSync(join(dist, 'index.html'), 'utf8');
-  if (!/<div id="root"><\/div>/.test(home)) throw new Error('prerender-landing: empty #root not found in dist/index.html');
-  writeFileSync(join(dist, 'index.html'), home.replace(/<div id="root"><\/div>/, () => `<div id="root">${body}</div>`));
+  writeFileSync(join(dist, 'index.html'), home.replace(/<div id="root">[\s\S]*?<\/div>/, () => `<div id="root">${body}</div>`));
   console.log('prerender-landing: wrote homepage content to dist/index.html');
 }
